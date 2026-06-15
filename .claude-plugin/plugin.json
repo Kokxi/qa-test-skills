@@ -1,0 +1,31 @@
+{
+  "name": "qa-test-skills",
+  "description": "软件测试技能集 - 42个专家级测试技能，覆盖测试全生命周期。从需求分析到测试设计、AI协作、执行监控、质量度量，让初级测试人员输出专家级测试用例。",
+  "version": "1.0.0",
+  "author": {
+    "name": "no19@foxmail.com"
+  },
+  "homepage": "https://github.com/kokxi/qa-test-skills",
+  "repository": "https://github.com/kokxi/qa-test-skills",
+  "license": "MIT",
+  "keywords": [
+    "testing",
+    "qa",
+    "test-automation",
+    "test-design",
+    "ai-collaboration",
+    "quality-assurance",
+    "软件测试",
+    "测试用例",
+    "测试设计",
+    "AI协作",
+    "质量保障",
+    "测试策略",
+    "自动化测试"
+  ],
+  "categories": [
+    "testing",
+    "quality",
+    "automation"
+  ]
+}
