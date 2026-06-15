@@ -15,21 +15,48 @@ QA Test Skills 是一套完整的软件测试技能集合，旨在将资深测�
 
 ## 安装
 
-### 方式1：从 ClawHub 安装
+### 方式1：克隆仓库安装（推荐）
+
 ```bash
-/plugin install qa-test-skills
+# 1. 克隆仓库到本地
+git clone https://github.com/Kokxi/qa-test-skills.git
+
+# 2. 进入项目目录
+cd qa-test-skills
+
+# 3. 安装插件
+/plugin dir ./qa-test-skills
 ```
 
-### 方式2：从 SkillHub 安装
-```bash
-/plugin marketplace add Kokxi/qa-test-skills-marketplace
-/plugin install qa-test-skills
-```
+### 方式2：下载压缩包安装
 
-### 方式3：本地安装
 ```bash
+# 1. 从GitHub下载ZIP压缩包
+# https://github.com/Kokxi/qa-test-skills/archive/refs/heads/master.zip
+
+# 2. 解压到本地目录
+
+# 3. 安装插件
 /plugin dir /path/to/qa-test-skills
 ```
+
+### 方式3：直接复制安装
+
+```bash
+# 1. 将 skills/ 目录复制到 Claude Code 的 skills 目录
+# Windows: %USERPROFILE%\.claude\skills\
+# macOS/Linux: ~/.claude/skills/
+
+# 2. 复制完成后，重启 Claude Code 即可生效
+```
+
+### 安装验证
+
+安装完成后，输入以下命令验证：
+```bash
+/help
+```
+如果看到 `qa-test-skills` 相关技能，说明安装成功。
 
 ## 使用
 
