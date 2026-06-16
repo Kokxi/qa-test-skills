@@ -1,7 +1,7 @@
 {
   "name": "qa-test-skills",
   "description": "软件测试技能集 - 43个专家级测试技能，覆盖测试全生命周期。从需求分析到测试设计、AI协作、执行监控、质量度量，让初级测试人员输出专家级测试用例。",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": {
     "name": "no19@foxmail.com"
   },
