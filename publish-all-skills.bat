@@ -6,29 +6,39 @@ echo ========================================
 echo.
 
 :: Check if clawhub is installed
+echo [1/4] Checking clawhub CLI...
 where clawhub >nul 2>nul
 if %errorlevel% neq 0 (
     echo [ERROR] clawhub CLI not installed
     echo Please install: npm i -g clawhub
+    echo.
     pause
     exit /b 1
 )
+echo [OK] clawhub CLI found
+echo.
 
 :: Check login status
-echo Checking login status...
-clawhub whoami >nul 2>nul
+echo [2/4] Checking login status...
+clawhub whoami 2>nul
 if %errorlevel% neq 0 (
+    echo.
     echo [ERROR] Not logged in to ClawHub
-    echo Please login first: clawhub login
+    echo.
+    echo Please login first with:
+    echo   clawhub login
+    echo.
+    echo After login, run this script again.
+    echo.
     pause
     exit /b 1
 )
-
+echo.
 echo [OK] Logged in to ClawHub
 echo.
 
 :: Publish meta skill
-echo Publishing meta skill: qa-test-skills
+echo [3/4] Publishing meta skill: qa-test-skills
 clawhub skill publish ./skills/qa-test-skills --slug qa-test-skills --version 1.3.0
 if %errorlevel% equ 0 (
     echo [OK] qa-test-skills published successfully
@@ -38,7 +48,7 @@ if %errorlevel% equ 0 (
 echo.
 
 :: Publish all skills
-echo Publishing all skills...
+echo [4/4] Publishing all skills...
 echo.
 
 set success=0
