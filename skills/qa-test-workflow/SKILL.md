@@ -24,6 +24,28 @@ related_skills:
     - qa-test-reporting
     - qa-agent-testing
     - qa-expert-review
+input_format:
+  required:
+    - name: 用户需求
+      type: string
+      description: 用户的需求描述，可以是文字、文件路径或URL
+  optional:
+    - name: 附件
+      type: file
+      description: 上传的需求文档
+    - name: URL
+      type: string
+      description: 需求文档链接
+output_format:
+  structure:
+    - test_cases: "测试用例列表"
+    - coverage_report: "覆盖率报告"
+    - risk_areas: "风险区域"
+    - test_report: "测试报告"
+  traceability:
+    - 每个测试用例带唯一ID（TC-XXXX）
+    - 关联需求ID（REQ-XXXX）
+    - 关联场景ID（SC-XXXX）
 ---
 
 # 测试工作流编排（主入口）
@@ -34,6 +56,11 @@ related_skills:
 
 **用户提问方式不变，技能集在后台自动帮他完成专家级测试设计。**
 
+**全局限制**：
+- **默认禁止读取代码**：整个技能集使用期间，默认禁止AI读取代码实现
+- **目的**：防止AI偷懒根据代码生成测试用例，确保测试用例验证需求而非代码实现
+- **例外情况**：仅在特定技能（如代码评审、Bug根因分析）中明确允许读取代码
+
 ## 输入类型识别
 
 ### 1. 输入来源识别
@@ -43,6 +70,165 @@ related_skills:
 | 直接描述 | 文字描述需求 | 提取关键信息 |
 | 上传文件 | 附件/文件路径 | 读取并解构 |
 | URL链接 | http/https开头 | 获取并分析 |
+| 需求文档目录 | 包含多个需求文档的目录 | 解析索引并读取所有子模块 |
+
+### 2. 需求文档格式支持
+
+**支持的文档格式**：
+
+| 格式 | 扩展名 | 处理方式 |
+|------|--------|----------|
+| Markdown | .md | 直接读取解析 |
+| Word文档 | .docx | 使用pdf-extraction技能提取内容 |
+| PDF文档 | .pdf | 使用pdf-extraction技能提取内容 |
+| 纯文本 | .txt | 直接读取解析 |
+| HTML | .html | 使用webfetch或解析HTML内容 |
+
+**格式识别规则**：
+- 根据文件扩展名自动识别格式
+- Word/PDF文档需要先提取文本内容再解析
+- 提取后的内容按Markdown格式处理
+
+### 3. 需求文档索引解析
+
+**当用户提供主需求文档时，必须执行以下步骤**：
+
+```
+步骤1：识别文档格式并读取主文档
+  - Markdown/纯文本：直接读取
+  - Word/PDF：使用pdf-extraction技能提取内容
+步骤2：解析文档中的索引引用
+  - 查找对子模块需求的引用（如"详见 requirements/01-auth.md"）
+  - 查找目录结构（如"需求文档目录：docs/requirements/"）
+  - 查找链接引用（如"[认证需求](./requirements/01-auth.md)"）
+  - Word文档中的目录引用（如"认证模块需求见附件01-auth.docx"）
+步骤3：读取所有被引用的子模块需求文档
+  - 支持混合格式（主文档是Word，子模块是Markdown等）
+步骤4：合并所有需求内容进行分析
+```
+
+**识别模式**：
+- 相对路径引用：`./requirements/01-auth.md`、`../requirements/01-auth.md`
+- 绝对路径引用：`/docs/requirements/01-auth.md`
+- 目录引用：`requirements/`、`docs/requirements/`
+- 锚点引用：`#认证模块`、`##用户管理`
+- 附件引用：`附件01-auth.docx`、`详见附件`
+- 跨格式引用：`认证需求见 requirements/01-auth.md`
+
+**处理原则**：
+- 主文档包含索引时，必须读取所有被引用的子模块
+- 子模块需求是主文档的补充，不能忽略
+- 支持混合格式（主文档和子模块可以是不同格式）
+- 合并所有需求后，再进行后续的测试设计流程
+
+### 4. 实际处理示例
+
+#### 示例1：纯Markdown格式
+
+**用户输入**：
+```
+请帮我测试这个项目：docs/prd.md
+```
+
+**项目结构**：
+```
+docs/
+├── prd.md                    # 主需求文档（Markdown，包含索引）
+└── requirements/
+    ├── 01-auth.md            # 认证模块需求（Markdown）
+    └── 02-user.md            # 用户管理需求（Markdown）
+```
+
+**主文档内容**（docs/prd.md）：
+```markdown
+# 项目需求文档
+
+## 模块索引
+- 认证模块：详见 requirements/01-auth.md
+- 用户管理：详见 requirements/02-user.md
+```
+
+**正确处理流程**：
+1. 读取 docs/prd.md（Markdown格式，直接读取）
+2. 发现索引引用：requirements/01-auth.md、requirements/02-user.md
+3. 读取 requirements/01-auth.md（Markdown格式，直接读取）
+4. 读取 requirements/02-user.md（Markdown格式，直接读取）
+5. 合并所有需求内容
+6. 基于完整需求进行测试设计
+
+#### 示例2：混合格式（Word主文档+Markdown子模块）
+
+**用户输入**：
+```
+请帮我测试这个项目：docs/PRD.docx
+```
+
+**项目结构**：
+```
+docs/
+├── PRD.docx                  # 主需求文档（Word格式，包含索引）
+└── requirements/
+    ├── 01-auth.md            # 认证模块需求（Markdown）
+    └── 02-user.md            # 用户管理需求（Markdown）
+```
+
+**主文档内容**（docs/PRD.docx提取后）：
+```markdown
+# 项目需求文档
+
+## 模块索引
+- 认证模块：详见 requirements/01-auth.md
+- 用户管理：详见 requirements/02-user.md
+```
+
+**正确处理流程**：
+1. 读取 docs/PRD.docx（Word格式，使用pdf-extraction提取内容）
+2. 提取文本内容，转换为可解析格式
+3. 发现索引引用：requirements/01-auth.md、requirements/02-user.md
+4. 读取 requirements/01-auth.md（Markdown格式，直接读取）
+5. 读取 requirements/02-user.md（Markdown格式，直接读取）
+6. 合并所有需求内容
+7. 基于完整需求进行测试设计
+
+#### 示例3：纯Word格式
+
+**用户输入**：
+```
+请帮我测试这个项目：docs/PRD.docx
+```
+
+**项目结构**：
+```
+docs/
+├── PRD.docx                  # 主需求文档（Word格式，包含索引）
+└── requirements/
+    ├── 01-auth.docx          # 认证模块需求（Word格式）
+    └── 02-user.docx          # 用户管理需求（Word格式）
+```
+
+**主文档内容**（docs/PRD.docx提取后）：
+```markdown
+# 项目需求文档
+
+## 模块索引
+- 认证模块：详见 requirements/01-auth.docx
+- 用户管理：详见 requirements/02-user.docx
+```
+
+**正确处理流程**：
+1. 读取 docs/PRD.docx（Word格式，使用pdf-extraction提取内容）
+2. 提取文本内容，转换为可解析格式
+3. 发现索引引用：requirements/01-auth.docx、requirements/02-user.docx
+4. 读取 requirements/01-auth.docx（Word格式，使用pdf-extraction提取内容）
+5. 读取 requirements/02-user.docx（Word格式，使用pdf-extraction提取内容）
+6. 合并所有需求内容
+7. 基于完整需求进行测试设计
+
+**错误处理方式**（应避免）：
+- ❌ 只读取主文档，忽略子模块需求
+- ❌ 假设用户只需要测试主文档内容
+- ❌ 不解析文档中的索引引用
+- ❌ 不支持Word/PDF格式，直接跳过
 
 ### 2. 用例类型识别
 
@@ -67,10 +253,38 @@ related_skills:
 
 ## 标准化工作流（8步串接）
 
+### 第0步：需求文档解析（新增）
+
+```
+输入：用户提供的需求文档路径
+输出：完整的需求文档集合
+
+执行内容：
+1. 读取主需求文档
+2. 解析文档中的索引引用
+3. 识别子模块需求文档路径
+4. 读取所有子模块需求文档
+5. 合并需求内容
+6. 构建完整的需求上下文
+
+处理逻辑：
+if 主文档包含索引引用:
+    for each 引用的子模块:
+        读取子模块需求文档
+        合并到需求上下文
+else:
+    直接使用主文档内容
+```
+
+**关键检查点**：
+- 主文档是否包含对子模块的引用？
+- 引用的子模块文件是否存在？
+- 是否有遗漏的需求文档？
+
 ### 第1步：需求评审（qa-requirement-review）
 
 ```
-输入：用户原始需求/文档
+输入：完整的需求文档集合（主文档+子模块）
 输出：需求评审报告
 
 执行内容：
