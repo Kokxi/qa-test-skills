@@ -1,31 +1,30 @@
-# QA Test Skills 批量安装脚本 (Windows PowerShell)
-# 一键安装所有48个skills
+﻿# QA Test Skills 鎵归噺瀹夎鑴氭湰 (Windows PowerShell)
+# 涓€閿畨瑁呮墍鏈?8涓猻kills
 
-Write-Host "=== QA Test Skills 批量安装脚本 ===" -ForegroundColor Cyan
+Write-Host "=== QA Test Skills 鎵归噺瀹夎鑴氭湰 ===" -ForegroundColor Cyan
 Write-Host ""
 
-# 检查clawhub CLI是否安装
+# 妫€鏌lawhub CLI鏄惁瀹夎
 if (-not (Get-Command clawhub -ErrorAction SilentlyContinue)) {
-    Write-Host "❌ clawhub CLI 未安装" -ForegroundColor Red
-    Write-Host "请先安装: npm i -g clawhub" -ForegroundColor Yellow
+    Write-Host "鉂?clawhub CLI 鏈畨瑁? -ForegroundColor Red
+    Write-Host "璇峰厛瀹夎: npm i -g clawhub" -ForegroundColor Yellow
     exit 1
 }
 
-Write-Host "开始安装所有skills..." -ForegroundColor Yellow
+Write-Host "寮€濮嬪畨瑁呮墍鏈塻kills..." -ForegroundColor Yellow
 Write-Host ""
 
-# 安装元skill
-Write-Host "安装元skill: qa-test-skills" -ForegroundColor Cyan
+# 瀹夎鍏僺kill
+Write-Host "瀹夎鍏僺kill: qa-test-skills" -ForegroundColor Cyan
 clawhub install "@kokxi/qa-test-skills"
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "✅ qa-test-skills 安装成功" -ForegroundColor Green
+    Write-Host "鉁?qa-test-skills 瀹夎鎴愬姛" -ForegroundColor Green
 } else {
-    Write-Host "❌ qa-test-skills 安装失败" -ForegroundColor Red
+    Write-Host "鉂?qa-test-skills 瀹夎澶辫触" -ForegroundColor Red
 }
 Write-Host ""
 
-# 安装所有技能
-$skills = @(
+# 瀹夎鎵€鏈夋妧鑳?$skills = @(
     "qa-test-workflow",
     "qa-requirement-review",
     "qa-req-deconstruction",
@@ -76,38 +75,37 @@ $skills = @(
     "qa-question-framework"
 )
 
-Write-Host "安装所有技能..." -ForegroundColor Yellow
+Write-Host "瀹夎鎵€鏈夋妧鑳?.." -ForegroundColor Yellow
 Write-Host ""
 
 $successCount = 0
 $failCount = 0
 
 foreach ($skill in $skills) {
-    Write-Host "安装: $skill" -ForegroundColor Cyan
+    Write-Host "瀹夎: $skill" -ForegroundColor Cyan
     clawhub install "@kokxi/$skill"
     
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "✅ $skill 安装成功" -ForegroundColor Green
+        Write-Host "鉁?$skill 瀹夎鎴愬姛" -ForegroundColor Green
         $successCount++
     } else {
-        Write-Host "❌ $skill 安装失败" -ForegroundColor Red
+        Write-Host "鉂?$skill 瀹夎澶辫触" -ForegroundColor Red
         $failCount++
     }
     Write-Host ""
     
-    # 每次安装后等待1秒
-    Start-Sleep -Seconds 1
+    # 姣忔瀹夎鍚庣瓑寰?绉?    Start-Sleep -Seconds 1
 }
 
-Write-Host "=== 批量安装完成 ===" -ForegroundColor Cyan
+Write-Host "=== 鎵归噺瀹夎瀹屾垚 ===" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "安装结果:" -ForegroundColor Yellow
-Write-Host "✅ 成功: $successCount 个" -ForegroundColor Green
-Write-Host "❌ 失败: $failCount 个" -ForegroundColor Red
+Write-Host "瀹夎缁撴灉:" -ForegroundColor Yellow
+Write-Host "鉁?鎴愬姛: $successCount 涓? -ForegroundColor Green
+Write-Host "鉂?澶辫触: $failCount 涓? -ForegroundColor Red
 Write-Host ""
-Write-Host "总共安装: $($successCount + $failCount) 个skills" -ForegroundColor Cyan
+Write-Host "鎬诲叡瀹夎: $($successCount + $failCount) 涓猻kills" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "使用方式:" -ForegroundColor Yellow
-Write-Host "1. 直接使用主工作流: 请帮我测试这个项目：[需求文档路径]" -ForegroundColor White
-Write-Host "2. 单独使用技能: 帮我分析这个场景的边界：[场景描述]" -ForegroundColor White
-Write-Host "3. 查看README获取更多使用说明" -ForegroundColor White
+Write-Host "浣跨敤鏂瑰紡:" -ForegroundColor Yellow
+Write-Host "1. 鐩存帴浣跨敤涓诲伐浣滄祦: 璇峰府鎴戞祴璇曡繖涓」鐩細[闇€姹傛枃妗ｈ矾寰刔" -ForegroundColor White
+Write-Host "2. 鍗曠嫭浣跨敤鎶€鑳? 甯垜鍒嗘瀽杩欎釜鍦烘櫙鐨勮竟鐣岋細[鍦烘櫙鎻忚堪]" -ForegroundColor White
+Write-Host "3. 鏌ョ湅README鑾峰彇鏇村浣跨敤璇存槑" -ForegroundColor White
