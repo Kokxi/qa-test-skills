@@ -1,6 +1,6 @@
 ---
 name: qa-test-skills
-description: 45个专家级测试技能集合，覆盖测试全生命周期。从需求分析到测试设计、AI协作、执行监控、质量度量，让初级测试人员输出专家级测试用例。
+description: 48个专家级测试技能集合，覆盖测试全生命周期。从需求分析到测试设计、AI协作、执行监控、质量度量，让初级测试人员输出专家级测试用例。
 when_to_use: 用户说"软件测试"、"测试用例"、"测试设计"、"AI测试"、需要完整的测试设计能力时
 allowed-tools: Read Grep Glob
 related_skills:
@@ -28,7 +28,7 @@ output_format: 完整的测试用例集 + 测试报告
 
 ## 技能集概述
 
-这是一个包含45个专家级测试技能的完整集合，覆盖测试全生命周期。
+这是一个包含48个专家级测试技能的完整集合，覆盖测试全生命周期。
 
 ## 核心价值
 
@@ -39,30 +39,71 @@ output_format: 完整的测试用例集 + 测试报告
 
 ## 技能分类
 
-### 核心技能（7个）
-- **qa-test-workflow**：测试工作流编排，自动串联所有技能
+### AI协作（6个）
+- **qa-ai-context-engineering**：构建AI测试上下文
+- **qa-ai-prompt-strategy**：AI测试提示词策略
+- **qa-ai-output-critique**：AI输出评审与补全
+- **qa-ai-blindspot-compensation**：AI盲区补偿
+- **qa-input-validation**：输入验证
+- **qa-output-validation**：输出验证
+
+### 需求分析（4个）
 - **qa-requirement-review**：需求评审
 - **qa-req-deconstruction**：需求解构与显隐式挖掘
 - **qa-scenario-tree**：场景树构建
+- **qa-domain-modeling**：领域建模
+
+### 深度设计（4个）
 - **qa-boundary-deep-dive**：边界深度分析
-- **qa-test-case-design**：测试用例设计
-- **qa-ai-context-engineering**：构建AI测试上下文
+- **qa-combination-strategy**：组合测试策略
+- **qa-state-transition**：状态转换测试
+- **qa-heuristic-checklist**：启发式检查清单
 
-### 专项技能（5个）
-- **qa-api-testing**：接口测试专项
-- **qa-agent-testing**：AI Agent测试
-- **qa-mobile-testing**：移动端测试
-- **qa-specialized-testing**：专项测试能力
-- **qa-code-review-for-test**：测试视角的代码评审
+### 执行洞察（4个）
+- **qa-execution-observation**：执行观察力
+- **qa-bug-root-cause-analysis**：Bug根因分析
+- **qa-bug-reporting**：Bug报告编写
+- **qa-expert-review**：专家评审与元学习
 
-### 管理技能（4个）
+### 策略架构（13个）
 - **qa-test-strategy-design**：测试策略制定
 - **qa-release-risk-governance**：发布风险管理
 - **qa-quality-metrics**：质量度量体系
+- **qa-ci-cd-testing**：持续测试实践
+- **qa-test-automation-arch**：测试自动化架构
+- **qa-tech-selection**：测试技术选型
+- **qa-test-env-data**：测试环境与数据管理
+- **qa-test-data-engineering**：测试数据工程
+- **qa-testability-advocacy**：可测试性推动
+- **qa-shift-left**：测试左移实践
+- **qa-shift-right**：测试右移实践
+- **qa-test-leadership**：测试领导力
 - **qa-test-reporting**：测试报告编写
 
-### 其他技能（29个）
-详见 skills/ 目录下的各技能文件
+### 沟通传承（4个）
+- **qa-stakeholder-communication**：干系人沟通
+- **qa-code-review-for-test**：测试视角的代码评审
+- **qa-team-coaching**：团队赋能
+- **qa-retrospective**：复盘与经验沉淀
+
+### 专项测试（8个）
+- **qa-api-testing**：接口测试专项
+- **qa-mobile-testing**：移动端测试
+- **qa-agent-testing**：AI Agent测试
+- **qa-specialized-testing**：专项测试能力
+- **qa-exploratory-testing**：探索式测试
+- **qa-tech-debt-management**：技术债务管理
+- **qa-test-estimation**：测试工作量估算
+- **qa-defect-lifecycle**：缺陷生命周期管理
+
+### 测试设计（4个）
+- **qa-test-case-design**：测试用例设计
+- **qa-critical-thinking**：测试批判性思维
+- **qa-question-framework**：提问框架
+- **qa-risk-intuition**：风险直觉与优先级判断
+
+### 主工作流（1个）
+- **qa-test-workflow**：测试工作流编排，自动串联所有技能
 
 ## 使用方式
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # QA Test Skills 批量发布脚本
-# 将所有45个skills发布到ClawHub
+# 将所有48个skills发布到ClawHub
 
 echo "=== QA Test Skills 批量发布脚本 ==="
 echo ""
@@ -65,7 +65,7 @@ done
 
 echo "=== 批量发布完成 ==="
 echo ""
-echo "总共发布: 46个skills (1个元skill + 45个技能)"
+echo "总共发布: 49个skills (1个元skill + 48个技能)"
 echo ""
 echo "用户可以通过以下方式安装:"
 echo "1. 安装元skill: clawhub install @kokxi/qa-test-skills"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # QA Test Skills 批量安装脚本
-# 一键安装所有45个skills
+# 一键安装所有48个skills
 
 echo "=== QA Test Skills 批量安装脚本 ==="
 echo ""
