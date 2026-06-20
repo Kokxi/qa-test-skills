@@ -16,3 +16,8 @@ build/
 # OS
 Thumbs.db
 .DS_Store
+
+# zip
+*.zip
+*.bat
+*.txt

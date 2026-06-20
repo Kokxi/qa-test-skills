@@ -1,6 +1,6 @@
 {
   "name": "@kokxi/qa-test-skills",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "48个专家级测试技能集合，覆盖测试全生命周期",
   "extensions": ["./index.js"],
   "compat": {
