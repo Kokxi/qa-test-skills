@@ -128,14 +128,11 @@ output_format: 完整的测试用例集 + 测试报告
 
 ### 方式1：从GitHub下载（推荐）
 ```bash
-# 克隆完整仓库
+# 1. 克隆完整仓库
 git clone https://github.com/Kokxi/qa-test-skills.git
 
-# 运行安装脚本
-cd qa-test-skills
-./install-all-skills.sh      # Linux/Mac
-.\install-all-skills.ps1     # Windows PowerShell
-install-all-skills.bat       # Windows CMD
+# 2. 将skills目录下的所有文件夹拷贝到你的skills目录
+# 例如：/your-project/skills/
 ```
 
 ### 方式2：从ClawHub安装Plugin
