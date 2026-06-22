@@ -121,7 +121,7 @@ output_format: 完整的测试用例集 + 测试报告
 ### 方式3：批量安装所有技能
 ```bash
 # 使用安装脚本
-./install-skills.sh
+./install-all-skills.sh
 ```
 
 ## 安装方式
