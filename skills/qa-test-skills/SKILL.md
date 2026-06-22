@@ -124,15 +124,46 @@ output_format: 完整的测试用例集 + 测试报告
 ./install-skills.sh
 ```
 
-## 安装说明
+## 完整安装（推荐）
 
-### 从GitHub安装
+**本技能集包含48个技能，请从GitHub下载完整版本：**
+
+### 方式1：一键安装（推荐）
 ```bash
+# 1. 克隆完整仓库
 git clone https://github.com/Kokxi/qa-test-skills.git
+
+# 2. 进入目录
+cd qa-test-skills
+
+# 3. 运行安装脚本
+./install-all-skills.sh      # Linux/Mac
+.\install-all-skills.ps1     # Windows PowerShell
+install-all-skills.bat       # Windows CMD
+```
+
+### 方式2：手动安装所有技能
+```bash
+# 克隆仓库后，手动安装所有技能
+cd qa-test-skills
 /plugin dir ./qa-test-skills
 ```
 
-### 从ClawHub安装
+### 方式3：从GitHub直接使用
+```bash
+# 克隆仓库
+git clone https://github.com/Kokxi/qa-test-skills.git
+
+# 直接使用主工作流
+请帮我测试这个项目：qa-test-skills/examples/ecommerce-project/docs/prd.md
+```
+
+---
+
+## 单独安装（不推荐）
+
+如果只需要部分技能，可以单独安装：
+
 ```bash
 # 安装主工作流
 clawhub install @kokxi/qa-test-workflow
@@ -140,14 +171,16 @@ clawhub install @kokxi/qa-test-workflow
 # 安装其他技能
 clawhub install @kokxi/qa-requirement-review
 clawhub install @kokxi/qa-req-deconstruction
-# ... 其他技能
+clawhub install @kokxi/qa-risk-intuition
+clawhub install @kokxi/qa-heuristic-checklist
+clawhub install @kokxi/qa-scenario-tree
+clawhub install @kokxi/qa-boundary-deep-dive
+clawhub install @kokxi/qa-test-case-design
+clawhub install @kokxi/qa-ai-context-engineering
+# ... 其他40个技能
 ```
 
-### 一键安装所有技能
-```bash
-# 运行批量安装脚本
-./install-all-skills.sh
-```
+**注意**：单独安装可能导致部分功能不可用，建议使用完整安装。
 
 ## 技能协作关系
 
