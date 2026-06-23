@@ -1,7 +1,10 @@
 ---
 name: qa-bug-reporting
-description: Bug报告艺术，编写高质量的Bug报告让开发一次修复。当需要提交或优化Bug报告时激活。
-when_to_use: 用户说"提Bug"、"写Bug报告"、"Bug描述"、需要编写或优化Bug报告时
+description: >-
+  Bug报告艺术，编写高质量的Bug报告让开发一次修复。当用户需要提交Bug、编写Bug报告或优化Bug描述时自动触发。
+  也适用于：开发频繁打回Bug报告需要提高报告质量，或需要标准化团队的Bug报告模板时。
+   关键词：Bug报告、缺陷描述、复现步骤、报告质量、Bug标题、前置条件、预期结果、附件技巧、影响评估、标准模板。
+when_to_use: 用户说"提Bug"、"写Bug报告"、"Bug描述"、"报告格式"、"复现步骤"、"加附件"、需要编写或优化Bug报告、开发打回Bug报告需要改进时
 allowed-tools: Read Grep Glob Bash
 related_skills:
   upstream:
@@ -9,18 +12,18 @@ related_skills:
     - qa-bug-root-cause-analysis # 输入：根因分析结果
     - qa-question-framework      # 输入：提问框架确保信息完整
   downstream:
-    - qa-defect-lifecycle        # 输出：Bug报告进入缺陷管理
+    - qa-bug-lifecycle        # 输出：Bug报告进入缺陷管理
 input_format: 执行观察 + 根因分析 + 问题信息
 output_format: 标准Bug报告（标题+前置条件+步骤+预期vs实际+附件+根因推测+影响评估）
 ---
 
 # Bug报告艺术
 
-你是一位Bug报告专家，擅长编写让开发能一次修复的Bug报告。
+## Overview
 
-## 核心原则
-
-**好的Bug报告不只是"描述问题"，而是帮开发缩小排查范围。**
+你是一位Bug报告专家，让每个Bug报告被开发收到后能一次修复。
+**核心原则**：好的Bug报告不只是"描述问题"，而是帮开发缩小排查范围。
+本技能覆盖Bug报告的7个黄金结构部分，从标题到影响评估，确保每个Bug报告完整可追溯。
 
 ## Bug报告黄金结构
 
@@ -191,7 +194,21 @@ output_format: 标准Bug报告（标题+前置条件+步骤+预期vs实际+附�
 - 修复优先级：[P0-P3]
 ```
 
-## 验收清单
+## Examples
+
+**用户发现登录功能报错**
+→ 使用Bug报告结构生成：
+  - 标题：[登录] 输入正确密码后提示"密码错误"（Chrome浏览器）
+  - 前置条件：已注册用户testuser001，Chrome 120.0
+  - 复现步骤和预期vs实际结果
+
+**用户需要提交支付Bug**
+→ 自动组装Bug报告7个结构部分，生成标准格式的Bug报告
+
+**开发打回Bug报告说"无法复现"**
+→ 触发本技能补充复现步骤细节和环境信息
+
+## Guidelines
 
 Bug报告完成后检查：
 - [ ] 标题是否清晰（是什么+在哪+条件下）？
