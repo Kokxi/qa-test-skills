@@ -1,6 +1,6 @@
 ---
 name: qa-test-skills-catalog
-description: QA Test Skills 技能集的目录入口，列出全部48个测试技能。安装完整插件：openclaw plugins install clawhub:@kokxi/qa-test-skills。GitHub：https://github.com/Kokxi/qa-test-skills
+description: QA Test Skills 技能集的目录入口，列出全部50个测试技能。安装完整插件：openclaw plugins install clawhub:@kokxi/qa-test-skills。GitHub：https://github.com/Kokxi/qa-test-skills
 when_to_use: 用户想浏览技能集目录、了解QA Test Skills包含哪些技能、查看技能分类说明、获取完整安装指引时
 allowed-tools: Read Grep Glob
 related_skills:
@@ -61,13 +61,13 @@ output_format: 技能分类清单 + 安装指引
 
 ## ⚠️ 本技能是技能集的目录页
 
-执行 `openclaw skills install @kokxi/qa-test-skills-catalog` 后你只获得了当前目录文件，**并没有安装完整的 48 个技能**。请参考下方安装方式获取完整技能集。
+执行 `openclaw skills install @kokxi/qa-test-skills-catalog` 后你只获得了当前目录文件，**并没有安装完整的 50 个技能**。请参考下方安装方式获取完整技能集。
 
 ---
 
 ## 技能集概述
 
-**QA Test Skills** 是一个包含 48 个专家级测试技能的完整集合，覆盖从需求分析到测试设计、AI协作、执行监控、质量度量的完整测试生命周期。
+**QA Test Skills** 是一个包含 50 个专家级测试技能的完整集合，覆盖从需求分析到测试设计、AI协作、执行监控、质量度量的完整测试生命周期。
 
 ### 核心价值
 
@@ -78,7 +78,7 @@ output_format: 技能分类清单 + 安装指引
 
 ---
 
-## 48个技能分类清单
+## 50个技能分类清单
 
 ### AI协作（6个）
 | 技能 | 说明 |
@@ -169,7 +169,7 @@ output_format: 技能分类清单 + 安装指引
 
 ## 安装方式
 
-执行以下任意一种方式获得完整的 48 个技能（含工作流）：
+执行以下任意一种方式获得完整的 50 个技能（含工作流）：
 
 ### 方式一：通过 ClawHub 安装 Plugin（推荐，一键获取全部技能）
 

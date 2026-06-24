@@ -12,6 +12,7 @@ build/
 *.swp
 *.swo
 .claude/
+.omo/
 
 # OS
 Thumbs.db

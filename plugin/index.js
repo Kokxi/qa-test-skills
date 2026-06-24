@@ -1,5 +1,5 @@
 // QA Test Skills Plugin
-// 48个专家级测试技能集合
+// 50个专家级测试技能集合
 
 import { readFileSync, readdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
