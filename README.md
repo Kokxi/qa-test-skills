@@ -2,10 +2,11 @@
 
 > **50个专家级测试技能，覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
 
-![Version](https://img.shields.io/badge/version-1.4.0-blue)
+![Version](https://img.shields.io/badge/version-1.4.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skills](https://img.shields.io/badge/skills-50-orange)
 ![AI](https://img.shields.io/badge/AI-协作-purple)
+[![skills.sh](https://skills.sh/b/Kokxi/qa-test-skills)](https://skills.sh/Kokxi/qa-test-skills)
 
 ## 平台信息
 
@@ -201,13 +202,84 @@ AI辅助测试正在普及，但多数团队面临同一个困境：**新人用A
 
 ### 安装
 
-```bash
-# 克隆仓库
-git clone https://github.com/Kokxi/qa-test-skills.git
+#### 方式一：使用 npx skills（推荐）
 
-# 安装插件
+```bash
+# 自动检测已安装的 agent 并安装
+npx skills add Kokxi/qa-test-skills
+```
+
+#### 方式二：指定 Agent 安装
+
+```bash
+# Cursor
+npx skills add Kokxi/qa-test-skills -a cursor
+
+# Codex
+npx skills add Kokxi/qa-test-skills -a codex
+
+# Claude Code
+npx skills add Kokxi/qa-test-skills -a claude-code
+
+# Windsurf
+npx skills add Kokxi/qa-test-skills -a windsurf
+
+# Cline
+npx skills add Kokxi/qa-test-skills -a cline
+
+# Gemini CLI
+npx skills add Kokxi/qa-test-skills -a gemini-cli
+
+# GitHub Copilot
+npx skills add Kokxi/qa-test-skills -a github-copilot
+
+# OpenClaw
+npx skills add Kokxi/qa-test-skills -a openclaw
+```
+
+#### 方式三：多 Agent 同时安装
+
+```bash
+npx skills add Kokxi/qa-test-skills -a cursor -a codex -a claude-code
+```
+
+#### 方式四：安装到所有支持的 Agent
+
+```bash
+npx skills add Kokxi/qa-test-skills --all
+```
+
+#### 方式五：只安装特定技能
+
+```bash
+npx skills add Kokxi/qa-test-skills --skill qa-test-workflow
+```
+
+#### 方式六：克隆仓库手动安装
+
+```bash
+git clone https://github.com/Kokxi/qa-test-skills.git
 /plugin dir ./qa-test-skills
 ```
+
+### Agent 安装路径对照
+
+| Agent | 项目路径 | 全局路径 |
+|-------|----------|----------|
+| Cursor | `.agents/skills/` | `~/.cursor/skills/` |
+| Codex | `.agents/skills/` | `~/.codex/skills/` |
+| Claude Code | `.claude/skills/` | `~/.claude/skills/` |
+| Windsurf | `.windsurf/skills/` | `~/.codeium/windsurf/skills/` |
+| OpenClaw | `skills/` | `~/.openclaw/skills/` |
+
+### 常用选项
+
+| 选项 | 说明 |
+|------|------|
+| `-g` | 安装到全局目录（所有项目可用） |
+| `-y` | 跳过确认提示（CI/CD 场景） |
+| `--list` | 列出可用技能，不安装 |
+| `--skill <name>` | 只安装指定技能 |
 
 ### 使用示例
 
@@ -539,6 +611,17 @@ AI工作流：
 - **YAML frontmatter**：必须包含 name、description、when_to_use、related_skills、input_format、output_format
 - **内容结构**：核心原则、检查清单、输出格式
 - **格式要求**：使用中文，结构清晰，便于AI阅读
+
+---
+
+## 支持项目
+
+如果这个项目对你有帮助，欢迎点个 Star ⭐
+
+[![GitHub](https://img.shields.io/badge/GitHub-kokxi/qa--test--skills-blue?style=flat-square)](https://github.com/Kokxi/qa-test-skills)
+[![ClawHub](https://img.shields.io/badge/ClawHub-kokxi-blue?style=flat-square)](https://clawhub.ai/kokxi)
+
+Star 越多，更多测试人员能发现这个项目，一起成长。
 
 ---
 

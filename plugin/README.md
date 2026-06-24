@@ -2,10 +2,11 @@
 
 > **50个专家级测试技能，覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
 
-![Version](https://img.shields.io/badge/version-1.4.0-blue)
+![Version](https://img.shields.io/badge/version-1.4.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skills](https://img.shields.io/badge/skills-50-orange)
 ![AI](https://img.shields.io/badge/AI-协作-purple)
+[![skills.sh](https://skills.sh/b/Kokxi/qa-test-skills)](https://skills.sh/Kokxi/qa-test-skills)
 
 ## 设计初衷
 
@@ -97,14 +98,67 @@ AI辅助测试正在普及，但多数团队面临同一个困境：**新人用A
 
 ## 安装方式
 
-### 方式1：从ClawHub安装（推荐）
+### 方式1：使用 npx skills（推荐）
+
+```bash
+# 自动检测已安装的 agent 并安装
+npx skills add Kokxi/qa-test-skills
+```
+
+#### 指定 Agent 安装
+
+```bash
+# Cursor
+npx skills add Kokxi/qa-test-skills -a cursor
+
+# Codex
+npx skills add Kokxi/qa-test-skills -a codex
+
+# Claude Code
+npx skills add Kokxi/qa-test-skills -a claude-code
+
+# Windsurf
+npx skills add Kokxi/qa-test-skills -a windsurf
+
+# Cline
+npx skills add Kokxi/qa-test-skills -a cline
+
+# Gemini CLI
+npx skills add Kokxi/qa-test-skills -a gemini-cli
+
+# GitHub Copilot
+npx skills add Kokxi/qa-test-skills -a github-copilot
+
+# OpenClaw
+npx skills add Kokxi/qa-test-skills -a openclaw
+```
+
+#### 多 Agent 同时安装
+
+```bash
+npx skills add Kokxi/qa-test-skills -a cursor -a codex -a claude-code
+```
+
+#### 安装到所有支持的 Agent
+
+```bash
+npx skills add Kokxi/qa-test-skills --all
+```
+
+#### 只安装特定技能
+
+```bash
+npx skills add Kokxi/qa-test-skills --skill qa-test-workflow
+```
+
+### 方式2：从ClawHub安装
 
 ```bash
 # 安装完整插件（一键获取全部技能）
 openclaw plugins install clawhub:@kokxi/qa-test-skills
 ```
 
-### 方式2：从GitHub安装
+### 方式3：从GitHub安装
 
 ```bash
 # 克隆仓库
@@ -117,18 +171,24 @@ cd qa-test-skills
 /plugin dir ./qa-test-skills
 ```
 
-### 方式3：批量安装所有技能
+### Agent 安装路径对照
 
-```bash
-# Windows CMD
-install-all-skills.bat
+| Agent | 项目路径 | 全局路径 |
+|-------|----------|----------|
+| Cursor | `.agents/skills/` | `~/.cursor/skills/` |
+| Codex | `.agents/skills/` | `~/.codex/skills/` |
+| Claude Code | `.claude/skills/` | `~/.claude/skills/` |
+| Windsurf | `.windsurf/skills/` | `~/.codeium/windsurf/skills/` |
+| OpenClaw | `skills/` | `~/.openclaw/skills/` |
 
-# Windows PowerShell
-.\install-all-skills.ps1
+### 常用选项
 
-# Linux/Mac
-./install-all-skills.sh
-```
+| 选项 | 说明 |
+|------|------|
+| `-g` | 安装到全局目录（所有项目可用） |
+| `-y` | 跳过确认提示（CI/CD 场景） |
+| `--list` | 列出可用技能，不安装 |
+| `--skill <name>` | 只安装指定技能 |
 
 ---
 
@@ -356,20 +416,23 @@ examples/ecommerce-project/
 
 ## 关键词标签
 
+### Core Keywords
+`software testing` `test case generation` `AI testing` `QA automation` `test design` `AI test assistant` `automated testing` `quality assurance` `test workflow` `regression testing`
+
 ### 核心关键词
-`软件测试` `测试用例` `测试设计` `AI协作` `AI测试` `测试自动化` `测试策略` `质量保障`
+`软件测试` `测试用例` `AI测试` `测试设计` `AI协作` `测试自动化` `测试策略` `质量保障` `回归测试` `测试工作流`
 
 ### 技能关键词
-`测试工具` `测试技能` `测试工程师` `测试管理` `测试框架` `测试方法` `测试流程` `测试报告`
+`测试工具` `测试技能` `测试工程师` `测试管理` `测试框架` `测试方法` `测试流程` `测试报告` `AI辅助测试` `测试方法论`
 
 ### 专项测试关键词
-`Bug管理` `缺陷管理` `需求测试` `接口测试` `性能测试` `安全测试` `移动端测试`
+`Bug管理` `缺陷生命周期` `接口测试` `性能测试` `安全测试` `移动端测试` `Agent测试` `探索式测试`
 
 ### AI相关关键词
-`自动化测试` `持续集成` `测试左移` `测试右移` `测试架构` `测试领导力`
+`自动化测试` `持续集成` `测试左移` `测试右移` `测试架构` `测试领导力` `AI盲区补偿` `AI输出评审`
 
 ### 学习关键词
-`测试培训` `测试复盘` `测试度量` `测试评审` `测试探索` `测试数据` `测试环境`
+`测试培训` `测试复盘` `测试度量` `测试评审` `测试探索` `测试数据` `测试环境` `新人成长` `测试认知`
 
 ---
 
@@ -387,6 +450,17 @@ examples/ecommerce-project/
 - **YAML frontmatter**：必须包含 name、description、when_to_use、related_skills、input_format、output_format
 - **内容结构**：核心原则、检查清单、输出格式
 - **格式要求**：使用中文，结构清晰，便于AI阅读
+
+---
+
+## 支持项目
+
+如果这个项目对你有帮助，欢迎点个 Star ⭐
+
+[![GitHub](https://img.shields.io/badge/GitHub-kokxi/qa--test--skills-blue?style=flat-square)](https://github.com/Kokxi/qa-test-skills)
+[![ClawHub](https://img.shields.io/badge/ClawHub-kokxi-blue?style=flat-square)](https://clawhub.ai/kokxi)
+
+Star 越多，更多测试人员能发现这个项目，一起成长。
 
 ---
 

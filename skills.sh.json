@@ -1,0 +1,110 @@
+{
+  "name": "QA Test Skills",
+  "description": "50个专家级测试技能，覆盖测试全生命周期。AI辅助测试用例设计，让初级测试人员输出专家级测试用例。",
+  "groups": [
+    {
+      "name": "AI协作",
+      "description": "AI输出质量控制和上下文工程",
+      "skills": [
+        "qa-ai-context-engineering",
+        "qa-ai-prompt-strategy",
+        "qa-ai-output-critique",
+        "qa-ai-blindspot-compensation",
+        "qa-input-validation",
+        "qa-output-validation"
+      ]
+    },
+    {
+      "name": "需求分析",
+      "description": "需求评审、解构和场景建模",
+      "skills": [
+        "qa-requirement-review",
+        "qa-req-deconstruction",
+        "qa-scenario-tree",
+        "qa-domain-modeling"
+      ]
+    },
+    {
+      "name": "深度设计",
+      "description": "边界分析、组合策略和状态转换",
+      "skills": [
+        "qa-boundary-deep-dive",
+        "qa-combination-strategy",
+        "qa-state-transition",
+        "qa-heuristic-checklist"
+      ]
+    },
+    {
+      "name": "测试设计",
+      "description": "用例设计方法论和认知型技能",
+      "skills": [
+        "qa-test-case-design",
+        "qa-critical-thinking",
+        "qa-question-framework",
+        "qa-risk-intuition"
+      ]
+    },
+    {
+      "name": "执行洞察",
+      "description": "Bug分析、报告和专家评审",
+      "skills": [
+        "qa-execution-observation",
+        "qa-bug-root-cause-analysis",
+        "qa-bug-reporting",
+        "qa-expert-review"
+      ]
+    },
+    {
+      "name": "专项测试",
+      "description": "接口、移动端、Agent等专项测试",
+      "skills": [
+        "qa-api-testing",
+        "qa-mobile-testing",
+        "qa-agent-testing",
+        "qa-specialized-testing",
+        "qa-exploratory-testing",
+        "qa-tech-debt-management",
+        "qa-test-estimation",
+        "qa-bug-lifecycle"
+      ]
+    },
+    {
+      "name": "策略架构",
+      "description": "测试策略、自动化架构和质量度量",
+      "skills": [
+        "qa-test-strategy-design",
+        "qa-release-risk-governance",
+        "qa-quality-metrics",
+        "qa-ci-cd-testing",
+        "qa-test-automation-arch",
+        "qa-tech-selection",
+        "qa-test-env-data",
+        "qa-test-data-engineering",
+        "qa-testability-advocacy",
+        "qa-shift-left",
+        "qa-shift-right",
+        "qa-test-leadership",
+        "qa-test-reporting",
+        "qa-regression-testing"
+      ]
+    },
+    {
+      "name": "沟通传承",
+      "description": "团队赋能、复盘和知识传递",
+      "skills": [
+        "qa-stakeholder-communication",
+        "qa-code-review-for-test",
+        "qa-team-coaching",
+        "qa-retrospective"
+      ]
+    },
+    {
+      "name": "主工作流",
+      "description": "测试工作流编排引擎和技能目录",
+      "skills": [
+        "qa-test-workflow",
+        "qa-test-skills-catalog"
+      ]
+    }
+  ]
+}
