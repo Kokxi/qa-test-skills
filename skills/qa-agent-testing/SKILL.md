@@ -1,10 +1,8 @@
 ﻿---
 name: qa-agent-testing
 description: >-
-  AI Agent测试专项，覆盖智能体功能、安全性、可控性、边界条件和异常场景的测试方法，包含工具调用测试、幻觉检测、推理链路验证和高级安全防护。
-  当用户提到Agent测试、智能体测试、AI测试、AI助手测试、聊天机器人测试、或需要评估AI Agent行为边界时自动触发。
-  也适用于：Agent出现幻觉、失控、工具误调用、被注入攻击时进行定向检测；AI上下文工程完成后进行Agent专项测试时。
-  适用场景：Agent安全审计、LLM应用测试、AI功能验收、大模型应用质量保障。
+  AI Agent测试专项，覆盖智能体功能/安全/可控性/可靠性九维测试方法，含工具调用测试、幻觉检测和推理链路验证。当需要测试AI Agent行为边界时激活。
+
 when_to_use: 用户说"Agent测试"、"智能体测试"、"AI测试"、"AI助手"、"聊天机器人"、"Agent幻觉"、"Agent失控"、"Agent乱调用"、"Agent被攻击"、"Prompt注入"、"AI安全审计"、"LLM测试"、"大模型应用测试"、需要测试AI Agent或评估AI行为时
 allowed-tools: Read Grep Glob Bash WebFetch
 related_skills:
@@ -499,3 +497,5 @@ Agent测试完成后检查：
 - [ ] 工具调用测试是否完成？
 - [ ] 检查清单是否完成？
 - [ ] 测试报告是否输出？
+
+

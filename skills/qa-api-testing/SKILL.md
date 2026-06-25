@@ -1,9 +1,8 @@
 ﻿---
 name: qa-api-testing
 description: >-
-  接口测试专项设计，覆盖RESTful、GraphQL、gRPC、WebSocket接口的测试方法、用例设计和工具选型。当用户提到接口测试、API测试、接口自动化或需要测试API时自动触发。
-  也适用于：需要对接口进行安全审计、设计Mock方案、实施契约测试或验证接口兼容性时。
-  包含功能、安全、异常、性能、契约、兼容性6个维度的测试要点。
+  接口测试专项设计，覆盖RESTful/GraphQL/gRPC/WebSocket的测试方法、用例设计和工具选型。当需要接口测试或API自动化时激活。
+
 when_to_use: 用户说"接口测试"、"API测试"、"接口自动化"、"RESTful测试"、"GraphQL测试"、"gRPC测试"、"WebSocket测试"、"契约测试"、"接口Mock"、"接口安全"、"API兼容性"、"Swagger测试"、"OpenAPI"、需要测试API时
 allowed-tools: Read Grep Glob Bash WebFetch
 related_skills:
@@ -287,3 +286,5 @@ output_format: 接口测试方案（用例设计+自动化脚本+Mock策略）
 - [ ] 兼容性是否验证？
 - [ ] Mock策略是否设计？
 - [ ] 自动化脚本是否可维护？
+
+

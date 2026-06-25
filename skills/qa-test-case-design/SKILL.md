@@ -1,8 +1,8 @@
 ﻿---
 name: qa-test-case-design
 description: >-
-  高级测试用例设计专项，专注测试用例结构、分类和覆盖策略。当用户需要设计测试用例、评审用例质量或优化用例覆盖时自动触发。
-  也适用于：需要系统化学习测试设计方法，或测试用例结构需要规范化时。
+  测试用例设计专项，专注用例结构规范/分类体系/覆盖策略设计/优先级编排。当需要设计测试用例或规范化用例格式时激活。
+
 when_to_use: 用户说"设计测试用例"、"用例评审"、"用例覆盖"、"测试用例设计"、"用例模板"、"用例规范"、"用例格式"、需要测试用例结构指导、需要编写或规范测试用例时
 allowed-tools: Read Grep Glob
 related_skills:
@@ -698,3 +698,4 @@ output_format: 测试用例设计（结构+分类+优先级+覆盖策略，测�
 - ISO/IEC/IEEE 29119软件测试标准
 - Google Testing Blog
 - Microsoft Test Engineering Guidelines
+
