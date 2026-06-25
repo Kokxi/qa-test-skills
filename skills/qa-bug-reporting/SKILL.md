@@ -1,9 +1,8 @@
----
+﻿---
 name: qa-bug-reporting
 description: >-
   Bug报告艺术，编写高质量的Bug报告让开发一次修复。当用户需要提交Bug、编写Bug报告或优化Bug描述时自动触发。
   也适用于：开发频繁打回Bug报告需要提高报告质量，或需要标准化团队的Bug报告模板时。
-   关键词：Bug报告、缺陷描述、复现步骤、报告质量、Bug标题、前置条件、预期结果、附件技巧、影响评估、标准模板。
 when_to_use: 用户说"提Bug"、"写Bug报告"、"Bug描述"、"报告格式"、"复现步骤"、"加附件"、需要编写或优化Bug报告、开发打回Bug报告需要改进时
 allowed-tools: Read Grep Glob Bash
 related_skills:

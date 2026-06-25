@@ -1,9 +1,8 @@
----
+﻿---
 name: qa-bug-root-cause-analysis
 description: >-
   Bug根因分析，从症状倒推根因方向，系统化定位缺陷根源。当用户需要分析Bug、进行根因分析、追问为什么出现或定位Bug原因时自动触发。
   也适用于：缺陷频发需要系统性根治，或复盘时需要对漏测做根因分析时。
-   关键词：根因分析、Bug定位、根本原因、缺陷溯源、症状分类、根因映射、分析流程、假设验证、偶发问题、性能退化、根因分析表。
 when_to_use: 用户说"分析Bug"、"根因分析"、"为什么出错"、"Bug原因"、"怎么发生的"、"5 Why"、"根治"、需要定位Bug原因、缺陷频发需要系统性根治时
 allowed-tools: Read Grep Glob Bash
 related_skills:

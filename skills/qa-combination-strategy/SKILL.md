@@ -1,9 +1,8 @@
----
+﻿---
 name: qa-combination-strategy
 description: >-
   组合测试策略，处理多参数多环境的测试组合爆炸问题。当参数多、环境多、全组合测不完需要简化时自动触发。
   也适用于：需要设计正交试验、判定表或Pairwise测试方案时。
-   关键词：组合测试、正交试验、Pairwise、参数组合、组合爆炸、测试简化、全组合、风险加权、判断表、测试正交。
 when_to_use: 用户说"组合测试"、"参数组合"、"正交测试"、"组合爆炸"、"Pairwise"、"全组合测不完"、"判断表"、需要简化测试组合、参数多环境多时
 allowed-tools: Read Grep Glob
 related_skills:

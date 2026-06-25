@@ -1,9 +1,8 @@
----
+﻿---
 name: qa-mobile-testing
 description: >-
   移动端测试专项，覆盖iOS和Android应用的测试方法和要点。当用户需要测试移动应用、进行App测试或Android/iOS测试时自动触发。
   也适用于：移动端发版前需要全面测试，或需要设计移动专项测试方案时。
-   关键词：移动测试、App测试、Android、iOS、兼容性测试、弱网测试、中断测试、性能测试、H5测试、小程序测试、Page Object模式。
 when_to_use: 用户说"移动测试"、"App测试"、"Android测试"、"iOS测试"、"手机上测"、"H5测试"、"小程序测试"、需要测试移动应用、移动端发版前全面测试时
 allowed-tools: Read Grep Glob Bash
 related_skills:
