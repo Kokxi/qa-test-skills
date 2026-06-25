@@ -1,6 +1,6 @@
 {
   "name": "QA Test Skills",
-  "description": "50个专家级测试技能，覆盖测试全生命周期。AI辅助测试用例设计，让初级测试人员输出专家级测试用例。",
+  "description": "48个专家级测试技能 + 1个入口工作流，覆盖测试全生命周期。AI辅助测试用例设计，让初级测试人员输出专家级测试用例。",
   "groups": [
     {
       "name": "AI协作",
@@ -96,14 +96,6 @@
         "qa-code-review-for-test",
         "qa-team-coaching",
         "qa-retrospective"
-      ]
-    },
-    {
-      "name": "主工作流",
-      "description": "测试工作流编排引擎和技能目录",
-      "skills": [
-        "qa-test-workflow",
-        "qa-test-skills-catalog"
       ]
     }
   ]

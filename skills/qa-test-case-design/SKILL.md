@@ -12,7 +12,7 @@ related_skills:
     - qa-boundary-deep-dive      # 输入：边界分析结果
     - qa-scenario-tree           # 输入：场景树构建结果
   downstream:
-    - qa-test-workflow           # 输出：测试用例设计结果
+    - qa-test-skills           # 输出：测试用例设计结果
     - qa-expert-review           # 输出：用例评审反馈
 input_format: 需求描述 + 场景分析 + 边界条件
 output_format: 测试用例设计（结构+分类+优先级+覆盖策略，测试步骤留空）

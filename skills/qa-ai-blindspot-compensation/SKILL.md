@@ -10,7 +10,7 @@ related_skills:
   upstream:
     - qa-ai-output-critique      # 输入：评审后的测试用例
   downstream:
-    - qa-test-workflow           # 输出：最终测试用例返回给主流程
+    - qa-test-skills           # 输出：最终测试用例返回给主流程
 input_format:
   required:
     - name: 测试用例

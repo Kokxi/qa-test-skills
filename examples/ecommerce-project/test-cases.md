@@ -4,7 +4,7 @@
 - **项目名称**：电商平台
 - **需求来源**：docs/prd.md + docs/requirements/子模块需求
 - **生成日期**：2026-06-20
-- **生成工具**：qa-test-workflow技能
+- **生成工具**：qa-test-skills 入口工作流
 
 ## 测试用例统计
 

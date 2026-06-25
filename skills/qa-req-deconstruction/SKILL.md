@@ -8,7 +8,7 @@ when_to_use: 用户说"分析这个需求"、"需求解构"、"挖掘隐含需�
 allowed-tools: Read Grep Glob WebFetch
 related_skills:
   upstream:
-    - qa-test-workflow           # 从主流程调用
+    - qa-test-skills           # 从主流程调用
   downstream:
     - qa-scenario-tree           # 输出：需求解构表传递给场景树
     - qa-risk-intuition          # 输出：风险点用于风险评估

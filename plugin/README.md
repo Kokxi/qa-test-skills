@@ -1,10 +1,10 @@
 # QA Test Skills Plugin - 软件测试技能集 | AI辅助测试用例设计专家
 
-> **50个专家级测试技能，覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
+> **48个专家级测试技能 + 1个入口工作流，覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
 
-![Version](https://img.shields.io/badge/version-1.4.1-blue)
+![Version](https://img.shields.io/badge/version-1.4.2-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Skills](https://img.shields.io/badge/skills-50-orange)
+![Skills](https://img.shields.io/badge/skills-48-orange)
 ![AI](https://img.shields.io/badge/AI-协作-purple)
 [![skills.sh](https://skills.sh/b/Kokxi/qa-test-skills)](https://skills.sh/Kokxi/qa-test-skills)
 
@@ -28,7 +28,7 @@ AI辅助测试正在普及，但多数团队面临同一个困境：**新人用A
 
 **2. 不是散装技能，是有序工作流**
 
-50个技能通过 `qa-test-workflow` 编排为10步有序流水线：从需求输入到测试报告，每一步的输入输出都有明确依赖关系。
+48个技能通过根目录的 SKILL.md 作为入口工作流编排为10步有序流水线：从需求输入到测试报告，每一步的输入输出都有明确依赖关系。
 
 **3. 同一份内容，两个读者各取所需**
 
@@ -55,7 +55,7 @@ AI辅助测试正在普及，但多数团队面临同一个困境：**新人用A
 用户输入 → 需求文档解析 → 智能识别 → 需求评审 → 需求解构 → 场景构建 → 深度设计 → 回归策略设计 → 上下文工程 → 提示词生成 → AI生成 → 输出评审 → 盲区补盲 → 测试报告
 ```
 
-### 2. 50个专家级技能
+### 2. 48个专家级技能
 
 | 领域 | 技能数 | 说明 |
 |------|--------|------|
@@ -148,7 +148,7 @@ npx skills add Kokxi/qa-test-skills --all
 #### 只安装特定技能
 
 ```bash
-npx skills add Kokxi/qa-test-skills --skill qa-test-workflow
+npx skills add Kokxi/qa-test-skills --skill qa-test-skills
 ```
 
 ### 方式2：从ClawHub安装
@@ -231,7 +231,7 @@ const skills = getSkills();
 console.log(skills);
 
 // 获取指定技能内容
-const workflow = getSkillContent('qa-test-workflow');
+const workflow = getSkillContent('qa-test-skills');
 console.log(workflow);
 ```
 
@@ -243,7 +243,7 @@ console.log(workflow);
 
 | 技能名称 | 功能描述 | 使用场景 |
 |----------|----------|----------|
-| **qa-test-workflow** | 测试工作流编排，自动串联所有技能 | 生成完整测试用例 |
+| **qa-test-skills** | 入口工作流，自动串联所有子技能 | 生成完整测试用例 |
 | **qa-requirement-review** | 需求评审 | 评审需求文档质量 |
 | **qa-req-deconstruction** | 需求解构与显隐式挖掘 | 分析需求文档 |
 | **qa-scenario-tree** | 场景树构建 | 设计测试场景 |
@@ -480,7 +480,7 @@ MIT License - 详见 [LICENSE](LICENSE)
 
 ### v1.3.0 (2026-06-20)
 - 新增qa-test-case-design技能，专注测试用例设计但不生成测试步骤
-- 优化qa-test-workflow技能，增加需求文档索引解析和多格式支持
+- 优化qa-test-skills入口工作流(原qa-test-workflow)，增加需求文档索引解析和多格式支持
 - 补充7种测试用例设计方法的应用要点
 - 根据用户反馈优化测试覆盖维度、形式化方法、字段级验证和输出格式
 - 添加电商平台测试用例示例

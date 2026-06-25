@@ -1,10 +1,10 @@
 # QA Test Skills - 软件测试技能集 | AI辅助测试用例设计专家
 
-> **50个专家级测试技能，覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
+> **48个专家级测试技能 + 1个入口工作流，覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
 
-![Version](https://img.shields.io/badge/version-1.4.1-blue)
+![Version](https://img.shields.io/badge/version-1.4.2-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Skills](https://img.shields.io/badge/skills-50-orange)
+![Skills](https://img.shields.io/badge/skills-48-orange)
 ![AI](https://img.shields.io/badge/AI-协作-purple)
 [![skills.sh](https://skills.sh/b/Kokxi/qa-test-skills)](https://skills.sh/Kokxi/qa-test-skills)
 
@@ -38,7 +38,7 @@ AI辅助测试正在普及，但多数团队面临同一个困境：**新人用A
 
 **2. 不是散装技能，是有序工作流**
 
-50个技能不是随意堆砌的。`qa-test-workflow` 将它们编排为10步有序流水线：从需求输入到测试报告，每一步的输入输出都有明确依赖关系。新人跟着工作流走一遍，就理解了一个完整的测试设计过程。
+48个技能不是随意堆砌的。根目录的 SKILL.md 作为入口工作流将它们编排为10步有序流水线：从需求输入到测试报告，每一步的输入输出都有明确依赖关系。新人跟着工作流走一遍，就理解了一个完整的测试设计过程。
 
 **3. 写给AI的，同时也是写给人的**
 
@@ -77,7 +77,7 @@ AI辅助测试正在普及，但多数团队面临同一个困境：**新人用A
 用户输入 → 需求文档解析 → 智能识别 → 需求评审 → 需求解构 → 场景构建 → 深度设计 → 回归策略设计 → 上下文工程 → 提示词生成 → AI生成 → 输出评审 → 盲区补盲 → 测试报告
 ```
 
-### 2. 50个专家级技能
+### 2. 48个专家级技能
 
 | 领域 | 技能数 | 说明 |
 |------|--------|------|
@@ -89,7 +89,6 @@ AI辅助测试正在普及，但多数团队面临同一个困境：**新人用A
 | **沟通传承** | 4个 | 干系人沟通、代码评审、团队赋能、复盘 |
 | **专项测试** | 8个 | 接口、移动端、Agent、专项、探索、债务、估算、缺陷 |
 | **测试设计** | 4个 | 测试用例设计、批判思维、提问框架、风险直觉 |
-| **主工作流** | 1个 | 测试工作流编排 |
 
 ### 3. 全面的测试覆盖维度
 
@@ -252,7 +251,7 @@ npx skills add Kokxi/qa-test-skills --all
 #### 方式五：只安装特定技能
 
 ```bash
-npx skills add Kokxi/qa-test-skills --skill qa-test-workflow
+npx skills add Kokxi/qa-test-skills --skill qa-test-skills
 ```
 
 #### 方式六：克隆仓库手动安装
@@ -355,7 +354,7 @@ examples/ecommerce-project/
 
 ### 如何使用示例项目
 ```bash
-# 使用qa-test-workflow技能处理示例项目
+# 使用根 SKILL.md 入口工作流处理示例项目
 请帮我测试这个项目：examples/ecommerce-project/docs/prd.md
 ```
 
@@ -380,7 +379,7 @@ examples/ecommerce-project/
 
 | 技能名称 | 功能描述 | 使用场景 |
 |----------|----------|----------|
-| **qa-test-workflow** | 测试工作流编排，自动串联所有技能 | 生成完整测试用例 |
+| **qa-test-skills** | 入口工作流，自动串联所有子技能 | 生成完整测试用例 |
 | **qa-req-deconstruction** | 需求解构与显隐式挖掘 | 分析需求文档 |
 | **qa-boundary-deep-dive** | 边界深度分析 | 识别边界条件 |
 | **qa-scenario-tree** | 场景树构建 | 设计测试场景 |
@@ -543,7 +542,6 @@ Step 3: 执行测试
 | **技术债务** | 2个 | 技术选型、债务管理 |
 | **代码探索** | 2个 | 代码评审、探索式测试 |
 | **用例设计** | 1个 | 测试用例设计 |
-| **主工作流** | 1个 | 测试工作流编排 |
 
 ### 依赖关系
 

@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-这是一个电商平台的测试用例示例，展示了如何使用`qa-test-workflow`技能集从需求文档生成测试用例。
+这是一个电商平台的测试用例示例，展示了如何使用根 SKILL.md 入口工作流从需求文档生成测试用例。
 
 ## 示例目的
 
@@ -31,12 +31,12 @@ ecommerce-project/
 
 可以参考这个示例项目的结构和测试用例格式，为自己的项目创建类似的测试用例。
 
-### 2. 测试qa-test-workflow技能
+### 2. 测试入口工作流
 
-可以使用这个示例项目测试`qa-test-workflow`技能的需求文档索引解析功能：
+可以使用这个示例项目测试入口工作流的需求文档索引解析功能：
 
 ```bash
-# 使用qa-test-workflow技能处理这个项目
+# 使用入口工作流处理这个项目
 请帮我测试这个项目：examples/ecommerce-project/docs/prd.md
 ```
 
@@ -71,7 +71,7 @@ ecommerce-project/
 
 ## 相关技能
 
-- `qa-test-workflow`：测试工作流编排，自动串联所有技能
+- `qa-test-skills`：入口工作流，自动串联所有子技能
 - `qa-requirement-review`：需求评审
 - `qa-req-deconstruction`：需求解构
 - `qa-scenario-tree`：场景树构建
