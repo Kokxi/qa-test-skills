@@ -1,7 +1,8 @@
-﻿---
+---
 name: qa-test-automation-arch
+version: 1.5.0
 description: >-
-  测试自动化架构设计，运用PageObject/分层/关键字驱动等模式构建可维护可扩展的自动化框架。当需要设计或优化自动化测试架构时激活。
+  当需要设计自动化测试框架、或者现有框架维护成本太高需要重构时使用此技能。运用 PageObject、分层测试、关键字驱动、数据驱动等模式设计可维护可扩展的自动化架构。不要直接写测试代码——先设计架构：选型（UI/API/单元）、分层（测试层/业务层/基础设施层）、数据管理（测试数据与脚本分离）和 CI 集成方案。好的自动化架构应该让写用例的人不需要懂底层实现。
 
 when_to_use: 用户说"自动化架构"、"框架设计"、"自动化策略"、"自动化框架"、"测试框架"、需要设计测试自动化架构、自动化维护困难需要重构时
 allowed-tools: Read Grep Glob Bash
@@ -12,13 +13,29 @@ related_skills:
   downstream:
     - qa-ci-cd-testing           # 输出：架构设计用于CI/CD集成
     - qa-api-testing             # 输出：架构设计指导API测试
-input_format: 技术选型 + 测试策略
-output_format: 自动化架构设计（分层策略+框架选型+最佳实践）
+input_format:
+  required:
+    - name: 测试策略
+      type: object
+      description: 来自qa-test-strategy-design的测试策略
+    - name: 技术选型
+      type: object
+      description: 来自qa-tech-selection的技术选型建议
+  optional:
+    - name: 项目约束
+      type: string
+      description: 技术栈和团队限制
+output_format:
+  structure:
+    - automation_architecture: 自动化测试架构设计
+    - framework_selection: 框架选择建议
+    - layer_design: 分层设计
+    - maintenance_strategy: 维护策略
 ---
 
 # 测试自动化架构设计
 
-## Overview
+## 核心原则
 
 你是一位自动化架构专家，擅长设计可维护、可扩展的自动化测试框架。
 **核心原则**：好的自动化架构——分层清晰、职责单一、易于维护、快速反馈。
@@ -26,7 +43,9 @@ output_format: 自动化架构设计（分层策略+框架选型+最佳实践）
 
 ## 测试自动化金字塔
 
-```
+> 📌 本节与 qa-test-strategy-design「测试金字塔」概念对应，但分层名称和比例不同——本技能侧重自动化落地（集成测试层名、70/20/10 比例），strategy-design 侧重策略规划（接口测试层名、60/30/10 比例）。修改时请确认两处含义，避免矛盾。
+
+```text
                     ┌─────────────┐
                     │   E2E测试    │  10%
                     │  (UI/API)    │
@@ -43,7 +62,7 @@ output_format: 自动化架构设计（分层策略+框架选型+最佳实践）
 
 ### 第1层：单元测试层
 
-```
+```text
 职责：
 ├─ 测试范围：函数、类、模块
 ├─ 执行速度：毫秒级
@@ -66,7 +85,7 @@ output_format: 自动化架构设计（分层策略+框架选型+最佳实践）
 
 ### 第2层：集成测试层
 
-```
+```text
 职责：
 ├─ 测试范围：接口、服务间交互
 ├─ 执行速度：秒级
@@ -89,7 +108,7 @@ output_format: 自动化架构设计（分层策略+框架选型+最佳实践）
 
 ### 第3层：E2E测试层
 
-```
+```text
 职责：
 ├─ 测试范围：完整用户流程
 ├─ 执行速度：分钟级
@@ -114,7 +133,7 @@ output_format: 自动化架构设计（分层策略+框架选型+最佳实践）
 
 ### Page Object Model
 
-```
+```text
 优点：
 ├─ 封装页面元素和操作
 ├─ 减少代码重复
@@ -141,7 +160,7 @@ tests/
 
 ### 关键字驱动
 
-```
+```text
 优点：
 ├─ 业务人员可参与
 ├─ 测试用例可读性强
@@ -160,7 +179,7 @@ tests/
 
 ### 数据驱动
 
-```
+```text
 优点：
 ├─ 测试数据与逻辑分离
 ├─ 易于添加新用例
@@ -190,7 +209,7 @@ def test_login(username, password, expected):
 | 社区生态 | 成长中 | 成熟 | 成熟 |
 | 适用场景 | 现代Web | 单页应用 | 传统Web |
 
-## Examples
+## 输出示例
 
 **设计Web UI自动化框架（团队5人，JS技术栈，1000+用例）**
 → 分层：单元测试（Jest）→集成测试（Supertest）→E2E（Playwright）
@@ -201,7 +220,7 @@ def test_login(username, password, expected):
 **API自动化框架设计**
 → 分层：请求封装层→业务接口层→用例层→数据层
 
-## Guidelines
+## 检查清单
 
 架构设计完成后检查：
 - [ ] 分层是否清晰（单元/集成/E2E）？

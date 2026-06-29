@@ -1,7 +1,8 @@
-﻿---
+---
 name: qa-test-reporting
+version: 1.5.0
 description: >-
-  测试报告编写，输出面向不同受众的日报/周报/迭代报告/质量报告。当需要编写测试报告或向上汇报质量时激活。
+  输出面向不同受众的测试报告——日报给团队同步进度、周报给项目经理、质量报告给管理层决策。当测试执行完成需要汇总结果、或者上级问"质量怎么样"的时候使用此技能。不同角色关心的数据不同：开发关心Bug明细，经理关心通过率和趋势，老板关心风险和发版决策。报告内容适配受众，关键指标量化呈现，风险区域必须醒目标注。
 
 when_to_use: 用户说"测试报告"、"日报"、"周报"、"迭代报告"、"报告模板"、"质量汇报"、"进度汇报"、需要编写测试报告、向管理层汇报测试进展时
 allowed-tools: Read Grep Glob
@@ -13,13 +14,30 @@ related_skills:
   downstream:
     - qa-stakeholder-communication # 输出：报告用于干系人沟通
     - qa-retrospective           # 输出：报告数据用于复盘
-input_format: 质量度量 + 缺陷数据 + 执行结果
-output_format: 测试报告（日报/周报/迭代报告/专项报告）
+input_format:
+  required:
+    - name: 测试执行数据
+      type: object
+      description: 测试执行结果和统计
+    - name: 缺陷数据
+      type: object
+      description: 缺陷统计和分析数据
+  optional:
+    - name: 质量度量
+      type: object
+      description: 来自qa-quality-metrics的质量数据
+output_format:
+  structure:
+    - executive_summary: 执行摘要
+    - test_results: 测试结果统计
+    - defect_analysis: 缺陷分析
+    - risk_assessment: 风险评估
+    - recommendations: 改进建议
 ---
 
 # 测试报告编写
 
-## Overview
+## 核心原则
 
 你是一位测试报告专家，擅长编写清晰、有价值的测试报告。
 **核心原则**：测试报告不是数据堆砌，而是决策支持——让读者快速了解质量状态和风险。
@@ -29,7 +47,7 @@ output_format: 测试报告（日报/周报/迭代报告/专项报告）
 
 ### 1. 日报
 
-```
+```text
 用途：每日测试进展同步
 受众：测试团队、开发
 频率：每日
@@ -53,7 +71,7 @@ output_format: 测试报告（日报/周报/迭代报告/专项报告）
 
 ### 2. 周报
 
-```
+```text
 用途：每周测试进展总结
 受众：测试负责人、项目经理
 频率：每周
@@ -85,7 +103,7 @@ output_format: 测试报告（日报/周报/迭代报告/专项报告）
 
 ### 3. 迭代报告
 
-```
+```text
 用途：迭代测试总结
 受众：项目团队、管理层
 频率：每个迭代结束
@@ -136,7 +154,7 @@ output_format: 测试报告（日报/周报/迭代报告/专项报告）
 
 ### 4. 专项报告
 
-```
+```text
 类型：
 ├─ 性能测试报告
 ├─ 安全测试报告
@@ -206,7 +224,7 @@ output_format: 测试报告（日报/周报/迭代报告/专项报告）
 [建议发布/建议延期]
 ```
 
-## Examples
+## 输出示例
 
 **编写迭代结束的测试报告**
 → 日报：今日完成XX条用例/发现XX个Bug/阻塞项XX
@@ -217,7 +235,7 @@ output_format: 测试报告（日报/周报/迭代报告/专项报告）
 **用户说"质量到底行不行"**
 → 迭代报告一句话结论：质量良好，建议发布（P0/P1 Bug已全部修复，P2 Bug已评估无风险）
 
-## Guidelines
+## 检查清单
 
 测试报告完成后检查：
 - [ ] 报告类型是否正确？

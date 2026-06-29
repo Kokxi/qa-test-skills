@@ -1,6 +1,6 @@
 {
   "name": "@kokxi/qa-test-skills",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "48个专家级测试技能 + 1个入口工作流，覆盖测试全生命周期。AI辅助测试用例设计插件，让AI输出专家级测试用例，新人也能学习测试方法。",
   "extensions": ["./index.js"],
   "compat": {

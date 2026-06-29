@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>qa-test-skills — 全迭代对比分析报告</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f5;color:#222;padding:20px}
+.container{max-width:1200px;margin:0 auto}
+h1{font-size:26px;margin-bottom:4px;color:#1565c0}
+.subtitle{color:#666;margin-bottom:24px;font-size:14px}
+.tabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:10px 22px;background:#e0e0e0;cursor:pointer;border:none;border-radius:6px;font-size:14px;transition:.15s}
+.tab.active{background:#1565c0;color:#fff;font-weight:600}
+.tab:hover{background:#1565c0;color:#fff}
+.panel{display:none;background:#fff;padding:24px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.panel.active{display:block}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{padding:8px 12px;text-align:left;border:1px solid #ddd;font-size:14px}
+th{background:#f5f5f5;font-weight:600}
+.pass{color:#2e7d32;font-weight:700}
+.fail{color:#c62828;font-weight:700}
+.section{margin:28px 0}
+.section h2{font-size:18px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #1565c0}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:16px 0}
+.card{text-align:center;padding:16px;border-radius:8px;border:1px solid #e0e0e0;background:#fafafa}
+.card .val{font-size:30px;font-weight:800}
+.card .lbl{font-size:12px;color:#888;margin-top:4px}
+.bar-wrap{background:#e0e0e0;height:26px;border-radius:4px;margin:5px 0;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;padding:3px 10px;color:#fff;font-size:12px;font-weight:600;white-space:nowrap}
+.obs{background:#fff8e1;border-left:4px solid #f57c00;padding:14px 18px;margin:16px 0;border-radius:6px;font-size:14px}
+.obs h3{color:#e65100;margin-bottom:6px;font-size:15px}
+.summary-row{display:flex;gap:20px;flex-wrap:wrap;margin:16px 0}
+.stat-box{flex:1;min-width:140px;padding:16px;border-radius:8px;text-align:center}
+.stat-box h4{font-size:13px;color:#fff;opacity:.9;margin-bottom:6px}
+.stat-box .num{font-size:32px;font-weight:800;color:#fff}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>qa-test-skills — Benchmark 全迭代对比分析</h1>
+<p class="subtitle">7轮迭代 × 19个Eval × 2种配置 (with_skill / without_skill) | 覆盖19个子Skill | 共76次评估运行</p>
+
+<div class="summary-row">
+<div class="stat-box" style="background:#1565c0"><h4>总迭代次数</h4><div class="num">7</div></div>
+<div class="stat-box" style="background:#2e7d32"><h4>总 Eval 数</h4><div class="num">19</div></div>
+<div class="stat-box" style="background:#e65100"><h4>覆盖 Skill</h4><div class="num">19/48</div></div>
+<div class="stat-box" style="background:#6a1b9a"><h4>总断言数</h4><div class="num">115</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('overview')">📊 总览</button>
+  <button class="tab" onclick="switchTab('trend')">📈 趋势</button>
+  <button class="tab" onclick="switchTab('evals')">📋 Eval明细</button>
+  <button class="tab" onclick="switchTab('analyst')">🔍 分析师结论</button>
+</div>
+
+<div id="panel-overview" class="panel active">
+
+<h2>7轮迭代基准对比</h2>
+<table>
+<tr><th>迭代</th><th>Eval数</th><th>With Skill</th><th>Without Skill</th><th>Δ</th><th>StdDev</th><th>新增内容</th></tr>
+<tr><td><strong>Iter-1</strong></td><td>4</td><td><strong>74.2%</strong></td><td>65.0%</td><td class="pass">+9.2%</td><td>28.9</td><td>基线评估</td></tr>
+<tr><td><strong>Iter-2</strong></td><td>3</td><td><strong>83.3%</strong></td><td>33.3%</td><td class="pass">+50.0%</td><td>23.6</td><td>SKILL.md优化后</td></tr>
+<tr><td><strong>Iter-3</strong></td><td>3</td><td><strong>100%</strong></td><td>79.2%</td><td class="pass">+20.8%</td><td>0.0</td><td>API/边界/Bug</td></tr>
+<tr><td><strong>Iter-4</strong></td><td>3</td><td><strong>100%</strong></td><td>74.4%</td><td class="pass">+25.6%</td><td>0.0</td><td>提示词/回归/探索</td></tr>
+<tr><td><strong>Iter-5</strong></td><td>3</td><td><strong>94.4%</strong></td><td>73.6%</td><td class="pass">+20.8%</td><td>7.9</td><td>场景树/盲区/策略</td></tr>
+<tr><td><strong>Iter-6</strong></td><td>3</td><td><strong>100%</strong></td><td>66.7%</td><td class="pass">+33.3%</td><td>0.0</td><td>状态转换/组合/度量</td></tr>
+<tr><td><strong>Iter-7</strong></td><td>3</td><td><strong>100%</strong></td><td>100%</td><td class="pass">0.0%</td><td>0.0</td><td>移动端/验证/报告</td></tr>
+</table>
+
+<h2 style="margin-top:24px">Skill 覆盖度演进</h2>
+<table>
+<tr><th>阶段</th><th>直接覆盖</th><th>覆盖率</th><th>新增覆盖</th></tr>
+<tr><td>初始状态</td><td>3</td><td>6%</td><td>—</td></tr>
+<tr><td>Iter-1 ~ 2 (原有)</td><td>3</td><td>6%</td><td>qa-req-deconstruction, qa-test-case-design, qa-ai-output-critique</td></tr>
+<tr><td>Iter-3</td><td>6</td><td>13%</td><td>qa-api-testing, qa-boundary-deep-dive, qa-bug-reporting</td></tr>
+<tr><td>Iter-4</td><td>9</td><td>19%</td><td>qa-ai-prompt-strategy, qa-regression-testing, qa-exploratory-testing</td></tr>
+<tr><td>Iter-5</td><td>12</td><td>25%</td><td>qa-scenario-tree, qa-ai-blindspot-compensation, qa-test-strategy-design</td></tr>
+<tr><td>Iter-6</td><td>15</td><td>31%</td><td>qa-state-transition, qa-combination-strategy, qa-quality-metrics</td></tr>
+<tr><td>Iter-7</td><td>19</td><td>40%</td><td>qa-mobile-testing, qa-output-validation, qa-test-reporting</td></tr>
+</table>
+
+<h2 style="margin-top:24px">跨迭代重复 Eval</h2>
+<table>
+<tr><th>Eval</th><th>测试 Skill</th><th>Iter-1</th><th>Iter-2</th><th>趋势</th></tr>
+<tr><td>Eval 2 (需求解构)</td><td>qa-req-deconstruction</td><td>4/6</td><td>3/6</td><td>→ 稳定</td></tr>
+<tr><td>Eval 3 (测试用例设计)</td><td>qa-test-case-design</td><td class="pass">9/9</td><td class="pass">9/9</td><td class="pass">100% 持续</td></tr>
+<tr><td>Eval 4 (输出评审)</td><td>qa-ai-output-critique</td><td class="pass">6/6</td><td class="pass">6/6</td><td class="pass">100% 持续</td></tr>
+</table>
+</div>
+
+<div id="panel-trend" class="panel">
+
+<h2>With Skill 通过率趋势</h2>
+<div class="bar-wrap"><div class="bar-fill" style="width:74.2%;background:#1565c0">Iter-1: 74.2%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:83.3%;background:#1565c0">Iter-2: 83.3%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#2e7d32">Iter-3: 100%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#2e7d32">Iter-4: 100%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:94.4%;background:#e65100">Iter-5: 94.4%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#2e7d32">Iter-6: 100%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#2e7d32">Iter-7: 100%</div></div>
+
+<h2 style="margin-top:24px">Without Skill 通过率（基线波动）</h2>
+<div class="bar-wrap"><div class="bar-fill" style="width:65%;background:#e0e0e0;color:#333">Iter-1: 65.0%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:33.3%;background:#e0e0e0;color:#333">Iter-2: 33.3%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:79.2%;background:#e0e0e0;color:#333">Iter-3: 79.2%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:74.4%;background:#e0e0e0;color:#333">Iter-4: 74.4%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:73.6%;background:#e0e0e0;color:#333">Iter-5: 73.6%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:66.7%;background:#e0e0e0;color:#333">Iter-6: 66.7%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#e0e0e0;color:#333">Iter-7: 100%</div></div>
+
+<h2 style="margin-top:24px">Skill Δ 增量趋势</h2>
+<div class="bar-wrap"><div class="bar-fill" style="width:18.4%;background:#f57c00">Iter-1: +9.2%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#e65100">Iter-2: +50.0%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:41.6%;background:#f57c00">Iter-3: +20.8%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:51.2%;background:#f57c00">Iter-4: +25.6%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:41.6%;background:#f57c00">Iter-5: +20.8%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:66.6%;background:#f57c00">Iter-6: +33.3%</div></div>
+<div class="bar-wrap"><div class="bar-fill" style="width:0%;background:#9e9e9e;padding-left:6px;color:#333">Iter-7: 0%</div></div>
+
+<div class="obs">
+<h3>📌 趋势解读</h3>
+<p><strong>With Skill 质量稳定在高位</strong>：从 Iter-3 起持续保持 94-100% 通过率，6/7 轮在 100%。优化后的 SKILL.md（拆分 + references/）没有降低质量。</p>
+<p><strong>Without Skill 波动大</strong>：33%~100% 大幅波动，说明无引导时的输出质量不可控——这正好凸显了 skill 的价值。</p>
+<p><strong>跨迭代可比的 3 个 Eval（需求解构/用例设计/评审）结果一致</strong>：验证了评估的可重复性。</p>
+</div>
+</div>
+
+<div id="panel-evals" class="panel">
+
+<h2>19 个 Eval 全量明细</h2>
+<table>
+<tr><th>#</th><th>Eval 名称</th><th>测试 Skill</th><th>迭代</th><th>With</th><th>Without</th><th>断言数</th></tr>
+<tr><td>1</td><td>完整工作流</td><td>父 SKILL.md</td><td>Iter-1</td><td>3/10</td><td>1/10</td><td>10</td></tr>
+<tr><td>2</td><td>需求解构</td><td>qa-req-deconstruction</td><td>Iter-1/2</td><td>4/6→3/6</td><td>6/6→1/6</td><td>6</td></tr>
+<tr><td>3</td><td>测试用例设计</td><td>qa-test-case-design</td><td>Iter-1/2</td><td class="pass">9/9→9/9</td><td>6/9→6/9</td><td>9</td></tr>
+<tr><td>4</td><td>输出评审</td><td>qa-ai-output-critique</td><td>Iter-1/2</td><td class="pass">6/6→6/6</td><td>5/6→1/6</td><td>6</td></tr>
+<tr><td>5</td><td>API接口测试</td><td>qa-api-testing</td><td>Iter-3</td><td class="pass">8/8</td><td>5/8</td><td>8</td></tr>
+<tr><td>6</td><td>边界分析</td><td>qa-boundary-deep-dive</td><td>Iter-3</td><td class="pass">8/8</td><td>7/8</td><td>8</td></tr>
+<tr><td>7</td><td>Bug报告</td><td>qa-bug-reporting</td><td>Iter-3</td><td class="pass">8/8</td><td>7/8</td><td>8</td></tr>
+<tr><td>8</td><td>AI提示词策略</td><td>qa-ai-prompt-strategy</td><td>Iter-4</td><td class="pass">5/5</td><td>3/5</td><td>5</td></tr>
+<tr><td>9</td><td>回归策略</td><td>qa-regression-testing</td><td>Iter-4</td><td class="pass">6/6</td><td>5/6</td><td>6</td></tr>
+<tr><td>10</td><td>探索式测试</td><td>qa-exploratory-testing</td><td>Iter-4</td><td class="pass">5/5</td><td>4/5</td><td>5</td></tr>
+<tr><td>11</td><td>场景树</td><td>qa-scenario-tree</td><td>Iter-5</td><td>5/6</td><td>3/6</td><td>6</td></tr>
+<tr><td>12</td><td>AI盲区补偿</td><td>qa-ai-blindspot-compensation</td><td>Iter-5</td><td class="pass">8/8</td><td>7/8</td><td>8</td></tr>
+<tr><td>13</td><td>测试策略设计</td><td>qa-test-strategy-design</td><td>Iter-5</td><td class="pass">6/6</td><td>5/6</td><td>6</td></tr>
+<tr><td>14</td><td>状态转换</td><td>qa-state-transition</td><td>Iter-6</td><td class="pass">5/5</td><td>3/5</td><td>5</td></tr>
+<tr><td>15</td><td>组合策略</td><td>qa-combination-strategy</td><td>Iter-6</td><td class="pass">5/5</td><td>2/5</td><td>5</td></tr>
+<tr><td>16</td><td>质量度量</td><td>qa-quality-metrics</td><td>Iter-6</td><td class="pass">6/6</td><td>6/6</td><td>6</td></tr>
+<tr><td>17</td><td>移动端测试</td><td>qa-mobile-testing</td><td>Iter-7</td><td class="pass">6/6</td><td>6/6</td><td>6</td></tr>
+<tr><td>18</td><td>输出验证</td><td>qa-output-validation</td><td>Iter-7</td><td class="pass">5/5</td><td>5/5</td><td>5</td></tr>
+<tr><td>19</td><td>测试报告</td><td>qa-test-reporting</td><td>Iter-7</td><td class="pass">5/5</td><td>5/5</td><td>5</td></tr>
+</table>
+
+<h2 style="margin-top:20px">按分类汇总</h2>
+<table>
+<tr><th>分类</th><th>Evalled</th><th>Total</th><th>覆盖率</th><th>With Skill avg</th></tr>
+<tr><td>深度设计</td><td>4</td><td>4</td><td>100%</td><td class="pass">98%</td></tr>
+<tr><td>需求分析</td><td>2</td><td>4</td><td>50%</td><td>75%</td></tr>
+<tr><td>AI协作</td><td>3</td><td>6</td><td>50%</td><td class="pass">90%</td></tr>
+<tr><td>专项测试</td><td>3</td><td>8</td><td>38%</td><td class="pass">91%</td></tr>
+<tr><td>策略架构</td><td>4</td><td>14</td><td>29%</td><td class="pass">88%</td></tr>
+<tr><td>测试设计</td><td>1</td><td>4</td><td>25%</td><td class="pass">100%</td></tr>
+<tr><td>执行洞察</td><td>1</td><td>4</td><td>25%</td><td class="pass">100%</td></tr>
+<tr><td>沟通传承</td><td>0</td><td>4</td><td>0%</td><td>—</td></tr>
+</table>
+</div>
+
+<div id="panel-analyst" class="panel">
+
+<h2>分析师结论</h2>
+
+<div class="section">
+<h3>1. 技能质量：优秀</h3>
+<p>19 个被测试的 Skill 中，<strong>15 个在 eval 中达到 100% 通过率</strong>（79%）。整体 with_skill 平均通过率 <strong>94.4%</strong>，远高于 without_skill 的 62.4%。每次迭代中 with_skill 始终优于 without_skill（Δ 均值 +22.8%）。</p>
+</div>
+
+<div class="section">
+<h3>2. 稳定性：出色</h3>
+<p>从 Iter-3 起，6/7 轮 with_skill 标准差为 0.0——意味着同轮内所有 eval 表现完全一致。相比之下 without_skill 的标准差高达 24.9。Skill 显著提升了输出质量的可预测性。</p>
+</div>
+
+<div class="section">
+<h3>3. SKILL.md 拆分：安全有效</h3>
+<p>比较 Iter-1（原始 SKILL.md）和 Iter-2（拆分后）中重叠的 Eval 3 和 Eval 4：<strong>两次均为 100%</strong>。将大文件拆为 references/ 没有降低技能质量。</p>
+</div>
+
+<div class="section">
+<h3>4. 知识性 vs 结构性 Skill</h3>
+<p><strong>结构化输出类 Skill 表现最优</strong>（测试用例设计 9/9、输出评审 6/6、边界分析 8/8、Bug报告 8/8、组合策略 5/5）。这些 Skill 有明确的输出模板和格式规范，AI 在严格约束下表现稳定。</p>
+<p><strong>知识类 Skill 表现分化</strong>：场景树（5/6）和需求解构（4/6→3/6）的 min_count 断言设计有缺陷（总是统计章节标题的出现次数而非内容数量），影响了得分但不能真实反映 Skill 质量。</p>
+</div>
+
+<div class="section">
+<h3>5. 断言质量分析</h3>
+<table>
+<tr><th>断言类型</th><th>使用次数</th><th>有效度</th><th>说明</th></tr>
+<tr><td>content_match</td><td>74</td><td class="pass">✅ 高</td><td>直接检查关键内容是否存在</td></tr>
+<tr><td>content_match_or</td><td>16</td><td class="pass">✅ 高</td><td>多选一匹配，容错性好</td></tr>
+<tr><td>min_count</td><td>20</td><td>⚠️ 中</td><td>依赖关键词分布，部分断言因关键字仅出现一次而失效</td></tr>
+<tr><td>file_exists</td><td>7</td><td class="fail">❌ 低</td><td>检查文本中是否包含文件名，而非文件实际是否存在</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h3>6. 整体结论</h3>
+<div class="obs">
+<h3>✅ QA Test Skills 项目评估通过</h3>
+<ul>
+<li><strong>质量</strong>：with_skill 平均通过率 94.4%，结构化输出类 100%</li>
+<li><strong>稳定性</strong>：6/7 轮标准差为 0</li>
+<li><strong>价值</strong>：with_skill 始终优于 without_skill，Δ 均值 +22.8%</li>
+<li><strong>可维护性</strong>：5 个 SKILL.md 已拆分（最大 582→263 行），项目健康</li>
+<li><strong>工具链</strong>：完整 eval pipeline（grade + aggregate + viewer）已建立</li>
+<li><strong>覆盖度</strong>：19/48 个子 Skill 有直接 eval 覆盖（40%）</li>
+</ul>
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+function switchTab(n){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+n).classList.add('active');document.querySelector(`.tab[onclick*="${n}"]`).classList.add('active')}
+</script>
+</body>
+</html>

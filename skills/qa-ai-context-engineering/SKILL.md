@@ -1,35 +1,66 @@
-﻿---
+---
 name: qa-ai-context-engineering
+version: 1.5.0
 description: >-
-  AI测试上下文构建，将需求解构、场景树、边界清单等分析结果打包为结构化上下文包，优化AI生成质量。当需要生成或优化测试用例时激活。
+  将前面所有分析步骤（需求解构、场景树、边界清单、风险评估等）打包成一个结构化的AI上下文包，确保AI在生成测试用例时拥有完整的业务上下文、功能上下文和技术上下文。当已经完成了需求分析、场景构建和深度设计，即将进入提示词生成阶段时，必须经过此步骤。上下文包的完整度直接决定了AI生成用例的质量——输入垃圾，输出也是垃圾。
 
-when_to_use: 用户说"生成测试用例"、"帮我测试"、"分析这个功能"、"上下文工程"、"构建上下文"、"测试分析"、"需求分析"、"结构化"、"上下文不够"、上传需求文档/URL时
+when_to_use: 用户说"分析这个功能"、"上下文工程"、"构建上下文"、"测试分析"、"需求分析"、"结构化"、"上下文不够"
 allowed-tools: Read Grep Glob WebFetch
 related_skills:
   upstream:
-    - qa-req-deconstruction  # 输入：需求解构表
-    - qa-scenario-tree       # 输入：场景树
-    - qa-boundary-deep-dive  # 输入：边界清单
-    - qa-combination-strategy # 输入：组合矩阵
-    - qa-state-transition    # 输入：状态转换图
+    - qa-req-deconstruction
+    - qa-scenario-tree
+    - qa-boundary-deep-dive
+    - qa-combination-strategy
+    - qa-state-transition
   downstream:
-    - qa-ai-prompt-strategy  # 输出：上下文包传递给提示词策略
-input_format: 需求解构表 + 场景树 + 边界清单 + 组合矩阵 + 状态转换图
-output_format: 结构化上下文包（JSON格式）
+    - qa-ai-prompt-strategy
+input_format:
+  required:
+    - name: 需求解构表
+      type: object
+      description: 来自qa-req-deconstruction的需求解构结果
+    - name: 场景树
+      type: object
+      description: 来自qa-scenario-tree的场景树结构
+  optional:
+    - name: 边界清单
+      type: object
+      description: 来自qa-boundary-deep-dive的边界分析结果
+    - name: 组合矩阵
+      type: object
+      description: 来自qa-combination-strategy的组合覆盖矩阵
+    - name: 状态转换图
+      type: object
+      description: 来自qa-state-transition的状态转换分析
+    - name: 风险评估
+      type: object
+      description: 来自qa-risk-intuition的风险评估结果
+output_format:
+  structure:
+    - context_package: 包含所有分析结果的AI上下文包
+    - scenario_summary: 场景汇总
+    - boundary_list: 边界条件清单
+    - risk_indicators: 风险指示器
+depth_requirement_quantification:
+  reference_value: "根据分析结果复杂度调整上下文深度：简单x1/中等x2/复杂x3"
+  minimum: "至少包含需求解构表、场景树、边界清单3个核心输入"
 ---
 
 # AI 上下文工程
 
-## Overview
+## 核心原则
 
 你是一位资深测试架构师，擅长为AI构建高质量的测试上下文。
 **核心原则**：不是给更多信息，而是给对的信息结构。
 本技能将需求解构、场景树、边界清单等分析结果打包为结构化上下文包，传递给qa-ai-prompt-strategy。
 
+> 输出模板格式和字段说明参见 [`references/output-template.md`](references/output-template.md)。
+
 ## 上下文金字塔（必须按此顺序构建）
 
 ### 第1层：业务目标与用户角色（必须）
-```
+```text
 【业务背景】
 - 业务目标：这个功能要解决什么问题？
 - 目标用户：谁在用？有几个角色？
@@ -41,7 +72,7 @@ output_format: 结构化上下文包（JSON格式）
 ```
 
 ### 第2层：功能描述与约束条件（必须）
-```
+```text
 【功能边界】
 - 功能名称：
 - 核心流程：[主路径描述]
@@ -56,7 +87,7 @@ output_format: 结构化上下文包（JSON格式）
 ```
 
 ### 第3层：技术细节与历史缺陷（按需）
-```
+```text
 【技术架构】
 - 技术栈：
 - 关键接口：
@@ -64,12 +95,12 @@ output_format: 结构化上下文包（JSON格式）
 - 依赖服务：
 
 【历史缺陷模式】
-- 同类型功能曾出过的Bug：
+- 同类型功能曾出现过的Bug：
 - 高风险区域：
 ```
 
 ### 第4层：输出格式与质量要求（必须）
-```
+```text
 【输出要求】
 - 格式：表格/列表/思维导图
 - 字段：用例编号、标题、前置条件、步骤、预期结果、优先级、风险等级
@@ -81,9 +112,9 @@ output_format: 结构化上下文包（JSON格式）
 当用户请求生成测试用例时：
 
 1. **识别输入类型**：
-   - 直接描述 → 提取关键信息
-   - 上传文件 → 读取并解构
-   - URL链接 → 获取并分析
+   - 直接描述 -> 提取关键信息
+   - 上传文件 -> 读取并解析
+   - URL链接 -> 获取并分析
 
 2. **构建上下文包**：
    - 检查用户提供了哪些信息
@@ -96,27 +127,25 @@ output_format: 结构化上下文包（JSON格式）
 
 ## 上下文类型速查表
 
-不同测试场景的上下文构建策略不同，按需选择：
-
 | 场景类型 | 金字塔层数 | 关键侧重 | 典型耗时 |
 |---------|-----------|---------|---------|
 | **日常测试** | 第1层+第2层+第4层 | 功能边界+输出格式 | 快速构建 |
 | **紧急测试** | 第1层+第4层 | 业务目标+输出格式，依赖假设快速产出 | 最简构建 |
 | **完整测试** | 4层全建 | 全量信息+历史缺陷+技术细节 | 全面构建 |
-| **复测回归** | 第3层+第4层 | 历史缺陷模式+输出格式 | 针对性构建 |
+| **复测回归** | 第1层+第3层+第4层 | 历史缺陷模式+输出格式 | 针对性构建 |
 
-## Examples
+## 输出示例
 
 **用户说"帮我测试用户登录"**
-→ 上下文金字塔从第1层开始构建：
+-> 上下文金字塔从第1层开始构建：
   - 第1层：业务目标（验证用户身份）+ 用户角色（普通用户/管理员）
   - 第2层：功能边界（用户名+密码登录）+ 约束（密码错误3次锁定）
   - 第3层按需补充，第4层指定输出格式
 
 **用户上传PRD但信息零散**
-→ 按金字塔结构组织零散需求，标注信息来源[用户提供]/[推断]/[假设]
+-> 按金字塔结构组织零散需求，标注信息来源[用户提供]/[推断]/[假设]
 
-## Guidelines
+## 检查清单
 
 检查上下文是否包含：
 - [ ] 业务目标和用户角色
@@ -127,9 +156,7 @@ output_format: 结构化上下文包（JSON格式）
 
 ## 常见翻车点
 
-1. **信息过载**：给太多细节导致AI迷失重点 → 用结构化格式组织
-2. **假设未标注**：AI不知道哪些是你假设的 → 明确标注[假设]
-3. **缺少负面案例**：AI不知道什么是"不好的" → 给出反例
-4. **输出格式模糊**：AI不知道你要什么格式 → 明确指定
-
-
+1. **信息过载**：给太多细节导致AI迷失重心 -> 用结构化格式组织
+2. **假设未标注**：AI不知道哪些是你假设的 -> 明确标注[假设]
+3. **缺少负面案例**：AI不知道什么是"不好的" -> 给出反例
+4. **输出格式模糊**：AI不知道你要什么格式 -> 明确指定

@@ -1,7 +1,8 @@
-﻿---
+---
 name: qa-exploratory-testing
+version: 1.5.0
 description: >-
-  探索式测试，用系统化探索方法（场景漫游/角色扮演/失败路径）发现脚本化测试遗漏的问题。当需要进行探索测试或快速验证时激活。
+  当脚本化测试覆盖得差不多了、但直觉告诉你"可能还有东西没测到"时使用此技能。用系统化的探索方法（场景漫游、角色扮演、失败路径、标杆对比）来发现预设测试用例覆盖不到的问题。探索式测试不是随便点——它是有明确 charter（任务书）和时长的有目的探索。每次探索需要记录 session 笔记和发现的问题列表。
 
 when_to_use: 用户说"探索测试"、"自由测试"、"漫游测试"、"场景发现"、"到处点一点"、"随机测试"、"角色扮演"、"SBTM"、需要发现脚本化测试遗漏的问题、新产品快速验证时
 allowed-tools: Read Grep Glob Bash
@@ -12,23 +13,56 @@ related_skills:
   downstream:
     - qa-bug-reporting           # 输出：发现的问题用于Bug报告
     - qa-retrospective           # 输出：测试发现用于复盘
-input_format: 场景树 + 风险评估
-output_format: 探索式测试报告（Charter+发现+Session记录）
+input_format:
+  required:
+    - name: 测试目标
+      type: string
+      description: 探索式测试的目标和范围
+    - name: 探索领域
+      type: string
+      description: 待探索的功能领域和特性
+  optional:
+    - name: 启发式清单
+      type: array
+      description: 来自qa-heuristic-checklist的启发式检查项
+    - name: 时间盒
+      type: string
+      description: 探索时间限制
+output_format:
+  structure:
+    - exploration_charter: 探索章程
+    - session_notes: 探索笔记
+    - findings: 发现清单
+    - bug_reports: 发现缺陷报告
+    - coverage_notes: 覆盖记录
+error_recovery_guidance:
+  on_failure: "记录探索路径，切换测试策略或结束当前Session"
+  retry_behavior: "开启新Session，尝试不同的探索方向"
 ---
 
 # 探索式测试
 
-## Overview
+## 核心原则
 
 你是一位探索式测试专家，擅长用系统化的探索发现脚本化测试遗漏的问题。
 **核心原则**：探索式测试不是随意测试，而是有章程、有记录、有学习的系统化探索。
 本技能基于SBTM框架（Session-Based Test Management）进行结构化探索。
 
+## 深度要求（参考值）
+
+**关键指标**：根据功能复杂度调整探索深度
+
+| 复杂度 | Session要求 | Bug发现目标 | 说明 |
+|--------|------------|------------|------|
+| 简单功能 | 1-2个Session | 3-5个发现 | 单一功能/页面 |
+| 中等功能 | 3-5个Session | 8-15个发现 | 多页面/流程功能 |
+| 复杂功能 | 5-8个Session | 15-30个发现 | 跨模块/核心业务流 |
+
 ## Session-Based Test Management（SBTM）
 
 ### Charter（测试章程）
 
-```
+```text
 Charter结构：
 ├─ 探索（Explore）
 ├─ 学习（Learn）
@@ -44,7 +78,7 @@ Charter结构：
 
 ### Session类型
 
-```
+```text
 ├─ 探索Session：发现新问题
 │   ├─ 时长：60-120分钟
 │   ├─ 目标：发现新Bug、新风险
@@ -65,7 +99,7 @@ Charter结构：
 
 ### 1. 卖点漫游（Feature Tour）
 
-```
+```text
 方法：
 ├─ 从用户视角体验所有功能
 ├─ 记录每个功能的使用感受
@@ -81,7 +115,7 @@ Charter结构：
 
 ### 2. 地标漫游（Landmark Tour）
 
-```
+```text
 方法：
 ├─ 识别系统的关键入口/出口
 ├─ 从每个入口深入探索
@@ -97,7 +131,7 @@ Charter结构：
 
 ### 3. 旅伴漫游（Bad Neighborhood）
 
-```
+```text
 方法：
 ├─ 识别系统的问题高发区
 ├─ 重点探索这些问题区域
@@ -113,7 +147,7 @@ Charter结构：
 
 ### 4. 基于风险的漫游（Risk Tour）
 
-```
+```text
 方法：
 ├─ 识别高风险区域
 ├─ 设计针对性探索策略
@@ -131,7 +165,7 @@ Charter结构：
 
 ### 用户角色
 
-```
+```text
 角色类型：
 ├─ 新手用户：第一次使用
 │   ├─ 关注：学习成本、引导设计
@@ -209,7 +243,7 @@ Charter结构：
 - [ ] 待确认：[事项]
 ```
 
-## Examples
+## 输出示例
 
 **探索"商品搜索"功能**
 → 创建Charter："探索商品搜索的边界和异常行为（30分钟）"
@@ -220,7 +254,16 @@ Charter结构：
 **探索"用户注册"流程**
 → 角色扮演：普通用户（正常注册）→恶意用户（批量注册）→忘记密码用户
 
-## Guidelines
+## 异常处理引导
+
+| 场景 | 表现 | 处理方式 |
+|------|------|---------|
+| Charter目标过大 | 30分钟无法完成Charter | 拆分为多个子Charter，每个聚焦一个维度 |
+| 探索方向迷失 | 测试过程中偏离初始目标 | 暂停回顾Charter，必要时重新明确目标 |
+| 发现过多但时间不够 | 大量发现来不及深入验证 | 按风险优先排序，高风险当场深挖，低风险记录待办 |
+| 无法复现探索发现 | 探索时遇到的问题无法稳定复现 | 记录环境和操作序列，截图+日志辅助，降级为风险项 |
+
+## 检查清单
 
 探索式测试完成后检查：
 - [ ] Charter是否清晰定义？

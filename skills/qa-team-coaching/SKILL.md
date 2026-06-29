@@ -1,7 +1,8 @@
-﻿---
+---
 name: qa-team-coaching
+version: 1.5.0
 description: >-
-  团队赋能，将测试经验沉淀为checklist/模板/培训材料，通过Pair测试等方式提升团队整体测试能力。当需要赋能团队或培训新人时激活。
+  当团队里有测试新人需要带、想提升团队整体测试水平、或者需要把个人经验转化为团队能力时使用此技能。通过 Pair 测试、经验分享、checklist 沉淀、模板建设和培训材料等方式赋能团队。不要等着新人犯错再教——好的赋能是提前给工具和方法论，让新人在第一次做之前就知道"正确的做法是什么"。
 
 when_to_use: 用户说"培训"、"赋能"、"新人"、"怎么教"、"带人"、"培养"、"团队成长"、需要赋能团队、新成员加入需要快速上手时
 allowed-tools: Read Grep Glob
@@ -9,14 +10,31 @@ related_skills:
   upstream:
     - qa-retrospective           # 输入：复盘结果和经验
     - qa-heuristic-checklist     # 输入：checklist作为培训材料
-  downstream: 无（输出用于团队赋能）
-input_format: 复盘报告 + checklist + 最佳实践
-output_format: 赋能材料（checklist+模板+培训大纲+评估体系）
+  downstream: []  # 输出用于团队赋能
+input_format:
+  required:
+    - name: 团队评估
+      type: string
+      description: 团队测试能力评估结果
+    - name: 培训需求
+      type: string
+      description: 团队技能提升需求
+  optional:
+    - name: 培训资源
+      type: string
+      description: 可用的培训资源和预算
+output_format:
+  structure:
+    - coaching_plan: 教练计划
+    - skill_matrix: 技能矩阵
+    - training_materials: 培训材料清单
+    - mentorship_guide: 导师指导方案
+    - progress_metrics: 进步度量方式
 ---
 
 # 团队赋能
 
-## Overview
+## 核心原则
 
 你是一位团队赋能专家，擅长把经验做成checklist、模板、培训材料。
 **核心原则**：授人以渔——把经验做成checklist、把案例做成模板、把评判标准量化。
@@ -26,7 +44,7 @@ output_format: 赋能材料（checklist+模板+培训大纲+评估体系）
 
 ### 方式1：Checklist式
 
-```
+```text
 适用场景：
 ├─ 常见测试点整理
 ├─ 评审检查清单
@@ -53,7 +71,7 @@ Checklist设计原则：
 
 ### 方式2：模板式
 
-```
+```text
 适用场景：
 ├─ 用例模板
 ├─ Bug报告模板
@@ -79,7 +97,7 @@ Checklist设计原则：
 
 ### 方式3：Review式
 
-```
+```text
 适用场景：
 ├─ 用例评审
 ├─ Bug评审
@@ -103,7 +121,7 @@ Review设计原则：
 
 ### 方式4：Pair式
 
-```
+```text
 适用场景：
 ├─ 结对测试
 ├─ 新人带教
@@ -129,7 +147,7 @@ Pair设计原则：
 
 ### 新人培训大纲
 
-```
+```text
 第1周：基础认知
 ├─ 测试基础概念
 ├─ 公司测试流程
@@ -157,7 +175,7 @@ Pair设计原则：
 
 ### 培训练习设计
 
-```
+```text
 练习类型：
 ├─ 案例分析：分析真实Bug案例
 ├─ 用例设计：设计测试用例
@@ -175,7 +193,7 @@ Pair设计原则：
 
 ### 评估维度
 
-```
+```text
 评估维度：
 ├─ 测试设计能力：用例设计质量
 ├─ 测试执行能力：执行效率和质量
@@ -192,7 +210,7 @@ Pair设计原则：
 
 ### 评估方法
 
-```
+```text
 评估方法：
 ├─ 日常观察：工作表现观察
 ├─ 产出评审：用例/Bug报告评审
@@ -201,7 +219,7 @@ Pair设计原则：
 └─ 成长记录：成长轨迹记录
 ```
 
-## Examples
+## 应用场景
 
 **新入职的测试同学不知道怎么写测试用例**
 → Checklist式赋能：提供测试用例设计checklist，逐项check即可完成
@@ -213,7 +231,7 @@ Pair设计原则：
 → 能力评估：按维度（需求分析/用例设计/自动化/性能）评估每位成员
 → 针对性培训：根据评估结果设计分层培训内容
 
-## Guidelines
+## 自检清单
 
 团队赋能完成后检查：
 - [ ] 是否设计了Checklist？

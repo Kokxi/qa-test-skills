@@ -1,0 +1,488 @@
+{
+  "skill_name": "qa-test-skills",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "请帮我测试这个电商项目：E:\\dingskills\\qa-test-skills\\examples\\ecommerce-project\\docs\\prd.md 生成完整的测试用例集和测试报告",
+      "expected_output": "父工作流完整执行12步，产出一系列输出文件，包括需求评审报告、需求解构表、场景树、测试用例等",
+      "files": ["examples/ecommerce-project/docs/prd.md"],
+      "expectations": [
+        "输出了需求评审报告",
+        "输出了需求解构表",
+        "输出了场景树",
+        "输出了边界清单",
+        "输出了AI提示词",
+        "输出了用例评审报告或盲区补偿用例",
+        "输出了测试报告和测试用例CSV",
+        "测试用例包含唯一ID（TC-XXXX格式）",
+        "测试用例关联了需求ID或场景ID",
+        "最终输出是专家级结构化测试用例"
+      ],
+      "assertions": [
+        {"name": "需求评审报告已生成", "type": "file_exists", "target": "需求评审报告.md"},
+        {"name": "需求解构表已生成", "type": "file_exists", "target": "需求解构表.md"},
+        {"name": "场景树已生成", "type": "file_exists", "target": "场景树.md"},
+        {"name": "边界清单已生成", "type": "file_exists", "target": "边界清单.md"},
+        {"name": "AI提示词已生成", "type": "file_exists", "target": "AI提示词.md"},
+        {"name": "评审或补盲已执行", "type": "file_exists_or", "targets": ["用例评审报告.md", "盲区补偿用例.md"]},
+        {"name": "测试报告已生成", "type": "file_exists", "target": "测试报告.md"},
+        {"name": "用例包含TC唯一ID", "type": "content_match", "target": "TC_"},
+        {"name": "用例关联了需求ID", "type": "content_match", "target": "REQ-"},
+        {"name": "覆盖至少5个步骤输出", "type": "min_count", "target": 5}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "分析以下登录功能的显性需求和隐性需求：用户在登录页面输入用户名和密码，点击登录按钮，系统验证通过后跳转到首页。密码错误时显示'用户名或密码错误'提示，连续5次错误锁定账号30分钟。支持'记住密码'功能。",
+      "expected_output": "需求解构表，包含显性需求、隐性需求、衍生需求，以及五维拆解（输入/操作/状态/输出/规则）",
+      "files": [],
+      "expectations": [
+        "识别出至少3条显性需求",
+        "识别出至少2条隐性需求",
+        "识别出至少2条衍生需求",
+        "包含五维拆解",
+        "每个需求都有唯一ID标识",
+        "输出了结构化的需求解构表"
+      ],
+      "assertions": [
+        {"name": "显性需求≥3条", "type": "min_count", "target": 3, "keyword": "显性"},
+        {"name": "隐性需求≥2条", "type": "min_count", "target": 2, "keyword": "隐性"},
+        {"name": "衍生需求≥2条", "type": "min_count", "target": 2, "keyword": "衍生"},
+        {"name": "包含五维拆解", "type": "content_match", "target": "五维"},
+        {"name": "需求有唯一ID", "type": "content_match", "target": "REQ-"},
+        {"name": "覆盖了密码锁定场景", "type": "content_match", "target": "锁定"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "设计用户登录功能的测试用例。需求说明：用户在登录页面输入用户名和密码进行登录，密码需8-20位且包含字母和数字，连续错误5次锁定账号30分钟。请生成完整的测试用例集。",
+      "expected_output": "结构化的测试用例集，包含P0-P3等级划分，用例编号符合TC规范",
+      "files": [],
+      "expectations": [
+        "测试用例包含P0级别用例",
+        "测试用例包含P1/P2级别用例",
+        "用例编号遵循TC_模块_功能_序号格式",
+        "每个用例包含预置条件和预期结果",
+        "测试步骤按要求留空",
+        "用例总数至少5条",
+        "覆盖了正常登录、密码错误、账号锁定场景",
+        "输出了用例统计"
+      ],
+      "assertions": [
+        {"name": "有P0级别用例", "type": "content_match", "target": "P0"},
+        {"name": "有P1/P2级别用例", "type": "content_match", "target": "P1|P2"},
+        {"name": "用例编号符合TC规范", "type": "content_match", "target": "TC_"},
+        {"name": "包含预置条件", "type": "content_match", "target": "预置条件"},
+        {"name": "包含预期结果", "type": "content_match", "target": "预期结果"},
+        {"name": "用例总数≥5条", "type": "min_count", "target": 5, "keyword": "TC_"},
+        {"name": "覆盖正常登录", "type": "content_match", "target": "登录"},
+        {"name": "覆盖密码错误", "type": "content_match", "target": "密码错误"},
+        {"name": "覆盖账号锁定", "type": "content_match", "target": "锁定"}
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "评审以下AI生成的登录模块测试用例质量，要求六维评审：\n\nTC_USER_LOGIN_001 - 验证正确用户名密码可以成功登录 - P0\n预置条件：用户已注册，账号正常，网络正常\n预期结果：跳转首页，显示用户信息\n\nTC_USER_LOGIN_002 - 验证密码错误提示 - P0\n预置条件：用户已注册\n预期结果：显示'用户名或密码错误'\n\nTC_USER_LOGIN_003 - 验证连续5次错误锁定 - P1\n预置条件：用户已注册\n预期结果：提示账号已锁定，30分钟后重试\n\nTC_USER_LOGIN_004 - 验证特殊字符输入 - P2\n预置条件：用户已注册\n预期结果：系统正确处理\n\nTC_USER_LOGIN_005 - 验证记住密码功能 - P1\n预置条件：用户已注册，勾选记住密码\n预期结果：下次打开自动填充",
+      "expected_output": "六维评审报告，包含每个维度的评分和问题清单",
+      "files": [],
+      "expectations": [
+        "评审覆盖了至少4个维度",
+        "每个维度都有评分或结论",
+        "识别出了至少1个用例问题或缺陷",
+        "输出了结构化的评审报告",
+        "给出了改进建议或优化方向",
+        "问题标记使用了规范格式（如MISSING/WRONG/VAGUE等）"
+      ],
+      "assertions": [
+        {"name": "评审维度≥4个", "type": "min_count", "target": 4, "keyword": "评审"},
+        {"name": "每个维度有评分", "type": "content_match", "target": "/10"},
+        {"name": "识别出用例问题", "type": "content_match", "target": "问题"},
+        {"name": "有改进建议", "type": "content_match", "target": "改进"},
+        {"name": "有结构化报告框架", "type": "content_match", "target": "评审报告"},
+        {"name": "使用规范标记格式", "type": "content_match_or", "targets": ["MISSING", "WRONG", "VAGUE"]}
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "设计以下用户管理API的接口测试方案。接口说明：POST /api/users 创建用户，请求体包含 username(必填,3-20字符), email(必填,邮箱格式), password(必填,6位以上), role(选填,枚举:admin/user)。返回201及用户对象，或400/409错误。GET /api/users/{id} 查询用户，返回200及用户对象，或404。DELETE /api/users/{id} 删除用户，返回204，或404/403。要求覆盖功能验证、参数组合、异常场景、安全测试。",
+      "expected_output": "接口测试方案，包含测试用例、参数组合矩阵、异常场景和安全检查清单",
+      "files": [],
+      "expectations": [
+        "覆盖了POST/GET/DELETE三个接口",
+        "覆盖了参数组合和边界值",
+        "覆盖了异常场景（404/400/409/403）",
+        "包含了鉴权或安全测试",
+        "输出了结构化的测试方案"
+      ],
+      "assertions": [
+        {"name": "覆盖POST接口", "type": "content_match", "target": "POST"},
+        {"name": "覆盖GET接口", "type": "content_match", "target": "GET"},
+        {"name": "覆盖DELETE接口", "type": "content_match", "target": "DELETE"},
+        {"name": "覆盖异常状态码", "type": "content_match_or", "targets": ["404", "400", "409", "403"]},
+        {"name": "有参数组合测试", "type": "content_match", "target": "参数"},
+        {"name": "有安全测试", "type": "content_match_or", "targets": ["鉴权", "认证", "token", "安全"]},
+        {"name": "有结构化方案", "type": "content_match", "target": "测试"},
+        {"name": "覆盖边界值", "type": "content_match_or", "targets": ["边界", "3-20", "6位"]}
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "对以下功能进行边界分析：用户在注册页面填写表单，包含以下字段：用户名（文本，3-20个字符，字母数字下划线）、年龄（数字，18-120岁）、邮箱（文本，需含@和.）、密码（文本，8-32位）、邀请码（文本，选填，8位字母数字）。请系统化识别所有边界条件并输出边界清单。",
+      "expected_output": "边界分析清单，覆盖输入边界、状态边界、时间边界、资源边界等多个维度",
+      "files": [],
+      "expectations": [
+        "覆盖了所有五个字段的边界条件",
+        "包含了输入边界（长度/格式/范围）",
+        "包含了异常和特殊情况",
+        "每个边界条件标注了风险等级",
+        "输出了结构化的边界清单"
+      ],
+      "assertions": [
+        {"name": "覆盖用户名边界", "type": "content_match", "target": "用户名"},
+        {"name": "覆盖年龄边界", "type": "content_match", "target": "年龄"},
+        {"name": "覆盖邮箱边界", "type": "content_match", "target": "邮箱"},
+        {"name": "覆盖密码边界", "type": "content_match", "target": "密码"},
+        {"name": "覆盖邀请码边界", "type": "content_match", "target": "邀请码"},
+        {"name": "有边界值分析", "type": "content_match_or", "targets": ["3", "20", "18", "120", "8", "32"]},
+        {"name": "标注了风险等级", "type": "content_match", "target": "高|中|低"},
+        {"name": "有结构化输出", "type": "content_match", "target": "边界"}
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "用户反馈：'我在支付页面点击确认支付后，页面一直显示'支付中...'，等了5分钟还是没反应，刷新页面后发现订单状态变成了'已支付'，但我的银行卡扣款短信收到了3条同样的扣款通知，金额被扣了3次！' 请将此用户反馈整理为标准的Bug报告，包含Bug标题、严重度、优先级、复现步骤、预期结果、实际结果、影响范围、根因推测和附件建议。",
+      "expected_output": "标准化的Bug报告，包含完整的7个黄金结构部分",
+      "files": [],
+      "expectations": [
+        "有清晰的Bug标题",
+        "标注了严重度和优先级",
+        "有详细的复现步骤",
+        "区分了预期结果和实际结果",
+        "有影响范围评估",
+        "有根因推测"
+      ],
+      "assertions": [
+        {"name": "有Bug标题", "type": "content_match", "target": "Bug|缺陷|重复扣款|重复支付"},
+        {"name": "有严重度", "type": "content_match", "target": "严重|P0|P1|Critical|高"},
+        {"name": "有优先级", "type": "content_match", "target": "优先|P0|P1|高"},
+        {"name": "有复现步骤", "type": "content_match", "target": "步骤|复现"},
+        {"name": "有预期vs实际结果", "type": "content_match", "target": "预期|实际"},
+        {"name": "有影响范围", "type": "content_match", "target": "影响|范围"},
+        {"name": "有根因推测", "type": "content_match", "target": "根因|原因|推测"},
+        {"name": "有附件建议", "type": "content_match", "target": "日志|截图|附件"}
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "以下是一个电商登录功能的测试分析结果：需求解构已完成，包含显性需求（输入用户名/密码、验证跳转、错误提示、5次锁定、记住密码）和边界条件（密码7/8/20/21位、用户名空/1/20/21字符）。请根据这些输入，生成一份优化后的AI提示词，用于驱动AI生成高质量的登录功能测试用例。要求提示词包含角色定义、输出格式规范和约束条件。",
+      "expected_output": "优化后的AI提示词，包含角色定义、输出格式规范和约束条件",
+      "files": [],
+      "expectations": [
+        "包含角色定义",
+        "包含输出格式规范",
+        "包含约束条件",
+        "引用了输入的分析结果",
+        "提示词结构完整可用"
+      ],
+      "assertions": [
+        {"name": "有角色定义", "type": "content_match", "target": "角色|你是一位|你是一个"},
+        {"name": "有输出格式", "type": "content_match", "target": "格式|输出"},
+        {"name": "有约束条件", "type": "content_match", "target": "约束|限制|不得|必须"},
+        {"name": "引用了输入", "type": "content_match_or", "targets": ["密码", "锁定", "边界", "用户名"]},
+        {"name": "有结构化输出", "type": "content_match", "target": "TC_|P0|P1|用例"}
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "一个电商平台即将发布v2.1版本，本次变更内容为：1）订单模块新增'拆分订单'功能，允许用户将一个订单拆分为多个子订单分别发货；2）支付模块对接了新的支付渠道'云闪付'；3）修复了商品列表中价格显示精度问题。上一个版本v2.0刚刚完成全量回归测试，用例库共有1200条用例。请设计分级的回归测试策略，包含冒烟回归、核心回归和全量回归三个级别，并说明每个级别覆盖的范围和执行建议。",
+      "expected_output": "分级回归测试方案，包含冒烟/核心/全量三级策略，每级的范围和执行建议",
+      "files": [],
+      "expectations": [
+        "包含至少3个回归级别",
+        "每个级别有明确的覆盖范围",
+        "有执行建议或优先级指导",
+        "结合了变更分析",
+        "有风险评估或资源建议"
+      ],
+      "assertions": [
+        {"name": "至少3个回归级别", "type": "min_count", "target": 3, "keyword": "回归"},
+        {"name": "有冒烟级别", "type": "content_match", "target": "冒烟"},
+        {"name": "有核心级别", "type": "content_match", "target": "核心"},
+        {"name": "有全量级别", "type": "content_match", "target": "全量"},
+        {"name": "有变更分析", "type": "content_match", "target": "变更|新增|修复"},
+        {"name": "有执行建议", "type": "content_match", "target": "建议|推荐|优先"}
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "我们刚刚完成了一个电商购物车功能的脚本化测试（覆盖了添加商品、修改数量、删除商品、价格计算等基本场景），但直觉告诉我可能还有遗漏。请设计一份探索式测试方案，包含测试任务书(charter)、探索方法、关注区域和会话记录模板。目标是发现脚本化测试覆盖不到的边缘场景和用户体验问题。",
+      "expected_output": "探索式测试方案，包含charter、探索方法、关注区域和会话模板",
+      "files": [],
+      "expectations": [
+        "包含测试任务书(charter)",
+        "包含探索方法",
+        "覆盖了多个探索维度",
+        "有会话记录模板",
+        "关注了边缘场景或用户体验"
+      ],
+      "assertions": [
+        {"name": "有测试任务书", "type": "content_match_or", "targets": ["charter", "任务书", "使命"]},
+        {"name": "有探索方法", "type": "content_match", "target": "漫游|探索|角色扮演|失败路径|对比"},
+        {"name": "覆盖多个维度", "type": "min_count", "target": 3, "keyword": "维度|区域|方面"},
+        {"name": "有会话模板", "type": "content_match", "target": "会话|session|记录|笔记"},
+        {"name": "关注边缘场景", "type": "content_match_or", "targets": ["边缘", "体验", "异常", "边界"]}
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "请为以下功能构建场景树：一个电商平台的'商品搜索'功能。用户在搜索框输入关键词，系统返回匹配的商品列表。支持按价格范围、品牌、分类筛选，按销量/价格/评分排序。搜索无结果时显示'未找到相关商品'并推荐热门商品。关键词为空时显示搜索历史。请构建包含主路径、分支路径、异常路径和业务规则的场景树。",
+      "expected_output": "场景树，包含主路径/分支路径/异常路径/业务规则四类场景",
+      "files": [],
+      "expectations": [
+        "包含主路径场景",
+        "包含分支路径场景",
+        "包含异常路径场景",
+        "包含业务规则",
+        "场景有层次结构",
+        "场景数量≥6个"
+      ],
+      "assertions": [
+        {"name": "有主路径", "type": "content_match", "target": "主路径|Happy|正常"},
+        {"name": "有分支路径", "type": "content_match", "target": "分支|备选|Alternative"},
+        {"name": "有异常路径", "type": "content_match", "target": "异常|Exception|错误"},
+        {"name": "有业务规则", "type": "content_match", "target": "业务规则|规则"},
+        {"name": "场景数≥6", "type": "min_count", "target": 6, "keyword": "SC-"},
+        {"name": "有层次结构", "type": "content_match", "target": "├|└|│"}
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "以下是一组AI生成的登录功能测试用例，请执行盲区补偿：\nTC-001:正常登录（P0）\nTC-002:密码错误（P0）\nTC-003:5次错误锁定（P1）\nTC-004:记住密码（P1）\nTC-005:Session超时（P1）\n请从六大盲区维度（时序依赖、并发冲突、资源竞争、状态累积、数据一致性、第三方集成）分析这组用例缺少哪些场景，为每个缺失的盲区补充至少2个测试场景。",
+      "expected_output": "盲区补偿报告，覆盖六大盲区并补充测试场景",
+      "files": [],
+      "expectations": [
+        "覆盖了六大盲区",
+        "每个盲区有补盲场景",
+        "补盲场景可执行",
+        "标注了风险等级",
+        "输出了结构化补盲报告"
+      ],
+      "assertions": [
+        {"name": "覆盖时序盲区", "type": "content_match", "target": "时序"},
+        {"name": "覆盖并发盲区", "type": "content_match", "target": "并发"},
+        {"name": "覆盖资源盲区", "type": "content_match", "target": "资源"},
+        {"name": "覆盖状态盲区", "type": "content_match", "target": "状态"},
+        {"name": "覆盖数据盲区", "type": "content_match", "target": "数据"},
+        {"name": "覆盖第三方盲区", "type": "content_match", "target": "第三方"},
+        {"name": "有风险标注", "type": "content_match", "target": "高|中|低"},
+        {"name": "统一补盲编号", "type": "content_match", "target": "BS_|BS-"}
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "我们即将启动一个新的B2B电商平台项目，主要面向企业采购场景。第一期需求包含：供应商管理（入驻/审核/评价）、商品目录管理（批量上架/价格策略）、采购订单管理（询价/比价/下单/审批）、对账与结算。技术栈：Java + Spring Boot + MySQL + Redis + Vue.js。团队配置：5个后端、2个前端、2个测试。工期3个月。请设计分层测试策略，包含测试范围、测试手段、资源分配和质量门禁。",
+      "expected_output": "分层测试策略文档，包含测试范围、测试手段、资源分配和质量门禁",
+      "files": [],
+      "expectations": [
+        "定义了测试范围",
+        "覆盖了多个测试层次",
+        "有资源分配或排期建议",
+        "有质量门禁标准",
+        "结合了项目特点和风险"
+      ],
+      "assertions": [
+        {"name": "有测试范围", "type": "content_match", "target": "范围|覆盖"},
+        {"name": "有分层策略", "type": "content_match", "target": "分层|单元|接口|端到端|UI|E2E"},
+        {"name": "有资源分配", "type": "content_match", "target": "资源|人员|分配"},
+        {"name": "有质量门禁", "type": "content_match", "target": "门禁|准入|准出|标准"},
+        {"name": "有排期建议", "type": "content_match", "target": "工期|排期|阶段|迭代|周期"},
+        {"name": "结合了项目特点", "type": "content_match", "target": "B2B|企业|采购|供应商"}
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "请为'电商订单'构建状态转换图。订单状态：待付款、待发货、已发货、已完成、已取消、退款中、已退款。转换条件：下单→待付款；付款→待发货；发货→已发货；收货确认→已完成；待付款时取消→已取消；待发货时取消→已取消；申请退款→退款中；审核通过→已退款。请分析所有合法转换、非法转换和边界转换场景，并标注每个转换的触发条件和验证点。",
+      "expected_output": "状态转换分析，包含合法转换、非法转换、边界转换及触发条件和验证点",
+      "files": [],
+      "expectations": [
+        "覆盖了所有7种订单状态",
+        "识别了合法转换",
+        "识别了非法转换",
+        "标注了触发条件或验证点",
+        "有状态转换图或表格"
+      ],
+      "assertions": [
+        {"name": "覆盖7种状态", "type": "min_count", "target": 5, "keyword": "待付|待发|已发|完成|取消|退款"},
+        {"name": "有合法转换", "type": "content_match", "target": "合法|正常|正向|允许"},
+        {"name": "有非法转换", "type": "content_match", "target": "非法|不允许|禁止|拒绝"},
+        {"name": "有触发条件", "type": "content_match", "target": "触发|条件|条件"},
+        {"name": "有验证点", "type": "content_match", "target": "验证|检查|确认"}
+      ]
+    },
+    {
+      "id": 15,
+      "prompt": "一个搜索功能有3个筛选条件：价格区间(低/中/高)、品牌(A/B/C)、排序方式(销量/价格/评分)。如果每个条件的所有取值都要组合测试，需要3×3×3=27种组合。请使用Pairwise或正交试验法来简化组合数量，输出最少的测试组合覆盖所有两两配对。同时请说明你的简化策略和覆盖分析。",
+      "expected_output": "简化的组合测试矩阵，包含最少测试组合数和覆盖分析",
+      "files": [],
+      "expectations": [
+        "使用了Pairwise或正交法",
+        "组合数少于全量27种",
+        "产生了具体的组合列表",
+        "有覆盖分析说明",
+        "说明了简化策略"
+      ],
+      "assertions": [
+        {"name": "使用简化方法", "type": "content_match_or", "targets": ["Pairwise", "正交", "判定表", "allpairs"]},
+        {"name": "组合数<27", "type": "min_count", "target": 5, "keyword": "组合|用例"},
+        {"name": "有组合列表", "type": "content_match", "target": "|├|└|TC-"},
+        {"name": "有覆盖分析", "type": "content_match", "target": "覆盖"},
+        {"name": "有策略说明", "type": "content_match", "target": "策略|方法|原理"}
+      ]
+    },
+    {
+      "id": 16,
+      "prompt": "一个电商平台即将上线v3.0大版本，管理层需要一份质量度量报告来决定是否能发布。请设计质量度量指标体系，覆盖过程质量（需求评审通过率/用例覆盖度）、结果质量（Bug密度/线上事故数）、效率（测试周期/回归耗时）和健康度（自动化通过率/环境稳定性）四个维度。每个维度至少包含2个具体指标，并说明计算方法和目标值。",
+      "expected_output": "质量度量指标体系，覆盖过程/结果/效率/健康度四个维度，含计算方法和目标值",
+      "files": [],
+      "expectations": [
+        "覆盖了4个维度",
+        "每个维度≥2个指标",
+        "指标有计算方法或公式",
+        "指标有目标值或基准",
+        "输出了结构化的度量矩阵"
+      ],
+      "assertions": [
+        {"name": "覆盖过程质量", "type": "content_match", "target": "过程"},
+        {"name": "覆盖结果质量", "type": "content_match", "target": "结果"},
+        {"name": "覆盖效率维度", "type": "content_match", "target": "效率"},
+        {"name": "覆盖健康度", "type": "content_match", "target": "健康|自动化通过|环境"},
+        {"name": "有计算方法", "type": "content_match", "target": "计算|公式|率|比|数"},
+        {"name": "有目标值", "type": "content_match", "target": "目标|≥|≤|%"}
+      ]
+    },
+    {
+      "id": 17,
+      "prompt": "我们有一款电商App即将发布iOS和Android版本，请设计移动端专项测试方案。核心功能：商品浏览、搜索、加购、下单支付、个人中心。请覆盖功能测试、中断测试（来电/短信/通知/低电量）、弱网测试（WiFi/4G切换、离线模式）、兼容性测试（iOS 15+/Android 10+，主流机型）、性能测试（启动时间/页面加载/内存）五个维度，每个维度列出测试要点清单。",
+      "expected_output": "移动端测试方案，覆盖功能/中断/弱网/兼容性/性能五维测试要点",
+      "files": [],
+      "expectations": [
+        "覆盖了5个测试维度",
+        "每个维度有测试要点",
+        "覆盖了iOS和Android平台",
+        "包含中断测试场景",
+        "包含弱网或兼容性测试",
+        "有测试要点清单"
+      ],
+      "assertions": [
+        {"name": "覆盖功能测试", "type": "content_match", "target": "功能"},
+        {"name": "覆盖中断测试", "type": "content_match", "target": "中断|来电|短信|通知|低电量"},
+        {"name": "覆盖弱网测试", "type": "content_match", "target": "弱网|WiFi|4G|离线|网络"},
+        {"name": "覆盖兼容性测试", "type": "content_match", "target": "兼容|机型|iOS|Android|系统版本"},
+        {"name": "覆盖性能测试", "type": "content_match", "target": "性能|启动|内存|帧率|电量"},
+        {"name": "有测试要点清单", "type": "content_match", "target": "[ ]|├|└|清单|列表"}
+      ]
+    },
+    {
+      "id": 18,
+      "prompt": "以下是AI生成的一组测试用例（已通过评审和补盲），请在最终输出前执行输出验证。验证要求：1)事实核查：验证每个需求的ID是否存在、用例中的业务规则是否与需求一致 2)一致性检查：用例之间是否有矛盾（前置条件冲突、预期结果矛盾）3)可执行性验证：每个用例的预置条件是否可满足、预期结果是否可观测 4)来源追溯：每条用例是否能追溯到具体需求和场景。\n\n用例：\nTC-001:登录成功(P0)，REQ-AUTH-001\nTC-002:密码错误(P0)，REQ-AUTH-001\nTC-003:5次锁定(P1)，REQ-AUTH-002\nTC-004:记住密码(P1)，REQ-AUTH-006\n\n请输出验证报告，包含每个维度的检查结果和问题清单。",
+      "expected_output": "输出验证报告，包含事实核查/一致性/可执行性/来源追溯四维检查结果",
+      "files": [],
+      "expectations": [
+        "覆盖了4个验证维度",
+        "每个维度有检查结论",
+        "有问题清单或改进建议",
+        "有通过/不通过的总体结论",
+        "输出结构清晰"
+      ],
+      "assertions": [
+        {"name": "有事实核查", "type": "content_match", "target": "事实|需求ID|业务规则|存在"},
+        {"name": "有一致性检查", "type": "content_match", "target": "一致|矛盾|冲突"},
+        {"name": "有可执行性检查", "type": "content_match", "target": "可执行|预置条件|可观测"},
+        {"name": "有来源追溯", "type": "content_match", "target": "追溯|REQ|需求"},
+        {"name": "有总体结论", "type": "content_match", "target": "通过|不通过|合格|验证"}
+      ]
+    },
+    {
+      "id": 19,
+      "prompt": "一个电商平台项目完成了v2.0版本的测试，以下是测试数据：总用例200条，执行195条(97.5%)，通过180条(92.3%)，失败10条，阻塞5条。发现Bug总数45个：P0=2个(已修复1个)、P1=8个(已修复6个)、P2=20个(已修复15个)、P3=15个(已修复10个)。测试周期15天，自动化覆盖60%，自动化通过率88%。请根据这些数据编写一份面向管理层的测试报告，包含测试执行概况、缺陷分析、风险评估和发布建议。",
+      "expected_output": "面向管理层的测试报告，包含执行概况/缺陷分析/风险评估/发布建议",
+      "files": [],
+      "expectations": [
+        "有测试执行概况",
+        "有缺陷分析或分布统计",
+        "有风险评估",
+        "有发布建议",
+        "报告面向管理层格式"
+      ],
+      "assertions": [
+        {"name": "有执行概况", "type": "content_match", "target": "执行|概况|总用例|通过"},
+        {"name": "有缺陷分析", "type": "content_match", "target": "缺陷|Bug|P0|P1|分布"},
+        {"name": "有风险评估", "type": "content_match", "target": "风险"},
+        {"name": "有发布建议", "type": "content_match", "target": "发布|建议|结论"},
+        {"name": "面向管理层", "type": "content_match", "target": "报告|概况|摘要|总结"}
+      ]
+    },
+    {
+      "id": 20,
+      "prompt": "我们需要测试一个AI客服Agent，它能够理解用户问题、查询知识库、生成回答。请输出Agent测试方案，覆盖功能测试（任务执行/意图识别/多轮对话）、安全测试（Prompt注入/敏感信息/越权）、可控性测试（人工确认/终止机制/速率限制）、幻觉与事实性测试（事实核查/来源归因/RAG准确性）四个维度，每个维度列出测试要点。",
+      "expected_output": "Agent测试方案，覆盖功能/安全/可控性/幻觉四维测试要点",
+      "files": [],
+      "expectations": [
+        "覆盖了功能测试",
+        "覆盖了安全测试",
+        "覆盖了可控性测试",
+        "覆盖了幻觉与事实性测试",
+        "每个维度有测试要点",
+        "输出结构清晰"
+      ],
+      "assertions": [
+        {"name": "功能测试", "type": "content_match", "target": "功能|任务|意图"},
+        {"name": "安全测试", "type": "content_match", "target": "注入|安全|敏感"},
+        {"name": "可控性测试", "type": "content_match", "target": "可控|HITL|终止|人工|速率"},
+        {"name": "幻觉测试", "type": "content_match", "target": "幻觉|事实|RAG|来源"},
+        {"name": "有测试要点", "type": "content_match", "target": "[ ]|├|└|要点"},
+        {"name": "结构清晰", "type": "content_match", "target": "维度|方面"}
+      ]
+    },
+    {
+      "id": 21,
+      "prompt": "一个电商平台即将开始v3.0版本的测试，包含用户认证重构、商品推荐算法升级、支付渠道新增3个。需求文档共15页，涉及6个模块。团队有3个测试人员，工期4周。请根据以下信息估算测试工作量：1)功能点估算：认证模块(20个)、商品推荐(15个)、支付(10个)、其他(15个) 2)每个功能点平均3个测试用例 3)用例设计每人天8个、执行每人天20个、自动化每人天5个 4)需要1轮功能测试+1轮回归测试。请输出包含各阶段人天估算、总人天、置信区间和风险预留的测试工作量估算报告。",
+      "expected_output": "测试工作量估算报告，含逐阶段人天、总人天、置信区间和风险预留",
+      "files": [],
+      "expectations": [
+        "有功能点估算",
+        "有逐阶段人天计算",
+        "有总人天汇总",
+        "有置信区间或风险预留",
+        "输出结构清晰的估算报告"
+      ],
+      "assertions": [
+        {"name": "有功能点", "type": "content_match", "target": "功能点|模块"},
+        {"name": "有阶段人天", "type": "content_match", "target": "人天|人时|天"},
+        {"name": "有总人天", "type": "content_match", "target": "总计|合计|总人天"},
+        {"name": "有风险预留", "type": "content_match", "target": "风险|预留|缓冲"},
+        {"name": "有置信区间", "type": "content_match", "target": "置信|区间|±"}
+      ]
+    },
+    {
+      "id": 22,
+      "prompt": "我们有一个Web电商平台，自动化测试用例从去年初的300个增长到现在的1500个，但维护成本越来越高——每次迭代有15-20%的用例因UI变更而失败，CI流水线从15分钟延长到45分钟，Flaky测试率从3%涨到12%。团队花费40%的时间在维护已有用例而非编写新用例。请评估测试自动化技术债务，识别债务类型（维护债务/架构债务/数据债务/技能债务），计算每类债务的利息（维护成本）和本金（重写成本），给出分阶段的还款规划。",
+      "expected_output": "技术债务评估报告，含债务分类/利息/本金/分阶段还款规划",
+      "files": [],
+      "expectations": [
+        "识别了技术债务类型",
+        "有债务利息评估",
+        "有债务本金评估",
+        "有分阶段还款规划",
+        "输出了结构化的评估报告"
+      ],
+      "assertions": [
+        {"name": "有债务分类", "type": "content_match", "target": "债务|维护|架构|数据|技能"},
+        {"name": "有利息评估", "type": "content_match", "target": "利息|成本|维护"},
+        {"name": "有本金评估", "type": "content_match", "target": "本金|重写"},
+        {"name": "有还款规划", "type": "content_match", "target": "还款|规划|阶段"},
+        {"name": "有报告结构", "type": "content_match", "target": "评估|报告|建议"}
+      ]
+    }
+  ]
+}

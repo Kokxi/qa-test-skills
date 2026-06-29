@@ -1,7 +1,8 @@
-﻿---
+---
 name: qa-mobile-testing
+version: 1.5.0
 description: >-
-  移动端测试专项，覆盖iOS/Android的功能/性能/兼容性/网络/中断测试要点。当需要移动端App测试或专项方案时激活。
+  当需要测试 iOS/Android 原生 App、H5 页面或小程序的移动端专项场景时使用此技能。移动端的坑主要不在功能逻辑上——中断（电话/通知/低电量）、弱网/断网/网络切换、前后台切换、系统权限管理、多机型适配和各种系统版本兼容才是重灾区。不要只测功能流程，移动端的 Bug 有一半以上是中断和兼容性相关的。输出按中断/网络/权限/兼容/性能分类的测试要点清单。
 
 when_to_use: 用户说"移动测试"、"App测试"、"Android测试"、"iOS测试"、"手机上测"、"H5测试"、"小程序测试"、需要测试移动应用、移动端发版前全面测试时
 allowed-tools: Read Grep Glob Bash
@@ -12,13 +13,32 @@ related_skills:
   downstream:
     - qa-ci-cd-testing           # 输出：移动端测试用于CI/CD
     - qa-release-risk-governance # 输出：测试结果用于发布评估
-input_format: 应用需求 + 自动化架构
-output_format: 移动端测试方案（测试维度+自动化策略+兼容性矩阵）
+input_format:
+  required:
+    - name: 测试策略
+      type: object
+      description: 来自qa-test-strategy-design的测试策略
+    - name: 移动端需求
+      type: string
+      description: 移动端的特性需求和平台要求
+  optional:
+    - name: 设备清单
+      type: array
+      description: 测试设备和OS版本列表
+output_format:
+  structure:
+    - mobile_test_plan: 移动端测试方案
+    - device_coverage: 设备覆盖矩阵
+    - platform_specific: 平台特性测试清单
+    - performance_checks: 性能测试要点
+error_recovery_guidance:
+  on_failure: "设备兼容性问题时切换到备用设备或模拟器，记录环境信息"
+  retry_behavior: "更换测试设备或修复环境问题后重新执行移动端测试"
 ---
 
 # 移动端测试专项
 
-## Overview
+## 核心原则
 
 你是一位移动端测试专家，擅长设计和执行iOS/Android应用测试。
 **核心原则**：移动测试的核心挑战——设备碎片化、网络不稳定性、用户场景多样性。
@@ -42,6 +62,13 @@ output_format: 移动端测试方案（测试维度+自动化策略+兼容性矩
 | 性能测试 | 10% | 启动/内存/电量/流量 |
 | 弱网测试 | 10% | 网络切换/弱网/离线 |
 | 安全测试 | 5% | 权限/数据保护 |
+
+> **平台专项参考**：不同平台有各自的高风险场景，加载对应参考文件可获取专项测试要点：
+> - [`references/platform-mobile-app.md`](references/platform-mobile-app.md) — iOS/Android 原生 App 专项
+> - [`references/platform-mobile-web.md`](references/platform-mobile-web.md) — H5/移动 Web 专项
+> - [`references/platform-mini-program.md`](references/platform-mini-program.md) — 小程序专项
+> - [`references/platform-desktop.md`](references/platform-desktop.md) — 桌面端（非移动）专项
+> - [`references/platform-pc-web.md`](references/platform-pc-web.md) — PC Web 专项
 
 ## 移动端测试检查清单
 
@@ -78,7 +105,7 @@ output_format: 移动端测试方案（测试维度+自动化策略+兼容性矩
 
 ### 功能测试
 
-```
+```text
 测试范围：
 ├─ 安装/卸载/升级
 │   ├─ 全新安装
@@ -103,7 +130,7 @@ output_format: 移动端测试方案（测试维度+自动化策略+兼容性矩
 
 ### 兼容性测试
 
-```
+```text
 设备维度：
 ├─ 屏幕尺寸：小屏/标准/大屏/折叠屏
 ├─ 分辨率：720p/1080p/2K/4K
@@ -120,7 +147,7 @@ output_format: 移动端测试方案（测试维度+自动化策略+兼容性矩
 
 ### 性能测试
 
-```
+```text
 性能指标：
 ├─ 启动时间
 │   ├─ 冷启动：<2秒
@@ -150,7 +177,7 @@ output_format: 移动端测试方案（测试维度+自动化策略+兼容性矩
 
 ### 网络测试
 
-```
+```text
 网络场景：
 ├─ 网络类型
 │   ├─ WiFi
@@ -175,7 +202,7 @@ output_format: 移动端测试方案（测试维度+自动化策略+兼容性矩
 
 ### 工具选型
 
-```
+```text
 ├─ Appium
 │   ├─ 优点：跨平台、语言无关
 │   ├─ 缺点：速度较慢、稳定性一般
@@ -227,7 +254,7 @@ class LoginPage:
 | Xiaomi 13 | Android 13 | 6.36寸 | ✅ 通过 |
 ```
 
-## Examples
+## 输出示例
 
 **测试移动端登录功能**
 → 五维覆盖：
@@ -240,7 +267,7 @@ class LoginPage:
 **App首页加载慢（iOS 3秒，Android 5秒）**
 → 触发性能测试清单，检查首页接口、图片加载、缓存策略
 
-## Guidelines
+## 检查清单
 
 移动端测试完成后检查：
 - [ ] 安装/卸载/升级是否测试？
