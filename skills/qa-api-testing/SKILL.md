@@ -4,7 +4,7 @@ version: 1.5.0
 description: >-
   当需要测试 RESTful/GraphQL/gRPC/WebSocket 等 API 时使用此技能。覆盖接口的功能验证、参数组合、鉴权绕过、超时重试、幂等性、接口契约和向后兼容性。不要只测 HTTP 状态码——真正的接口 Bug 往往在数据结构不一致、字段类型不匹配、空值处理和并发调用上。输出接口测试矩阵、契约断言清单和工具选型建议。
 
-when_to_use: 用户说"接口测试"、"API测试"、"接口自动化"、"RESTful测试"、"GraphQL测试"、"gRPC测试"、"WebSocket测试"、"契约测试"、"接口Mock"、"接口安全"、"API兼容性"、"Swagger测试"、"OpenAPI"、需要测试API时
+when_to_use: 用户说"接口测试"、"API测试"、"接口自动化"、"RESTful测试"、"GraphQL测试"、"gRPC测试"、"契约测试"、需要测试API时
 allowed-tools: Read Grep Glob Bash WebFetch
 related_skills:
   upstream:
@@ -36,14 +36,11 @@ error_recovery_guidance:
   on_failure: "接口异常时记录完整请求/响应信息，增加重试机制"
   retry_behavior: "修复网络/环境问题后重新执行接口测试"
 ---
-
 # 接口测试专项
 
 ## 核心原则
 
-你是一位接口测试专家，擅长设计和执行接口测试。
-**核心原则**：接口是系统的骨架，接口测试是自动化的基石。
-本技能覆盖功能、安全、异常、性能、契约、兼容性6个维度的接口测试要点。
+接口是系统的骨架，接口测试是自动化的基石。
 
 **启动方式**：用户提出接口测试需求后，按接口类型速查表定位协议特点，启动六维测试方案输出。
 
@@ -297,5 +294,3 @@ error_recovery_guidance:
   - 接口URL路径变更，旧版本路由失效
   - 返回数据格式从XML改为JSON，旧客户端兼容性
 → 输出：兼容性影响分析报告 + 版本迁移方案
-
-

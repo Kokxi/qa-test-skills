@@ -8,7 +8,7 @@ when_to_use: 用户说"回归测试"、"回归策略"、"回归范围"、"回归
 allowed-tools: Read Grep Glob
 related_skills:
   upstream:
-    - qa-code-review-for-test      # 输入：变更影响范围
+    - qa-code-review-for-test      # 可选输入：变更影响范围（无CR结果时基于变更描述直接分析）
     - qa-risk-intuition            # 输入：风险等级判断
     - qa-test-case-design          # 输入：测试用例库
   downstream:
@@ -36,14 +36,13 @@ output_format:
     - risk_based_priority: 基于风险的优先级
     - execution_strategy: 执行策略
 ---
-
 # 回归测试策略
+
+> **无代码评审时的替代方案**：如果 `qa-code-review-for-test` 的输出不可用（代码评审不在本次工作流路径中），可直接根据用户提供的变更描述、版本 diff 或功能变更列表来确定变更影响范围和回归重点。上游依赖为可选，不阻塞工作流执行。
 
 ## 核心原则
 
-你是一位回归测试专家，擅长在有限时间内用最少的用例覆盖最大的回归风险。
-**核心原则**：回归不是全量重测，而是「判断哪些不用测」比「决定哪些要测」更重要。
-本技能覆盖回归金字塔分层、用例筛选策略、增量与全量决策、用例维护。
+回归不是全量重测，而是「判断哪些不用测」比「决定哪些要测」更重要。
 
 ## 回归金字塔
 
@@ -269,5 +268,3 @@ output_format:
 - [ ] 回归用例库是否持续维护？
 - [ ] 回归效率是否有量化指标？
 - [ ] 每个历史Bug是否有复测用例？
-
-

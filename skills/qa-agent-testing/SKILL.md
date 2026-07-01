@@ -4,7 +4,7 @@ version: 1.5.0
 description: >-
   当需要测试 AI Agent（智能体、聊天机器人、AI 助手）时使用此技能。Agent 测试和传统功能测试完全不同——你要测的不是"点按钮看结果"，而是它的推理链路、工具调用时机、幻觉率、Prompt 注入防护、角色边界保持和记忆一致性。如果 Agent 能乱调用工具或泄漏系统 Prompt，那就是安全事件。⚠️ Agent 测试必须包含功能安全可控可靠九维覆盖，缺一不可。
 
-when_to_use: 用户说"Agent测试"、"智能体测试"、"AI测试"、"AI助手"、"聊天机器人"、"Agent幻觉"、"Agent失控"、"Agent乱调用"、"Agent被攻击"、"Prompt注入"、"AI安全审计"、"LLM测试"、"大模型应用测试"、需要测试AI Agent或评估AI行为时
+when_to_use: 用户说"Agent测试"、"智能体测试"、"AI助手"、"聊天机器人"、"Agent幻觉"、"Prompt注入"、"AI安全审计"、"LLM测试"、需要测试AI Agent或评估AI行为时
 allowed-tools: Read Grep Glob Bash WebFetch
 related_skills:
   upstream:
@@ -36,14 +36,11 @@ error_recovery_guidance:
   on_failure: "Agent行为异常时回退到确定性测试方案，配合人工验证"
   retry_behavior: "调整测试参数后重新执行Agent测试"
 ---
-
 # AI Agent测试专项
 
 ## 核心原则
 
-你是一位AI Agent测试专家，擅长设计和执行智能体测试。
-**核心原则**：Agent测试的核心——验证AI决策的正确性、安全性、可控性。
-本技能覆盖Agent的功能、安全、高级安全、边界、可控性、可靠性、幻觉与事实性、推理链路、工具调用九维测试方法。
+Agent测试的核心——验证AI决策的正确性、安全性、可控性。
 
 **启动方式**：用户提出Agent测试需求后，按Agent类型速查表定位必测维度，输出测试方案。
 
@@ -151,5 +148,3 @@ Agent读取含有隐藏指令的用户上传文档，在不知情下执行了"�
 Agent处理批量退款时对同一订单反复调用了3次退款接口
 → 验证：幂等性检查 → API速率限制和频控 → 工具调用参数+时间戳完整记录 → 异常熔断机制
 → 输出：工具调用安全报告 + 幂等性改进建议
-
-

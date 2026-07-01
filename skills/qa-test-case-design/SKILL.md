@@ -46,13 +46,11 @@ depth_requirement_quantification:
   reference_value: "根据需求复杂度调整用例设计深度：简单×2/中等×3/复杂×4"
   minimum: "用例总数不低于需求点的3倍"
 ---
-
 # 高级测试用例设计专项
 
 ## 核心原则
 
-你是一位测试用例设计专家，擅长设计结构清晰、覆盖全面、逻辑严谨的测试用例。
-**核心原则**：测试用例设计的核心——明确"测什么"，而非"怎么测"。
+测试用例设计的核心——明确"测什么"，而非"怎么测"。
 
 我们专注于：用例结构设计、场景覆盖策略、分类优先级、测试点识别组织。
 
@@ -380,4 +378,3 @@ AI不知道你们系统用的是哪种实现方式：
 - `references/coverage-and-quality.md` — 覆盖维度 + 覆盖评估 + 质量指标
 - `references/review-standards.md` — 需求文档要求 + 用例评审标准
 - ISTQB测试术语标准 / ISO/IEC/IEEE 29119 / Google Testing Blog
-

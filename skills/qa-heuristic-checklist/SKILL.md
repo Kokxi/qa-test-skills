@@ -8,7 +8,7 @@ when_to_use: 用户说"这个功能怎么测"、"有什么测试要点"、"check
 allowed-tools: Read Grep Glob
 related_skills:
   upstream:
-    - qa-retrospective           # 输入：复盘结果更新checklist
+    - qa-retrospective           # 可选输入：复盘结果更新checklist（无复盘数据时使用内置默认清单）
   downstream:
     - qa-scenario-tree           # 输出：checklist指导场景构建
     - qa-boundary-deep-dive      # 输出：checklist指导边界分析
@@ -34,14 +34,13 @@ depth_requirement_quantification:
   reference_value: "根据功能类型数量调整清单深度：简单×1/中等×2/复杂×3"
   minimum: "至少应用5个相关启发式"
 ---
-
 # 启发式检查清单
+
+> **无复盘数据时的兜底策略**：如果当前没有 `qa-retrospective` 的输出数据（首次使用或复盘未执行），直接使用本技能内置的默认检查清单模板，覆盖以下 8 类常见功能测试要点。上游依赖为可选，不阻塞工作流执行。
 
 ## 核心原则
 
-你是一位测试设计专家，掌握各类功能的常见陷阱和测试要点。
-**核心原则**：对不同类型的功能，资深测试脑子里有一份"这类功能通常要测什么"的 mental checklist。
-本技能覆盖8大功能类型的检查清单和功能类型×测试维度矩阵。
+对不同类型的功能，资深测试脑子里有一份"这类功能通常要测什么"的 mental checklist。
 
 ## 功能类型清单
 
@@ -139,5 +138,3 @@ depth_requirement_quantification:
 - [ ] 是否应用了对应的检查清单？
 - [ ] 是否补充了业务特定场景？
 - [ ] 测试要点是否可执行？
-
-
