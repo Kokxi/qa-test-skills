@@ -1,6 +1,6 @@
 ---
 name: qa-code-review-for-test
-version: 1.5.0
+version: 1.5.1
 description: >-
   当开发提了 PR、代码变更需要确定测试范围、或者想通过分析代码来预测可能出 Bug 的区域时使用此技能。从测试视角分析代码变更的影响范围、识别高危模式和典型风险区域。不要看完整代码逻辑——你只需要关注变更类型（新增/修改/删除/重构）、影响范围（接口定义/数据库字段/业务逻辑）和相关依赖，据此确定最小回归测试范围。输出代码变更影响分析报告。
 
@@ -13,6 +13,7 @@ related_skills:
   downstream:
     - qa-execution-observation   # 输出：代码变更指导执行观察
     - qa-test-strategy-design    # 输出：代码变更影响测试策略
+    - qa-regression-testing
 input_format:
   required:
     - name: 代码变更
@@ -26,11 +27,22 @@ input_format:
       type: string
       description: 相关功能需求
 output_format:
+  traceability:
+    - 每次代码评审带唯一ID（CR-XXXX）
+    - 关联变更ID或需求ID
   structure:
     - review_findings: 代码评审发现
     - test_gaps: 测试遗漏点
     - impact_analysis: 变更影响分析
+    - high_risk_patterns: 高危模式识别
     - regression_scope: 回归测试范围建议
+categories: ['Development','Team']
+depth_requirement_quantification:
+  reference_value: "根据代码变更量调整评审深度：简单×1/中等×2/复杂×3"
+  minimum: "至少分析变更类型、影响范围、回归范围3个维度"
+error_recovery_guidance:
+  on_failure: "代码变更分析遗漏依赖时回退到边界分析补充"
+  retry_behavior: "补全依赖分析后重新确定回归范围"
 ---
 # 测试视角的代码评审
 

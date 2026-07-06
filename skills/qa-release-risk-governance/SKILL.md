@@ -1,6 +1,6 @@
 ---
 name: qa-release-risk-governance
-version: 1.5.0
+version: 1.5.1
 description: >-
   当版本要发布了、需要决定"能不能发"、或者需要设计灰度/回滚方案时使用此技能。系统化评估变更风险（变更范围/影响面/回退成本），设计灰度发布策略（按用户/区域/流量比例），制定回滚方案和线上监控计划。不要问"这个版本稳不稳"——要问"如果出问题了，我们能在几分钟内发现并回滚"。产出发布风险评估报告和灰度发布方案。
 
@@ -12,6 +12,8 @@ related_skills:
     - qa-risk-intuition          # 输入：风险评估
   downstream:
     - qa-quality-metrics         # 输出：发布数据用于质量度量
+    - qa-shift-right
+    - qa-stakeholder-communication
 input_format:
   required:
     - name: 测试策略
@@ -28,12 +30,21 @@ input_format:
       type: object
       description: 来自qa-quality-metrics的质量数据
 output_format:
+  traceability:
+    - 每次发布评估带唯一ID（REL-XXXX）
   structure:
     - release_decision: 发布决策建议
     - risk_summary: 风险摘要
     - blocking_issues: 阻塞性问题清单
     - rollback_plan: 回滚方案
     - monitoring_recommendations: 上线监控建议
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据发布规模调整评估深度：简单×1/中等×2/复杂×3"
+  minimum: "至少覆盖变更风险、灰度策略、回滚方案、监控计划4项"
+error_recovery_guidance:
+  on_failure: "发布评估发现阻塞性问题时回退到测试策略补齐"
+  retry_behavior: "修复阻塞问题后重新评估发布"
 ---
 # 发布风险管理
 

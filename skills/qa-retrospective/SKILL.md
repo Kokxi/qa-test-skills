@@ -1,10 +1,10 @@
 ---
 name: qa-retrospective
-version: 1.5.0
+version: 1.5.1
 description: >-
   当一个迭代结束、一个项目完成、或者发生线上事故需要事后分析时使用此技能。通过系统性的回顾会议和数据复盘，把个人和团队的经验教训转化为可复用的组织资产。不要沦为"说说好话走个形式"——有效的复盘需要有数据支撑（缺陷趋势/漏测分析/效率数据）、有根因分析（为什么出问题）和有 action items（下次怎么做不一样）。输出复盘报告和改进项追踪表。
 
-when_to_use: 用户说"复盘"、"总结"、"经验沉淀"、"漏测分析"、"回顾"、"事后分析"、需要复盘总结经验、反复出现同类问题需要根因改进时
+when_to_use: 用户说"测试复盘"、"迭代复盘"、"项目复盘"、"经验沉淀"、"漏测分析"、"回顾总结"、"事后分析"、需要复盘总结经验、反复出现同类问题需要根因改进时
 allowed-tools: Read Grep Glob
 related_skills:
   upstream:
@@ -14,6 +14,7 @@ related_skills:
   downstream:
     - qa-heuristic-checklist     # 输出：更新checklist
     - qa-team-coaching           # 输出：更新培训材料
+    - qa-test-leadership
 input_format:
   required:
     - name: 迭代数据
@@ -27,12 +28,21 @@ input_format:
       type: object
       description: 历史回顾记录
 output_format:
+  traceability:
+    - 每次复盘带唯一ID（RETRO-XXXX）
   structure:
     - retrospective_report: 复盘报告
     - what_went_well: 做得好的事项
     - improvement_areas: 改进领域
     - action_items: 行动项清单
     - follow_up_plan: 跟踪计划
+categories: ['Development','Team']
+depth_requirement_quantification:
+  reference_value: "根据迭代数据调整复盘深度：简单×1/中等×2/复杂×3"
+  minimum: "至少包含数据支撑、根因分析、action items 3要素"
+error_recovery_guidance:
+  on_failure: "复盘数据不充分时回退到质量度量收集更多数据"
+  retry_behavior: "补齐数据后重新复盘"
 ---
 # 复盘与经验沉淀
 

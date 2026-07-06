@@ -1,11 +1,12 @@
 ---
 name: qa-test-skills
+version: 1.5.1
 description: >-
   从需求文档自动生成结构化测试用例，覆盖功能测试、边界分析、组合测试和回归测试全流程。自动串联48个专家级子技能，按12步工作流编排执行。适用于：上传需求文档（PRD/Word/PDF/URL）需要完整测试用例时、不知道如何设计测试场景或担心遗漏边界条件时、需要AI评审测试输出并补充测试盲区时。每个步骤都有独立技能支撑，输出格式统一、需求可追溯、覆盖率可量化。
 when_to_use: >-
   用户说"生成测试用例"、"帮我测试"、"设计测试"、"上传需求"、"开始测试"、上传需求文档/URL时自动激活，
   需要完整测试流程时，想浏览技能集目录、了解QA Test Skills包含哪些技能、查看技能分类说明、获取安装指引时
-disable-model-invocation: true
+disable-model-invocation: false
 allowed-tools: Read Grep Glob WebFetch Bash
 related_skills:
   all_skills:

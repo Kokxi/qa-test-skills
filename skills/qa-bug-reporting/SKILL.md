@@ -1,10 +1,8 @@
 ---
 name: qa-bug-reporting
-version: 1.5.0
+version: 1.5.1
 description: >-
-  当发现了一个 Bug 需要提交、自己提的 Bug 被开发打回来了、或者团队 Bug 质量参差不齐需要统一规范时使用此技能。一个高质量的 Bug 报告应该让开发看一遍就能复现并定位，不需要来回追问。包含清晰的复现步骤（从环境准备到操作序列到预期/实际结果）、根因推测、影响范围评估和必要附件。
-
-when_to_use: 用户说"提Bug"、"写Bug报告"、"Bug描述"、"报告格式"、"复现步骤"、"加附件"、需要编写或优化Bug报告、开发打回Bug报告需要改进时
+  当发现了一个 Bug 需要提交、自己提的 Bug 被开发打回来了、或者团队 Bug 质量参差不齐需要统一规范时使用此技能。一个高质量的 Bug 报告应该让开发看一遍就能复现并定位，不需要来回追问。包含清晰的复现步骤（从环境准备到操作序列到预期/实际结果）、根因推测、影响范围评估和必要附件。 ⚠️ 本技能示例可能调用外部抓包/日志工具，请在受控环境执行hen_to_use: 用户说"提Bug"、"写Bug报告"、"Bug描述"、"报告格式"、"复现步骤"、"加附件"、需要编写或优化Bug报告、开发打回Bug报告需要改进时
 allowed-tools: Read Grep Glob Bash
 related_skills:
   upstream:
@@ -13,6 +11,7 @@ related_skills:
     - qa-question-framework      # 输入：提问框架确保信息完整
   downstream:
     - qa-bug-lifecycle        # 输出：Bug报告进入缺陷管理
+    - qa-stakeholder-communication
 input_format:
   required:
     - name: Bug描述
@@ -29,13 +28,30 @@ input_format:
       type: string
       description: 相关执行日志
 output_format:
+  traceability:
+    - 每个Bug带唯一ID（BUG-XXXX）
+    - 关联执行用例ID（TC-XXXX）
   structure:
     - bug_title: 缺陷标题
     - severity: 严重级别
     - priority: 优先级
     - reproduction_steps: 复现步骤
     - expected_vs_actual: 预期vs实际结果
+    - root_cause: 根因推测（可选）
+    - impact_assessment: 影响范围评估
+    - attachments: 附件清单
+categories: ['Development','Testing','Quality']
+depth_requirement_quantification:
+  reference_value: "根据缺陷严重度调整报告深度：简单×1/中等×2/复杂×3"
+  minimum: "至少包含复现步骤、预期vs实际、影响评估3个核心结构"
+error_recovery_guidance:
+  on_failure: "Bug报告被开发打回时回退到执行观察步骤补充信息"
+  retry_behavior: "补充复现步骤或环境信息后重新提交"
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 # Bug报告艺术
 
 ## 核心原则

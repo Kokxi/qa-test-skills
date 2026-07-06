@@ -1,6 +1,6 @@
 ---
 name: qa-state-transition
-version: 1.5.0
+version: 1.5.1
 description: >-
   系统化测试状态机的合法转换、非法转换、边界转换和并发转换场景。当业务对象经历了多种状态（如订单：待支付→已支付→已发货→已完成）、或者需要验证状态变化时的数据一致性时，应当使用此技能。最容易遗漏的是非法转换（业务不允许的操作如"已完成→待支付"）和并发转换（同一订单同时被支付和取消）。每个状态转换需标注触发条件、前置状态、后置状态和验证点。
 
@@ -24,6 +24,9 @@ input_format:
       type: object
       description: 来自qa-risk-intuition的风险评估
 output_format:
+  traceability:
+    - 每个状态转换带唯一ID（ST-XXXX）
+    - 关联场景ID（SC-XXXX）
   structure:
     - state_diagram: 状态转换图
     - valid_transitions: 合法转换列表
@@ -32,6 +35,10 @@ output_format:
 depth_requirement_quantification:
   reference_value: "根据状态数量调整分析深度：简单×2/中等×3/复杂×4"
   minimum: "至少识别5个关键状态转换"
+categories: ['Development','Testing']
+error_recovery_guidance:
+  on_failure: "状态转换遗漏异常路径时回退到场景树补充"
+  retry_behavior: "补全异常场景后重新分析状态转换"
 ---
 
 # 状态转换测试

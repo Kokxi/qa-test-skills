@@ -1,6 +1,6 @@
 ---
 name: qa-shift-right
-version: 1.5.0
+version: 1.5.1
 description: >-
   当功能已经上线了但还担心线上质量、或者需要设计灰度发布后的验证方案时使用此技能。通过生产监控（APM/日志/用户反馈）、线上巡检拨测、A/B 验证和混沌工程将测试延伸到生产环境。不要把上线当成终点——用户在生产环境的使用方式是永远测不全的。输出右移验证方案（灰度监控指标 + 拨测用例 + 告警阈值 + 回滚触发条件）。
 
@@ -26,11 +26,20 @@ input_format:
       type: string
       description: 用户反馈收集机制
 output_format:
+  traceability:
+    - 本技能规划右移，不产出唯一ID；可溯源到发布风险ID
   structure:
     - shift_right_plan: 右移测试计划
     - monitoring_dashboard: 生产监控仪表盘
     - feedback_loop: 用户反馈闭环
     - canary_strategy: 灰度发布测试策略
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据生产规模调整右移深度：简单×1/中等×2/复杂×3"
+  minimum: "至少覆盖灰度监控、混沌工程、回滚策略3项"
+error_recovery_guidance:
+  on_failure: "右移方案遗漏监控项时回退到发布风险补充"
+  retry_behavior: "补充风险评估后重新设计右移方案"
 ---
 # 测试右移实践
 

@@ -1,6 +1,6 @@
 ---
 name: qa-scenario-tree
-version: 1.5.0
+version: 1.5.1
 description: >-
   将需求解构的结果系统化转化为主路径、备选路径、异常路径、业务规则四类测试场景。当业务流程复杂、涉及多个页面跳转或状态变化、需要确保关键路径和异常路径都有覆盖时，应当使用此技能。不要只测"正常流程"——场景树的核心价值是暴露那些"用户可能不会按你预期操作"的分支和异常路径。每个场景都应有唯一ID（SC-XXXX）并关联回具体需求。
 
@@ -13,6 +13,12 @@ related_skills:
     - qa-boundary-deep-dive      # 输出：场景树传递给边界分析
     - qa-combination-strategy    # 输出：场景树传递给组合策略
     - qa-state-transition        # 输出：场景树传递给状态转换
+    - qa-ai-context-engineering
+    - qa-ai-output-critique
+    - qa-domain-modeling
+    - qa-execution-observation
+    - qa-exploratory-testing
+    - qa-test-case-design
 input_format:
   required:
     - name: 需求解构表
@@ -36,7 +42,15 @@ output_format:
 depth_requirement_quantification:
   reference_value: "根据需求复杂度调整场景深度：简单×3/中等×5/复杂×7"
   minimum: "至少构建3层场景树（主路径+分支+异常）"
+categories: ['Development','Requirements']
+error_recovery_guidance:
+  on_failure: "场景树遗漏异常路径时回退到需求解构补充"
+  retry_behavior: "补全异常需求后重新构建场景树"
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 # 场景树构建
 
 ## 核心原则

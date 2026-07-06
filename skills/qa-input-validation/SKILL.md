@@ -1,6 +1,6 @@
 ---
 name: qa-input-validation
-version: 1.5.0
+version: 1.5.1
 description: >-
   在测试工作流开始前检查用户输入是否包含有效的需求描述和足够的上下文信息。当用户的测试请求过于模糊（只说"帮我测试"却没说测什么）、缺少必要的需求文档或上下文时，应当使用此技能来验证输入完整性。如果输入验证失败，必须返回缺失信息清单要求用户补充。适用于启动任何测试设计流程的第一步。
 
@@ -23,6 +23,8 @@ input_format:
       type: string
       description: 需求文档链接
 output_format:
+  traceability:
+    - 本技能验证输入，不产出唯一ID
   structure:
     - validation_result: "pass/fail/need_more_info"
     - input_quality_score: "输入质量评分（1-10）"
@@ -31,7 +33,15 @@ output_format:
 error_recovery_guidance:
   on_failure: "返回缺失信息清单和追问问题，要求用户补充"
   retry_behavior: "用户补充后重新执行输入验证"
+categories: ['Development','Testing','AI']
+depth_requirement_quantification:
+  reference_value: "根据输入模糊度调整验证深度：简单×1/中等×2/复杂×3"
+  minimum: "至少检查需求明确性、上下文充分性、输入类型3项"
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 # 输入验证
 
 ## 核心原则

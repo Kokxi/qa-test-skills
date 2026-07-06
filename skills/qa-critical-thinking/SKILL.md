@@ -1,6 +1,6 @@
 ---
 name: qa-critical-thinking
-version: 1.5.0
+version: 1.5.1
 description: >-
   当需要挑战已有假设、挖掘隐含约束、发现"所有人都没想过"的测试场景时使用此技能。测试中最常犯的错误是接受了需求文档里的隐含假设——比如"用户一定会有网络"、"输入一定有内容"、"操作顺序一定正确"。用「如果不呢」的深度质疑方式反向思考，暴露那些被默认为"正常"的异常场景。每一个测试场景都应该走一遍"如果这个假设不成立呢"的质疑流程。
 
@@ -12,6 +12,7 @@ related_skills:
     - qa-req-deconstruction      # 影响：需求挖掘深度
     - qa-scenario-tree           # 影响：场景覆盖全面性
     - qa-boundary-deep-dive      # 影响：边界分析深度
+    - qa-requirement-review
 input_format:
   required:
     - name: 需求描述
@@ -25,12 +26,25 @@ input_format:
       type: string
       description: 业务目标和用户角色
 output_format:
+  traceability:
+    - 本技能质疑思维，不产出唯一ID；发现的假设挑战关联到需求ID或场景ID
   structure:
     - thinking_gaps: 思维盲区清单
     - assumption_challenges: 假设挑战列表
     - alternative_scenarios: 替代场景建议
     - risk_reevaluation: 风险重评估
+categories: ['Development','Testing']
+depth_requirement_quantification:
+  reference_value: "根据需求复杂度调整质疑深度：简单×3/中等×5/复杂×7"
+  minimum: "至少挑战3个隐含假设"
+error_recovery_guidance:
+  on_failure: "质疑流未能暴露假设时回退到需求解构补充上下文"
+  retry_behavior: "补充业务背景后重新质疑"
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 # 测试批判性思维
 
 ## 核心原则

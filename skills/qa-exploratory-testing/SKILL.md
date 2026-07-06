@@ -1,6 +1,6 @@
 ---
 name: qa-exploratory-testing
-version: 1.5.0
+version: 1.5.1
 description: >-
   当脚本化测试覆盖得差不多了、但直觉告诉你"可能还有东西没测到"时使用此技能。用系统化的探索方法（场景漫游、角色扮演、失败路径、标杆对比）来发现预设测试用例覆盖不到的问题。探索式测试不是随便点——它是有明确 charter（任务书）和时长的有目的探索。每次探索需要记录 session 笔记和发现的问题列表。
 
@@ -29,6 +29,8 @@ input_format:
       type: string
       description: 探索时间限制
 output_format:
+  traceability:
+    - 每个探索session带唯一ID（EXP-XXXX）
   structure:
     - exploration_charter: 探索章程
     - session_notes: 探索笔记
@@ -38,7 +40,15 @@ output_format:
 error_recovery_guidance:
   on_failure: "记录探索路径，切换测试策略或结束当前Session"
   retry_behavior: "开启新Session，尝试不同的探索方向"
+categories: ['Development','Testing']
+depth_requirement_quantification:
+  reference_value: "根据探索目标调整session深度：简单×1/中等×2/复杂×3"
+  minimum: "至少完成1个charter的session笔记和发现清单"
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 # 探索式测试
 
 ## 核心原则

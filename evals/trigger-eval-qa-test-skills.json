@@ -1,0 +1,22 @@
+[
+  {"query": "帮我生成测试用例，需求文档在 E:\\projects\\prd.md", "should_trigger": true},
+  {"query": "刚拿到一个PRD文档，在桌面上叫'商城v2需求.docx'，帮我出一份完整的测试方案", "should_trigger": true},
+  {"query": "我这有个新项目，需求文档在附件里，帮我出一整套测试用例和测试方案", "should_trigger": true},
+  {"query": "这个电商项目需要做功能测试和边界测试，需求在这里：docs/requirements.md", "should_trigger": true},
+  {"query": "帮我测试一下登录模块，用户名密码登录，还要测忘记密码和注册", "should_trigger": true},
+  {"query": "能不能帮我分析一下这份需求文档有什么测试点？文档在附件里", "should_trigger": true},
+  {"query": "我们要发版了，帮我做一轮完整的功能测试和回归测试设计", "should_trigger": true},
+  {"query": "哎这个新功能需求写好了，但我不知道从哪开始测，帮我看一下", "should_trigger": true},
+  {"query": "需要设计测试用例覆盖主流程和异常场景，需求文档见附件", "should_trigger": true},
+  {"query": "我上传了一个PRD文档，帮我分析需求并生成测试方案", "should_trigger": true},
+  {"query": "发现了一个Bug，付款页面点了支付没反应，帮我分析一下根因", "should_trigger": false},
+  {"query": "这个接口返回的数据不对，帮我调试一下看看为什么", "should_trigger": false},
+  {"query": "帮我把这份需求文档翻译成英文，客户要看的", "should_trigger": false},
+  {"query": "写一个Python脚本来批量造测试数据，需要1000条订单数据", "should_trigger": false},
+  {"query": "帮我部署测试环境，需要安装MySQL 8.0和Redis，还要配置Nginx", "should_trigger": false},
+  {"query": "帮我写一份测试周报，数据如下：执行用例200条，通过180条，发现Bug15个", "should_trigger": false},
+  {"query": "自动化脚本跑不过了，登录用例一直报元素找不到，帮忙看看", "should_trigger": false},
+  {"query": "帮我评审一下这段代码有没有安全问题，这是个Spring Boot的API", "should_trigger": false},
+  {"query": "我要做个性能测试，帮我设计一下压测方案和性能指标", "should_trigger": false},
+  {"query": "我们项目要做回归测试，之前用例库有1200条，帮我设计一下回归策略", "should_trigger": false}
+]

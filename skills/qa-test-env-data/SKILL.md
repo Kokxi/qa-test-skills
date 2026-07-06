@@ -1,10 +1,8 @@
 ---
 name: qa-test-env-data
-version: 1.5.0
+version: 1.5.1
 description: >-
-  当测试环境不稳定、环境不够用、或者需要准备测试数据时使用此技能。覆盖环境部署与配置管理、环境监控与问题排查（环境问题 vs 代码问题的快速区分）、多环境管理策略（开发/测试/预发）和日常测试数据准备。环境问题是最容易浪费测试时间的事——一个稳定的环境比一百个测试用例更有价值。输出环境健康度检查和数据准备 checklist。
-
-when_to_use: 用户说"测试环境"、"环境部署"、"环境配置"、"准备环境"、"环境排查"、需要搭建测试环境、环境不稳定影响测试需要排查、需要准备测试数据时
+  当测试环境不稳定、环境不够用、或者需要准备测试数据时使用此技能。覆盖环境部署与配置管理、环境监控与问题排查（环境问题 vs 代码问题的快速区分）、多环境管理策略（开发/测试/预发）和日常测试数据准备。环境问题是最容易浪费测试时间的事——一个稳定的环境比一百个测试用例更有价值。输出环境健康度检查和数据准备 checklist。 ⚠️ 本技能含环境清理步骤，执行前请确认非生产环境hen_to_use: 用户说"测试环境"、"环境部署"、"环境配置"、"准备环境"、"环境排查"、需要搭建测试环境、环境不稳定影响测试需要排查、需要准备测试数据时
 allowed-tools: Read Grep Glob Bash
 related_skills:
   upstream:
@@ -12,6 +10,7 @@ related_skills:
     - qa-test-strategy-design    # 输入：测试策略确定环境需求
   downstream:
     - qa-execution-observation   # 输出：环境和数据支持执行
+    - qa-test-data-engineering
 input_format:
   required:
     - name: 测试策略
@@ -25,11 +24,20 @@ input_format:
       type: array
       description: 现有测试环境列表
 output_format:
+  traceability:
+    - 每套环境配置带唯一ID（ENV-XXXX）
   structure:
     - env_requirements: 环境需求清单
     - env_design: 环境设计方案
     - configuration_guide: 配置指南
     - maintenance_plan: 维护计划
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据环境复杂度调整部署深度：简单×1/中等×2/复杂×3"
+  minimum: "至少完成环境搭建、配置管理、数据准备3步"
+error_recovery_guidance:
+  on_failure: "环境部署遗漏配置项时回退到测试策略补充依赖"
+  retry_behavior: "补充依赖后重新部署环境"
 ---
 # 测试环境与数据管理
 

@@ -1,6 +1,6 @@
 ---
 name: qa-test-estimation
-version: 1.5.0
+version: 1.5.1
 description: >-
   当项目经理问"这个版本多久测完"或者需要给测试排期做资源规划时使用此技能。基于需求复杂度、变更范围和历史数据系统化估算测试人天，输出包含冒烟/功能/回归/专项的逐阶段预估。不要拍脑袋——估算必须有依据（复杂度分级 + 历史基线 + 风险系数），同时标注置信度区间和风险预留。
 
@@ -29,11 +29,20 @@ input_format:
       type: string
       description: 团队测试产能信息
 output_format:
+  traceability:
+    - 每份估算带唯一ID（EST-XXXX）
   structure:
     - estimation_result: 工作量估算结果
     - breakdown: 工作分解结构
     - risk_buffer: 风险缓冲建议
     - confidence_level: 置信度评估
+categories: ['Development','Testing']
+depth_requirement_quantification:
+  reference_value: "根据项目规模调整估算深度：简单×1/中等×2/复杂×3"
+  minimum: "至少分解到功能模块级工作量"
+error_recovery_guidance:
+  on_failure: "估算遗漏关键模块时回退到需求解构补充范围"
+  retry_behavior: "补全范围后重新估算"
 ---
 # 测试工作量估算
 

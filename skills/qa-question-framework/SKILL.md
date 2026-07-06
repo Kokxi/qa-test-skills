@@ -1,16 +1,17 @@
 ---
 name: qa-question-framework
-version: 1.5.0
+version: 1.5.1
 description: >-
   当需求文档信息不够、不知道接下来该问产品什么、或者需要从开发那边获取更多技术细节时使用此技能。很多人测不好不是因为不会设计用例，而是因为一开始就没问对问题。提供需求调研、边界确认、规则挖掘、技术细节追问等不同场景的结构化提问模板，确保在测试设计前获取到足够上下文。每一个问题都标注了问谁、怎么问、什么时候问。
 
-when_to_use: 用户说"不知道该问什么"、"怎么获取信息"、"需求不清楚"、"需要澄清"、"问什么问题"、"怎么沟通"、"和产品对需求"、"和开发沟通"、需要和PM/开发沟通需求细节、需求文档信息不足需要补充时
+when_to_use: 用户说"不知道该问什么"、"怎么获取信息"、"需求不清楚"、"需要澄清"、"问什么问题"、"提问模板"、"和产品对需求"、"和开发沟通细节"、需要和PM/开发沟通需求细节、需求文档信息不足需要补充时
 allowed-tools: Read Grep Glob
 related_skills:
   upstream: []  # 基础层技能
   downstream:
     - qa-req-deconstruction      # 影响：需求挖掘完整性
     - qa-bug-reporting           # 影响：Bug报告完整性
+    - qa-requirement-review
 input_format:
   required:
     - name: 测试上下文
@@ -24,11 +25,24 @@ input_format:
       type: string
       description: 技术或业务约束条件
 output_format:
+  traceability:
+    - 本技能设计提问，不产出唯一ID
   structure:
     - question_list: 结构化提问清单
     - exploration_areas: 探索领域建议
     - clarification_needs: 需澄清的问题列表
+categories: ['Development','Testing']
+depth_requirement_quantification:
+  reference_value: "根据信息缺口调整提问深度：简单×3/中等×5/复杂×7"
+  minimum: "至少覆盖需求调研、边界确认、技术细节3类问题"
+error_recovery_guidance:
+  on_failure: "提问未能获取关键信息时回退到需求文档补充上下文"
+  retry_behavior: "补充上下文后重新设计提问"
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 # 提问框架
 
 ## 核心原则

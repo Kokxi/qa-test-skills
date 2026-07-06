@@ -1,6 +1,6 @@
 ---
 name: qa-team-coaching
-version: 1.5.0
+version: 1.5.1
 description: >-
   当团队里有测试新人需要带、想提升团队整体测试水平、或者需要把个人经验转化为团队能力时使用此技能。通过 Pair 测试、经验分享、checklist 沉淀、模板建设和培训材料等方式赋能团队。不要等着新人犯错再教——好的赋能是提前给工具和方法论，让新人在第一次做之前就知道"正确的做法是什么"。
 
@@ -24,12 +24,21 @@ input_format:
       type: string
       description: 可用的培训资源和预算
 output_format:
+  traceability:
+    - 每份赋能方案带唯一ID（COACH-XXXX）
   structure:
     - coaching_plan: 教练计划
     - skill_matrix: 技能矩阵
     - training_materials: 培训材料清单
     - mentorship_guide: 导师指导方案
     - progress_metrics: 进步度量方式
+categories: ['Development','Team']
+depth_requirement_quantification:
+  reference_value: "根据团队能力差距调整赋能深度：简单×1/中等×2/复杂×3"
+  minimum: "至少包含能力评估、培训计划、效果验收3环节"
+error_recovery_guidance:
+  on_failure: "赋能方案未能补齐能力差距时回退到能力评估补充"
+  retry_behavior: "补充评估后重新设计赋能方案"
 ---
 # 团队赋能
 

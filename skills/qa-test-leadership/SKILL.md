@@ -1,6 +1,6 @@
 ---
 name: qa-test-leadership
-version: 1.5.0
+version: 1.5.1
 description: >-
   当需要管理测试团队、制定团队目标和绩效标准、或者团队扩招需要面试标准时使用此技能。覆盖测试团队管理（目标设定/KPI 制定/人员成长）、绩效评估（能力模型/360 评估）、招聘面试（面试流程/技术评估标准）和组织建设。不要只管进度不管成长——一个稳定的测试团队靠的是每个人都在不断学习和进步。
 
@@ -25,11 +25,20 @@ input_format:
       type: string
       description: 可用资源和预算
 output_format:
+  traceability:
+    - 每份管理方案带唯一ID（LEAD-XXXX）
   structure:
     - team_assessment: 团队评估报告
     - improvement_roadmap: 改进路线图
     - stakeholder_plan: 干系人管理计划
     - metrics_framework: 度量框架设计
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据团队规模调整管理深度：简单×1/中等×2/复杂×3"
+  minimum: "至少覆盖能力模型、绩效评估、招聘标准3项"
+error_recovery_guidance:
+  on_failure: "管理方案遗漏角色时回退到团队能力评估补充"
+  retry_behavior: "补充评估后重新设计方案"
 ---
 # 测试领导力
 

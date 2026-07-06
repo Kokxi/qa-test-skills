@@ -1,10 +1,10 @@
 ---
 name: qa-ci-cd-testing
-version: 1.5.0
+version: 1.5.1
 description: >-
   当需要把测试集成到 CI/CD 流水线中、或者现有流水线的测试环节跑起来效率低不可靠时使用此技能。覆盖流水线各阶段的分层测试卡点设计（提交检查→单元测试→接口测试→UI 测试→回归测试）、工具集成策略和质量门禁配置。不要在 CI 里堆满慢的 UI 测试——而是构建测试金字塔：提交阶段跑最快的（<5min），合码阶段跑核心的（<15min），夜间跑全量的。
 
-when_to_use: 用户说"CI/CD"、"持续测试"、"自动化测试"、"流水线"、"质量门禁"、"自动化回归"、"提交即测试"、"左移"、"右移"、需要设计CI/CD测试流程、构建流水线需要加入测试环节时
+when_to_use: 用户说"CI/CD"、"持续测试"、"流水线测试"、"质量门禁"、"自动化回归"、"提交即测试"、需要设计CI/CD测试流程、构建流水线需要加入测试环节时
 allowed-tools: Read Grep Glob Bash
 related_skills:
   upstream:
@@ -12,6 +12,7 @@ related_skills:
     - qa-test-strategy-design    # 输入：测试策略确定自动化范围
   downstream:
     - qa-release-risk-governance # 输出：CI/CD流程支持发布
+    - qa-shift-right
 input_format:
   required:
     - name: 测试策略
@@ -25,11 +26,20 @@ input_format:
       type: string
       description: CI/CD流水线配置信息
 output_format:
+  traceability:
+    - 每条流水线带唯一ID（PIPE-XXXX）
   structure:
     - pipeline_design: CI/CD流水线设计
     - test_stages: 各阶段测试配置
     - quality_gates: 质量门禁设置
     - feedback_loops: 反馈循环机制
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据流水线复杂度调整设计深度：简单×1/中等×2/复杂×3"
+  minimum: "至少覆盖提交检查、接口测试、回归测试3个卡点"
+error_recovery_guidance:
+  on_failure: "流水线测试卡点失败时回退到测试策略调整范围"
+  retry_behavior: "调整测试范围或工具后重新配置卡点"
 ---
 # 持续测试实践
 

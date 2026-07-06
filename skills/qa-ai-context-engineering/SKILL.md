@@ -1,10 +1,10 @@
 ---
 name: qa-ai-context-engineering
-version: 1.5.0
+version: 1.5.1
 description: >-
   将前面所有分析步骤（需求解构、场景树、边界清单、风险评估等）打包成一个结构化的AI上下文包，确保AI在生成测试用例时拥有完整的业务上下文、功能上下文和技术上下文。当已经完成了需求分析、场景构建和深度设计，即将进入提示词生成阶段时，必须经过此步骤。上下文包的完整度直接决定了AI生成用例的质量——输入垃圾，输出也是垃圾。
 
-when_to_use: 用户说"分析这个功能"、"上下文工程"、"构建上下文"、"测试分析"、"需求分析"、"结构化"、"上下文不够"
+when_to_use: 用户说"上下文工程"、"构建上下文"、"上下文包"、"测试上下文"、"结构化上下文"、"上下文不够"、已完成需求解构和场景构建需要打包上下文时
 allowed-tools: Read Grep Glob WebFetch
 related_skills:
   upstream:
@@ -15,6 +15,8 @@ related_skills:
     - qa-state-transition
   downstream:
     - qa-ai-prompt-strategy
+references:
+  - references/output-template.md
 input_format:
   required:
     - name: 需求解构表
@@ -37,6 +39,8 @@ input_format:
       type: object
       description: 来自qa-risk-intuition的风险评估结果
 output_format:
+  traceability:
+    - 本技能打包上下文，不直接产出唯一ID；沿用上游需求ID（REQ-XXXX）和场景ID（SC-XXXX）
   structure:
     - context_package: 包含所有分析结果的AI上下文包
     - scenario_summary: 场景汇总
@@ -45,6 +49,10 @@ output_format:
 depth_requirement_quantification:
   reference_value: "根据分析结果复杂度调整上下文深度：简单x1/中等x2/复杂x3"
   minimum: "至少包含需求解构表、场景树、边界清单3个核心输入"
+categories: ['Development','Testing','AI']
+error_recovery_guidance:
+  on_failure: "上下文包不完整时回退到上游分析步骤补充"
+  retry_behavior: "补充缺失的上游输入后重新打包上下文"
 ---
 # AI 上下文工程
 

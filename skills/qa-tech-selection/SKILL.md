@@ -1,6 +1,6 @@
 ---
 name: qa-tech-selection
-version: 1.5.0
+version: 1.5.1
 description: >-
   当团队要选测试工具（自动化框架/性能工具/管理平台）、现有工具不能满足需求需要替换、或者公司要求做技术评估时使用此技能。通过多维度对比评估（功能覆盖/学习成本/社区活跃度/维护成本/扩展性）输出推荐方案和迁移实施建议。不要只看 Gartner 象限或者技术网红推荐——工具好不好取决于你的团队能力、技术栈和实际场景。每个推荐方案附带 POC 验证计划和风险提示。
 
@@ -11,6 +11,7 @@ related_skills:
     - qa-test-strategy-design    # 输入：测试策略确定需求
   downstream:
     - qa-ci-cd-testing           # 输出：技术选型用于CI/CD集成
+    - qa-test-automation-arch
 input_format:
   required:
     - name: 项目需求
@@ -24,11 +25,20 @@ input_format:
       type: string
       description: 工具和资源预算
 output_format:
+  traceability:
+    - 每次选型评估带唯一ID（SEL-XXXX）
   structure:
     - tech_evaluation: 技术评估报告
     - comparison_matrix: 对比矩阵
     - recommendation: 推荐方案
     - risk_assessment: 技术风险评估
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据选型复杂度调整评估深度：简单×1/中等×2/复杂×3"
+  minimum: "至少对比3个候选工具的核心维度"
+error_recovery_guidance:
+  on_failure: "工具选型遗漏关键维度时回退到测试策略补充需求"
+  retry_behavior: "补充需求后重新评估候选工具"
 ---
 # 测试技术选型
 

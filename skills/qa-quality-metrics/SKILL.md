@@ -1,6 +1,6 @@
 ---
 name: qa-quality-metrics
-version: 1.5.0
+version: 1.5.1
 description: >-
   当管理层问"质量到底怎么样"、需要量化质量数据来做决策、或者想建立质量看板来跟踪趋势时使用此技能。从过程质量（需求评审通过率/用例覆盖度）、结果质量（Bug 密度/线上事故数）、效率（测试周期/回归耗时）和健康度（自动化通过率/环境稳定性）四个维度设计度量指标。⚠️ 度量的目的不是打分，是发现问题趋势——如果只报喜不报忧，度量就没用了。
 
@@ -13,6 +13,9 @@ related_skills:
   downstream:
     - qa-retrospective           # 输出：度量数据用于复盘
     - qa-testability-advocacy    # 输出：质量趋势推动改进
+    - qa-stakeholder-communication
+    - qa-tech-debt-management
+    - qa-test-reporting
 input_format:
   required:
     - name: 测试数据
@@ -26,12 +29,21 @@ input_format:
       type: object
       description: 历史质量基线数据
 output_format:
+  traceability:
+    - 每份度量报告带唯一ID（METRIC-XXXX）
   structure:
     - quality_dashboard: 质量仪表盘
     - defect_density: 缺陷密度分析
     - test_coverage: 测试覆盖率
     - pass_fail_rate: 通过/失败率
     - trend_analysis: 质量趋势分析
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据度量维度调整指标深度：简单×1/中等×2/复杂×3"
+  minimum: "至少覆盖过程质量、结果质量、效率、健康度4个维度"
+error_recovery_guidance:
+  on_failure: "度量数据缺失时回退到测试执行和缺陷数据收集"
+  retry_behavior: "补齐数据后重新计算指标"
 ---
 # 质量度量体系
 

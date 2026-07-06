@@ -5,7 +5,9 @@
       "id": 1,
       "prompt": "请帮我测试这个电商项目：E:\\dingskills\\qa-test-skills\\examples\\ecommerce-project\\docs\\prd.md 生成完整的测试用例集和测试报告",
       "expected_output": "父工作流完整执行12步，产出一系列输出文件，包括需求评审报告、需求解构表、场景树、测试用例等",
-      "files": ["examples/ecommerce-project/docs/prd.md"],
+      "files": [
+        "examples/ecommerce-project/docs/prd.md"
+      ],
       "expectations": [
         "输出了需求评审报告",
         "输出了需求解构表",
@@ -19,16 +21,59 @@
         "最终输出是专家级结构化测试用例"
       ],
       "assertions": [
-        {"name": "需求评审报告已生成", "type": "file_exists", "target": "需求评审报告.md"},
-        {"name": "需求解构表已生成", "type": "file_exists", "target": "需求解构表.md"},
-        {"name": "场景树已生成", "type": "file_exists", "target": "场景树.md"},
-        {"name": "边界清单已生成", "type": "file_exists", "target": "边界清单.md"},
-        {"name": "AI提示词已生成", "type": "file_exists", "target": "AI提示词.md"},
-        {"name": "评审或补盲已执行", "type": "file_exists_or", "targets": ["用例评审报告.md", "盲区补偿用例.md"]},
-        {"name": "测试报告已生成", "type": "file_exists", "target": "测试报告.md"},
-        {"name": "用例包含TC唯一ID", "type": "content_match", "target": "TC_"},
-        {"name": "用例关联了需求ID", "type": "content_match", "target": "REQ-"},
-        {"name": "覆盖至少5个步骤输出", "type": "min_count", "target": 5}
+        {
+          "name": "需求评审报告已生成",
+          "type": "file_exists",
+          "target": "需求评审报告.md"
+        },
+        {
+          "name": "需求解构表已生成",
+          "type": "file_exists",
+          "target": "需求解构表.md"
+        },
+        {
+          "name": "场景树已生成",
+          "type": "file_exists",
+          "target": "场景树.md"
+        },
+        {
+          "name": "边界清单已生成",
+          "type": "file_exists",
+          "target": "边界清单.md"
+        },
+        {
+          "name": "AI提示词已生成",
+          "type": "file_exists",
+          "target": "AI提示词.md"
+        },
+        {
+          "name": "评审或补盲已执行",
+          "type": "file_exists_or",
+          "targets": [
+            "用例评审报告.md",
+            "盲区补偿用例.md"
+          ]
+        },
+        {
+          "name": "测试报告已生成",
+          "type": "file_exists",
+          "target": "测试报告.md"
+        },
+        {
+          "name": "用例包含TC唯一ID",
+          "type": "content_match",
+          "target": "TC_"
+        },
+        {
+          "name": "用例关联了需求ID",
+          "type": "content_match",
+          "target": "REQ-"
+        },
+        {
+          "name": "覆盖至少5个步骤输出",
+          "type": "min_count",
+          "target": 5
+        }
       ]
     },
     {
@@ -45,12 +90,39 @@
         "输出了结构化的需求解构表"
       ],
       "assertions": [
-        {"name": "显性需求≥3条", "type": "min_count", "target": 3, "keyword": "显性"},
-        {"name": "隐性需求≥2条", "type": "min_count", "target": 2, "keyword": "隐性"},
-        {"name": "衍生需求≥2条", "type": "min_count", "target": 2, "keyword": "衍生"},
-        {"name": "包含五维拆解", "type": "content_match", "target": "五维"},
-        {"name": "需求有唯一ID", "type": "content_match", "target": "REQ-"},
-        {"name": "覆盖了密码锁定场景", "type": "content_match", "target": "锁定"}
+        {
+          "name": "显性需求≥3条",
+          "type": "min_count",
+          "target": 3,
+          "keyword": "显性"
+        },
+        {
+          "name": "隐性需求≥2条",
+          "type": "min_count",
+          "target": 2,
+          "keyword": "隐性"
+        },
+        {
+          "name": "衍生需求≥2条",
+          "type": "min_count",
+          "target": 2,
+          "keyword": "衍生"
+        },
+        {
+          "name": "包含五维拆解",
+          "type": "content_match",
+          "target": "五维"
+        },
+        {
+          "name": "需求有唯一ID",
+          "type": "content_match",
+          "target": "REQ-"
+        },
+        {
+          "name": "覆盖了密码锁定场景",
+          "type": "content_match",
+          "target": "锁定"
+        }
       ]
     },
     {
@@ -69,15 +141,52 @@
         "输出了用例统计"
       ],
       "assertions": [
-        {"name": "有P0级别用例", "type": "content_match", "target": "P0"},
-        {"name": "有P1/P2级别用例", "type": "content_match", "target": "P1|P2"},
-        {"name": "用例编号符合TC规范", "type": "content_match", "target": "TC_"},
-        {"name": "包含预置条件", "type": "content_match", "target": "预置条件"},
-        {"name": "包含预期结果", "type": "content_match", "target": "预期结果"},
-        {"name": "用例总数≥5条", "type": "min_count", "target": 5, "keyword": "TC_"},
-        {"name": "覆盖正常登录", "type": "content_match", "target": "登录"},
-        {"name": "覆盖密码错误", "type": "content_match", "target": "密码错误"},
-        {"name": "覆盖账号锁定", "type": "content_match", "target": "锁定"}
+        {
+          "name": "有P0级别用例",
+          "type": "content_match",
+          "target": "P0"
+        },
+        {
+          "name": "有P1/P2级别用例",
+          "type": "content_match",
+          "target": "P1|P2"
+        },
+        {
+          "name": "用例编号符合TC规范",
+          "type": "content_match",
+          "target": "TC_"
+        },
+        {
+          "name": "包含预置条件",
+          "type": "content_match",
+          "target": "预置条件"
+        },
+        {
+          "name": "包含预期结果",
+          "type": "content_match",
+          "target": "预期结果"
+        },
+        {
+          "name": "用例总数≥5条",
+          "type": "min_count",
+          "target": 5,
+          "keyword": "TC_"
+        },
+        {
+          "name": "覆盖正常登录",
+          "type": "content_match",
+          "target": "登录"
+        },
+        {
+          "name": "覆盖密码错误",
+          "type": "content_match",
+          "target": "密码错误"
+        },
+        {
+          "name": "覆盖账号锁定",
+          "type": "content_match",
+          "target": "锁定"
+        }
       ]
     },
     {
@@ -94,12 +203,41 @@
         "问题标记使用了规范格式（如MISSING/WRONG/VAGUE等）"
       ],
       "assertions": [
-        {"name": "评审维度≥4个", "type": "min_count", "target": 4, "keyword": "评审"},
-        {"name": "每个维度有评分", "type": "content_match", "target": "/10"},
-        {"name": "识别出用例问题", "type": "content_match", "target": "问题"},
-        {"name": "有改进建议", "type": "content_match", "target": "改进"},
-        {"name": "有结构化报告框架", "type": "content_match", "target": "评审报告"},
-        {"name": "使用规范标记格式", "type": "content_match_or", "targets": ["MISSING", "WRONG", "VAGUE"]}
+        {
+          "name": "评审维度≥4个",
+          "type": "min_count",
+          "target": 4,
+          "keyword": "评审"
+        },
+        {
+          "name": "每个维度有评分",
+          "type": "content_match",
+          "target": "/10"
+        },
+        {
+          "name": "识别出用例问题",
+          "type": "content_match",
+          "target": "问题"
+        },
+        {
+          "name": "有改进建议",
+          "type": "content_match",
+          "target": "改进"
+        },
+        {
+          "name": "有结构化报告框架",
+          "type": "content_match",
+          "target": "评审报告"
+        },
+        {
+          "name": "使用规范标记格式",
+          "type": "content_match_or",
+          "targets": [
+            "MISSING",
+            "WRONG",
+            "VAGUE"
+          ]
+        }
       ]
     },
     {
@@ -115,14 +253,60 @@
         "输出了结构化的测试方案"
       ],
       "assertions": [
-        {"name": "覆盖POST接口", "type": "content_match", "target": "POST"},
-        {"name": "覆盖GET接口", "type": "content_match", "target": "GET"},
-        {"name": "覆盖DELETE接口", "type": "content_match", "target": "DELETE"},
-        {"name": "覆盖异常状态码", "type": "content_match_or", "targets": ["404", "400", "409", "403"]},
-        {"name": "有参数组合测试", "type": "content_match", "target": "参数"},
-        {"name": "有安全测试", "type": "content_match_or", "targets": ["鉴权", "认证", "token", "安全"]},
-        {"name": "有结构化方案", "type": "content_match", "target": "测试"},
-        {"name": "覆盖边界值", "type": "content_match_or", "targets": ["边界", "3-20", "6位"]}
+        {
+          "name": "覆盖POST接口",
+          "type": "content_match",
+          "target": "POST"
+        },
+        {
+          "name": "覆盖GET接口",
+          "type": "content_match",
+          "target": "GET"
+        },
+        {
+          "name": "覆盖DELETE接口",
+          "type": "content_match",
+          "target": "DELETE"
+        },
+        {
+          "name": "覆盖异常状态码",
+          "type": "content_match_or",
+          "targets": [
+            "404",
+            "400",
+            "409",
+            "403"
+          ]
+        },
+        {
+          "name": "有参数组合测试",
+          "type": "content_match",
+          "target": "参数"
+        },
+        {
+          "name": "有安全测试",
+          "type": "content_match_or",
+          "targets": [
+            "鉴权",
+            "认证",
+            "token",
+            "安全"
+          ]
+        },
+        {
+          "name": "有结构化方案",
+          "type": "content_match",
+          "target": "测试"
+        },
+        {
+          "name": "覆盖边界值",
+          "type": "content_match_or",
+          "targets": [
+            "边界",
+            "3-20",
+            "6位"
+          ]
+        }
       ]
     },
     {
@@ -138,14 +322,53 @@
         "输出了结构化的边界清单"
       ],
       "assertions": [
-        {"name": "覆盖用户名边界", "type": "content_match", "target": "用户名"},
-        {"name": "覆盖年龄边界", "type": "content_match", "target": "年龄"},
-        {"name": "覆盖邮箱边界", "type": "content_match", "target": "邮箱"},
-        {"name": "覆盖密码边界", "type": "content_match", "target": "密码"},
-        {"name": "覆盖邀请码边界", "type": "content_match", "target": "邀请码"},
-        {"name": "有边界值分析", "type": "content_match_or", "targets": ["3", "20", "18", "120", "8", "32"]},
-        {"name": "标注了风险等级", "type": "content_match", "target": "高|中|低"},
-        {"name": "有结构化输出", "type": "content_match", "target": "边界"}
+        {
+          "name": "覆盖用户名边界",
+          "type": "content_match",
+          "target": "用户名"
+        },
+        {
+          "name": "覆盖年龄边界",
+          "type": "content_match",
+          "target": "年龄"
+        },
+        {
+          "name": "覆盖邮箱边界",
+          "type": "content_match",
+          "target": "邮箱"
+        },
+        {
+          "name": "覆盖密码边界",
+          "type": "content_match",
+          "target": "密码"
+        },
+        {
+          "name": "覆盖邀请码边界",
+          "type": "content_match",
+          "target": "邀请码"
+        },
+        {
+          "name": "有边界值分析",
+          "type": "content_match_or",
+          "targets": [
+            "3",
+            "20",
+            "18",
+            "120",
+            "8",
+            "32"
+          ]
+        },
+        {
+          "name": "标注了风险等级",
+          "type": "content_match",
+          "target": "高|中|低"
+        },
+        {
+          "name": "有结构化输出",
+          "type": "content_match",
+          "target": "边界"
+        }
       ]
     },
     {
@@ -162,14 +385,46 @@
         "有根因推测"
       ],
       "assertions": [
-        {"name": "有Bug标题", "type": "content_match", "target": "Bug|缺陷|重复扣款|重复支付"},
-        {"name": "有严重度", "type": "content_match", "target": "严重|P0|P1|Critical|高"},
-        {"name": "有优先级", "type": "content_match", "target": "优先|P0|P1|高"},
-        {"name": "有复现步骤", "type": "content_match", "target": "步骤|复现"},
-        {"name": "有预期vs实际结果", "type": "content_match", "target": "预期|实际"},
-        {"name": "有影响范围", "type": "content_match", "target": "影响|范围"},
-        {"name": "有根因推测", "type": "content_match", "target": "根因|原因|推测"},
-        {"name": "有附件建议", "type": "content_match", "target": "日志|截图|附件"}
+        {
+          "name": "有Bug标题",
+          "type": "content_match",
+          "target": "Bug|缺陷|重复扣款|重复支付"
+        },
+        {
+          "name": "有严重度",
+          "type": "content_match",
+          "target": "严重|P0|P1|Critical|高"
+        },
+        {
+          "name": "有优先级",
+          "type": "content_match",
+          "target": "优先|P0|P1|高"
+        },
+        {
+          "name": "有复现步骤",
+          "type": "content_match",
+          "target": "步骤|复现"
+        },
+        {
+          "name": "有预期vs实际结果",
+          "type": "content_match",
+          "target": "预期|实际"
+        },
+        {
+          "name": "有影响范围",
+          "type": "content_match",
+          "target": "影响|范围"
+        },
+        {
+          "name": "有根因推测",
+          "type": "content_match",
+          "target": "根因|原因|推测"
+        },
+        {
+          "name": "有附件建议",
+          "type": "content_match",
+          "target": "日志|截图|附件"
+        }
       ]
     },
     {
@@ -185,11 +440,36 @@
         "提示词结构完整可用"
       ],
       "assertions": [
-        {"name": "有角色定义", "type": "content_match", "target": "角色|你是一位|你是一个"},
-        {"name": "有输出格式", "type": "content_match", "target": "格式|输出"},
-        {"name": "有约束条件", "type": "content_match", "target": "约束|限制|不得|必须"},
-        {"name": "引用了输入", "type": "content_match_or", "targets": ["密码", "锁定", "边界", "用户名"]},
-        {"name": "有结构化输出", "type": "content_match", "target": "TC_|P0|P1|用例"}
+        {
+          "name": "有角色定义",
+          "type": "content_match",
+          "target": "角色|你是一位|你是一个"
+        },
+        {
+          "name": "有输出格式",
+          "type": "content_match",
+          "target": "格式|输出"
+        },
+        {
+          "name": "有约束条件",
+          "type": "content_match",
+          "target": "约束|限制|不得|必须"
+        },
+        {
+          "name": "引用了输入",
+          "type": "content_match_or",
+          "targets": [
+            "密码",
+            "锁定",
+            "边界",
+            "用户名"
+          ]
+        },
+        {
+          "name": "有结构化输出",
+          "type": "content_match",
+          "target": "TC_|P0|P1|用例"
+        }
       ]
     },
     {
@@ -205,12 +485,37 @@
         "有风险评估或资源建议"
       ],
       "assertions": [
-        {"name": "至少3个回归级别", "type": "min_count", "target": 3, "keyword": "回归"},
-        {"name": "有冒烟级别", "type": "content_match", "target": "冒烟"},
-        {"name": "有核心级别", "type": "content_match", "target": "核心"},
-        {"name": "有全量级别", "type": "content_match", "target": "全量"},
-        {"name": "有变更分析", "type": "content_match", "target": "变更|新增|修复"},
-        {"name": "有执行建议", "type": "content_match", "target": "建议|推荐|优先"}
+        {
+          "name": "至少3个回归级别",
+          "type": "min_count",
+          "target": 3,
+          "keyword": "回归"
+        },
+        {
+          "name": "有冒烟级别",
+          "type": "content_match",
+          "target": "冒烟"
+        },
+        {
+          "name": "有核心级别",
+          "type": "content_match",
+          "target": "核心"
+        },
+        {
+          "name": "有全量级别",
+          "type": "content_match",
+          "target": "全量"
+        },
+        {
+          "name": "有变更分析",
+          "type": "content_match",
+          "target": "变更|新增|修复"
+        },
+        {
+          "name": "有执行建议",
+          "type": "content_match",
+          "target": "建议|推荐|优先"
+        }
       ]
     },
     {
@@ -226,11 +531,41 @@
         "关注了边缘场景或用户体验"
       ],
       "assertions": [
-        {"name": "有测试任务书", "type": "content_match_or", "targets": ["charter", "任务书", "使命"]},
-        {"name": "有探索方法", "type": "content_match", "target": "漫游|探索|角色扮演|失败路径|对比"},
-        {"name": "覆盖多个维度", "type": "min_count", "target": 3, "keyword": "维度|区域|方面"},
-        {"name": "有会话模板", "type": "content_match", "target": "会话|session|记录|笔记"},
-        {"name": "关注边缘场景", "type": "content_match_or", "targets": ["边缘", "体验", "异常", "边界"]}
+        {
+          "name": "有测试任务书",
+          "type": "content_match_or",
+          "targets": [
+            "charter",
+            "任务书",
+            "使命"
+          ]
+        },
+        {
+          "name": "有探索方法",
+          "type": "content_match",
+          "target": "漫游|探索|角色扮演|失败路径|对比"
+        },
+        {
+          "name": "覆盖多个维度",
+          "type": "min_count",
+          "target": 3,
+          "keyword": "维度|区域|方面"
+        },
+        {
+          "name": "有会话模板",
+          "type": "content_match",
+          "target": "会话|session|记录|笔记"
+        },
+        {
+          "name": "关注边缘场景",
+          "type": "content_match_or",
+          "targets": [
+            "边缘",
+            "体验",
+            "异常",
+            "边界"
+          ]
+        }
       ]
     },
     {
@@ -247,12 +582,37 @@
         "场景数量≥6个"
       ],
       "assertions": [
-        {"name": "有主路径", "type": "content_match", "target": "主路径|Happy|正常"},
-        {"name": "有分支路径", "type": "content_match", "target": "分支|备选|Alternative"},
-        {"name": "有异常路径", "type": "content_match", "target": "异常|Exception|错误"},
-        {"name": "有业务规则", "type": "content_match", "target": "业务规则|规则"},
-        {"name": "场景数≥6", "type": "min_count", "target": 6, "keyword": "SC-"},
-        {"name": "有层次结构", "type": "content_match", "target": "├|└|│"}
+        {
+          "name": "有主路径",
+          "type": "content_match",
+          "target": "主路径|Happy|正常"
+        },
+        {
+          "name": "有分支路径",
+          "type": "content_match",
+          "target": "分支|备选|Alternative"
+        },
+        {
+          "name": "有异常路径",
+          "type": "content_match",
+          "target": "异常|Exception|错误"
+        },
+        {
+          "name": "有业务规则",
+          "type": "content_match",
+          "target": "业务规则|规则"
+        },
+        {
+          "name": "场景数≥6",
+          "type": "min_count",
+          "target": 6,
+          "keyword": "SC-"
+        },
+        {
+          "name": "有层次结构",
+          "type": "content_match",
+          "target": "├|└|│"
+        }
       ]
     },
     {
@@ -268,14 +628,46 @@
         "输出了结构化补盲报告"
       ],
       "assertions": [
-        {"name": "覆盖时序盲区", "type": "content_match", "target": "时序"},
-        {"name": "覆盖并发盲区", "type": "content_match", "target": "并发"},
-        {"name": "覆盖资源盲区", "type": "content_match", "target": "资源"},
-        {"name": "覆盖状态盲区", "type": "content_match", "target": "状态"},
-        {"name": "覆盖数据盲区", "type": "content_match", "target": "数据"},
-        {"name": "覆盖第三方盲区", "type": "content_match", "target": "第三方"},
-        {"name": "有风险标注", "type": "content_match", "target": "高|中|低"},
-        {"name": "统一补盲编号", "type": "content_match", "target": "BS_|BS-"}
+        {
+          "name": "覆盖时序盲区",
+          "type": "content_match",
+          "target": "时序"
+        },
+        {
+          "name": "覆盖并发盲区",
+          "type": "content_match",
+          "target": "并发"
+        },
+        {
+          "name": "覆盖资源盲区",
+          "type": "content_match",
+          "target": "资源"
+        },
+        {
+          "name": "覆盖状态盲区",
+          "type": "content_match",
+          "target": "状态"
+        },
+        {
+          "name": "覆盖数据盲区",
+          "type": "content_match",
+          "target": "数据"
+        },
+        {
+          "name": "覆盖第三方盲区",
+          "type": "content_match",
+          "target": "第三方"
+        },
+        {
+          "name": "有风险标注",
+          "type": "content_match",
+          "target": "高|中|低"
+        },
+        {
+          "name": "统一补盲编号",
+          "type": "content_match",
+          "target": "BS_|BS-"
+        }
       ]
     },
     {
@@ -291,12 +683,36 @@
         "结合了项目特点和风险"
       ],
       "assertions": [
-        {"name": "有测试范围", "type": "content_match", "target": "范围|覆盖"},
-        {"name": "有分层策略", "type": "content_match", "target": "分层|单元|接口|端到端|UI|E2E"},
-        {"name": "有资源分配", "type": "content_match", "target": "资源|人员|分配"},
-        {"name": "有质量门禁", "type": "content_match", "target": "门禁|准入|准出|标准"},
-        {"name": "有排期建议", "type": "content_match", "target": "工期|排期|阶段|迭代|周期"},
-        {"name": "结合了项目特点", "type": "content_match", "target": "B2B|企业|采购|供应商"}
+        {
+          "name": "有测试范围",
+          "type": "content_match",
+          "target": "范围|覆盖"
+        },
+        {
+          "name": "有分层策略",
+          "type": "content_match",
+          "target": "分层|单元|接口|端到端|UI|E2E"
+        },
+        {
+          "name": "有资源分配",
+          "type": "content_match",
+          "target": "资源|人员|分配"
+        },
+        {
+          "name": "有质量门禁",
+          "type": "content_match",
+          "target": "门禁|准入|准出|标准"
+        },
+        {
+          "name": "有排期建议",
+          "type": "content_match",
+          "target": "工期|排期|阶段|迭代|周期"
+        },
+        {
+          "name": "结合了项目特点",
+          "type": "content_match",
+          "target": "B2B|企业|采购|供应商"
+        }
       ]
     },
     {
@@ -312,11 +728,32 @@
         "有状态转换图或表格"
       ],
       "assertions": [
-        {"name": "覆盖7种状态", "type": "min_count", "target": 5, "keyword": "待付|待发|已发|完成|取消|退款"},
-        {"name": "有合法转换", "type": "content_match", "target": "合法|正常|正向|允许"},
-        {"name": "有非法转换", "type": "content_match", "target": "非法|不允许|禁止|拒绝"},
-        {"name": "有触发条件", "type": "content_match", "target": "触发|条件|条件"},
-        {"name": "有验证点", "type": "content_match", "target": "验证|检查|确认"}
+        {
+          "name": "覆盖7种状态",
+          "type": "min_count",
+          "target": 5,
+          "keyword": "待付|待发|已发|完成|取消|退款"
+        },
+        {
+          "name": "有合法转换",
+          "type": "content_match",
+          "target": "合法|正常|正向|允许"
+        },
+        {
+          "name": "有非法转换",
+          "type": "content_match",
+          "target": "非法|不允许|禁止|拒绝"
+        },
+        {
+          "name": "有触发条件",
+          "type": "content_match",
+          "target": "触发|条件|条件"
+        },
+        {
+          "name": "有验证点",
+          "type": "content_match",
+          "target": "验证|检查|确认"
+        }
       ]
     },
     {
@@ -332,11 +769,37 @@
         "说明了简化策略"
       ],
       "assertions": [
-        {"name": "使用简化方法", "type": "content_match_or", "targets": ["Pairwise", "正交", "判定表", "allpairs"]},
-        {"name": "组合数<27", "type": "min_count", "target": 5, "keyword": "组合|用例"},
-        {"name": "有组合列表", "type": "content_match", "target": "|├|└|TC-"},
-        {"name": "有覆盖分析", "type": "content_match", "target": "覆盖"},
-        {"name": "有策略说明", "type": "content_match", "target": "策略|方法|原理"}
+        {
+          "name": "使用简化方法",
+          "type": "content_match_or",
+          "targets": [
+            "Pairwise",
+            "正交",
+            "判定表",
+            "allpairs"
+          ]
+        },
+        {
+          "name": "组合数<27",
+          "type": "min_count",
+          "target": 5,
+          "keyword": "组合|用例"
+        },
+        {
+          "name": "有组合列表",
+          "type": "content_match",
+          "target": "|├|└|TC-"
+        },
+        {
+          "name": "有覆盖分析",
+          "type": "content_match",
+          "target": "覆盖"
+        },
+        {
+          "name": "有策略说明",
+          "type": "content_match",
+          "target": "策略|方法|原理"
+        }
       ]
     },
     {
@@ -352,12 +815,36 @@
         "输出了结构化的度量矩阵"
       ],
       "assertions": [
-        {"name": "覆盖过程质量", "type": "content_match", "target": "过程"},
-        {"name": "覆盖结果质量", "type": "content_match", "target": "结果"},
-        {"name": "覆盖效率维度", "type": "content_match", "target": "效率"},
-        {"name": "覆盖健康度", "type": "content_match", "target": "健康|自动化通过|环境"},
-        {"name": "有计算方法", "type": "content_match", "target": "计算|公式|率|比|数"},
-        {"name": "有目标值", "type": "content_match", "target": "目标|≥|≤|%"}
+        {
+          "name": "覆盖过程质量",
+          "type": "content_match",
+          "target": "过程"
+        },
+        {
+          "name": "覆盖结果质量",
+          "type": "content_match",
+          "target": "结果"
+        },
+        {
+          "name": "覆盖效率维度",
+          "type": "content_match",
+          "target": "效率"
+        },
+        {
+          "name": "覆盖健康度",
+          "type": "content_match",
+          "target": "健康|自动化通过|环境"
+        },
+        {
+          "name": "有计算方法",
+          "type": "content_match",
+          "target": "计算|公式|率|比|数"
+        },
+        {
+          "name": "有目标值",
+          "type": "content_match",
+          "target": "目标|≥|≤|%"
+        }
       ]
     },
     {
@@ -374,12 +861,36 @@
         "有测试要点清单"
       ],
       "assertions": [
-        {"name": "覆盖功能测试", "type": "content_match", "target": "功能"},
-        {"name": "覆盖中断测试", "type": "content_match", "target": "中断|来电|短信|通知|低电量"},
-        {"name": "覆盖弱网测试", "type": "content_match", "target": "弱网|WiFi|4G|离线|网络"},
-        {"name": "覆盖兼容性测试", "type": "content_match", "target": "兼容|机型|iOS|Android|系统版本"},
-        {"name": "覆盖性能测试", "type": "content_match", "target": "性能|启动|内存|帧率|电量"},
-        {"name": "有测试要点清单", "type": "content_match", "target": "[ ]|├|└|清单|列表"}
+        {
+          "name": "覆盖功能测试",
+          "type": "content_match",
+          "target": "功能"
+        },
+        {
+          "name": "覆盖中断测试",
+          "type": "content_match",
+          "target": "中断|来电|短信|通知|低电量"
+        },
+        {
+          "name": "覆盖弱网测试",
+          "type": "content_match",
+          "target": "弱网|WiFi|4G|离线|网络"
+        },
+        {
+          "name": "覆盖兼容性测试",
+          "type": "content_match",
+          "target": "兼容|机型|iOS|Android|系统版本"
+        },
+        {
+          "name": "覆盖性能测试",
+          "type": "content_match",
+          "target": "性能|启动|内存|帧率|电量"
+        },
+        {
+          "name": "有测试要点清单",
+          "type": "content_match",
+          "target": "[ ]|├|└|清单|列表"
+        }
       ]
     },
     {
@@ -395,11 +906,31 @@
         "输出结构清晰"
       ],
       "assertions": [
-        {"name": "有事实核查", "type": "content_match", "target": "事实|需求ID|业务规则|存在"},
-        {"name": "有一致性检查", "type": "content_match", "target": "一致|矛盾|冲突"},
-        {"name": "有可执行性检查", "type": "content_match", "target": "可执行|预置条件|可观测"},
-        {"name": "有来源追溯", "type": "content_match", "target": "追溯|REQ|需求"},
-        {"name": "有总体结论", "type": "content_match", "target": "通过|不通过|合格|验证"}
+        {
+          "name": "有事实核查",
+          "type": "content_match",
+          "target": "事实|需求ID|业务规则|存在"
+        },
+        {
+          "name": "有一致性检查",
+          "type": "content_match",
+          "target": "一致|矛盾|冲突"
+        },
+        {
+          "name": "有可执行性检查",
+          "type": "content_match",
+          "target": "可执行|预置条件|可观测"
+        },
+        {
+          "name": "有来源追溯",
+          "type": "content_match",
+          "target": "追溯|REQ|需求"
+        },
+        {
+          "name": "有总体结论",
+          "type": "content_match",
+          "target": "通过|不通过|合格|验证"
+        }
       ]
     },
     {
@@ -415,11 +946,31 @@
         "报告面向管理层格式"
       ],
       "assertions": [
-        {"name": "有执行概况", "type": "content_match", "target": "执行|概况|总用例|通过"},
-        {"name": "有缺陷分析", "type": "content_match", "target": "缺陷|Bug|P0|P1|分布"},
-        {"name": "有风险评估", "type": "content_match", "target": "风险"},
-        {"name": "有发布建议", "type": "content_match", "target": "发布|建议|结论"},
-        {"name": "面向管理层", "type": "content_match", "target": "报告|概况|摘要|总结"}
+        {
+          "name": "有执行概况",
+          "type": "content_match",
+          "target": "执行|概况|总用例|通过"
+        },
+        {
+          "name": "有缺陷分析",
+          "type": "content_match",
+          "target": "缺陷|Bug|P0|P1|分布"
+        },
+        {
+          "name": "有风险评估",
+          "type": "content_match",
+          "target": "风险"
+        },
+        {
+          "name": "有发布建议",
+          "type": "content_match",
+          "target": "发布|建议|结论"
+        },
+        {
+          "name": "面向管理层",
+          "type": "content_match",
+          "target": "报告|概况|摘要|总结"
+        }
       ]
     },
     {
@@ -436,12 +987,36 @@
         "输出结构清晰"
       ],
       "assertions": [
-        {"name": "功能测试", "type": "content_match", "target": "功能|任务|意图"},
-        {"name": "安全测试", "type": "content_match", "target": "注入|安全|敏感"},
-        {"name": "可控性测试", "type": "content_match", "target": "可控|HITL|终止|人工|速率"},
-        {"name": "幻觉测试", "type": "content_match", "target": "幻觉|事实|RAG|来源"},
-        {"name": "有测试要点", "type": "content_match", "target": "[ ]|├|└|要点"},
-        {"name": "结构清晰", "type": "content_match", "target": "维度|方面"}
+        {
+          "name": "功能测试",
+          "type": "content_match",
+          "target": "功能|任务|意图"
+        },
+        {
+          "name": "安全测试",
+          "type": "content_match",
+          "target": "注入|安全|敏感"
+        },
+        {
+          "name": "可控性测试",
+          "type": "content_match",
+          "target": "可控|HITL|终止|人工|速率"
+        },
+        {
+          "name": "幻觉测试",
+          "type": "content_match",
+          "target": "幻觉|事实|RAG|来源"
+        },
+        {
+          "name": "有测试要点",
+          "type": "content_match",
+          "target": "[ ]|├|└|要点"
+        },
+        {
+          "name": "结构清晰",
+          "type": "content_match",
+          "target": "维度|方面"
+        }
       ]
     },
     {
@@ -457,11 +1032,31 @@
         "输出结构清晰的估算报告"
       ],
       "assertions": [
-        {"name": "有功能点", "type": "content_match", "target": "功能点|模块"},
-        {"name": "有阶段人天", "type": "content_match", "target": "人天|人时|天"},
-        {"name": "有总人天", "type": "content_match", "target": "总计|合计|总人天"},
-        {"name": "有风险预留", "type": "content_match", "target": "风险|预留|缓冲"},
-        {"name": "有置信区间", "type": "content_match", "target": "置信|区间|±"}
+        {
+          "name": "有功能点",
+          "type": "content_match",
+          "target": "功能点|模块"
+        },
+        {
+          "name": "有阶段人天",
+          "type": "content_match",
+          "target": "人天|人时|天"
+        },
+        {
+          "name": "有总人天",
+          "type": "content_match",
+          "target": "总计|合计|总人天"
+        },
+        {
+          "name": "有风险预留",
+          "type": "content_match",
+          "target": "风险|预留|缓冲"
+        },
+        {
+          "name": "有置信区间",
+          "type": "content_match",
+          "target": "置信|区间|±"
+        }
       ]
     },
     {
@@ -477,11 +1072,31 @@
         "输出了结构化的评估报告"
       ],
       "assertions": [
-        {"name": "有债务分类", "type": "content_match", "target": "债务|维护|架构|数据|技能"},
-        {"name": "有利息评估", "type": "content_match", "target": "利息|成本|维护"},
-        {"name": "有本金评估", "type": "content_match", "target": "本金|重写"},
-        {"name": "有还款规划", "type": "content_match", "target": "还款|规划|阶段"},
-        {"name": "有报告结构", "type": "content_match", "target": "评估|报告|建议"}
+        {
+          "name": "有债务分类",
+          "type": "content_match",
+          "target": "债务|维护|架构|数据|技能"
+        },
+        {
+          "name": "有利息评估",
+          "type": "content_match",
+          "target": "利息|成本|维护"
+        },
+        {
+          "name": "有本金评估",
+          "type": "content_match",
+          "target": "本金|重写"
+        },
+        {
+          "name": "有还款规划",
+          "type": "content_match",
+          "target": "还款|规划|阶段"
+        },
+        {
+          "name": "有报告结构",
+          "type": "content_match",
+          "target": "评估|报告|建议"
+        }
       ]
     },
     {
@@ -496,11 +1111,31 @@
         "有输入质量评分"
       ],
       "assertions": [
-        {"name": "有验证结论", "type": "content_match", "target": "验证|结果|评分"},
-        {"name": "有质量评分", "type": "content_match", "target": "/10|1-10|评分"},
-        {"name": "有缺失信息", "type": "content_match", "target": "缺失|不足|追问"},
-        {"name": "有评审报告", "type": "content_match", "target": "评审"},
-        {"name": "格式结构化", "type": "content_match", "target": "├|└|清单|列表"}
+        {
+          "name": "有验证结论",
+          "type": "content_match",
+          "target": "验证|结果|评分"
+        },
+        {
+          "name": "有质量评分",
+          "type": "content_match",
+          "target": "/10|1-10|评分"
+        },
+        {
+          "name": "有缺失信息",
+          "type": "content_match",
+          "target": "缺失|不足|追问"
+        },
+        {
+          "name": "有评审报告",
+          "type": "content_match",
+          "target": "评审"
+        },
+        {
+          "name": "格式结构化",
+          "type": "content_match",
+          "target": "├|└|清单|列表"
+        }
       ]
     },
     {
@@ -515,11 +1150,32 @@
         "每个风险点有缓解建议"
       ],
       "assertions": [
-        {"name": "风险点≥4个", "type": "min_count", "target": 4, "keyword": "风险|Risk"},
-        {"name": "有风险矩阵", "type": "content_match", "target": "矩阵|概率|影响"},
-        {"name": "有风险等级标注", "type": "content_match", "target": "高|中|低"},
-        {"name": "有缓解建议", "type": "content_match", "target": "缓解|建议|对策"},
-        {"name": "结构化输出", "type": "content_match", "target": "├|└|清单|列表"}
+        {
+          "name": "风险点≥4个",
+          "type": "min_count",
+          "target": 4,
+          "keyword": "风险|Risk"
+        },
+        {
+          "name": "有风险矩阵",
+          "type": "content_match",
+          "target": "矩阵|概率|影响"
+        },
+        {
+          "name": "有风险等级标注",
+          "type": "content_match",
+          "target": "高|中|低"
+        },
+        {
+          "name": "有缓解建议",
+          "type": "content_match",
+          "target": "缓解|建议|对策"
+        },
+        {
+          "name": "结构化输出",
+          "type": "content_match",
+          "target": "├|└|清单|列表"
+        }
       ]
     },
     {
@@ -534,11 +1190,32 @@
         "输出了结构化清单"
       ],
       "assertions": [
-        {"name": "有思维盲区", "type": "content_match", "target": "盲区|遗漏|忽略|没想到"},
-        {"name": "有假设挑战", "type": "content_match", "target": "假设|以为|默认|如果"},
-        {"name": "有追问≥4条", "type": "min_count", "target": 4, "keyword": "问题|追问|clarify"},
-        {"name": "覆盖锁定场景", "type": "content_match", "target": "锁定|30分钟|5次"},
-        {"name": "有结构化输出", "type": "content_match", "target": "├|└|清单|列表"}
+        {
+          "name": "有思维盲区",
+          "type": "content_match",
+          "target": "盲区|遗漏|忽略|没想到"
+        },
+        {
+          "name": "有假设挑战",
+          "type": "content_match",
+          "target": "假设|以为|默认|如果"
+        },
+        {
+          "name": "有追问≥4条",
+          "type": "min_count",
+          "target": 4,
+          "keyword": "问题|追问|clarify"
+        },
+        {
+          "name": "覆盖锁定场景",
+          "type": "content_match",
+          "target": "锁定|30分钟|5次"
+        },
+        {
+          "name": "有结构化输出",
+          "type": "content_match",
+          "target": "├|└|清单|列表"
+        }
       ]
     },
     {
@@ -553,11 +1230,32 @@
         "有严重度分级标准"
       ],
       "assertions": [
-        {"name": "覆盖多路信号", "type": "min_count", "target": 3, "keyword": "信号|观察|关注"},
-        {"name": "有观察模板", "type": "content_match", "target": "模板|记录"},
-        {"name": "有状态流转", "type": "content_match", "target": "状态|流转|生命周期"},
-        {"name": "有严重度分级", "type": "content_match", "target": "严重|P0|P1|P2|Critical"},
-        {"name": "有时效要求", "type": "content_match", "target": "时效|小时|天|时限"}
+        {
+          "name": "覆盖多路信号",
+          "type": "min_count",
+          "target": 3,
+          "keyword": "信号|观察|关注"
+        },
+        {
+          "name": "有观察模板",
+          "type": "content_match",
+          "target": "模板|记录"
+        },
+        {
+          "name": "有状态流转",
+          "type": "content_match",
+          "target": "状态|流转|生命周期"
+        },
+        {
+          "name": "有严重度分级",
+          "type": "content_match",
+          "target": "严重|P0|P1|P2|Critical"
+        },
+        {
+          "name": "有时效要求",
+          "type": "content_match",
+          "target": "时效|小时|天|时限"
+        }
       ]
     },
     {
@@ -572,11 +1270,38 @@
         "有反馈机制设计"
       ],
       "assertions": [
-        {"name": "至少3个阶段", "type": "min_count", "target": 3, "keyword": "阶段|门禁|层"},
-        {"name": "有门禁阈值", "type": "content_match", "target": "≥|通过率|%|阈值"},
-        {"name": "有工具集成", "type": "content_match_or", "targets": ["GitLab", "Jenkins", "工具", "集成", "插件"]},
-        {"name": "有反馈机制", "type": "content_match", "target": "反馈|告警|通知"},
-        {"name": "有分层设计", "type": "content_match", "target": "分层|金字塔|提交|合码|夜间"}
+        {
+          "name": "至少3个阶段",
+          "type": "min_count",
+          "target": 3,
+          "keyword": "阶段|门禁|层"
+        },
+        {
+          "name": "有门禁阈值",
+          "type": "content_match",
+          "target": "≥|通过率|%|阈值"
+        },
+        {
+          "name": "有工具集成",
+          "type": "content_match_or",
+          "targets": [
+            "GitLab",
+            "Jenkins",
+            "工具",
+            "集成",
+            "插件"
+          ]
+        },
+        {
+          "name": "有反馈机制",
+          "type": "content_match",
+          "target": "反馈|告警|通知"
+        },
+        {
+          "name": "有分层设计",
+          "type": "content_match",
+          "target": "分层|金字塔|提交|合码|夜间"
+        }
       ]
     },
     {
@@ -591,11 +1316,36 @@
         "有回滚条件"
       ],
       "assertions": [
-        {"name": "有可测试性评审", "type": "content_match", "target": "可测试|可测"},
-        {"name": "有开发阶段计划", "type": "content_match", "target": "开发|单元|测试桩|契约"},
-        {"name": "有灰度监控指标", "type": "content_match", "target": "灰度|监控|指标"},
-        {"name": "有回滚条件", "type": "content_match", "target": "回滚|触发|条件"},
-        {"name": "覆盖全生命周期", "type": "content_match_or", "targets": ["左移", "右移", "需求", "生产"]}
+        {
+          "name": "有可测试性评审",
+          "type": "content_match",
+          "target": "可测试|可测"
+        },
+        {
+          "name": "有开发阶段计划",
+          "type": "content_match",
+          "target": "开发|单元|测试桩|契约"
+        },
+        {
+          "name": "有灰度监控指标",
+          "type": "content_match",
+          "target": "灰度|监控|指标"
+        },
+        {
+          "name": "有回滚条件",
+          "type": "content_match",
+          "target": "回滚|触发|条件"
+        },
+        {
+          "name": "覆盖全生命周期",
+          "type": "content_match_or",
+          "targets": [
+            "左移",
+            "右移",
+            "需求",
+            "生产"
+          ]
+        }
       ]
     },
     {
@@ -610,11 +1360,37 @@
         "有数据工厂架构建议"
       ],
       "assertions": [
-        {"name": "有造数策略", "type": "content_match", "target": "构造|造数|生成|批量"},
-        {"name": "有多状态覆盖", "type": "min_count", "target": 3, "keyword": "待付|待发|已发|完成|取消"},
-        {"name": "有脱敏方案", "type": "content_match", "target": "脱敏|掩码|替换|加密"},
-        {"name": "有数据架构", "type": "content_match", "target": "数据工厂|架构|策略"},
-        {"name": "有合规说明", "type": "content_match_or", "targets": ["合规", "GDPR", "个保法", "等保"]}
+        {
+          "name": "有造数策略",
+          "type": "content_match",
+          "target": "构造|造数|生成|批量"
+        },
+        {
+          "name": "有多状态覆盖",
+          "type": "min_count",
+          "target": 3,
+          "keyword": "待付|待发|已发|完成|取消"
+        },
+        {
+          "name": "有脱敏方案",
+          "type": "content_match",
+          "target": "脱敏|掩码|替换|加密"
+        },
+        {
+          "name": "有数据架构",
+          "type": "content_match",
+          "target": "数据工厂|架构|策略"
+        },
+        {
+          "name": "有合规说明",
+          "type": "content_match_or",
+          "targets": [
+            "合规",
+            "GDPR",
+            "个保法",
+            "等保"
+          ]
+        }
       ]
     },
     {
@@ -629,11 +1405,32 @@
         "有维护策略"
       ],
       "assertions": [
-        {"name": "有工具对比", "type": "min_count", "target": 3, "keyword": "Selenium|Cypress|Playwright|工具|框架"},
-        {"name": "有选型推荐", "type": "content_match", "target": "推荐|建议|选择"},
-        {"name": "有分层架构", "type": "content_match", "target": "分层|单元|接口|UI|Page Object|PO"},
-        {"name": "有数据驱动", "type": "content_match", "target": "数据驱动|参数化|Data"},
-        {"name": "有维护策略", "type": "content_match", "target": "维护|重构|Flaky|稳定"}
+        {
+          "name": "有工具对比",
+          "type": "min_count",
+          "target": 3,
+          "keyword": "Selenium|Cypress|Playwright|工具|框架"
+        },
+        {
+          "name": "有选型推荐",
+          "type": "content_match",
+          "target": "推荐|建议|选择"
+        },
+        {
+          "name": "有分层架构",
+          "type": "content_match",
+          "target": "分层|单元|接口|UI|Page Object|PO"
+        },
+        {
+          "name": "有数据驱动",
+          "type": "content_match",
+          "target": "数据驱动|参数化|Data"
+        },
+        {
+          "name": "有维护策略",
+          "type": "content_match",
+          "target": "维护|重构|Flaky|稳定"
+        }
       ]
     },
     {
@@ -648,11 +1445,31 @@
         "有培训计划"
       ],
       "assertions": [
-        {"name": "有根因分析", "type": "content_match", "target": "根因|5Why|鱼骨|原因"},
-        {"name": "有漏测分析", "type": "content_match", "target": "漏测|遗漏|缺口"},
-        {"name": "有Action Items", "type": "content_match", "target": "Action|改进|下一步|措施"},
-        {"name": "有培训计划", "type": "content_match", "target": "培训|新人|成长|技能矩阵"},
-        {"name": "有追踪表", "type": "content_match", "target": "追踪|追踪|负责人|deadline"}
+        {
+          "name": "有根因分析",
+          "type": "content_match",
+          "target": "根因|5Why|鱼骨|原因"
+        },
+        {
+          "name": "有漏测分析",
+          "type": "content_match",
+          "target": "漏测|遗漏|缺口"
+        },
+        {
+          "name": "有Action Items",
+          "type": "content_match",
+          "target": "Action|改进|下一步|措施"
+        },
+        {
+          "name": "有培训计划",
+          "type": "content_match",
+          "target": "培训|新人|成长|技能矩阵"
+        },
+        {
+          "name": "有追踪表",
+          "type": "content_match",
+          "target": "追踪|追踪|负责人|deadline"
+        }
       ]
     },
     {
@@ -667,11 +1484,451 @@
         "有团队建设规划"
       ],
       "assertions": [
-        {"name": "有执行概况", "type": "content_match", "target": "执行|概况|总用例|通过率"},
-        {"name": "有缺陷分布", "type": "content_match", "target": "P0|P1|分布|分析"},
-        {"name": "有发布建议", "type": "content_match", "target": "发布|建议|结论"},
-        {"name": "有团队建设", "type": "content_match", "target": "团队|能力|招聘|建设"},
-        {"name": "有数据可视化", "type": "content_match", "target": "%|率|趋势|对比"}
+        {
+          "name": "有执行概况",
+          "type": "content_match",
+          "target": "执行|概况|总用例|通过率"
+        },
+        {
+          "name": "有缺陷分布",
+          "type": "content_match",
+          "target": "P0|P1|分布|分析"
+        },
+        {
+          "name": "有发布建议",
+          "type": "content_match",
+          "target": "发布|建议|结论"
+        },
+        {
+          "name": "有团队建设",
+          "type": "content_match",
+          "target": "团队|能力|招聘|建设"
+        },
+        {
+          "name": "有数据可视化",
+          "type": "content_match",
+          "target": "%|率|趋势|对比"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "skill": "qa-input-validation",
+      "prompt": "帮我测试这个项目：[上传一个只写了'登录功能'四个字、无任何细节的文档] 生成完整测试用例",
+      "expected_output": "输入验证报告，判定输入不完整，返回缺失信息清单和追问问题，要求用户补充后再启动工作流",
+      "files": [],
+      "expectations": [
+        "判定输入不完整（fail 或 need_more_info）",
+        "输出了缺失信息清单",
+        "输出了追问/澄清问题",
+        "未直接跳过验证生成用例",
+        "给出了输入质量评分"
+      ],
+      "assertions": [
+        {
+          "name": "判定输入不完整",
+          "type": "content_match_or",
+          "targets": [
+            "fail",
+            "need_more_info",
+            "不通过",
+            "信息不足"
+          ]
+        },
+        {
+          "name": "输出了缺失信息清单",
+          "type": "content_match_or",
+          "targets": [
+            "缺失",
+            "缺少",
+            "missing"
+          ]
+        },
+        {
+          "name": "输出了追问问题",
+          "type": "content_match_or",
+          "targets": [
+            "追问",
+            "澄清",
+            "clarification",
+            "请问"
+          ]
+        },
+        {
+          "name": "未直接生成用例",
+          "type": "content_match",
+          "target": "补充"
+        },
+        {
+          "name": "给出了输入质量评分",
+          "type": "content_match_or",
+          "targets": [
+            "质量评分",
+            "quality_score",
+            "评分"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "skill": "qa-output-validation",
+      "prompt": "对以下AI生成的测试用例集做最终输出验证：用例集包含 TC_AUTH_LOGIN_001（关联 REQ-AUTH-999）、TC_CART_ADD_001（无关联需求ID）、TC_ORDER_PAY_001（步骤为'执行支付操作'过于模糊）。请做事实核查、一致性检查、可执行性验证、来源追溯。",
+      "expected_output": "输出验证报告，判定 fail，列出问题清单：REQ-AUTH-999 不存在、TC_CART_ADD_001 缺追溯、TC_ORDER_PAY_001 步骤不可执行",
+      "files": [],
+      "expectations": [
+        "判定验证不通过（fail）",
+        "识别出 REQ-AUTH-999 不存在的事实核查问题",
+        "识别出 TC_CART_ADD_001 缺追溯的问题",
+        "识别出 TC_ORDER_PAY_001 步骤不可执行的问题",
+        "输出了问题清单要求修正",
+        "未直接放行通过"
+      ],
+      "assertions": [
+        {
+          "name": "判定验证失败",
+          "type": "content_match_or",
+          "targets": [
+            "fail",
+            "不通过",
+            "验证失败"
+          ]
+        },
+        {
+          "name": "识别 REQ-AUTH-999 不存在",
+          "type": "content_match_or",
+          "targets": [
+            "REQ-AUTH-999",
+            "不存在",
+            "未找到"
+          ]
+        },
+        {
+          "name": "识别追溯缺失",
+          "type": "content_match_or",
+          "targets": [
+            "追溯",
+            "关联需求",
+            "缺"
+          ]
+        },
+        {
+          "name": "识别步骤不可执行",
+          "type": "content_match_or",
+          "targets": [
+            "可执行",
+            "模糊",
+            "过于"
+          ]
+        },
+        {
+          "name": "输出问题清单",
+          "type": "content_match_or",
+          "targets": [
+            "问题清单",
+            "修正",
+            "issues"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "skill": "qa-ai-prompt-strategy",
+      "prompt": "针对电商购物车模块（需求：添加商品、修改数量、删除商品、结算、并发库存扣减），生成优化后的AI提示词，包含角色定义、输出格式规范、约束条件。要求注入前面的需求解构和场景树分析结果。",
+      "expected_output": "优化后的提示词，包含角色定义、输出数量约束、测试维度覆盖、输出格式规范、约束条件列表",
+      "files": [],
+      "expectations": [
+        "输出了优化后的提示词",
+        "包含角色定义（如资深测试工程师）",
+        "包含输出数量约束",
+        "包含测试维度覆盖要求",
+        "包含输出格式规范",
+        "包含约束条件列表",
+        "提示词中注入了购物车业务上下文"
+      ],
+      "assertions": [
+        {
+          "name": "输出优化提示词",
+          "type": "content_match_or",
+          "targets": [
+            "提示词",
+            "prompt",
+            "Prompt"
+          ]
+        },
+        {
+          "name": "含角色定义",
+          "type": "content_match_or",
+          "targets": [
+            "角色",
+            "role",
+            "资深测试"
+          ]
+        },
+        {
+          "name": "含输出数量约束",
+          "type": "content_match_or",
+          "targets": [
+            "数量",
+            "条",
+            "输出"
+          ]
+        },
+        {
+          "name": "含测试维度",
+          "type": "content_match_or",
+          "targets": [
+            "维度",
+            "覆盖",
+            "场景"
+          ]
+        },
+        {
+          "name": "含格式规范",
+          "type": "content_match_or",
+          "targets": [
+            "格式",
+            "format",
+            "规范"
+          ]
+        },
+        {
+          "name": "含约束条件",
+          "type": "content_match_or",
+          "targets": [
+            "约束",
+            "constraint",
+            "限制"
+          ]
+        },
+        {
+          "name": "注入购物车上下文",
+          "type": "content_match_or",
+          "targets": [
+            "购物车",
+            "cart",
+            "库存"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "skill": "qa-ai-output-critique",
+      "prompt": "对以下AI生成的3条测试用例做六维评审：TC_001 验证登录成功（步骤：输入正确账密点登录，预期跳转首页）；TC_002 验证密码错误（步骤：输入错误密码，预期提示错误，但缺预期提示文案）；TC_003 验证账号锁定（步骤：连续5次错误，预期锁定30分钟，但缺前置条件）。请从完整性、准确性、可执行性、风险覆盖、规范性、追溯性六维评审，每维评分。",
+      "expected_output": "六维评审报告，标注 TC_002/TC_003 的问题（MISSING 预期文案/前置条件），评分低于7分的标注问题，输出改进建议",
+      "files": [],
+      "expectations": [
+        "输出了六维评审报告",
+        "覆盖完整性维度",
+        "覆盖准确性维度",
+        "覆盖可执行性维度",
+        "覆盖风险覆盖维度",
+        "覆盖规范性维度",
+        "覆盖追溯性维度",
+        "识别出 TC_002 缺预期文案",
+        "识别出 TC_003 缺前置条件",
+        "输出了改进建议"
+      ],
+      "assertions": [
+        {
+          "name": "六维评审报告",
+          "type": "content_match_or",
+          "targets": [
+            "六维",
+            "评审",
+            "critique"
+          ]
+        },
+        {
+          "name": "完整性维度",
+          "type": "content_match",
+          "target": "完整性"
+        },
+        {
+          "name": "准确性维度",
+          "type": "content_match",
+          "target": "准确性"
+        },
+        {
+          "name": "可执行性维度",
+          "type": "content_match",
+          "target": "可执行"
+        },
+        {
+          "name": "风险覆盖维度",
+          "type": "content_match_or",
+          "targets": [
+            "风险覆盖",
+            "风险"
+          ]
+        },
+        {
+          "name": "规范性维度",
+          "type": "content_match",
+          "target": "规范"
+        },
+        {
+          "name": "追溯性维度",
+          "type": "content_match",
+          "target": "追溯"
+        },
+        {
+          "name": "识别 TC_002 问题",
+          "type": "content_match_or",
+          "targets": [
+            "TC_002",
+            "预期文案",
+            "MISSING"
+          ]
+        },
+        {
+          "name": "识别 TC_003 问题",
+          "type": "content_match_or",
+          "targets": [
+            "TC_003",
+            "前置条件",
+            "MISSING"
+          ]
+        },
+        {
+          "name": "输出改进建议",
+          "type": "content_match_or",
+          "targets": [
+            "改进",
+            "建议",
+            "improvement"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "skill": "qa-ai-blindspot-compensation",
+      "prompt": "对以下AI生成的购物车测试用例集做盲区补盲：现有用例覆盖了添加商品、修改数量、删除商品、结算的正向流程，但未覆盖并发、超时、库存边界。请从六大盲区（时序依赖、并发冲突、资源竞争、状态累积、数据一致性、第三方集成）补盲，每区至少2-3个场景。",
+      "expected_output": "盲区补偿用例，覆盖六大盲区，总补盲数12-18个，每个补盲用例带 BS-XXXX ID 并关联原始用例和需求",
+      "files": [],
+      "expectations": [
+        "覆盖时序依赖盲区",
+        "覆盖并发冲突盲区",
+        "覆盖资源竞争盲区",
+        "覆盖状态累积盲区",
+        "覆盖数据一致性盲区",
+        "覆盖第三方集成盲区",
+        "总补盲数≥12个",
+        "补盲用例带 BS- 唯一ID",
+        "补盲用例关联了原始用例或需求ID"
+      ],
+      "assertions": [
+        {
+          "name": "时序依赖盲区",
+          "type": "content_match_or",
+          "targets": [
+            "时序",
+            "顺序"
+          ]
+        },
+        {
+          "name": "并发冲突盲区",
+          "type": "content_match",
+          "target": "并发"
+        },
+        {
+          "name": "资源竞争盲区",
+          "type": "content_match_or",
+          "targets": [
+            "资源竞争",
+            "资源耗尽"
+          ]
+        },
+        {
+          "name": "状态累积盲区",
+          "type": "content_match_or",
+          "targets": [
+            "状态累积",
+            "长时间",
+            "漂移"
+          ]
+        },
+        {
+          "name": "数据一致性盲区",
+          "type": "content_match_or",
+          "targets": [
+            "数据一致",
+            "一致性"
+          ]
+        },
+        {
+          "name": "第三方集成盲区",
+          "type": "content_match_or",
+          "targets": [
+            "第三方",
+            "集成",
+            "Mock"
+          ]
+        },
+        {
+          "name": "总补盲数≥12",
+          "type": "min_count",
+          "target": 12,
+          "keyword": "BS-"
+        },
+        {
+          "name": "补盲用例带 BS- ID",
+          "type": "content_match",
+          "target": "BS-"
+        },
+        {
+          "name": "关联原始用例或需求",
+          "type": "content_match_or",
+          "targets": [
+            "TC_",
+            "REQ-"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "skill": "qa-test-skills (golden)",
+      "prompt": "请帮我测试这个电商项目：examples/ecommerce-project/docs/prd.md 生成完整的测试用例集和测试报告",
+      "expected_output": "完整测试用例集，TC_ID 覆盖 examples/ecommerce-project/test-cases.md 的 golden 用例集至少 50%",
+      "files": [
+        "examples/ecommerce-project/docs/prd.md"
+      ],
+      "expectations": [
+        "生成了测试用例集",
+        "用例 TC_ID 与 golden test-cases.md 重合度 ≥ 50%",
+        "覆盖了 AUTH/ORDER/PRODUCT/USER 四个模块"
+      ],
+      "assertions": [
+        {
+          "name": "golden 比对 ≥50%",
+          "type": "golden_compare",
+          "target": "examples/ecommerce-project/test-cases.md",
+          "min_overlap": 0.5
+        },
+        {
+          "name": "覆盖 AUTH 模块",
+          "type": "content_match",
+          "target": "TC_AUTH"
+        },
+        {
+          "name": "覆盖 ORDER 模块",
+          "type": "content_match",
+          "target": "TC_ORDER"
+        },
+        {
+          "name": "覆盖 PRODUCT 模块",
+          "type": "content_match",
+          "target": "TC_PRODUCT"
+        },
+        {
+          "name": "覆盖 USER 模块",
+          "type": "content_match",
+          "target": "TC_USER"
+        }
       ]
     }
   ]

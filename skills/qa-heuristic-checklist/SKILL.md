@@ -1,6 +1,6 @@
 ---
 name: qa-heuristic-checklist
-version: 1.5.0
+version: 1.5.1
 description: >-
   提供登录、支付、搜索、购物车、导入导出、审批、消息通知、权限管理等不同类型功能的测试要点模板。当面对一个新功能类型不知道从哪里开始测试、或者担心遗漏了某个功能类型的特有测试点时，应当使用此技能。特别适合测试新人——照着清单逐项检查就不会漏掉该功能类型的典型问题。例如支付类要测金额精度和幂等性，导入导出类要测格式兼容和性能，每个功能类型都有其特有的高风险区域。
 
@@ -12,6 +12,9 @@ related_skills:
   downstream:
     - qa-scenario-tree           # 输出：checklist指导场景构建
     - qa-boundary-deep-dive      # 输出：checklist指导边界分析
+    - qa-team-coaching
+references:
+  - references/checklists.md
 input_format:
   required:
     - name: 测试上下文
@@ -25,6 +28,8 @@ input_format:
       type: array
       description: 历史缺陷模式
 output_format:
+  traceability:
+    - 本技能应用清单，不新增唯一ID；标注覆盖的启发式编号
   structure:
     - heuristic_list: 启发式检查清单
     - covered_areas: 已覆盖领域
@@ -33,6 +38,10 @@ output_format:
 depth_requirement_quantification:
   reference_value: "根据功能类型数量调整清单深度：简单×1/中等×2/复杂×3"
   minimum: "至少应用5个相关启发式"
+categories: ['Development','Testing']
+error_recovery_guidance:
+  on_failure: "清单应用遗漏功能类型时回退到需求解构补充"
+  retry_behavior: "补全功能类型后重新应用清单"
 ---
 # 启发式检查清单
 

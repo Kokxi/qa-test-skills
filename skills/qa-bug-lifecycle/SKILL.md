@@ -1,6 +1,6 @@
 ---
 name: qa-bug-lifecycle
-version: 1.5.0
+version: 1.5.1
 description: >-
   当团队缺陷管理混乱、Bug 没有统一的分级标准、或者领导要看缺陷趋势数据时使用此技能。覆盖缺陷从提交到关闭的完整生命周期，包括严重度/优先级分级规范、各状态流转条件和时效要求、缺陷度量和趋势分析。如果缺陷管理不规范，复盘数据就是垃圾——"严重Bug数量下降"可能是因为大家不再标记严重了。
 
@@ -12,6 +12,7 @@ related_skills:
   downstream:
     - qa-quality-metrics         # 输出：缺陷数据用于质量度量
     - qa-retrospective           # 输出：缺陷数据用于复盘
+    - qa-test-reporting
 input_format:
   required:
     - name: Bug报告
@@ -25,15 +26,29 @@ input_format:
       type: string
       description: 修复验证结果
 output_format:
+  traceability:
+    - 每个缺陷沿用原始ID（BUG-XXXX）
+    - - 关联生命周期状态ID
   structure:
     - lifecycle_state: 当前生命周期状态
+    - severity_level: 严重度分级
+    - priority_level: 优先级分级
     - state_history: 状态变更历史
+    - timeline: 各状态时效要求
     - next_actions: 下一步操作建议
     - closure_criteria: 关闭条件检查
 error_recovery_guidance:
   on_failure: "验证不通过时退回上一状态并附上退回原因"
   retry_behavior: "退回后通知相关责任人重新处理"
+categories: ['Development','Testing','Quality']
+depth_requirement_quantification:
+  reference_value: "根据缺陷数量调整管理深度：简单×1/中等×2/复杂×3"
+  minimum: "至少覆盖严重度分级、状态流转、时效要求3个维度"
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 # 缺陷生命周期管理
 
 ## 核心原则

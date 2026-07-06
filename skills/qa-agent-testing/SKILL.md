@@ -1,6 +1,6 @@
 ---
 name: qa-agent-testing
-version: 1.5.0
+version: 1.5.1
 description: >-
   当需要测试 AI Agent（智能体、聊天机器人、AI 助手）时使用此技能。Agent 测试和传统功能测试完全不同——你要测的不是"点按钮看结果"，而是它的推理链路、工具调用时机、幻觉率、Prompt 注入防护、角色边界保持和记忆一致性。如果 Agent 能乱调用工具或泄漏系统 Prompt，那就是安全事件。⚠️ Agent 测试必须包含功能安全可控可靠九维覆盖，缺一不可。
 
@@ -12,6 +12,8 @@ related_skills:
     - qa-risk-intuition          # 输入：风险评估
   downstream:
     - qa-release-risk-governance # 输出：测试结果用于发布评估
+references:
+  - references/test-framework.md
 input_format:
   required:
     - name: Agent需求
@@ -25,6 +27,9 @@ input_format:
       type: object
       description: 来自qa-test-strategy-design的测试策略
 output_format:
+  traceability:
+    - 每个Agent测试用例带唯一ID（TC-XXXX）
+    - - 关联需求ID（REQ-XXXX）
   structure:
     - agent_test_plan: Agent测试方案
     - tool_call_tests: 工具调用测试用例
@@ -35,6 +40,9 @@ categories: ['Development','Automation','Agents']
 error_recovery_guidance:
   on_failure: "Agent行为异常时回退到确定性测试方案，配合人工验证"
   retry_behavior: "调整测试参数后重新执行Agent测试"
+depth_requirement_quantification:
+  reference_value: "根据Agent复杂度和风险等级调整测试深度：简单×1/中等×2/复杂×3"
+  minimum: "至少覆盖工具调用、幻觉检测、安全审计3个维度中的2个"
 ---
 # AI Agent测试专项
 

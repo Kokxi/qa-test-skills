@@ -1,6 +1,6 @@
 ---
 name: qa-ai-output-critique
-version: 1.5.0
+version: 1.5.1
 description: >-
   对AI生成的测试用例进行六维评审（完整性、准确性、可执行性、风险覆盖、规范性、追溯性），是AI生成用例后的第一个质量门禁。当AI刚刚生成了一大批测试用例、你需要确保这些用例真的有价值而不是"看起来不错"时，应当使用此技能。不要假设AI输出的都是对的——AI经常生成语义正确但实际操作不了的用例。每个维度评分低于7分的必须标注问题并使用MISSING/WRONG/VAGUE等规范格式标记。
 
@@ -13,6 +13,11 @@ related_skills:
     - qa-risk-intuition          # 可选输入：风险清单（用于风险覆盖评审）
   downstream:
     - qa-ai-blindspot-compensation # 输出：评审结果传递给补盲
+    - qa-expert-review
+    - qa-output-validation
+references:
+  - references/report-templates.md
+  - references/review-dimensions.md
 input_format:
   required:
     - name: AI生成测试用例
@@ -26,6 +31,8 @@ input_format:
       type: object
       description: 评审维度和标准配置
 output_format:
+  traceability:
+    - 本技能评审用例，不新增唯一ID；评审问题关联到原用例ID（TC-XXXX）
   structure:
     - critique_report: 六维评审报告
     - coverage_gaps: 覆盖遗漏清单
@@ -34,6 +41,10 @@ output_format:
 depth_requirement_quantification:
   reference_value: "根据用例数量和复杂度调整评审深度：简单x1/中等x2/复杂x3"
   minimum: "至少覆盖功能正确性、边界条件、异常场景3个评审维度"
+categories: ['Development','Testing','AI']
+error_recovery_guidance:
+  on_failure: "评审发现系统性问题时回退到AI生成步骤修正"
+  retry_behavior: "修正提示词或上下文后重新生成并评审"
 ---
 # AI 输出评审
 

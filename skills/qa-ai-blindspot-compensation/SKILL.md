@@ -1,6 +1,6 @@
 ---
 name: qa-ai-blindspot-compensation
-version: 1.5.0
+version: 1.5.1
 description: >-
   AI在生成测试用例时存在六大系统性盲区：时序依赖、并发冲突、资源竞争、状态累积、数据一致性、第三方集成差异。评审完AI生成的用例之后，必须用此技能做盲区补盲——因为AI几乎一定会漏掉这些。如果你心里觉得"好像还差点什么但说不上来"，这就是答案。每个盲区维度至少补2-3个场景，总补盲数12-18个。
 
@@ -11,6 +11,10 @@ related_skills:
     - qa-ai-output-critique      # 输入：评审后的测试用例
   downstream:
     - qa-test-skills           # 输出：最终测试用例返回给主流程
+    - qa-expert-review
+    - qa-output-validation
+references:
+  - references/blindspot-details.md
 input_format:
   required:
     - name: 测试用例
@@ -37,6 +41,10 @@ output_format:
 depth_requirement_quantification:
   reference_value: "根据测试复杂度和风险等级调整补盲深度：简单x1/中等x2/复杂x3"
   minimum: "至少覆盖边界盲区、场景盲区、数据盲区3个维度中的2个"
+categories: ['Development','Testing','AI']
+error_recovery_guidance:
+  on_failure: "盲区补盲遗漏维度时回退到评审报告定位遗漏点"
+  retry_behavior: "补充遗漏盲区类型后重新生成补盲用例"
 ---
 # AI 盲区补偿
 

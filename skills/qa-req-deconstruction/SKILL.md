@@ -1,6 +1,6 @@
 ---
 name: qa-req-deconstruction
-version: 1.5.0
+version: 1.5.1
 description: >-
   将模糊的需求描述系统化拆分为输入、操作、状态、输出、规则五个可测试维度，同时挖掘显性需求之外的那些"没写出来但必须满足"的隐性需求和衍生需求。当用户的需求描述只有一两句话、或者看起来功能很简单但你可能遗漏了什么的时候，一定要用此技能做深度解构。适用于任何测试任务的第二步骤——无论需求文档有多详细，解构之后总能发现盲区。
 
@@ -12,6 +12,13 @@ related_skills:
   downstream:
     - qa-scenario-tree           # 输出：需求解构表传递给场景树
     - qa-risk-intuition          # 输出：风险点用于风险评估
+    - qa-ai-context-engineering
+    - qa-api-testing
+    - qa-shift-left
+    - qa-test-case-design
+    - qa-test-data-engineering
+    - qa-test-estimation
+    - qa-test-strategy-design
 input_format:
   required:
     - name: 需求文档
@@ -39,7 +46,15 @@ output_format:
 depth_requirement_quantification:
   reference_value: "根据需求复杂度调整解构深度：简单×2/中等×3/复杂×4"
   minimum: "至少挖掘3个隐性需求"
+categories: ['Development','Requirements']
+error_recovery_guidance:
+  on_failure: "需求解构遗漏隐性需求时回退到需求评审补充上下文"
+  retry_behavior: "补充上下文后重新解构"
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 # 需求解构
 
 ## 核心原则

@@ -1,6 +1,6 @@
 ---
 name: qa-test-strategy-design
-version: 1.5.0
+version: 1.5.1
 description: >-
   当新项目启动需要制定测试方案、或者迭代开始前需要确定"这期怎么测"时使用此技能。根据项目特征（新项目/迭代/重构/紧急修复）、风险分布和资源约束设计分层测试策略，明确测试范围、测试手段、准入准出标准和工具选型。一个好的测试策略让团队知道"测什么、不测什么、为什么"。输出包含风险矩阵、分级测试方案的测试策略文档。
 
@@ -12,6 +12,11 @@ related_skills:
     - qa-req-deconstruction      # 输入：需求分析结果
   downstream:
     - qa-release-risk-governance # 输出：测试策略用于发布评估
+    - qa-ci-cd-testing
+    - qa-specialized-testing
+    - qa-tech-selection
+    - qa-test-automation-arch
+    - qa-test-env-data
 input_format:
   required:
     - name: 风险评估
@@ -28,12 +33,22 @@ input_format:
       type: string
       description: 测试资源限制
 output_format:
+  traceability:
+    - 每份策略带唯一ID（STRAT-XXXX）
+    - 关联需求ID（REQ-XXXX）
   structure:
     - test_strategy: 分层测试策略
     - scope_definition: 测试范围定义
     - means_selection: 测试手段选择
     - resource_allocation: 资源分配方案
     - entry_exit_criteria: 准入准出标准
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据项目复杂度调整策略深度：简单×1/中等×2/复杂×3"
+  minimum: "至少覆盖范围、层级、风险、资源4个核心维度"
+error_recovery_guidance:
+  on_failure: "策略遗漏高风险区域时回退到风险评估补充"
+  retry_behavior: "补充评估后重新制定策略"
 ---
 # 测试策略制定
 

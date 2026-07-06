@@ -1,10 +1,8 @@
 ---
 name: qa-bug-root-cause-analysis
-version: 1.5.0
+version: 1.5.1
 description: >-
-  当某个 Bug 频繁复现、线上有缺陷需要做事后分析、或者发现同一类问题反复出现需要根治时使用此技能。从症状出发用 5Why、因果图和鱼骨图等方法系统化定位缺陷根源，区分直接原因、间接原因和系统原因。不要只修症状——根因分析的价值在于找到让同类 Bug 不再发生的系统性改进措施，同时分析漏测原因来优化测试设计。
-
-when_to_use: 用户说"分析Bug"、"根因分析"、"为什么出错"、"Bug原因"、"怎么发生的"、"5 Why"、"根治"、需要定位Bug原因、缺陷频发需要系统性根治时
+  当某个 Bug 频繁复现、线上有缺陷需要做事后分析、或者发现同一类问题反复出现需要根治时使用此技能。从症状出发用 5Why、因果图和鱼骨图等方法系统化定位缺陷根源，区分直接原因、间接原因和系统原因。不要只修症状——根因分析的价值在于找到让同类 Bug 不再发生的系统性改进措施，同时分析漏测原因来优化测试设计。 ⚠️ 本技能示例可能调用外部日志/监控工具，请在受控环境执行hen_to_use: 用户说"分析Bug"、"根因分析"、"为什么出错"、"Bug原因"、"怎么发生的"、"5 Why"、"根治"、需要定位Bug原因、缺陷频发需要系统性根治时
 allowed-tools: Read Grep Glob Bash
 related_skills:
   upstream:
@@ -28,13 +26,27 @@ input_format:
       type: array
       description: 缺陷复现的具体步骤
 output_format:
+  traceability:
+    - 每个根因分析带唯一ID（ROOT-XXXX）
+    - 关联Bug ID（BUG-XXXX）
   structure:
     - root_cause: 根因分析结论
     - contributing_factors: 促成因素清单
     - impact_assessment: 影响范围评估
     - fix_suggestions: 修复建议
     - prevention_measures: 预防措施
+categories: ['Development','Testing','Quality']
+depth_requirement_quantification:
+  reference_value: "根据缺陷复杂度调整根因分析深度：简单×1/中等×2/复杂×3"
+  minimum: "至少区分直接原因、间接原因、系统原因3个层级"
+error_recovery_guidance:
+  on_failure: "根因定位不充分时回退到执行观察收集更多信号"
+  retry_behavior: "补充日志或环境信息后重新分析根因"
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 # Bug根因分析
 
 ## 核心原则

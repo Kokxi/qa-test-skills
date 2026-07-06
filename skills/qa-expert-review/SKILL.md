@@ -1,6 +1,6 @@
 ---
 name: qa-expert-review
-version: 1.5.0
+version: 1.5.1
 description: >-
   当 AI 生成的测试用例已经过输出评审和盲区补盲、准备终审上线时使用此技能。由资深测试对 AI 输出的用例做人工抽样校验，从业务有效性、场景完整性、可执行性三个维度做最后把关。⚠️ 如果发现系统性问题（比如遗漏了某个关键模块），需要回退修正并记录到 Prompt 优化反馈库。专家评审不是走形式——发现的问题必须闭环。
 
@@ -41,6 +41,10 @@ output_format:
 depth_requirement_quantification:
   reference_value: "根据项目重要性和风险等级调整评审深度：简单x1/中等x2/复杂x3"
   minimum: "至少覆盖功能完整性、边界充分性、异常覆盖性3个维度"
+categories: ['Development','Testing','Quality']
+error_recovery_guidance:
+  on_failure: "评审发现系统性问题时回退到输出评审步骤修正"
+  retry_behavior: "修正后重新抽样校验"
 ---
 # 专家评审与元学习
 

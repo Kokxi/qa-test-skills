@@ -1,6 +1,6 @@
 ---
 name: qa-output-validation
-version: 1.5.0
+version: 1.5.1
 description: >-
   在最终输出前对测试用例做最后一轮防幻觉验证：事实核查（引用的需求ID是否存在）、一致性检查（用例之间是否矛盾）、可执行性验证（步骤是否能实际操作）、来源追溯（每个用例是否能追溯到具体需求）。当测试用例已经生成完毕、准备输出了，但你不确定AI有没有编造不存在的功能或需求时，应当使用此技能。这是整个工作流的最终质量守门——如果验证失败，必须返回问题清单要求修正，不得跳过。
 
@@ -25,6 +25,8 @@ input_format:
       type: object
       description: 评审结果
 output_format:
+  traceability:
+    - 本技能验证输出，不新增唯一ID；问题清单关联到原用例ID（TC-XXXX）
   structure:
     - validation_result: "pass/fail"
     - fact_check: "事实核查结果"
@@ -35,6 +37,10 @@ output_format:
 error_recovery_guidance:
   on_failure: "返回问题清单和具体失败原因，要求修正后重新生成"
   retry_behavior: "修正后重新执行AI生成步骤"
+categories: ['Development','Testing','AI']
+depth_requirement_quantification:
+  reference_value: "根据用例数量调整验证深度：简单×1/中等×2/复杂×3"
+  minimum: "至少完成事实核查、一致性检查、可执行性验证、来源追溯4项"
 ---
 # 输出验证
 

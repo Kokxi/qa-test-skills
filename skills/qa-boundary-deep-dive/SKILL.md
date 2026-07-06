@@ -1,6 +1,6 @@
 ---
 name: qa-boundary-deep-dive
-version: 1.5.0
+version: 1.5.1
 description: >-
   从输入、状态、时间、资源四个维度系统化识别边界条件。真正的 Bug 往往在"看起来不是边界"的地方——比如用户名字段没测超长 Unicode、订单支付刚好在超时前1秒完成、1000人同时下单。当需要补充边界测试、等价类划分完成后需要补边界值、或者直觉告诉你某些边界可能有问题时，应当使用此技能。每个边界条件都需要标注风险等级并给出明确的预期结果。适用于任何有输入字段、状态变化、时间约束或资源限制的系统。
 
@@ -11,6 +11,9 @@ related_skills:
     - qa-scenario-tree           # 输入：场景树
   downstream:
     - qa-ai-context-engineering  # 输出：边界清单传递给上下文工程
+    - qa-code-review-for-test
+    - qa-execution-observation
+    - qa-test-case-design
 input_format:
   required:
     - name: 场景树
@@ -34,7 +37,15 @@ output_format:
 depth_requirement_quantification:
   reference_value: "根据需求复杂度调整分析深度：简单×2/中等×3/复杂×4"
   minimum: "至少覆盖输入/状态/时间/资源4个维度中的3个"
+categories: ['Development','Testing']
+error_recovery_guidance:
+  on_failure: "边界分析遗漏维度时回退到场景树补充"
+  retry_behavior: "补全缺失场景后重新分析边界"
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 
 # 边界深度分析
 

@@ -1,6 +1,6 @@
 ---
 name: qa-regression-testing
-version: 1.5.0
+version: 1.5.1
 description: >-
   根据变更范围、风险等级和时间约束制定分级精准回归方案。当版本迭代了、代码改动了、你需要确定"到底哪些功能要重新测一遍"的时候使用此技能。回归的时间永远不够——此技能帮你做出取舍决策：冒烟回归（P0核心流程）、核心回归（高影响区域）、全量回归（有余力时）。基于变更分析和风险评估选择最省时的回归策略，而不是盲目全量回归。
 
@@ -30,11 +30,21 @@ input_format:
       type: string
       description: 回归测试时间限制
 output_format:
+  traceability:
+    - 回归用例沿用原始ID（TC-XXXX）
+    - - 标注回归级别（冒烟/核心/全量）
   structure:
     - regression_plan: 回归测试方案
     - selected_cases: 选取用例清单
     - risk_based_priority: 基于风险的优先级
     - execution_strategy: 执行策略
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据变更范围调整回归深度：简单×1/中等×2/复杂×3"
+  minimum: "至少完成冒烟回归、核心回归、选择全量回归3级策略"
+error_recovery_guidance:
+  on_failure: "回归范围遗漏高风险区域时回退到风险评估补充"
+  retry_behavior: "补充风险评估后重新选取回归用例"
 ---
 # 回归测试策略
 

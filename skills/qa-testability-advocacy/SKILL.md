@@ -1,10 +1,8 @@
 ---
 name: qa-testability-advocacy
-version: 1.5.0
+version: 1.5.1
 description: >-
-  当测试发现"这个功能测不了"、"加个日志就能定位"、"这个模块没法 Mock"时使用此技能。从可控性（能否控制测试条件）、可观察性（能否看到内部状态）、可隔离性（能否独立测试）、自动化性和可诊断性五个维度评估系统的可测试性水平，给出具体的系统改进建议和推动策略。可测试性差的系统一定质量差——不是因为系统本身不好，是因为你根本测不透它。输出可测试性评估报告和各维度的改造建议。
-
-when_to_use: 用户说"可测试性"、"怎么测"、"测不了"、"测试难"、"难测"、"解耦"、"测试桩"、需要评估系统可测试性、测试难以开展需要推动系统改进时
+  当测试发现"这个功能测不了"、"加个日志就能定位"、"这个模块没法 Mock"时使用此技能。从可控性（能否控制测试条件）、可观察性（能否看到内部状态）、可隔离性（能否独立测试）、自动化性和可诊断性五个维度评估系统的可测试性水平，给出具体的系统改进建议和推动策略。可测试性差的系统一定质量差——不是因为系统本身不好，是因为你根本测不透它。输出可测试性评估报告和各维度的改造建议。 ⚠️ 本技能含废弃测试清理建议，执行前请确认非关键数据hen_to_use: 用户说"可测试性"、"怎么测"、"测不了"、"测试难"、"难测"、"解耦"、"测试桩"、需要评估系统可测试性、测试难以开展需要推动系统改进时
 allowed-tools: Read Grep Glob
 related_skills:
   upstream:
@@ -12,6 +10,7 @@ related_skills:
     - qa-execution-observation   # 输入：执行中发现的可测试性问题
   downstream:
     - qa-test-env-data           # 输出：推动环境和数据可测试性改进
+    - qa-shift-left
 input_format:
   required:
     - name: 测试策略
@@ -25,11 +24,20 @@ input_format:
       type: string
       description: 代码库路径和结构
 output_format:
+  traceability:
+    - 每项推动建议带唯一ID（ADV-XXXX）
   structure:
     - testability_assessment: 可测试性评估报告
     - improvement_suggestions: 改进建议
     - refactoring_guide: 重构指南
     - best_practices: 可测试性最佳实践
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据系统问题调整推动深度：简单×1/中等×2/复杂×3"
+  minimum: "至少识别3个可测试性问题并提出改进建议"
+error_recovery_guidance:
+  on_failure: "可测试性推动遗漏问题时回退到代码评审补充"
+  retry_behavior: "补充评审后重新推动改进"
 ---
 # 可测试性推动
 

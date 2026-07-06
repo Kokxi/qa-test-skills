@@ -1,6 +1,6 @@
 ---
 name: qa-combination-strategy
-version: 1.5.0
+version: 1.5.1
 description: >-
   当参数多、环境多、"全组合测不完"时运用正交试验法、Pairwise和判定表来解决组合爆炸问题。如果系统有多个输入字段的组合依赖关系（如"A=1且B=2时C不能为3"）、或者需要适配多浏览器多操作系统多语言，一定要用此技能来设计高效的组合覆盖方案。不要试图全覆盖——组合测试的核心是用最少的用例达到最高的组合覆盖率。输出组合覆盖矩阵并标注覆盖遗漏。
 
@@ -24,6 +24,9 @@ input_format:
       type: object
       description: 来自qa-risk-intuition的风险评估
 output_format:
+  traceability:
+    - 每个组合矩阵带唯一ID（COMBO-XXXX）
+    - 关联场景ID（SC-XXXX）
   structure:
     - combination_matrix: 组合覆盖矩阵
     - pairwise_combinations: 成对组合列表
@@ -35,7 +38,12 @@ depth_requirement_quantification:
 error_recovery_guidance:
   on_failure: "回退到全组合方案或增加取样率"
   retry_behavior: "扩大取样范围后重新生成组合方案"
+categories: ['Development','Testing']
 ---
+> **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
+> 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
+> 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
+
 
 # 组合测试策略
 

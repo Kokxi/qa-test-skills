@@ -1,6 +1,6 @@
 ---
 name: qa-requirement-review
-version: 1.5.0
+version: 1.5.1
 description: >-
   从完整性、清晰性、一致性、可测试性、可实现性五个维度系统化评审需求文档质量。当用户要求"评审这份需求"、"看看这个PRD写得怎么样"、或者测试用例设计前需要先评估需求质量时，应当使用此技能。如果需求本身有问题（模糊/矛盾/不可测试），后续的测试设计都是徒劳。不要只在用户明确说"需求评审"时才用——任何涉及需求文档的测试任务都应先过一遍需求评审。
 
@@ -14,6 +14,9 @@ related_skills:
   downstream:
     - qa-req-deconstruction      # 输出：评审结果用于需求解构
     - qa-test-strategy-design    # 输出：评审结果影响测试策略
+references:
+  - references/report-template.md
+  - references/review-standards.md
 input_format:
   required:
     - name: 需求描述
@@ -27,6 +30,9 @@ input_format:
       type: array
       description: 同类功能的历史缺陷记录
 output_format:
+  traceability:
+    - 每份需求评审报告带唯一ID（REV-REQ-XXXX）
+    - - 关联需求ID（REQ-XXXX）
   structure:
     - review_report: 需求评审报告
     - completeness_score: 完整性评分
@@ -36,6 +42,10 @@ output_format:
 error_recovery_guidance:
   on_failure: "识别到需求不完整时返回缺失清单，要求用户补充信息"
   retry_behavior: "用户补充信息后重新执行需求评审"
+categories: ['Development','Requirements']
+depth_requirement_quantification:
+  reference_value: "根据需求复杂度调整评审深度：简单×1/中等×2/复杂×3"
+  minimum: "至少评审完整性、清晰性、一致性、可测试性、可实现性5个维度"
 ---
 # 需求评审专项
 

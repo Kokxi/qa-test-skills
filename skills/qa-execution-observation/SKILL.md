@@ -1,10 +1,8 @@
 ---
 name: qa-execution-observation
-version: 1.5.0
+version: 1.5.1
 description: >-
-  当测试新人不知道执行时应该关注什么、或者有经验的测试发现"执行完了但好像什么都没发现"时使用此技能。测试执行不是"按步骤操作看结果"——你需要同时关注功能表现、接口响应、日志报错、UI 渲染、数据一致性、性能指标六路信号。大多数的 Bug 是被"不小心看到"的而非被测出来的。每轮执行后输出观察记录，标注异常信号和后续需要跟进的问题。
-
-when_to_use: 用户说"执行时看什么"、"怎么观察"、"测试执行"、"执行信号"、"怎么发现Bug"、"注意什么"、需要提升执行质量、执行经验不足需要指导时
+  当测试新人不知道执行时应该关注什么、或者有经验的测试发现"执行完了但好像什么都没发现"时使用此技能。测试执行不是"按步骤操作看结果"——你需要同时关注功能表现、接口响应、日志报错、UI 渲染、数据一致性、性能指标六路信号。大多数的 Bug 是被"不小心看到"的而非被测出来的。每轮执行后输出观察记录，标注异常信号和后续需要跟进的问题。 ⚠️ 本技能示例可能调用外部监控/截图工具，请在受控环境执行hen_to_use: 用户说"执行时看什么"、"怎么观察"、"测试执行"、"执行信号"、"怎么发现Bug"、"注意什么"、需要提升执行质量、执行经验不足需要指导时
 allowed-tools: Read Grep Glob Bash
 related_skills:
   upstream:
@@ -13,6 +11,8 @@ related_skills:
   downstream:
     - qa-bug-root-cause-analysis # 输出：异常信号用于根因分析
     - qa-bug-reporting           # 输出：异常信息用于Bug报告
+    - qa-test-reporting
+    - qa-testability-advocacy
 input_format:
   required:
     - name: 测试用例
@@ -26,6 +26,9 @@ input_format:
       type: array
       description: 各用例的预期结果对照
 output_format:
+  traceability:
+    - 每轮观察带唯一ID（OBS-XXXX）
+    - 关联执行用例ID（TC-XXXX）
   structure:
     - execution_report: 执行报告
     - observed_results: 实际结果记录
@@ -34,6 +37,10 @@ output_format:
 error_recovery_guidance:
   on_failure: "记录偏差但不中断流程，汇总到最终报告"
   retry_behavior: "继续执行，在最终报告中标注异常"
+categories: ['Development','Testing','Quality']
+depth_requirement_quantification:
+  reference_value: "根据用例数量调整观察深度：简单×1/中等×2/复杂×3"
+  minimum: "至少关注功能、接口响应、日志、UI渲染4路信号"
 ---
 
 # 执行观察力

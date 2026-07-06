@@ -1,6 +1,6 @@
 ---
 name: qa-test-reporting
-version: 1.5.0
+version: 1.5.1
 description: >-
   输出面向不同受众的测试报告——日报给团队同步进度、周报给项目经理、质量报告给管理层决策。当测试执行完成需要汇总结果、或者上级问"质量怎么样"的时候使用此技能。不同角色关心的数据不同：开发关心Bug明细，经理关心通过率和趋势，老板关心风险和发版决策。报告内容适配受众，关键指标量化呈现，风险区域必须醒目标注。
 
@@ -27,12 +27,22 @@ input_format:
       type: object
       description: 来自qa-quality-metrics的质量数据
 output_format:
+  traceability:
+    - 每份测试报告带唯一ID（RPT-XXXX）
+    - - 聚合用例ID、缺陷ID、需求ID
   structure:
     - executive_summary: 执行摘要
     - test_results: 测试结果统计
     - defect_analysis: 缺陷分析
     - risk_assessment: 风险评估
     - recommendations: 改进建议
+categories: ['Development','Testing','DevOps']
+depth_requirement_quantification:
+  reference_value: "根据受众调整报告深度：简单×1/中等×2/复杂×3"
+  minimum: "至少包含进度、质量、风险、下一步4个核心章节"
+error_recovery_guidance:
+  on_failure: "报告遗漏受众关注点时回退到质量度量补充数据"
+  retry_behavior: "补充数据后重新生成报告"
 ---
 # 测试报告编写
 
