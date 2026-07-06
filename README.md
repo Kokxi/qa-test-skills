@@ -2,11 +2,11 @@
 
 > **48个专家级测试技能 + 1个入口工作流，覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
 
-![Version](https://img.shields.io/badge/version-1.5.0-blue)
+![Version](https://img.shields.io/badge/version-1.6.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skills](https://img.shields.io/badge/skills-48-orange)
-![Eval](https://img.shields.io/badge/benchmark-22%20evals-brightgreen)
-![Pass Rate](https://img.shields.io/badge/pass%20rate-94%25-success)
+![Eval](https://img.shields.io/badge/benchmark-38%20evals-brightgreen)
+![Pass Rate](https://img.shields.io/badge/pass%20rate-95.4%25-success)
 ![AI](https://img.shields.io/badge/AI-协作-purple)
 
 [![skills.sh](https://skills.sh/b/Kokxi/qa-test-skills)](https://skills.sh/Kokxi/qa-test-skills)
@@ -211,15 +211,15 @@ AI 接收到测试需求后，自动执行标准化工作流：
 
 ## 质量基准
 
-本项目建立了完整的评估体系，8 轮迭代、22 个 Eval、139 条断言，持续验证技能质量：
+本项目建立了完整的评估体系，8 轮迭代、38 个 Eval、230 条断言，持续验证技能质量：
 
 | 指标                     | 数据                   |
 | ------------------------ | ---------------------- |
-| With Skill 平均通过率    | **94.4%**        |
+| With Skill 平均通过率    | **95.4%**        |
 | Without Skill 平均通过率 | 62.4%                  |
-| Skill 增量价值（Δ）     | **+22.8%**       |
-| 覆盖子 Skill 数          | **22/48（46%）** |
-| 评估轮次                 | 8 轮迭代               |
+| Skill 增量价值（Δ）     | **+33.0%**       |
+| 覆盖子 Skill 数          | **38/48（79%）** |
+| 评估轮次                 | 8 轮迭代 + LLM E2E    |
 | 稳定性（标准差）         | 0.0（6/8 轮）          |
 
 > 评估工具链：`scripts/grade_evals.py` 分级 → `scripts/aggregate_benchmark.py` 聚合 → `docs/full-report.html` 可视化对比
@@ -521,7 +521,7 @@ Step 3: 执行测试
 - **字段级验证**：每个表单字段的边界、格式、注入、特殊字符全覆盖
 - **好/坏对比示例**：每个技能都包含好示例和坏示例的对比，帮助 AI 和新人理解"好"的标准
 - **量化指标驱动**：每个技能包含明确的深度要求（如"简单×2/中等×3/复杂×4"），避免泛泛产出
-- **评估闭环**：22 个 Eval 持续监控技能质量，每次修改可验证效果
+- **评估闭环**：38 个 Eval 持续监控技能质量，每次修改可验证效果
 
 ---
 
