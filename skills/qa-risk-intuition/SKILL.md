@@ -1,6 +1,6 @@
 ---
 name: qa-risk-intuition
-version: 1.5.1
+version: 1.6.0
 description: >-
   识别那些"看起来很简单但实际风险很高"的测试区域，帮你在有限的测试资源下做优先级判断。当测试时间不够、不知道应该重点测哪些功能、或者直觉告诉你某个功能可能有问题但说不上来为什么时，应当使用此技能。典型的危险信号包括：频繁变更的模块、第三方依赖、资金/安全相关功能、历史Bug多发区域。每一个识别出的风险点都需要标注概率和影响等级，并附上缓解建议。
 
@@ -22,7 +22,7 @@ related_skills:
     - qa-test-estimation
 references:
   - references/risk-signals.md
-
+input_format:
   required:
     - name: 需求解构表
       type: object
@@ -220,5 +220,14 @@ error_recovery_guidance:
 - [ ] 是否评估了技术复杂度？
 - [ ] 风险等级是否合理？
 - [ ] 测试资源分配是否恰当？
+
+
+## 检查清单
+
+- [ ] 五大信号雷达是否全评估？
+- [ ] 高风险区域是否标注？
+- [ ] 风险加权是否合理？
+- [ ] 聚焦建议是否给出？
+- [ ] 风险ID是否分配？
 
 

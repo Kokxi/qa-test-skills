@@ -1,0 +1,16 @@
+{
+  "timestamp": "20260706_235133",
+  "provider": "deepseek",
+  "model": "deepseek-chat",
+  "smoke": false,
+  "total_evals": 2,
+  "total_assertions": 14,
+  "passed": 13,
+  "failed": 1,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "errors": 0,
+  "pass_rate_pct": 92.9,
+  "total_worker_tokens": 16228,
+  "total_elapsed_sec": 108.6
+}

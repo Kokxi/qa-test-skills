@@ -1,0 +1,15 @@
+{
+  "timestamp": "20260706_215353",
+  "model": "kimi-for-coding",
+  "smoke": false,
+  "total_evals": 8,
+  "total_assertions": 52,
+  "passed": 0,
+  "failed": 52,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "errors": 8,
+  "pass_rate_pct": 0.0,
+  "total_worker_tokens": 0,
+  "total_elapsed_sec": 320.7
+}

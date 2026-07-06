@@ -1,0 +1,53 @@
+{
+  "eval_id": 12,
+  "error": "API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}",
+  "total": 8,
+  "passed": 0,
+  "failed": 8,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "覆盖时序盲区",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "覆盖并发盲区",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "覆盖资源盲区",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "覆盖状态盲区",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "覆盖数据盲区",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "覆盖第三方盲区",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "有风险标注",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "统一补盲编号",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    }
+  ],
+  "worker_tokens": 0,
+  "elapsed_sec": 45.73359489440918
+}

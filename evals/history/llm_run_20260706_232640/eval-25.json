@@ -1,0 +1,40 @@
+{
+  "eval_id": 25,
+  "prompt_preview": "对'用户登录功能'（用户名密码+5次锁定+记住密码）展开批判性思维分析：找出所有假设、未考虑到的场景、可能的思维盲区。同时使用提问框架列出需要向产品经理追问的问题，确保需求细节完整。",
+  "output_preview": "# 批判性思维分析：用户登录功能\n\n## 📋 需求概述\n- **功能**：用户名密码登录 + 5次锁定 + 记住密码\n- **复杂度评估**：中等（3个核心功能点，存在状态依赖）\n\n---\n\n## 一、假设清单（已识别假设 vs 可能被忽略的假设）\n\n### ✅ 显性假设（需求中明确或隐含的）\n| # | 假设 | 风险等级 |\n|---|------|---------|\n| 1 | 用户名是唯",
+  "worker_tokens": 5883,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 29.8,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有思维盲区",
+      "passed": true,
+      "evidence": "found: 盲区|遗漏|忽略|没想到"
+    },
+    {
+      "text": "有假设挑战",
+      "passed": true,
+      "evidence": "found: 假设|以为|默认|如果"
+    },
+    {
+      "text": "有追问≥4条",
+      "passed": true,
+      "evidence": "count=20, min=4"
+    },
+    {
+      "text": "覆盖锁定场景",
+      "passed": true,
+      "evidence": "found: 锁定|30分钟|5次"
+    },
+    {
+      "text": "有结构化输出",
+      "passed": true,
+      "evidence": "found: ├|└|清单|列表"
+    }
+  ]
+}

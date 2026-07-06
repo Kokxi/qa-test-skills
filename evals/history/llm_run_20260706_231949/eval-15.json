@@ -1,0 +1,40 @@
+{
+  "eval_id": 15,
+  "prompt_preview": "一个搜索功能有3个筛选条件：价格区间(低/中/高)、品牌(A/B/C)、排序方式(销量/价格/评分)。如果每个条件的所有取值都要组合测试，需要3×3×3=27种组合。请使用Pairwise或正交试验法",
+  "output_preview": "我来使用Pairwise（成对组合测试）方法简化这个搜索功能的筛选条件组合。\n\n## 一、参数分析\n\n| 参数 | 取值 |\n|------|------|\n| 价格区间 | 低, 中, 高 |\n| 品牌 | A, B, C |\n| 排序方式 | 销量, 价格, 评分 |\n\n**全组合**：3 × 3 × 3 = **27种**\n\n**Pairwise目标**：覆盖所有两两配对（每对参数的所有取值",
+  "worker_tokens": 4128,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 12.5,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "使用简化方法",
+      "passed": true,
+      "evidence": "any match: True in ['Pairwise', '正交', '判定表', 'allpairs']"
+    },
+    {
+      "text": "组合数<27",
+      "passed": true,
+      "evidence": "count=20, min=5"
+    },
+    {
+      "text": "有组合列表",
+      "passed": true,
+      "evidence": "found: |├|└|TC-"
+    },
+    {
+      "text": "有覆盖分析",
+      "passed": true,
+      "evidence": "found: 覆盖"
+    },
+    {
+      "text": "有策略说明",
+      "passed": true,
+      "evidence": "found: 策略|方法|原理"
+    }
+  ]
+}

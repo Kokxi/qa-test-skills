@@ -1,0 +1,40 @@
+{
+  "eval_id": 23,
+  "prompt_preview": "用户只说了一句'帮我测试这个功能'但没有提供任何需求描述或文档。请先验证输入完整性，再启动需求评审流程。如果输入信息不足，请生成缺失信息清单和追问问题。",
+  "output_preview": "## 输入验证 — 信息缺失检测\n\n根据 **qa-input-validation** 技能，检测到当前输入存在以下问题：\n\n### ❌ 缺失信息清单\n\n| 缺失项 | 严重程度 | 说明 |\n|--------|---------|------|\n| 需求描述/功能名称 | 🔴 致命 | 未指定要测试哪个功能 |\n| 需求文档/PRD | 🔴 致命 | 未提供任何文档或URL |\n| 功能范围",
+  "worker_tokens": 3216,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 6.6,
+  "total": 5,
+  "passed": 4,
+  "failed": 1,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有验证结论",
+      "passed": true,
+      "evidence": "found: 验证|结果|评分"
+    },
+    {
+      "text": "有质量评分",
+      "passed": false,
+      "evidence": "not found: /10|1-10|评分"
+    },
+    {
+      "text": "有缺失信息",
+      "passed": true,
+      "evidence": "found: 缺失|不足|追问"
+    },
+    {
+      "text": "有评审报告",
+      "passed": true,
+      "evidence": "found: 评审"
+    },
+    {
+      "text": "格式结构化",
+      "passed": true,
+      "evidence": "found: ├|└|清单|列表"
+    }
+  ]
+}

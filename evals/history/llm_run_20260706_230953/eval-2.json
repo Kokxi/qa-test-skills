@@ -1,0 +1,45 @@
+{
+  "eval_id": 2,
+  "prompt_preview": "分析以下登录功能的显性需求和隐性需求：用户在登录页面输入用户名和密码，点击登录按钮，系统验证通过后跳转到首页。密码错误时显示'用户名或密码错误'提示，连续5次错误锁定账号30分钟。支持'记住密码'功能",
+  "output_preview": "# 登录功能需求分析\n\n## 一、需求解构\n\n### 显性需求（明确写出的）\n\n| 编号 | 需求描述 | 优先级 |\n|------|---------|--------|\n| REQ-01 | 用户在登录页面输入用户名和密码 | P0 |\n| REQ-02 | 点击登录按钮触发验证 | P0 |\n| REQ-03 | 验证通过后跳转到首页 | P0 |\n| REQ-04 | 密码错误时显示\"用",
+  "worker_tokens": 4906,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 23.8,
+  "total": 6,
+  "passed": 3,
+  "failed": 3,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "显性需求≥3条",
+      "passed": false,
+      "evidence": "count=2, min=3"
+    },
+    {
+      "text": "隐性需求≥2条",
+      "passed": false,
+      "evidence": "count=1, min=2"
+    },
+    {
+      "text": "衍生需求≥2条",
+      "passed": false,
+      "evidence": "count=1, min=2"
+    },
+    {
+      "text": "包含五维拆解",
+      "passed": true,
+      "evidence": "found: 五维"
+    },
+    {
+      "text": "需求有唯一ID",
+      "passed": true,
+      "evidence": "found: REQ-"
+    },
+    {
+      "text": "覆盖了密码锁定场景",
+      "passed": true,
+      "evidence": "found: 锁定"
+    }
+  ]
+}

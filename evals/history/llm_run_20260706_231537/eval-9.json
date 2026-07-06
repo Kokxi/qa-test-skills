@@ -1,0 +1,45 @@
+{
+  "eval_id": 9,
+  "prompt_preview": "一个电商平台即将发布v2.1版本，本次变更内容为：1）订单模块新增'拆分订单'功能，允许用户将一个订单拆分为多个子订单分别发货；2）支付模块对接了新的支付渠道'云闪付'；3）修复了商品列表中价格显示精",
+  "output_preview": "好的，我将按照 **QA Test Skills** 的标准化工作流，为你设计完整的测试方案。首先，我将执行需求解析和评审，然后进行深度分析，最后输出分级的回归测试策略。\n\n---\n\n## 第0步：需求文档解析\n\n根据你的描述，我解析出本次 v2.1 版本的核心变更点：\n\n| 变更ID | 变更模块 | 变更类型 | 变更描述 |\n|--------|---------|---------|---",
+  "worker_tokens": 5794,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 30.3,
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "至少3个回归级别",
+      "passed": true,
+      "evidence": "count=24, min=3"
+    },
+    {
+      "text": "有冒烟级别",
+      "passed": true,
+      "evidence": "found: 冒烟"
+    },
+    {
+      "text": "有核心级别",
+      "passed": true,
+      "evidence": "found: 核心"
+    },
+    {
+      "text": "有全量级别",
+      "passed": true,
+      "evidence": "found: 全量"
+    },
+    {
+      "text": "有变更分析",
+      "passed": true,
+      "evidence": "found: 变更|新增|修复"
+    },
+    {
+      "text": "有执行建议",
+      "passed": true,
+      "evidence": "found: 建议|推荐|优先"
+    }
+  ]
+}

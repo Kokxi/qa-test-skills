@@ -1,0 +1,72 @@
+{
+  "eval_id": 1,
+  "prompt_preview": "请帮我测试这个电商项目：E:\\dingskills\\qa-test-skills\\examples\\ecommerce-project\\docs\\prd.md 生成完整的测试用例集和测试报告",
+  "output_preview": "I’ll help you test this e-commerce project. First, I need to read the PRD and any related documents, then run the full test workflow. Let me start by reading the requirements.",
+  "worker_tokens": 2699,
+  "worker_tokens_cached": 2433,
+  "elapsed_sec": 4.8,
+  "total": 10,
+  "passed": 1,
+  "failed": 2,
+  "skipped": 7,
+  "e2e_skipped": 7,
+  "expectations": [
+    {
+      "text": "需求评审报告已生成",
+      "passed": null,
+      "evidence": "requires_e2e: 无法在纯 LLM 模式下验证 file_exists",
+      "requires_e2e": true
+    },
+    {
+      "text": "需求解构表已生成",
+      "passed": null,
+      "evidence": "requires_e2e: 无法在纯 LLM 模式下验证 file_exists",
+      "requires_e2e": true
+    },
+    {
+      "text": "场景树已生成",
+      "passed": null,
+      "evidence": "requires_e2e: 无法在纯 LLM 模式下验证 file_exists",
+      "requires_e2e": true
+    },
+    {
+      "text": "边界清单已生成",
+      "passed": null,
+      "evidence": "requires_e2e: 无法在纯 LLM 模式下验证 file_exists",
+      "requires_e2e": true
+    },
+    {
+      "text": "AI提示词已生成",
+      "passed": null,
+      "evidence": "requires_e2e: 无法在纯 LLM 模式下验证 file_exists",
+      "requires_e2e": true
+    },
+    {
+      "text": "评审或补盲已执行",
+      "passed": null,
+      "evidence": "requires_e2e: 无法在纯 LLM 模式下验证 file_exists_or",
+      "requires_e2e": true
+    },
+    {
+      "text": "测试报告已生成",
+      "passed": null,
+      "evidence": "requires_e2e: 无法在纯 LLM 模式下验证 file_exists",
+      "requires_e2e": true
+    },
+    {
+      "text": "用例包含TC唯一ID",
+      "passed": false,
+      "evidence": "not found: TC_"
+    },
+    {
+      "text": "用例关联了需求ID",
+      "passed": false,
+      "evidence": "not found: REQ-"
+    },
+    {
+      "text": "覆盖至少5个步骤输出",
+      "passed": true,
+      "evidence": "count=31, min=5"
+    }
+  ]
+}

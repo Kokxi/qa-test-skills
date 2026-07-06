@@ -1,0 +1,45 @@
+{
+  "eval_id": 11,
+  "prompt_preview": "请为以下功能构建场景树：一个电商平台的'商品搜索'功能。用户在搜索框输入关键词，系统返回匹配的商品列表。支持按价格范围、品牌、分类筛选，按销量/价格/评分排序。搜索无结果时显示'未找到相关商品'并推荐",
+  "output_preview": "我来为你构建电商平台\"商品搜索\"功能的完整场景树。\n\n---\n\n# 商品搜索功能 — 场景树\n\n## 一、场景树结构总览\n\n```\n┌─────────────────────────────────────────────────────────┐\n│                    商品搜索功能                          │\n├──────────────────",
+  "worker_tokens": 6058,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 29.3,
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有主路径",
+      "passed": true,
+      "evidence": "found: 主路径|Happy|正常"
+    },
+    {
+      "text": "有分支路径",
+      "passed": true,
+      "evidence": "found: 分支|备选|Alternative"
+    },
+    {
+      "text": "有异常路径",
+      "passed": true,
+      "evidence": "found: 异常|Exception|错误"
+    },
+    {
+      "text": "有业务规则",
+      "passed": true,
+      "evidence": "found: 业务规则|规则"
+    },
+    {
+      "text": "场景数≥6",
+      "passed": true,
+      "evidence": "count=58, min=6"
+    },
+    {
+      "text": "有层次结构",
+      "passed": true,
+      "evidence": "found: ├|└|│"
+    }
+  ]
+}

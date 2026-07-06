@@ -1,0 +1,40 @@
+{
+  "eval_id": 33,
+  "prompt_preview": "帮我测试这个项目：[上传一个只写了'登录功能'四个字、无任何细节的文档] 生成完整测试用例",
+  "output_preview": "好的，收到您的需求。我将启动 **QA Test Skills** 工作流，对您提供的“登录功能”需求进行完整的测试设计。\n\n由于您提供的需求文档内容极度精简（仅“登录功能”四字），我将首先执行**第0步：需求文档解析**，然后严格按照12步工作流，自动调用48个专家级子技能，生成结构化的、可追溯的测试用例集。\n\n---\n\n### **第0步：需求文档解析**\n\n**输入文件**: `用户提供的需",
+  "worker_tokens": 6884,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 36.2,
+  "total": 5,
+  "passed": 3,
+  "failed": 2,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "判定输入不完整",
+      "passed": false,
+      "evidence": "any match: False in ['fail', 'need_more_info', '不通过', '信息不足']"
+    },
+    {
+      "text": "输出了缺失信息清单",
+      "passed": true,
+      "evidence": "any match: True in ['缺失', '缺少', 'missing']"
+    },
+    {
+      "text": "输出了追问问题",
+      "passed": false,
+      "evidence": "any match: False in ['追问', '澄清', 'clarification', '请问']"
+    },
+    {
+      "text": "未直接生成用例",
+      "passed": true,
+      "evidence": "found: 补充"
+    },
+    {
+      "text": "给出了输入质量评分",
+      "passed": true,
+      "evidence": "any match: True in ['质量评分', 'quality_score', '评分']"
+    }
+  ]
+}

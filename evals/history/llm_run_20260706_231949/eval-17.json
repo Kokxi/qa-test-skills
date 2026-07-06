@@ -1,0 +1,45 @@
+{
+  "eval_id": 17,
+  "prompt_preview": "我们有一款电商App即将发布iOS和Android版本，请设计移动端专项测试方案。核心功能：商品浏览、搜索、加购、下单支付、个人中心。请覆盖功能测试、中断测试（来电/短信/通知/低电量）、弱网测试（W",
+  "output_preview": "好的，我将为您设计电商App移动端专项测试方案。按照工作流，我先进行需求解析和评审，然后输出完整的测试方案。\n\n---\n\n## 第0步：需求文档解析\n\n**需求摘要**：\n- 项目类型：电商App（iOS + Android）\n- 核心功能：商品浏览、搜索、加购、下单支付、个人中心\n- 测试维度：功能测试、中断测试、弱网测试、兼容性测试、性能测试\n- 平台要求：iOS 15+ / Android ",
+  "worker_tokens": 10148,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 61.5,
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "覆盖功能测试",
+      "passed": true,
+      "evidence": "found: 功能"
+    },
+    {
+      "text": "覆盖中断测试",
+      "passed": true,
+      "evidence": "found: 中断|来电|短信|通知|低电量"
+    },
+    {
+      "text": "覆盖弱网测试",
+      "passed": true,
+      "evidence": "found: 弱网|WiFi|4G|离线|网络"
+    },
+    {
+      "text": "覆盖兼容性测试",
+      "passed": true,
+      "evidence": "found: 兼容|机型|iOS|Android|系统版本"
+    },
+    {
+      "text": "覆盖性能测试",
+      "passed": true,
+      "evidence": "found: 性能|启动|内存|帧率|电量"
+    },
+    {
+      "text": "有测试要点清单",
+      "passed": true,
+      "evidence": "found: [ ]|├|└|清单|列表"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "eval_id": 8,
+  "prompt_preview": "以下是一个电商登录功能的测试分析结果：需求解构已完成，包含显性需求（输入用户名/密码、验证跳转、错误提示、5次锁定、记住密码）和边界条件（密码7/8/20/21位、用户名空/1/20/21字符）。请根",
+  "output_preview": "# AI提示词生成 — 电商登录功能测试用例\n\n## 角色定义\n\n```\n你是一位经验丰富的测试架构师，专精于Web应用的功能测试、安全测试和用户体验测试。你拥有10年以上的测试经验，擅长从用户视角和系统视角双重维度设计测试用例。你的测试设计风格严谨、全面且注重实际可执行性。\n```\n\n## 任务描述\n\n```\n请根据以下需求分析结果，为电商平台的登录功能设计一套完整的测试用例。\n```\n\n## ",
+  "worker_tokens": 3512,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 8.8,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有角色定义",
+      "passed": true,
+      "evidence": "found: 角色|你是一位|你是一个"
+    },
+    {
+      "text": "有输出格式",
+      "passed": true,
+      "evidence": "found: 格式|输出"
+    },
+    {
+      "text": "有约束条件",
+      "passed": true,
+      "evidence": "found: 约束|限制|不得|必须"
+    },
+    {
+      "text": "引用了输入",
+      "passed": true,
+      "evidence": "any match: True in ['密码', '锁定', '边界', '用户名']"
+    },
+    {
+      "text": "有结构化输出",
+      "passed": true,
+      "evidence": "found: TC_|P0|P1|用例"
+    }
+  ]
+}

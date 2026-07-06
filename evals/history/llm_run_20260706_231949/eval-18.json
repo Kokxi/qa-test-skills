@@ -1,0 +1,40 @@
+{
+  "eval_id": 18,
+  "prompt_preview": "以下是AI生成的一组测试用例（已通过评审和补盲），请在最终输出前执行输出验证。验证要求：1)事实核查：验证每个需求的ID是否存在、用例中的业务规则是否与需求一致 2)一致性检查：用例之间是否有矛盾（前",
+  "output_preview": "好的，我将严格按照您的要求，对提供的测试用例集执行输出验证，并生成详细的验证报告。\n\n---\n\n## 输出验证报告\n\n**验证对象**: AI生成的测试用例集（初版）\n**验证时间**: 2024-05-24\n**验证方法**: 基于提供的需求文档（假设存在）进行事实核查、一致性、可执行性和来源追溯。\n\n---\n\n### 1. 事实核查 (Fact-Checking)\n\n**目标**: 验证每个需",
+  "worker_tokens": 4561,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 15.6,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有事实核查",
+      "passed": true,
+      "evidence": "found: 事实|需求ID|业务规则|存在"
+    },
+    {
+      "text": "有一致性检查",
+      "passed": true,
+      "evidence": "found: 一致|矛盾|冲突"
+    },
+    {
+      "text": "有可执行性检查",
+      "passed": true,
+      "evidence": "found: 可执行|预置条件|可观测"
+    },
+    {
+      "text": "有来源追溯",
+      "passed": true,
+      "evidence": "found: 追溯|REQ|需求"
+    },
+    {
+      "text": "有总体结论",
+      "passed": true,
+      "evidence": "found: 通过|不通过|合格|验证"
+    }
+  ]
+}

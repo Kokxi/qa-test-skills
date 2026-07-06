@@ -1,0 +1,40 @@
+{
+  "eval_id": 31,
+  "prompt_preview": "电商平台v2.0刚上线一周发现3个P1线上缺陷（支付超时未退款、搜索关键词空指针、订单状态不同步）。请做迭代复盘：1）根因分析（5Why/鱼骨图）2）漏测分析 3）改进Action Items。同时制",
+  "output_preview": "好的，收到。这是一个典型的“线上事故复盘+团队能力建设”复合型需求。我将以测试架构师的身份，严格遵循 **QA Test Skills** 工作流，为你输出一份完整的迭代复盘报告和新人培训计划。\n\n**工作流执行路径：**\n1.  **需求识别**：识别到“线上缺陷复盘”、“根因分析”、“漏测分析”、“改进Action”、“新人培训”。\n2.  **技能路由**：\n    *   根因分析 -> ",
+  "worker_tokens": 5381,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 27.5,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有根因分析",
+      "passed": true,
+      "evidence": "found: 根因|5Why|鱼骨|原因"
+    },
+    {
+      "text": "有漏测分析",
+      "passed": true,
+      "evidence": "found: 漏测|遗漏|缺口"
+    },
+    {
+      "text": "有Action Items",
+      "passed": true,
+      "evidence": "found: Action|改进|下一步|措施"
+    },
+    {
+      "text": "有培训计划",
+      "passed": true,
+      "evidence": "found: 培训|新人|成长|技能矩阵"
+    },
+    {
+      "text": "有追踪表",
+      "passed": true,
+      "evidence": "found: 追踪|追踪|负责人|deadline"
+    }
+  ]
+}

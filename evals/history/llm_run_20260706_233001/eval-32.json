@@ -1,0 +1,40 @@
+{
+  "eval_id": 32,
+  "prompt_preview": "向VP汇报电商v2.0测试结果：总用例200条，执行195条（97.5%），通过180条（92.3%），发现Bug45个（P0=2,P1=8,P2=20,P3=15），已修复32个。自动化覆盖率60%",
+  "output_preview": "好的，VP。以下是为您准备的电商v2.0测试报告，已按照管理层视角进行组织和提炼。\n\n---\n\n# 电商v2.0 测试报告（管理层摘要）\n\n**报告日期：** 2024年5月24日\n**报告对象：** VP\n**报告人：** 测试团队负责人\n**项目版本：** 电商平台 v2.0\n\n## 1. 执行概况\n\n本次测试周期已基本结束，整体执行进度和通过率均达到健康水平。\n\n| 指标 | 数据 | 解读",
+  "worker_tokens": 4077,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 16.3,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有执行概况",
+      "passed": true,
+      "evidence": "found: 执行|概况|总用例|通过率"
+    },
+    {
+      "text": "有缺陷分布",
+      "passed": true,
+      "evidence": "found: P0|P1|分布|分析"
+    },
+    {
+      "text": "有发布建议",
+      "passed": true,
+      "evidence": "found: 发布|建议|结论"
+    },
+    {
+      "text": "有团队建设",
+      "passed": true,
+      "evidence": "found: 团队|能力|招聘|建设"
+    },
+    {
+      "text": "有数据可视化",
+      "passed": true,
+      "evidence": "found: %|率|趋势|对比"
+    }
+  ]
+}

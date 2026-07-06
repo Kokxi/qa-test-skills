@@ -1,0 +1,40 @@
+{
+  "eval_id": 19,
+  "prompt_preview": "一个电商平台项目完成了v2.0版本的测试，以下是测试数据：总用例200条，执行195条(97.5%)，通过180条(92.3%)，失败10条，阻塞5条。发现Bug总数45个：P0=2个(已修复1个)、",
+  "output_preview": "我来为你生成一份面向管理层的专业测试报告。\n\n---\n\n# 电商平台 v2.0 测试报告\n\n**报告日期：** 2025年1月  \n**报告对象：** 管理层  \n**报告人：** QA 团队  \n**版本：** v2.0\n\n---\n\n## 一、执行摘要\n\n电商平台 v2.0 已完成功能测试，整体质量处于 **中等偏上** 水平。测试覆盖率达到 97.5%，核心功能通过率 92.3%，但存在 **",
+  "worker_tokens": 4270,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 14.8,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有执行概况",
+      "passed": true,
+      "evidence": "found: 执行|概况|总用例|通过"
+    },
+    {
+      "text": "有缺陷分析",
+      "passed": true,
+      "evidence": "found: 缺陷|Bug|P0|P1|分布"
+    },
+    {
+      "text": "有风险评估",
+      "passed": true,
+      "evidence": "found: 风险"
+    },
+    {
+      "text": "有发布建议",
+      "passed": true,
+      "evidence": "found: 发布|建议|结论"
+    },
+    {
+      "text": "面向管理层",
+      "passed": true,
+      "evidence": "found: 报告|概况|摘要|总结"
+    }
+  ]
+}

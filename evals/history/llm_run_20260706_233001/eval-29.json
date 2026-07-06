@@ -1,0 +1,40 @@
+{
+  "eval_id": 29,
+  "prompt_preview": "为电商项目批量构造测试数据：需要1000条订单记录，覆盖待付款、待发货、已发货、已完成、已取消五种状态。每条数据需包含订单号、用户ID、商品ID、数量、金额、创建时间。同时提供数据脱敏方案（识别敏感字",
+  "output_preview": "# 电商项目测试数据批量构造方案\n\n## 一、数据工厂架构建议\n\n### 1.1 整体架构\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                    数据工厂 (DataFactory)                     │\n├──────────────────────",
+  "worker_tokens": 8395,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 38.1,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有造数策略",
+      "passed": true,
+      "evidence": "found: 构造|造数|生成|批量"
+    },
+    {
+      "text": "有多状态覆盖",
+      "passed": true,
+      "evidence": "count=33, min=3"
+    },
+    {
+      "text": "有脱敏方案",
+      "passed": true,
+      "evidence": "found: 脱敏|掩码|替换|加密"
+    },
+    {
+      "text": "有数据架构",
+      "passed": true,
+      "evidence": "found: 数据工厂|架构|策略"
+    },
+    {
+      "text": "有合规说明",
+      "passed": true,
+      "evidence": "any match: True in ['合规', 'GDPR', '个保法', '等保']"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "eval_id": 13,
+  "prompt_preview": "我们即将启动一个新的B2B电商平台项目，主要面向企业采购场景。第一期需求包含：供应商管理（入驻/审核/评价）、商品目录管理（批量上架/价格策略）、采购订单管理（询价/比价/下单/审批）、对账与结算。技",
+  "output_preview": "# B2B电商平台 — 分层测试策略设计\n\n## 一、项目全景分析\n\n### 1.1 项目画像\n\n| 维度 | 评估 | 影响 |\n|------|------|------|\n| **业务复杂度** | ⭐⭐⭐⭐ | 多角色（供应商/采购方/管理员）、多流程（询价→比价→下单→审批→结算） |\n| **技术复杂度** | ⭐⭐⭐ | 标准Spring Boot栈，但涉及金额计算和状态流转 |\n|",
+  "worker_tokens": 6746,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 43.3,
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有测试范围",
+      "passed": true,
+      "evidence": "found: 范围|覆盖"
+    },
+    {
+      "text": "有分层策略",
+      "passed": true,
+      "evidence": "found: 分层|单元|接口|端到端|UI|E2E"
+    },
+    {
+      "text": "有资源分配",
+      "passed": true,
+      "evidence": "found: 资源|人员|分配"
+    },
+    {
+      "text": "有质量门禁",
+      "passed": true,
+      "evidence": "found: 门禁|准入|准出|标准"
+    },
+    {
+      "text": "有排期建议",
+      "passed": true,
+      "evidence": "found: 工期|排期|阶段|迭代|周期"
+    },
+    {
+      "text": "结合了项目特点",
+      "passed": true,
+      "evidence": "found: B2B|企业|采购|供应商"
+    }
+  ]
+}

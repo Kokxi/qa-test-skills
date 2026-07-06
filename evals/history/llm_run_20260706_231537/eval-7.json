@@ -1,0 +1,55 @@
+{
+  "eval_id": 7,
+  "prompt_preview": "用户反馈：'我在支付页面点击确认支付后，页面一直显示'支付中...'，等了5分钟还是没反应，刷新页面后发现订单状态变成了'已支付'，但我的银行卡扣款短信收到了3条同样的扣款通知，金额被扣了3次！' 请",
+  "output_preview": "好的，收到您的反馈。这是一个非常严重的支付问题，我将按照标准格式整理Bug报告。\n\n---\n\n## Bug 报告\n\n| 字段 | 内容 |\n|------|------|\n| **Bug ID** | BUG-PAY-20240520-001 |\n| **Bug 标题** | 【支付】点击确认支付后页面卡在“支付中...”状态，刷新后订单显示已支付，但银行卡被重复扣款3次 |\n| **严重度** ",
+  "worker_tokens": 3653,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 11.8,
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有Bug标题",
+      "passed": true,
+      "evidence": "found: Bug|缺陷|重复扣款|重复支付"
+    },
+    {
+      "text": "有严重度",
+      "passed": true,
+      "evidence": "found: 严重|P0|P1|Critical|高"
+    },
+    {
+      "text": "有优先级",
+      "passed": true,
+      "evidence": "found: 优先|P0|P1|高"
+    },
+    {
+      "text": "有复现步骤",
+      "passed": true,
+      "evidence": "found: 步骤|复现"
+    },
+    {
+      "text": "有预期vs实际结果",
+      "passed": true,
+      "evidence": "found: 预期|实际"
+    },
+    {
+      "text": "有影响范围",
+      "passed": true,
+      "evidence": "found: 影响|范围"
+    },
+    {
+      "text": "有根因推测",
+      "passed": true,
+      "evidence": "found: 根因|原因|推测"
+    },
+    {
+      "text": "有附件建议",
+      "passed": true,
+      "evidence": "found: 日志|截图|附件"
+    }
+  ]
+}

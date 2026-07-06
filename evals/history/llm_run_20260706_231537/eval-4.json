@@ -1,0 +1,45 @@
+{
+  "eval_id": 4,
+  "prompt_preview": "评审以下AI生成的登录模块测试用例质量，要求六维评审：\n\nTC_USER_LOGIN_001 - 验证正确用户名密码可以成功登录 - P0\n预置条件：用户已注册，账号正常，网络正常\n预期结果：跳转首页",
+  "output_preview": "# AI生成测试用例六维评审报告\n\n## 一、完整性评审\n\n### ✅ 通过项\n- 覆盖了基本功能（成功登录、密码错误、锁定机制）\n- 包含了不同优先级（P0-P2）\n\n### ❌ 缺失项（严重）\n| 缺失类型 | 缺失用例 | 严重程度 |\n|---------|---------|---------|\n| **输入验证** | 空用户名/空密码 | 🔴 高 |\n| **边界值** | 密码长度",
+  "worker_tokens": 4552,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 18.5,
+  "total": 6,
+  "passed": 5,
+  "failed": 1,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "评审维度≥4个",
+      "passed": true,
+      "evidence": "count=9, min=4"
+    },
+    {
+      "text": "每个维度有评分",
+      "passed": true,
+      "evidence": "found: /10"
+    },
+    {
+      "text": "识别出用例问题",
+      "passed": true,
+      "evidence": "found: 问题"
+    },
+    {
+      "text": "有改进建议",
+      "passed": true,
+      "evidence": "found: 改进"
+    },
+    {
+      "text": "有结构化报告框架",
+      "passed": true,
+      "evidence": "found: 评审报告"
+    },
+    {
+      "text": "使用规范标记格式",
+      "passed": false,
+      "evidence": "any match: False in ['MISSING', 'WRONG', 'VAGUE']"
+    }
+  ]
+}

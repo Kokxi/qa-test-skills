@@ -1,0 +1,55 @@
+{
+  "eval_id": 5,
+  "prompt_preview": "设计以下用户管理API的接口测试方案。接口说明：POST /api/users 创建用户，请求体包含 username(必填,3-20字符), email(必填,邮箱格式), password(必填,",
+  "output_preview": "好的，我将按照 QA Test Skills 工作流，为您设计这个用户管理API的完整接口测试方案。\n\n首先，我将需求文档化，然后逐步执行工作流。\n\n## 第0步：需求文档解析\n\n**需求文档集合.md**\n\n```markdown\n# 用户管理API需求文档\n\n## 接口列表\n\n### 1. POST /api/users - 创建用户\n- **请求体**:\n  - `username` (必填",
+  "worker_tokens": 9105,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 52.4,
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "覆盖POST接口",
+      "passed": true,
+      "evidence": "found: POST"
+    },
+    {
+      "text": "覆盖GET接口",
+      "passed": true,
+      "evidence": "found: GET"
+    },
+    {
+      "text": "覆盖DELETE接口",
+      "passed": true,
+      "evidence": "found: DELETE"
+    },
+    {
+      "text": "覆盖异常状态码",
+      "passed": true,
+      "evidence": "any match: True in ['404', '400', '409', '403']"
+    },
+    {
+      "text": "有参数组合测试",
+      "passed": true,
+      "evidence": "found: 参数"
+    },
+    {
+      "text": "有安全测试",
+      "passed": true,
+      "evidence": "any match: True in ['鉴权', '认证', 'token', '安全']"
+    },
+    {
+      "text": "有结构化方案",
+      "passed": true,
+      "evidence": "found: 测试"
+    },
+    {
+      "text": "覆盖边界值",
+      "passed": true,
+      "evidence": "any match: True in ['边界', '3-20', '6位']"
+    }
+  ]
+}

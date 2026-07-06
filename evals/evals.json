@@ -3,6 +3,7 @@
   "evals": [
     {
       "id": 1,
+      "requires_e2e": true,
       "prompt": "请帮我测试这个电商项目：E:\\dingskills\\qa-test-skills\\examples\\ecommerce-project\\docs\\prd.md 生成完整的测试用例集和测试报告",
       "expected_output": "父工作流完整执行12步，产出一系列输出文件，包括需求评审报告、需求解构表、场景树、测试用例等",
       "files": [
@@ -1891,6 +1892,7 @@
     },
     {
       "id": 38,
+      "requires_e2e": true,
       "skill": "qa-test-skills (golden)",
       "prompt": "请帮我测试这个电商项目：examples/ecommerce-project/docs/prd.md 生成完整的测试用例集和测试报告",
       "expected_output": "完整测试用例集，TC_ID 覆盖 examples/ecommerce-project/test-cases.md 的 golden 用例集至少 50%",

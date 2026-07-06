@@ -1,0 +1,38 @@
+{
+  "eval_id": 10,
+  "error": "API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}",
+  "total": 5,
+  "passed": 0,
+  "failed": 5,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有测试任务书",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "有探索方法",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "覆盖多个维度",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "有会话模板",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    },
+    {
+      "text": "关注边缘场景",
+      "passed": false,
+      "evidence": "worker error: API error 403: {\"error\":{\"message\":\"You've reached your usage limit for this billing cycle. Your quota will be refreshed in the next cycle. Upgrade to get more: https://www.kimi.com/code/console?from=quota-upgrade\",\"type\":\"access_terminated_error\"}}"
+    }
+  ],
+  "worker_tokens": 0,
+  "elapsed_sec": 45.74152064323425
+}

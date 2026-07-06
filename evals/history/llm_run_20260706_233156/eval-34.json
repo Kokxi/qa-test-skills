@@ -1,0 +1,40 @@
+{
+  "eval_id": 34,
+  "prompt_preview": "对以下AI生成的测试用例集做最终输出验证：用例集包含 TC_AUTH_LOGIN_001（关联 REQ-AUTH-999）、TC_CART_ADD_001（无关联需求ID）、TC_ORDER_PAY_",
+  "output_preview": "# 输出验证报告\n\n## 概述\n\n| 项目 | 内容 |\n|------|------|\n| **验证对象** | AI生成的测试用例集（3个用例） |\n| **验证方法** | 事实核查、一致性检查、可执行性验证、来源追溯 |\n| **验证结果** | ❌ **未通过** — 发现3个严重问题、2个中等问题 |\n\n---\n\n## 一、事实核查（Fact Check）\n\n### 1.1 TC_AU",
+  "worker_tokens": 5206,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 19.5,
+  "total": 5,
+  "passed": 4,
+  "failed": 1,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "判定验证失败",
+      "passed": false,
+      "evidence": "any match: False in ['fail', '不通过', '验证失败']"
+    },
+    {
+      "text": "识别 REQ-AUTH-999 不存在",
+      "passed": true,
+      "evidence": "any match: True in ['REQ-AUTH-999', '不存在', '未找到']"
+    },
+    {
+      "text": "识别追溯缺失",
+      "passed": true,
+      "evidence": "any match: True in ['追溯', '关联需求', '缺']"
+    },
+    {
+      "text": "识别步骤不可执行",
+      "passed": true,
+      "evidence": "any match: True in ['可执行', '模糊', '过于']"
+    },
+    {
+      "text": "输出问题清单",
+      "passed": true,
+      "evidence": "any match: True in ['问题清单', '修正', 'issues']"
+    }
+  ]
+}

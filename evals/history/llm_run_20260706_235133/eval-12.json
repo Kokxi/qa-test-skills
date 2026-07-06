@@ -1,0 +1,55 @@
+{
+  "eval_id": 12,
+  "prompt_preview": "以下是一组AI生成的登录功能测试用例，请执行盲区补偿：\nTC-001:正常登录（P0）\nTC-002:密码错误（P0）\nTC-003:5次错误锁定（P1）\nTC-004:记住密码（P1）\nTC-005",
+  "output_preview": "# 盲区补偿分析报告\n\n## 一、原始用例概览\n\n| ID | 名称 | 优先级 | 覆盖维度 |\n|----|------|--------|---------|\n| TC-001 | 正常登录 | P0 | 基本功能 |\n| TC-002 | 密码错误 | P0 | 异常输入 |\n| TC-003 | 5次错误锁定 | P1 | 安全策略 |\n| TC-004 | 记住密码 | P1 | 用户",
+  "worker_tokens": 6669,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 39.1,
+  "total": 8,
+  "passed": 7,
+  "failed": 1,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "覆盖时序盲区",
+      "passed": true,
+      "evidence": "found: 时序"
+    },
+    {
+      "text": "覆盖并发盲区",
+      "passed": true,
+      "evidence": "found: 并发"
+    },
+    {
+      "text": "覆盖资源盲区",
+      "passed": true,
+      "evidence": "found: 资源"
+    },
+    {
+      "text": "覆盖状态盲区",
+      "passed": true,
+      "evidence": "found: 状态"
+    },
+    {
+      "text": "覆盖数据盲区",
+      "passed": true,
+      "evidence": "found: 数据"
+    },
+    {
+      "text": "覆盖第三方盲区",
+      "passed": true,
+      "evidence": "found: 第三方"
+    },
+    {
+      "text": "有风险标注",
+      "passed": true,
+      "evidence": "found: 高|中|低"
+    },
+    {
+      "text": "统一补盲编号",
+      "passed": false,
+      "evidence": "not found: BS_|BS-"
+    }
+  ]
+}

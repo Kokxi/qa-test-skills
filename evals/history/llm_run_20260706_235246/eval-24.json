@@ -1,0 +1,40 @@
+{
+  "eval_id": 24,
+  "prompt_preview": "对电商登录功能进行风险评估。需求说明：用户在登录页面输入用户名和密码，点击登录按钮，系统验证后跳转首页。密码错误5次锁定30分钟。请识别高风险区域、构建风险矩阵（概率×影响）、标注风险等级并提供缓解建",
+  "output_preview": "# 电商登录功能 — 风险评估报告\n\n## 一、需求摘要\n\n| 项目 | 内容 |\n|------|------|\n| 功能 | 用户登录 |\n| 输入 | 用户名 + 密码 |\n| 操作 | 点击登录按钮 |\n| 验证 | 系统验证后跳转首页 |\n| 锁定规则 | 密码错误5次，锁定30分钟 |\n\n---\n\n## 二、高风险区域识别\n\n### 2.1 功能逻辑风险\n\n| 编号 | 风险区域 | ",
+  "worker_tokens": 5474,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 23.5,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "风险点≥4个",
+      "passed": true,
+      "evidence": "count=32, min=4"
+    },
+    {
+      "text": "有风险矩阵",
+      "passed": true,
+      "evidence": "found: 矩阵|概率|影响"
+    },
+    {
+      "text": "有风险等级标注",
+      "passed": true,
+      "evidence": "found: 高|中|低"
+    },
+    {
+      "text": "有缓解建议",
+      "passed": true,
+      "evidence": "found: 缓解|建议|对策"
+    },
+    {
+      "text": "结构化输出",
+      "passed": true,
+      "evidence": "found: ├|└|清单|列表"
+    }
+  ]
+}

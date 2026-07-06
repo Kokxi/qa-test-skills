@@ -1,0 +1,60 @@
+{
+  "eval_id": 3,
+  "prompt_preview": "设计用户登录功能的测试用例。需求说明：用户在登录页面输入用户名和密码进行登录，密码需8-20位且包含字母和数字，连续错误5次锁定账号30分钟。请生成完整的测试用例集。",
+  "output_preview": "已按 **QA Test Skills 12 步工作流** 执行：需求评审 → 需求解构 → 风险/场景/边界/组合/状态分析 → 回归策略 → AI 上下文与提示词 → 生成用例 → 输出评审/盲区补盲 → 最终报告。以下为核心交付物。\n\n---\n\n## 1. 需求评审报告\n\n| 检查维度 | 结论 | 说明 / 风险 |\n|----------|------|--------------|\n|",
+  "worker_tokens": 14154,
+  "worker_tokens_cached": 2445,
+  "elapsed_sec": 127.9,
+  "total": 9,
+  "passed": 6,
+  "failed": 3,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有P0级别用例",
+      "passed": true,
+      "evidence": "found: P0"
+    },
+    {
+      "text": "有P1/P2级别用例",
+      "passed": true,
+      "evidence": "found: P1|P2"
+    },
+    {
+      "text": "用例编号符合TC规范",
+      "passed": false,
+      "evidence": "not found: TC_"
+    },
+    {
+      "text": "包含预置条件",
+      "passed": false,
+      "evidence": "not found: 预置条件"
+    },
+    {
+      "text": "包含预期结果",
+      "passed": true,
+      "evidence": "found: 预期结果"
+    },
+    {
+      "text": "用例总数≥5条",
+      "passed": false,
+      "evidence": "count=0, min=5"
+    },
+    {
+      "text": "覆盖正常登录",
+      "passed": true,
+      "evidence": "found: 登录"
+    },
+    {
+      "text": "覆盖密码错误",
+      "passed": true,
+      "evidence": "found: 密码错误"
+    },
+    {
+      "text": "覆盖账号锁定",
+      "passed": true,
+      "evidence": "found: 锁定"
+    }
+  ]
+}

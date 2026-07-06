@@ -1,0 +1,60 @@
+{
+  "eval_id": 37,
+  "prompt_preview": "对以下AI生成的购物车测试用例集做盲区补盲：现有用例覆盖了添加商品、修改数量、删除商品、结算的正向流程，但未覆盖并发、超时、库存边界。请从六大盲区（时序依赖、并发冲突、资源竞争、状态累积、数据一致性、",
+  "output_preview": "# 购物车测试用例集 — 盲区补盲分析\n\n## 盲区覆盖总览\n\n| 盲区类型 | 补盲场景数 | 严重程度 |\n|---------|-----------|---------|\n| 时序依赖 | 3 | 🔴 高 |\n| 并发冲突 | 3 | 🔴 高 |\n| 资源竞争 | 3 | 🟡 中 |\n| 状态累积 | 3 | 🟡 中 |\n| 数据一致性 | 3 | 🔴 高 |\n| 第三方集成 | 2 | ",
+  "worker_tokens": 5902,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 24.9,
+  "total": 9,
+  "passed": 6,
+  "failed": 3,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "时序依赖盲区",
+      "passed": true,
+      "evidence": "any match: True in ['时序', '顺序']"
+    },
+    {
+      "text": "并发冲突盲区",
+      "passed": true,
+      "evidence": "found: 并发"
+    },
+    {
+      "text": "资源竞争盲区",
+      "passed": true,
+      "evidence": "any match: True in ['资源竞争', '资源耗尽']"
+    },
+    {
+      "text": "状态累积盲区",
+      "passed": true,
+      "evidence": "any match: True in ['状态累积', '长时间', '漂移']"
+    },
+    {
+      "text": "数据一致性盲区",
+      "passed": true,
+      "evidence": "any match: True in ['数据一致', '一致性']"
+    },
+    {
+      "text": "第三方集成盲区",
+      "passed": true,
+      "evidence": "any match: True in ['第三方', '集成', 'Mock']"
+    },
+    {
+      "text": "总补盲数≥12",
+      "passed": false,
+      "evidence": "count=0, min=12"
+    },
+    {
+      "text": "补盲用例带 BS- ID",
+      "passed": false,
+      "evidence": "not found: BS-"
+    },
+    {
+      "text": "关联原始用例或需求",
+      "passed": false,
+      "evidence": "any match: False in ['TC_', 'REQ-']"
+    }
+  ]
+}

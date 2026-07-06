@@ -1,0 +1,40 @@
+{
+  "eval_id": 21,
+  "prompt_preview": "一个电商平台即将开始v3.0版本的测试，包含用户认证重构、商品推荐算法升级、支付渠道新增3个。需求文档共15页，涉及6个模块。团队有3个测试人员，工期4周。请根据以下信息估算测试工作量：1)功能点估算",
+  "output_preview": "好的，我将启动 **QA Test Skills** 工作流，并针对您提出的“测试工作量估算”需求，调用 `qa-test-estimation` 子技能，结合标准化工作流中的需求分析结果，生成一份专业的测试工作量估算报告。\n\n---\n\n## 工作流执行日志\n\n| 步骤 | 状态 | 说明 |\n|------|------|------|\n| 第0步 | ✅ | 解析输入需求：电商平台v3.0，6",
+  "worker_tokens": 5629,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 26.4,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有功能点",
+      "passed": true,
+      "evidence": "found: 功能点|模块"
+    },
+    {
+      "text": "有阶段人天",
+      "passed": true,
+      "evidence": "found: 人天|人时|天"
+    },
+    {
+      "text": "有总人天",
+      "passed": true,
+      "evidence": "found: 总计|合计|总人天"
+    },
+    {
+      "text": "有风险预留",
+      "passed": true,
+      "evidence": "found: 风险|预留|缓冲"
+    },
+    {
+      "text": "有置信区间",
+      "passed": true,
+      "evidence": "found: 置信|区间|±"
+    }
+  ]
+}

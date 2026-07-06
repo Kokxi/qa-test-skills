@@ -1,0 +1,40 @@
+{
+  "eval_id": 30,
+  "prompt_preview": "一个B2B电商项目（Java Spring Boot + Vue.js + MySQL）需要选择测试工具并设计自动化架构。团队2个测试，预算有限。请对比Selenium/Cypress/Playwri",
+  "output_preview": "# B2B电商项目测试工具选型与自动化架构设计\n\n## 📋 需求分析\n\n| 维度 | 内容 |\n|------|------|\n| 项目类型 | B2B电商（Java Spring Boot + Vue.js + MySQL） |\n| 团队规模 | 2名测试人员 |\n| 预算 | 有限（优先开源/低成本方案） |\n| 技术栈 | 后端Java/Spring Boot，前端Vue.js，数据库MyS",
+  "worker_tokens": 6308,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 32.3,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有工具对比",
+      "passed": true,
+      "evidence": "count=35, min=3"
+    },
+    {
+      "text": "有选型推荐",
+      "passed": true,
+      "evidence": "found: 推荐|建议|选择"
+    },
+    {
+      "text": "有分层架构",
+      "passed": true,
+      "evidence": "found: 分层|单元|接口|UI|Page Object|PO"
+    },
+    {
+      "text": "有数据驱动",
+      "passed": true,
+      "evidence": "found: 数据驱动|参数化|Data"
+    },
+    {
+      "text": "有维护策略",
+      "passed": true,
+      "evidence": "found: 维护|重构|Flaky|稳定"
+    }
+  ]
+}

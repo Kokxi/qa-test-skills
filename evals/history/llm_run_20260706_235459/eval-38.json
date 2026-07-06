@@ -1,0 +1,40 @@
+{
+  "eval_id": 38,
+  "prompt_preview": "请帮我测试这个电商项目：examples/ecommerce-project/docs/prd.md 生成完整的测试用例集和测试报告",
+  "output_preview": "好的，我将开始执行完整的测试工作流，为您的电商项目生成测试用例集和测试报告。\n\n**第一步：读取并解析需求文档**\n\n我将首先读取 `examples/ecommerce-project/docs/prd.md` 文件，以获取项目需求。\n\n```bash\ncat examples/ecommerce-project/docs/prd.md\n```",
+  "worker_tokens": 2853,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 1.4,
+  "total": 5,
+  "passed": 0,
+  "failed": 5,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "golden 比对 ≥50%",
+      "passed": false,
+      "evidence": "overlap=0% (≥50%), matched=0/12"
+    },
+    {
+      "text": "覆盖 AUTH 模块",
+      "passed": false,
+      "evidence": "not found: TC_AUTH"
+    },
+    {
+      "text": "覆盖 ORDER 模块",
+      "passed": false,
+      "evidence": "not found: TC_ORDER"
+    },
+    {
+      "text": "覆盖 PRODUCT 模块",
+      "passed": false,
+      "evidence": "not found: TC_PRODUCT"
+    },
+    {
+      "text": "覆盖 USER 模块",
+      "passed": false,
+      "evidence": "not found: TC_USER"
+    }
+  ]
+}

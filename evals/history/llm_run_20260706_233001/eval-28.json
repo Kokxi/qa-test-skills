@@ -1,0 +1,40 @@
+{
+  "eval_id": 28,
+  "prompt_preview": "一个电商平台即将启动v3.0项目，请从需求阶段就开始左移介入：1）做需求可测试性评审 2）制定开发阶段测试计划（含单元测试策略和测试桩方案）。同时制定上线后的右移方案：1）灰度发布监控指标 2）拨测用",
+  "output_preview": "# 电商平台 v3.0 左移右移全流程测试方案\n\n我将按照 QA Test Skills 工作流，从需求阶段开始左移介入，并制定完整的右移方案。\n\n---\n\n## 📋 第0步：需求文档解析\n\n首先，我需要确认需求文档。由于您没有提供具体文档，我将基于电商平台 v3.0 的典型需求进行假设性分析。\n\n> **⚠️ 提示**：请提供具体的 PRD/需求文档，以便我进行精确分析。当前基于通用电商平台 v",
+  "worker_tokens": 9016,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 54.8,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有可测试性评审",
+      "passed": true,
+      "evidence": "found: 可测试|可测"
+    },
+    {
+      "text": "有开发阶段计划",
+      "passed": true,
+      "evidence": "found: 开发|单元|测试桩|契约"
+    },
+    {
+      "text": "有灰度监控指标",
+      "passed": true,
+      "evidence": "found: 灰度|监控|指标"
+    },
+    {
+      "text": "有回滚条件",
+      "passed": true,
+      "evidence": "found: 回滚|触发|条件"
+    },
+    {
+      "text": "覆盖全生命周期",
+      "passed": true,
+      "evidence": "any match: True in ['左移', '右移', '需求', '生产']"
+    }
+  ]
+}

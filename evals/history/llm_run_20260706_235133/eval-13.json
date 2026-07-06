@@ -1,0 +1,45 @@
+{
+  "eval_id": 13,
+  "prompt_preview": "我们即将启动一个新的B2B电商平台项目，主要面向企业采购场景。第一期需求包含：供应商管理（入驻/审核/评价）、商品目录管理（批量上架/价格策略）、采购订单管理（询价/比价/下单/审批）、对账与结算。技",
+  "output_preview": "好的，收到您的需求。作为测试架构师，我将立即启动 **QA Test Skills** 工作流，为您设计一套完整的B2B电商平台分层测试策略。\n\n根据您提供的项目信息（B2B电商、第一期4大模块、技术栈、团队配置、工期），我将按12步标准化工作流执行，并直接输出完整内容。\n\n---\n\n### 第0步：需求文档解析\n\n**输入**：用户提供的项目描述文本。\n**输出文件**：`需求文档集合.md`\n",
+  "worker_tokens": 9559,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 69.5,
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有测试范围",
+      "passed": true,
+      "evidence": "found: 范围|覆盖"
+    },
+    {
+      "text": "有分层策略",
+      "passed": true,
+      "evidence": "found: 分层|单元|接口|端到端|UI|E2E"
+    },
+    {
+      "text": "有资源分配",
+      "passed": true,
+      "evidence": "found: 资源|人员|分配"
+    },
+    {
+      "text": "有质量门禁",
+      "passed": true,
+      "evidence": "found: 门禁|准入|准出|标准"
+    },
+    {
+      "text": "有排期建议",
+      "passed": true,
+      "evidence": "found: 工期|排期|阶段|迭代|周期"
+    },
+    {
+      "text": "结合了项目特点",
+      "passed": true,
+      "evidence": "found: B2B|企业|采购|供应商"
+    }
+  ]
+}

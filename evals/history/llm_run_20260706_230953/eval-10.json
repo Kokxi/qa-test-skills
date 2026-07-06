@@ -1,0 +1,40 @@
+{
+  "eval_id": 10,
+  "prompt_preview": "我们刚刚完成了一个电商购物车功能的脚本化测试（覆盖了添加商品、修改数量、删除商品、价格计算等基本场景），但直觉告诉我可能还有遗漏。请设计一份探索式测试方案，包含测试任务书(charter)、探索方法、",
+  "output_preview": "好的，收到您的需求。作为测试架构师，我将启动 **QA Test Skills** 工作流。根据您的输入——“脚本化测试后的探索式测试”——我将识别并执行以下步骤：\n\n1.  **第0步：需求文档解析**：解析您的需求，生成需求文档集合。\n2.  **第1步：需求评审**：确保需求清晰、可执行。\n3.  **第2步：需求解构**：拆解出显性、隐性和衍生需求。\n4.  **第3步：并行分析**：风险",
+  "worker_tokens": 9743,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 67.1,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有测试任务书",
+      "passed": true,
+      "evidence": "any match: True in ['charter', '任务书', '使命']"
+    },
+    {
+      "text": "有探索方法",
+      "passed": true,
+      "evidence": "found: 漫游|探索|角色扮演|失败路径|对比"
+    },
+    {
+      "text": "覆盖多个维度",
+      "passed": true,
+      "evidence": "count=19, min=3"
+    },
+    {
+      "text": "有会话模板",
+      "passed": true,
+      "evidence": "found: 会话|session|记录|笔记"
+    },
+    {
+      "text": "关注边缘场景",
+      "passed": true,
+      "evidence": "any match: True in ['边缘', '体验', '异常', '边界']"
+    }
+  ]
+}

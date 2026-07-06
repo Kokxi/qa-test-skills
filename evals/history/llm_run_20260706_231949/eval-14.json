@@ -1,0 +1,40 @@
+{
+  "eval_id": 14,
+  "prompt_preview": "请为'电商订单'构建状态转换图。订单状态：待付款、待发货、已发货、已完成、已取消、退款中、已退款。转换条件：下单→待付款；付款→待发货；发货→已发货；收货确认→已完成；待付款时取消→已取消；待发货时取",
+  "output_preview": "# 电商订单状态转换图分析\n\n## 一、状态转换图\n\n```\n                    ┌─────────────────────────────────────┐\n                    │                                     │\n                    ▼                            ",
+  "worker_tokens": 5718,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 27.9,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "覆盖7种状态",
+      "passed": true,
+      "evidence": "count=196, min=5"
+    },
+    {
+      "text": "有合法转换",
+      "passed": true,
+      "evidence": "found: 合法|正常|正向|允许"
+    },
+    {
+      "text": "有非法转换",
+      "passed": true,
+      "evidence": "found: 非法|不允许|禁止|拒绝"
+    },
+    {
+      "text": "有触发条件",
+      "passed": true,
+      "evidence": "found: 触发|条件|条件"
+    },
+    {
+      "text": "有验证点",
+      "passed": true,
+      "evidence": "found: 验证|检查|确认"
+    }
+  ]
+}

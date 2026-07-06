@@ -1,0 +1,55 @@
+{
+  "eval_id": 7,
+  "prompt_preview": "用户反馈：'我在支付页面点击确认支付后，页面一直显示'支付中...'，等了5分钟还是没反应，刷新页面后发现订单状态变成了'已支付'，但我的银行卡扣款短信收到了3条同样的扣款通知，金额被扣了3次！' 请",
+  "output_preview": "好的，收到用户反馈。作为测试架构师，我将按照标准流程，首先对用户反馈进行解析和结构化，然后输出一份专业的Bug报告。\n\n---\n\n### 第0步：需求文档解析\n\n**输入**：用户反馈文本\n**输出**：`需求文档集合.md` (此处为结构化解析)\n\n**解析结果**：\n- **用户操作**：在支付页面点击“确认支付”。\n- **系统行为**：页面显示“支付中...”，持续5分钟无响应。\n- **",
+  "worker_tokens": 4170,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 18.6,
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有Bug标题",
+      "passed": true,
+      "evidence": "found: Bug|缺陷|重复扣款|重复支付"
+    },
+    {
+      "text": "有严重度",
+      "passed": true,
+      "evidence": "found: 严重|P0|P1|Critical|高"
+    },
+    {
+      "text": "有优先级",
+      "passed": true,
+      "evidence": "found: 优先|P0|P1|高"
+    },
+    {
+      "text": "有复现步骤",
+      "passed": true,
+      "evidence": "found: 步骤|复现"
+    },
+    {
+      "text": "有预期vs实际结果",
+      "passed": true,
+      "evidence": "found: 预期|实际"
+    },
+    {
+      "text": "有影响范围",
+      "passed": true,
+      "evidence": "found: 影响|范围"
+    },
+    {
+      "text": "有根因推测",
+      "passed": true,
+      "evidence": "found: 根因|原因|推测"
+    },
+    {
+      "text": "有附件建议",
+      "passed": true,
+      "evidence": "found: 日志|截图|附件"
+    }
+  ]
+}

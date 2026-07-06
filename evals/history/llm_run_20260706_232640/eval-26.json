@@ -1,0 +1,40 @@
+{
+  "eval_id": 26,
+  "prompt_preview": "一组登录测试用例需要执行，请设计执行观察方案：说明执行时需要关注的六路信号（功能表现、接口响应、日志报错、UI渲染、数据一致性、性能指标），输出观察记录模板。同时针对发现的Bug，设计完整的缺陷生命周",
+  "output_preview": "好的，收到您的需求。作为测试架构师，我将为您设计一套完整的执行观察方案和缺陷生命周期管理流程。\n\n首先，我将按照标准化工作流，从需求分析开始，逐步产出您需要的文档。\n\n---\n\n## 第0步：需求文档解析\n\n**需求文档集合.md**\n\n### 需求文档集合\n\n**需求来源**：用户直接输入\n**需求ID**：REQ-001\n**需求标题**：登录测试用例执行观察与缺陷管理方案设计\n**需求描述*",
+  "worker_tokens": 7141,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 40.3,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "覆盖多路信号",
+      "passed": true,
+      "evidence": "count=41, min=3"
+    },
+    {
+      "text": "有观察模板",
+      "passed": true,
+      "evidence": "found: 模板|记录"
+    },
+    {
+      "text": "有状态流转",
+      "passed": true,
+      "evidence": "found: 状态|流转|生命周期"
+    },
+    {
+      "text": "有严重度分级",
+      "passed": true,
+      "evidence": "found: 严重|P0|P1|P2|Critical"
+    },
+    {
+      "text": "有时效要求",
+      "passed": true,
+      "evidence": "found: 时效|小时|天|时限"
+    }
+  ]
+}

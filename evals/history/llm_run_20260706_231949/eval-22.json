@@ -1,0 +1,40 @@
+{
+  "eval_id": 22,
+  "prompt_preview": "我们有一个Web电商平台，自动化测试用例从去年初的300个增长到现在的1500个，但维护成本越来越高——每次迭代有15-20%的用例因UI变更而失败，CI流水线从15分钟延长到45分钟，Flaky测试",
+  "output_preview": "# 测试自动化技术债务评估报告\n\n我将按照工作流步骤，系统性地评估您的测试自动化技术债务。\n\n---\n\n## 第0步：需求文档解析\n\n### 需求文档集合.md\n\n**项目背景**：Web电商平台  \n**当前状态**：\n- 测试用例数量：300 → 1500（增长5倍）\n- 维护成本：每次迭代15-20%用例因UI变更失败\n- CI流水线：15分钟 → 45分钟（延长3倍）\n- Flaky测试率",
+  "worker_tokens": 8082,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 47.3,
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有债务分类",
+      "passed": true,
+      "evidence": "found: 债务|维护|架构|数据|技能"
+    },
+    {
+      "text": "有利息评估",
+      "passed": true,
+      "evidence": "found: 利息|成本|维护"
+    },
+    {
+      "text": "有本金评估",
+      "passed": true,
+      "evidence": "found: 本金|重写"
+    },
+    {
+      "text": "有还款规划",
+      "passed": true,
+      "evidence": "found: 还款|规划|阶段"
+    },
+    {
+      "text": "有报告结构",
+      "passed": true,
+      "evidence": "found: 评估|报告|建议"
+    }
+  ]
+}

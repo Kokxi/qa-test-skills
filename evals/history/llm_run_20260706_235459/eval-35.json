@@ -1,0 +1,50 @@
+{
+  "eval_id": 35,
+  "prompt_preview": "针对电商购物车模块（需求：添加商品、修改数量、删除商品、结算、并发库存扣减），生成优化后的AI提示词，包含角色定义、输出格式规范、约束条件。要求注入前面的需求解构和场景树分析结果。",
+  "output_preview": "# AI提示词生成 — 电商购物车模块\n\n## 角色定义\n\n```\n你是一位资深测试架构师，拥有10年以上电商系统测试经验，精通购物车模块的测试设计。\n你的核心能力：\n- 精通购物车业务逻辑（添加/修改/删除/结算/库存扣减）\n- 精通并发测试设计（库存扣减的竞态条件、ABA问题）\n- 精通边界分析和组合测试策略\n- 精通测试用例的标准化输出\n```\n\n## 上下文注入\n\n### 需求解构结果\n\n",
+  "worker_tokens": 4351,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 14.5,
+  "total": 7,
+  "passed": 7,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "输出优化提示词",
+      "passed": true,
+      "evidence": "any match: True in ['提示词', 'prompt', 'Prompt']"
+    },
+    {
+      "text": "含角色定义",
+      "passed": true,
+      "evidence": "any match: True in ['角色', 'role', '资深测试']"
+    },
+    {
+      "text": "含输出数量约束",
+      "passed": true,
+      "evidence": "any match: True in ['数量', '条', '输出']"
+    },
+    {
+      "text": "含测试维度",
+      "passed": true,
+      "evidence": "any match: True in ['维度', '覆盖', '场景']"
+    },
+    {
+      "text": "含格式规范",
+      "passed": true,
+      "evidence": "any match: True in ['格式', 'format', '规范']"
+    },
+    {
+      "text": "含约束条件",
+      "passed": true,
+      "evidence": "any match: True in ['约束', 'constraint', '限制']"
+    },
+    {
+      "text": "注入购物车上下文",
+      "passed": true,
+      "evidence": "any match: True in ['购物车', 'cart', '库存']"
+    }
+  ]
+}

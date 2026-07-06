@@ -1,0 +1,55 @@
+{
+  "eval_id": 6,
+  "prompt_preview": "对以下功能进行边界分析：用户在注册页面填写表单，包含以下字段：用户名（文本，3-20个字符，字母数字下划线）、年龄（数字，18-120岁）、邮箱（文本，需含@和.）、密码（文本，8-32位）、邀请码（",
+  "output_preview": "# 边界分析：用户注册表单\n\n我将按照标准化工作流执行边界分析，并输出完整的边界清单。\n\n---\n\n## 第0步：需求文档解析\n\n### 需求文档集合\n\n**功能描述**：用户在注册页面填写表单，包含以下字段：\n1. **用户名**：文本，3-20个字符，字母数字下划线\n2. **年龄**：数字，18-120岁\n3. **邮箱**：文本，需含@和.\n4. **密码**：文本，8-32位\n5. **",
+  "worker_tokens": 9191,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 51.8,
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "覆盖用户名边界",
+      "passed": true,
+      "evidence": "found: 用户名"
+    },
+    {
+      "text": "覆盖年龄边界",
+      "passed": true,
+      "evidence": "found: 年龄"
+    },
+    {
+      "text": "覆盖邮箱边界",
+      "passed": true,
+      "evidence": "found: 邮箱"
+    },
+    {
+      "text": "覆盖密码边界",
+      "passed": true,
+      "evidence": "found: 密码"
+    },
+    {
+      "text": "覆盖邀请码边界",
+      "passed": true,
+      "evidence": "found: 邀请码"
+    },
+    {
+      "text": "有边界值分析",
+      "passed": true,
+      "evidence": "any match: True in ['3', '20', '18', '120', '8', '32']"
+    },
+    {
+      "text": "标注了风险等级",
+      "passed": true,
+      "evidence": "found: 高|中|低"
+    },
+    {
+      "text": "有结构化输出",
+      "passed": true,
+      "evidence": "found: 边界"
+    }
+  ]
+}

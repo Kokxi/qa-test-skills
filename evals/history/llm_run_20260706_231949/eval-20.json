@@ -1,0 +1,45 @@
+{
+  "eval_id": 20,
+  "prompt_preview": "我们需要测试一个AI客服Agent，它能够理解用户问题、查询知识库、生成回答。请输出Agent测试方案，覆盖功能测试（任务执行/意图识别/多轮对话）、安全测试（Prompt注入/敏感信息/越权）、可控",
+  "output_preview": "# AI客服Agent测试方案\n\n## 一、功能测试\n\n### 1.1 任务执行测试\n| 测试要点 | 说明 |\n|---------|------|\n| 知识库查询准确性 | 输入明确问题，验证是否返回正确知识条目 |\n| 多轮上下文保持 | 连续提问，验证Agent是否记住前文信息 |\n| 任务完成率 | 统计完整解决问题的会话占比 |\n| 超时处理 | 长时间无响应时的降级策略 |\n| 并发",
+  "worker_tokens": 4273,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 16.9,
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "功能测试",
+      "passed": true,
+      "evidence": "found: 功能|任务|意图"
+    },
+    {
+      "text": "安全测试",
+      "passed": true,
+      "evidence": "found: 注入|安全|敏感"
+    },
+    {
+      "text": "可控性测试",
+      "passed": true,
+      "evidence": "found: 可控|HITL|终止|人工|速率"
+    },
+    {
+      "text": "幻觉测试",
+      "passed": true,
+      "evidence": "found: 幻觉|事实|RAG|来源"
+    },
+    {
+      "text": "有测试要点",
+      "passed": true,
+      "evidence": "found: [ ]|├|└|要点"
+    },
+    {
+      "text": "结构清晰",
+      "passed": true,
+      "evidence": "found: 维度|方面"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "eval_id": 16,
+  "prompt_preview": "一个电商平台即将上线v3.0大版本，管理层需要一份质量度量报告来决定是否能发布。请设计质量度量指标体系，覆盖过程质量（需求评审通过率/用例覆盖度）、结果质量（Bug密度/线上事故数）、效率（测试周期/",
+  "output_preview": "好的，收到任务。作为测试架构师，我将启动 **QA Test Skills** 工作流，为你设计一份专业的质量度量指标体系。\n\n根据你的需求，这属于 **策略架构** 类别中的 `qa-quality-metrics` 技能。我将直接执行该技能，并按照标准化输出格式生成报告。\n\n---\n\n### 质量度量指标体系设计报告\n\n**报告生成时间**: 2024-05-24\n**报告版本**: v1.0",
+  "worker_tokens": 4278,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 16.5,
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "覆盖过程质量",
+      "passed": true,
+      "evidence": "found: 过程"
+    },
+    {
+      "text": "覆盖结果质量",
+      "passed": true,
+      "evidence": "found: 结果"
+    },
+    {
+      "text": "覆盖效率维度",
+      "passed": true,
+      "evidence": "found: 效率"
+    },
+    {
+      "text": "覆盖健康度",
+      "passed": true,
+      "evidence": "found: 健康|自动化通过|环境"
+    },
+    {
+      "text": "有计算方法",
+      "passed": true,
+      "evidence": "found: 计算|公式|率|比|数"
+    },
+    {
+      "text": "有目标值",
+      "passed": true,
+      "evidence": "found: 目标|≥|≤|%"
+    }
+  ]
+}

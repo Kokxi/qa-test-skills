@@ -1,0 +1,43 @@
+{
+  "eval_id": 13,
+  "error": "[Errno 22] Invalid argument",
+  "total": 6,
+  "passed": 0,
+  "failed": 6,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "有测试范围",
+      "passed": false,
+      "evidence": "worker error: [Errno 22] Invalid argument"
+    },
+    {
+      "text": "有分层策略",
+      "passed": false,
+      "evidence": "worker error: [Errno 22] Invalid argument"
+    },
+    {
+      "text": "有资源分配",
+      "passed": false,
+      "evidence": "worker error: [Errno 22] Invalid argument"
+    },
+    {
+      "text": "有质量门禁",
+      "passed": false,
+      "evidence": "worker error: [Errno 22] Invalid argument"
+    },
+    {
+      "text": "有排期建议",
+      "passed": false,
+      "evidence": "worker error: [Errno 22] Invalid argument"
+    },
+    {
+      "text": "结合了项目特点",
+      "passed": false,
+      "evidence": "worker error: [Errno 22] Invalid argument"
+    }
+  ],
+  "worker_tokens": 0,
+  "elapsed_sec": 0.2263321876525879
+}

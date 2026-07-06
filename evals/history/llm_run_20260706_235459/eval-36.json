@@ -1,0 +1,65 @@
+{
+  "eval_id": 36,
+  "prompt_preview": "对以下AI生成的3条测试用例做六维评审：TC_001 验证登录成功（步骤：输入正确账密点登录，预期跳转首页）；TC_002 验证密码错误（步骤：输入错误密码，预期提示错误，但缺预期提示文案）；TC_0",
+  "output_preview": "好的，收到。我将对您提供的3条AI生成的测试用例进行六维评审，并给出每维度的评分。\n\n---\n\n## 六维评审报告\n\n### 评审对象\n\n| 用例ID | 标题 | 前置条件 | 测试步骤 | 预期结果 |\n|--------|------|---------|---------|---------|\n| TC_001 | 验证登录成功 | 未填写 | 1. 输入正确账密<br>2. 点击登录按钮",
+  "worker_tokens": 4592,
+  "worker_tokens_cached": 0,
+  "elapsed_sec": 16.2,
+  "total": 10,
+  "passed": 10,
+  "failed": 0,
+  "skipped": 0,
+  "e2e_skipped": 0,
+  "expectations": [
+    {
+      "text": "六维评审报告",
+      "passed": true,
+      "evidence": "any match: True in ['六维', '评审', 'critique']"
+    },
+    {
+      "text": "完整性维度",
+      "passed": true,
+      "evidence": "found: 完整性"
+    },
+    {
+      "text": "准确性维度",
+      "passed": true,
+      "evidence": "found: 准确性"
+    },
+    {
+      "text": "可执行性维度",
+      "passed": true,
+      "evidence": "found: 可执行"
+    },
+    {
+      "text": "风险覆盖维度",
+      "passed": true,
+      "evidence": "any match: True in ['风险覆盖', '风险']"
+    },
+    {
+      "text": "规范性维度",
+      "passed": true,
+      "evidence": "found: 规范"
+    },
+    {
+      "text": "追溯性维度",
+      "passed": true,
+      "evidence": "found: 追溯"
+    },
+    {
+      "text": "识别 TC_002 问题",
+      "passed": true,
+      "evidence": "any match: True in ['TC_002', '预期文案', 'MISSING']"
+    },
+    {
+      "text": "识别 TC_003 问题",
+      "passed": true,
+      "evidence": "any match: True in ['TC_003', '前置条件', 'MISSING']"
+    },
+    {
+      "text": "输出改进建议",
+      "passed": true,
+      "evidence": "any match: True in ['改进', '建议', 'improvement']"
+    }
+  ]
+}
