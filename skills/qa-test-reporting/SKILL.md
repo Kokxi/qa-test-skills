@@ -1,5 +1,7 @@
 ---
 name: qa-test-reporting
+slug: qa-test-reporting
+displayName: Test Reporting
 version: 1.6.0
 description: >-
   输出面向不同受众的测试报告——日报给团队同步进度、周报给项目经理、质量报告给管理层决策。当测试执行完成需要汇总结果、或者上级问"质量怎么样"的时候使用此技能。不同角色关心的数据不同：开发关心Bug明细，经理关心通过率和趋势，老板关心风险和发版决策。报告内容适配受众，关键指标量化呈现，风险区域必须醒目标注。

@@ -1,5 +1,7 @@
 ---
 name: qa-ai-prompt-strategy
+slug: qa-ai-prompt-strategy
+displayName: Ai Prompt Strategy
 version: 1.6.0
 description: >-
   根据不同的测试目标和上下文，选择最佳的提示词模式来驱动AI生成高质量的测试用例。当AI输出的测试用例质量不够好、太泛泛、或者深度不够时，问题往往不在AI而在提示词。此技能提供结构化提示词模板，注入前面步骤产出的分析结果，输出包含角色定义、输出格式规范和约束条件的优化提示词。⚠️ 作为工作流的必过步骤，不得跳过。

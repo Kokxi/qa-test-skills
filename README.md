@@ -10,7 +10,8 @@
 ![AI](https://img.shields.io/badge/AI-协作-purple)
 
 [![skills.sh](https://skills.sh/b/Kokxi/qa-test-skills)](https://skills.sh/Kokxi/qa-test-skills)
-[![ClawHub](https://img.shields.io/badge/ClawHub-kokxi-blue?style=flat-square)](https://clawhub.ai/kokxi)
+[![ClawHub](https://img.shields.io/badge/ClawHub-plugin-blue?style=flat-square)](https://clawhub.ai/plugins/@kokxi/qa-test-skills)
+[![SkillHub](https://img.shields.io/badge/SkillHub-qa--test--skills-orange?style=flat-square)](skillhub://qa-test-skills)
 [![GitHub](https://img.shields.io/badge/GitHub-kokxi/qa--test--skills-blue?style=flat-square)](https://github.com/Kokxi/qa-test-skills)
 
 ## 平台信息
@@ -20,7 +21,8 @@
 | 平台                                  | 地址                                                         | 安装方式                                                   |
 | ------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
 | **[skills.sh](https://skills.sh)** | [Kokxi/qa-test-skills](https://skills.sh/Kokxi/qa-test-skills)  | `npx skills add Kokxi/qa-test-skills`                    |
-| **[ClawHub](https://clawhub.ai)**  | [@kokxi/qa-test-skills](https://clawhub.ai/kokxi)               | `openclaw plugins install clawhub:@kokxi/qa-test-skills` |
+| **[ClawHub](https://clawhub.ai)**  | [@kokxi/qa-test-skills](https://clawhub.ai/plugins/@kokxi/qa-test-skills) | `openclaw plugins install clawhub:@kokxi/qa-test-skills` |
+| **[SkillHub](https://skillhub.cn)** | [qa-test-skills](skillhub://qa-test-skills) | `skillhub install qa-test-skills --dir <skills-dir>` |
 | **[GitHub](https://github.com)**   | [Kokxi/qa-test-skills](https://github.com/Kokxi/qa-test-skills) | `git clone` + 手动安装                                   |
 
 - **分类**：软件测试 > 测试工具 > AI测试
@@ -621,7 +623,7 @@ AI工作流：
 
 [![GitHub Stars](https://img.shields.io/github/stars/Kokxi/qa-test-skills?style=social)](https://github.com/Kokxi/qa-test-skills)
 [![skills.sh](https://skills.sh/b/Kokxi/qa-test-skills)](https://skills.sh/Kokxi/qa-test-skills)
-[![ClawHub](https://img.shields.io/badge/ClawHub-kokxi-blue?style=flat-square)](https://clawhub.ai/kokxi)
+[![ClawHub](https://img.shields.io/badge/ClawHub-plugin-blue?style=flat-square)](https://clawhub.ai/plugins/@kokxi/qa-test-skills)
 
 ### 全平台安装
 
@@ -631,6 +633,9 @@ npx skills add Kokxi/qa-test-skills
 
 # ClawHub 插件
 openclaw plugins install clawhub:@kokxi/qa-test-skills
+
+# SkillHub（国内加速）
+skillhub install qa-test-skills --dir <skills-dir>
 
 # GitHub 克隆
 git clone https://github.com/Kokxi/qa-test-skills.git

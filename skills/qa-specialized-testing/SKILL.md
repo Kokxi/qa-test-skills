@@ -1,5 +1,7 @@
 ---
 name: qa-specialized-testing
+slug: qa-specialized-testing
+displayName: Specialized Testing
 version: 1.6.0
 description: >-
   当功能测试做完之后需要做进一步的质量验证时使用此技能。覆盖性能测试（负载/压力/稳定性）、安全测试（OWASP Top 10 TOP 漏洞）、兼容性测试（多浏览器/多设备）的测试方法。不要在功能测试还没做完时就做专项——先保证功能正确，再评估性能和安全。专项测试的产出是一组可复用的测试方案（性能指标基线、安全渗透用例、兼容性矩阵）。

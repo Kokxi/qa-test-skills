@@ -1,5 +1,7 @@
 ---
 name: qa-test-data-engineering
+slug: qa-test-data-engineering
+displayName: Test Data Engineering
 version: 1.6.0
 description: >-
   当需要批量构造测试数据（造 1000 条订单、准备各种状态的用户数据）、或者需要使用真实生产数据但需要脱敏时使用此技能。覆盖造数策略（API 造数/DB 直接构造/数据工厂）、脱敏方案（敏感字段识别/替换/掩码）、合规要求（GDPR/等保/个保法）和数据工厂架构设计。手工一条条造数据效率太低——测试数据工程的目标是让造数变成一键操作。

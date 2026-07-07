@@ -1,5 +1,7 @@
 ---
 name: qa-retrospective
+slug: qa-retrospective
+displayName: Retrospective
 version: 1.6.0
 description: >-
   当一个迭代结束、一个项目完成、或者发生线上事故需要事后分析时使用此技能。通过系统性的回顾会议和数据复盘，把个人和团队的经验教训转化为可复用的组织资产。不要沦为"说说好话走个形式"——有效的复盘需要有数据支撑（缺陷趋势/漏测分析/效率数据）、有根因分析（为什么出问题）和有 action items（下次怎么做不一样）。输出复盘报告和改进项追踪表。

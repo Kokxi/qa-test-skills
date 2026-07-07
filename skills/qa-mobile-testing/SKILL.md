@@ -1,5 +1,7 @@
 ---
 name: qa-mobile-testing
+slug: qa-mobile-testing
+displayName: Mobile Testing
 version: 1.6.0
 description: >-
   当需要测试 iOS/Android 原生 App、H5 页面或小程序的移动端专项场景时使用此技能。移动端的坑主要不在功能逻辑上——中断（电话/通知/低电量）、弱网/断网/网络切换、前后台切换、系统权限管理、多机型适配和各种系统版本兼容才是重灾区。不要只测功能流程，移动端的 Bug 有一半以上是中断和兼容性相关的。输出按中断/网络/权限/兼容/性能分类的测试要点清单。
