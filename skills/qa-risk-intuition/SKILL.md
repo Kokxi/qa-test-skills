@@ -2,7 +2,7 @@
 name: qa-risk-intuition
 slug: qa-risk-intuition
 displayName: Risk Intuition
-version: 1.6.0
+version: 1.6.3
 description: >-
   识别那些"看起来很简单但实际风险很高"的测试区域，帮你在有限的测试资源下做优先级判断。当测试时间不够、不知道应该重点测哪些功能、或者直觉告诉你某个功能可能有问题但说不上来为什么时，应当使用此技能。典型的危险信号包括：频繁变更的模块、第三方依赖、资金/安全相关功能、历史Bug多发区域。每一个识别出的风险点都需要标注概率和影响等级，并附上缓解建议。
 

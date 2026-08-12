@@ -2,7 +2,7 @@
 name: qa-combination-strategy
 slug: qa-combination-strategy
 displayName: Combination Strategy
-version: 1.6.0
+version: 1.6.3
 description: >-
   当参数多、环境多、"全组合测不完"时运用正交试验法、Pairwise和判定表来解决组合爆炸问题。如果系统有多个输入字段的组合依赖关系（如"A=1且B=2时C不能为3"）、或者需要适配多浏览器多操作系统多语言，一定要用此技能来设计高效的组合覆盖方案。不要试图全覆盖——组合测试的核心是用最少的用例达到最高的组合覆盖率。输出组合覆盖矩阵并标注覆盖遗漏。
 

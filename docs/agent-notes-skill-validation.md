@@ -1,6 +1,6 @@
-# QA Test Skills 质量验证实战笔记（V1.6.0）
+# QA Test Skills 质量验证实战笔记（V1.6.3）
 
-> 本文档由 qa-test-skills V1.6.0 发版实战提炼，记录本项目建立的分层验证金字塔、实际跑出的基线、踩过的坑。给 Agent 在本项目后续迭代或其他 skill 项目复用时直接照做。
+> 本文档由 qa-test-skills V1.6.3 发版实战提炼，记录本项目建立的分层验证金字塔、实际跑出的基线、踩过的坑。给 Agent 在本项目后续迭代或其他 skill 项目复用时直接照做。
 >
 > **本项目实测成果**：48 技能 + 38 eval + 230 断言，LLM 端到端通过率 **95.4%**（DeepSeek，排除 requires_e2e 项），ClawHub 安全审计 **48/48 pass**。
 
@@ -40,7 +40,7 @@
 **10 项必查**：
 1. frontmatter 12 字段 + traceability 全覆盖
 2. name 与目录名一致
-3. version 全统一（当前 1.6.0）
+3. version 全统一（当前 1.6.3）
 4. related_skills 悬空引用 + 对称性
 5. references/ 引用完整
 6. ID 规范一致性（`validate_standards.py`）
@@ -251,7 +251,7 @@ STEP 9: 归档 + 报告
 
 ## 7. 成果基线参考
 
-qa-test-skills V1.6.0 实测：
+qa-test-skills V1.6.3 实测：
 
 | 模型 | 通过率 | 说明 |
 |------|--------|------|
@@ -266,7 +266,7 @@ qa-test-skills V1.6.0 实测：
 | 项目 | 模型 | 首轮 | 最终 |
 |------|------|------|------|
 | qa-team-skills v1.5.0 | DeepSeek | 89.7% | 94.3% |
-| qa-test-skills V1.6.0 | DeepSeek | 88.8% | **95.4%** |
+| qa-test-skills V1.6.3 | DeepSeek | 88.8% | **95.4%** |
 
 ## 8. 复用检查清单
 

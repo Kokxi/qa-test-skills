@@ -2,7 +2,7 @@
 name: qa-api-testing
 slug: qa-api-testing
 displayName: Api Testing
-version: 1.6.0
+version: 1.6.3
 description: >-
   当需要测试 RESTful/GraphQL/gRPC/WebSocket 等 API 时使用此技能。覆盖接口的功能验证、参数组合、鉴权绕过、超时重试、幂等性、接口契约和向后兼容性。不要只测 HTTP 状态码——真正的接口 Bug 往往在数据结构不一致、字段类型不匹配、空值处理和并发调用上。输出接口测试矩阵、契约断言清单和工具选型建议。
 

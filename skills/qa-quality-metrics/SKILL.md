@@ -2,7 +2,7 @@
 name: qa-quality-metrics
 slug: qa-quality-metrics
 displayName: Quality Metrics
-version: 1.6.0
+version: 1.6.3
 description: >-
   当管理层问"质量到底怎么样"、需要量化质量数据来做决策、或者想建立质量看板来跟踪趋势时使用此技能。从过程质量（需求评审通过率/用例覆盖度）、结果质量（Bug 密度/线上事故数）、效率（测试周期/回归耗时）和健康度（自动化通过率/环境稳定性）四个维度设计度量指标。⚠️ 度量的目的不是打分，是发现问题趋势——如果只报喜不报忧，度量就没用了。
 
