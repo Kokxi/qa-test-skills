@@ -102,6 +102,8 @@ output_format:
 
 > 强制执行规则详见 [`references/enforcement.md`](references/enforcement.md)。
 
+> 各 skill 深度量化基准（`depth_requirement_quantification`）的乘数档位来源与判定指引详见 [`references/depth-benchmarks.md`](references/depth-benchmarks.md)。
+
 > 输入识别、路由规则和可选增强流程详见 [`references/routing.md`](references/routing.md)。
 
 ## 标准化工作流
