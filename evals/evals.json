@@ -74,6 +74,30 @@
           "name": "覆盖至少5个步骤输出",
           "type": "min_count",
           "target": 5
+        },
+        {
+          "name": "输出文件数≥8",
+          "type": "min_count",
+          "target": ".md",
+          "min": 8
+        },
+        {
+          "name": "测试用例数≥10",
+          "type": "min_count",
+          "target": "TC-",
+          "min": 10
+        },
+        {
+          "name": "需求评审要点≥4",
+          "type": "min_count",
+          "target": "评审",
+          "min": 4
+        },
+        {
+          "name": "风险点数≥5",
+          "type": "min_count",
+          "target": "风险",
+          "min": 5
         }
       ]
     },
@@ -123,6 +147,12 @@
           "name": "覆盖了密码锁定场景",
           "type": "content_match",
           "target": "锁定"
+        },
+        {
+          "name": "需求总数≥7",
+          "type": "min_count",
+          "target": "REQ-",
+          "min": 7
         }
       ]
     },
@@ -187,6 +217,18 @@
           "name": "覆盖账号锁定",
           "type": "content_match",
           "target": "锁定"
+        },
+        {
+          "name": "测试用例数≥8",
+          "type": "min_count",
+          "target": "TC-",
+          "min": 8
+        },
+        {
+          "name": "优先级档数≥3",
+          "type": "min_count",
+          "target": "P0|P1|P2|P3",
+          "min": 3
         }
       ]
     },
@@ -238,6 +280,18 @@
             "WRONG",
             "VAGUE"
           ]
+        },
+        {
+          "name": "评审维度数≥6",
+          "type": "min_count",
+          "target": "维度",
+          "min": 6
+        },
+        {
+          "name": "用例数≥3",
+          "type": "min_count",
+          "target": "TC_",
+          "min": 3
         }
       ]
     },
@@ -307,6 +361,24 @@
             "3-20",
             "6位"
           ]
+        },
+        {
+          "name": "接口测试用例数≥6",
+          "type": "min_count",
+          "target": "API-",
+          "min": 6
+        },
+        {
+          "name": "边界用例数≥4",
+          "type": "min_count",
+          "target": "边界",
+          "min": 4
+        },
+        {
+          "name": "HTTP方法覆盖≥3",
+          "type": "min_count",
+          "target": "GET|POST|PUT|DELETE",
+          "min": 3
         }
       ]
     },
@@ -369,6 +441,24 @@
           "name": "有结构化输出",
           "type": "content_match",
           "target": "边界"
+        },
+        {
+          "name": "边界条件数≥8",
+          "type": "min_count",
+          "target": "边界",
+          "min": 8
+        },
+        {
+          "name": "字段数≥5",
+          "type": "min_count",
+          "target": "字段",
+          "min": 5
+        },
+        {
+          "name": "BD-XXXX 编号数≥6",
+          "type": "min_count",
+          "target": "BD-",
+          "min": 6
         }
       ]
     },
@@ -425,6 +515,18 @@
           "name": "有附件建议",
           "type": "content_match",
           "target": "日志|截图|附件"
+        },
+        {
+          "name": "根因候选数≥3",
+          "type": "min_count",
+          "target": "根因",
+          "min": 3
+        },
+        {
+          "name": "故障点数≥3",
+          "type": "min_count",
+          "target": "故障|原因",
+          "min": 3
         }
       ]
     },
@@ -470,6 +572,18 @@
           "name": "有结构化输出",
           "type": "content_match",
           "target": "TC_|P0|P1|用例"
+        },
+        {
+          "name": "测试场景数≥6",
+          "type": "min_count",
+          "target": "场景",
+          "min": 6
+        },
+        {
+          "name": "REQ-XXXX 编号数≥5",
+          "type": "min_count",
+          "target": "REQ-",
+          "min": 5
         }
       ]
     },
@@ -516,6 +630,18 @@
           "name": "有执行建议",
           "type": "content_match",
           "target": "建议|推荐|优先"
+        },
+        {
+          "name": "变更模块数≥3",
+          "type": "min_count",
+          "target": "模块",
+          "min": 3
+        },
+        {
+          "name": "回归用例数≥5",
+          "type": "min_count",
+          "target": "回归",
+          "min": 5
         }
       ]
     },
@@ -566,6 +692,18 @@
             "异常",
             "边界"
           ]
+        },
+        {
+          "name": "复盘要点数≥5",
+          "type": "min_count",
+          "target": "要点",
+          "min": 5
+        },
+        {
+          "name": "改进项数≥3",
+          "type": "min_count",
+          "target": "改进",
+          "min": 3
         }
       ]
     },
@@ -613,6 +751,18 @@
           "name": "有层次结构",
           "type": "content_match",
           "target": "├|└|│"
+        },
+        {
+          "name": "场景节点数≥8",
+          "type": "min_count",
+          "target": "SC-",
+          "min": 8
+        },
+        {
+          "name": "分支节点数≥4",
+          "type": "min_count",
+          "target": "分支",
+          "min": 4
         }
       ]
     },
@@ -668,6 +818,18 @@
           "name": "统一补盲编号",
           "type": "content_match",
           "target": "BS_|BS-"
+        },
+        {
+          "name": "补盲用例数≥4",
+          "type": "min_count",
+          "target": "补盲",
+          "min": 4
+        },
+        {
+          "name": "TC-XXXX 编号数≥5",
+          "type": "min_count",
+          "target": "TC-",
+          "min": 5
         }
       ]
     },
@@ -713,6 +875,18 @@
           "name": "结合了项目特点",
           "type": "content_match",
           "target": "B2B|企业|采购|供应商"
+        },
+        {
+          "name": "测试策略要素数≥5",
+          "type": "min_count",
+          "target": "策略",
+          "min": 5
+        },
+        {
+          "name": "测试阶段数≥4",
+          "type": "min_count",
+          "target": "阶段",
+          "min": 4
         }
       ]
     },
@@ -754,6 +928,24 @@
           "name": "有验证点",
           "type": "content_match",
           "target": "验证|检查|确认"
+        },
+        {
+          "name": "状态数≥5",
+          "type": "min_count",
+          "target": "状态",
+          "min": 5
+        },
+        {
+          "name": "转换路径数≥6",
+          "type": "min_count",
+          "target": "转换",
+          "min": 6
+        },
+        {
+          "name": "ST-XXXX 编号数≥5",
+          "type": "min_count",
+          "target": "ST-",
+          "min": 5
         }
       ]
     },
@@ -800,6 +992,18 @@
           "name": "有策略说明",
           "type": "content_match",
           "target": "策略|方法|原理"
+        },
+        {
+          "name": "组合用例数≥4",
+          "type": "min_count",
+          "target": "组合",
+          "min": 4
+        },
+        {
+          "name": "COMBO-XXXX 编号数≥4",
+          "type": "min_count",
+          "target": "COMBO-",
+          "min": 4
         }
       ]
     },
@@ -845,6 +1049,18 @@
           "name": "有目标值",
           "type": "content_match",
           "target": "目标|≥|≤|%"
+        },
+        {
+          "name": "度量指标数≥5",
+          "type": "min_count",
+          "target": "指标",
+          "min": 5
+        },
+        {
+          "name": "度量维度数≥5",
+          "type": "min_count",
+          "target": "度量|指标",
+          "min": 5
         }
       ]
     },
@@ -891,6 +1107,18 @@
           "name": "有测试要点清单",
           "type": "content_match",
           "target": "[ ]|├|└|清单|列表"
+        },
+        {
+          "name": "专项测试维度≥5",
+          "type": "min_count",
+          "target": "专项",
+          "min": 5
+        },
+        {
+          "name": "兼容平台数≥3",
+          "type": "min_count",
+          "target": "iOS|Android|鸿蒙",
+          "min": 3
         }
       ]
     },
@@ -931,6 +1159,18 @@
           "name": "有总体结论",
           "type": "content_match",
           "target": "通过|不通过|合格|验证"
+        },
+        {
+          "name": "验证维度数≥4",
+          "type": "min_count",
+          "target": "验证",
+          "min": 4
+        },
+        {
+          "name": "验证项数≥4",
+          "type": "min_count",
+          "target": "验证项",
+          "min": 4
         }
       ]
     },
@@ -971,6 +1211,18 @@
           "name": "面向管理层",
           "type": "content_match",
           "target": "报告|概况|摘要|总结"
+        },
+        {
+          "name": "数据维度数≥4",
+          "type": "min_count",
+          "target": "维度",
+          "min": 4
+        },
+        {
+          "name": "统计维度数≥4",
+          "type": "min_count",
+          "target": "通过|失败|阻塞",
+          "min": 4
         }
       ]
     },
@@ -1017,6 +1269,18 @@
           "name": "结构清晰",
           "type": "content_match",
           "target": "维度|方面"
+        },
+        {
+          "name": "Agent 测试维度≥5",
+          "type": "min_count",
+          "target": "Agent",
+          "min": 5
+        },
+        {
+          "name": "Agent 评估维度≥5",
+          "type": "min_count",
+          "target": "幻觉|记忆|工具",
+          "min": 5
         }
       ]
     },
@@ -1057,6 +1321,18 @@
           "name": "有置信区间",
           "type": "content_match",
           "target": "置信|区间|±"
+        },
+        {
+          "name": "测试阶段数≥4",
+          "type": "min_count",
+          "target": "阶段",
+          "min": 4
+        },
+        {
+          "name": "风险等级档数≥3",
+          "type": "min_count",
+          "target": "高|中|低",
+          "min": 3
         }
       ]
     },
@@ -1097,6 +1373,18 @@
           "name": "有报告结构",
           "type": "content_match",
           "target": "评估|报告|建议"
+        },
+        {
+          "name": "分析维度数≥4",
+          "type": "min_count",
+          "target": "维度",
+          "min": 4
+        },
+        {
+          "name": "自动化分层≥3",
+          "type": "min_count",
+          "target": "UI|API|单元|集成",
+          "min": 3
         }
       ]
     },
@@ -1136,6 +1424,18 @@
           "name": "格式结构化",
           "type": "content_match",
           "target": "├|└|清单|列表"
+        },
+        {
+          "name": "追问问题数≥3",
+          "type": "min_count",
+          "target": "追问",
+          "min": 3
+        },
+        {
+          "name": "信息缺口类型数≥3",
+          "type": "min_count",
+          "target": "业务|数据|边界|时序",
+          "min": 3
         }
       ]
     },
@@ -1176,6 +1476,18 @@
           "name": "结构化输出",
           "type": "content_match",
           "target": "├|└|清单|列表"
+        },
+        {
+          "name": "风险点数≥5",
+          "type": "min_count",
+          "target": "风险",
+          "min": 5
+        },
+        {
+          "name": "风险矩阵维度≥3",
+          "type": "min_count",
+          "target": "业务影响|发生概率|技术复杂度",
+          "min": 3
         }
       ]
     },
@@ -1216,6 +1528,18 @@
           "name": "有结构化输出",
           "type": "content_match",
           "target": "├|└|清单|列表"
+        },
+        {
+          "name": "质疑点数≥5",
+          "type": "min_count",
+          "target": "质疑",
+          "min": 5
+        },
+        {
+          "name": "假设挑战数≥4",
+          "type": "min_count",
+          "target": "假设",
+          "min": 4
         }
       ]
     },
@@ -1256,6 +1580,18 @@
           "name": "有时效要求",
           "type": "content_match",
           "target": "时效|小时|天|时限"
+        },
+        {
+          "name": "观察信号路数≥6",
+          "type": "min_count",
+          "target": "信号",
+          "min": 6
+        },
+        {
+          "name": "观察信号路数≥6",
+          "type": "min_count",
+          "target": "信号",
+          "min": 6
         }
       ]
     },
@@ -1302,6 +1638,18 @@
           "name": "有分层设计",
           "type": "content_match",
           "target": "分层|金字塔|提交|合码|夜间"
+        },
+        {
+          "name": "流水线阶段数≥5",
+          "type": "min_count",
+          "target": "阶段",
+          "min": 5
+        },
+        {
+          "name": "CI 阶段数≥5",
+          "type": "min_count",
+          "target": "阶段|Stage",
+          "min": 5
         }
       ]
     },
@@ -1346,6 +1694,18 @@
             "需求",
             "生产"
           ]
+        },
+        {
+          "name": "左移介入点数≥4",
+          "type": "min_count",
+          "target": "左移",
+          "min": 4
+        },
+        {
+          "name": "左移介入点数≥4",
+          "type": "min_count",
+          "target": "介入",
+          "min": 4
         }
       ]
     },
@@ -1391,6 +1751,18 @@
             "个保法",
             "等保"
           ]
+        },
+        {
+          "name": "数据状态分类数≥4",
+          "type": "min_count",
+          "target": "状态",
+          "min": 4
+        },
+        {
+          "name": "数据状态分类数≥4",
+          "type": "min_count",
+          "target": "待付款|待发货|已发货",
+          "min": 4
         }
       ]
     },
@@ -1431,6 +1803,18 @@
           "name": "有维护策略",
           "type": "content_match",
           "target": "维护|重构|Flaky|稳定"
+        },
+        {
+          "name": "评估维度数≥5",
+          "type": "min_count",
+          "target": "维度",
+          "min": 5
+        },
+        {
+          "name": "技术选型维度≥5",
+          "type": "min_count",
+          "target": "框架|语言|数据库|部署",
+          "min": 5
         }
       ]
     },
@@ -1470,6 +1854,18 @@
           "name": "有追踪表",
           "type": "content_match",
           "target": "追踪|追踪|负责人|deadline"
+        },
+        {
+          "name": "缺陷根因数≥3",
+          "type": "min_count",
+          "target": "根因",
+          "min": 3
+        },
+        {
+          "name": "缺陷根因数≥3",
+          "type": "min_count",
+          "target": "根因|RCA",
+          "min": 3
         }
       ]
     },
@@ -1509,6 +1905,18 @@
           "name": "有数据可视化",
           "type": "content_match",
           "target": "%|率|趋势|对比"
+        },
+        {
+          "name": "汇报要素数≥5",
+          "type": "min_count",
+          "target": "要素",
+          "min": 5
+        },
+        {
+          "name": "汇报要素数≥5",
+          "type": "min_count",
+          "target": "用例数|通过率|缺陷|风险|建议",
+          "min": 5
         }
       ]
     },
@@ -1568,6 +1976,18 @@
             "quality_score",
             "评分"
           ]
+        },
+        {
+          "name": "缺失信息项数≥3",
+          "type": "min_count",
+          "target": "缺失",
+          "min": 3
+        },
+        {
+          "name": "追问问题数≥3",
+          "type": "min_count",
+          "target": "追问|澄清",
+          "min": 3
         }
       ]
     },
@@ -1630,6 +2050,12 @@
             "修正",
             "issues"
           ]
+        },
+        {
+          "name": "验证维度数≥4",
+          "type": "min_count",
+          "target": "事实|一致|可执行|来源",
+          "min": 4
         }
       ]
     },
@@ -1711,6 +2137,18 @@
             "cart",
             "库存"
           ]
+        },
+        {
+          "name": "提示词要素数≥5",
+          "type": "min_count",
+          "target": "要素",
+          "min": 5
+        },
+        {
+          "name": "提示词要素数≥5",
+          "type": "min_count",
+          "target": "角色|任务|约束|格式|示例",
+          "min": 5
         }
       ]
     },
@@ -1801,6 +2239,24 @@
             "建议",
             "improvement"
           ]
+        },
+        {
+          "name": "评审用例数≥3",
+          "type": "min_count",
+          "target": "TC_",
+          "min": 3
+        },
+        {
+          "name": "改进建议数≥3",
+          "type": "min_count",
+          "target": "改进",
+          "min": 3
+        },
+        {
+          "name": "评审维度数≥6",
+          "type": "min_count",
+          "target": "完整性|准确性|可执行|风险|规范|追溯",
+          "min": 6
         }
       ]
     },
@@ -1887,6 +2343,12 @@
             "TC_",
             "REQ-"
           ]
+        },
+        {
+          "name": "补盲用例数≥4",
+          "type": "min_count",
+          "target": "补盲|盲区",
+          "min": 4
         }
       ]
     },
@@ -1930,6 +2392,836 @@
           "name": "覆盖 USER 模块",
           "type": "content_match",
           "target": "TC_USER"
+        },
+        {
+          "name": "输出文件数≥6",
+          "type": "min_count",
+          "target": ".md",
+          "min": 6
+        },
+        {
+          "name": "TC-XXXX 编号数≥10",
+          "type": "min_count",
+          "target": "TC-",
+          "min": 10
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "requires_e2e": false,
+      "skill": "qa-critical-thinking",
+      "prompt": "对以下测试设计做批判性质疑：用例集覆盖了登录正向、密码错误、账号锁定。需求文档写的是'用户通过手机号验证码登录'。请用5W1H质疑法和假设挖掘，列出至少5个被默认为'正常'但可能不成立的隐含假设，并给出对应的异常场景追问。",
+      "expected_output": "至少5个隐含假设挑战清单，每个挑战标注被质疑的假设类型（用户行为/环境/数据/时序/依赖），并给出'如果不呢'追问",
+      "expectations": [
+        "输出了隐含假设挑战清单",
+        "至少识别5个隐含假设",
+        "覆盖用户行为假设类型",
+        "覆盖环境或数据或时序或依赖假设类型",
+        "每个假设带'如果不呢'追问",
+        "应用了5W1H或逆向思维框架"
+      ],
+      "assertions": [
+        {
+          "name": "隐含假设清单",
+          "type": "content_match_or",
+          "targets": [
+            "隐含假设",
+            "假设挑战",
+            "assumption"
+          ]
+        },
+        {
+          "name": "至少5个假设",
+          "type": "min_count",
+          "target": "假设",
+          "min": 5,
+          "match_pattern": "假设[\\d#]|假设[：:]"
+        },
+        {
+          "name": "覆盖用户行为假设",
+          "type": "content_match_or",
+          "targets": [
+            "用户行为假设",
+            "用户会按预期操作",
+            "用户误操作"
+          ]
+        },
+        {
+          "name": "覆盖其他假设类型",
+          "type": "content_match_or",
+          "targets": [
+            "环境假设",
+            "数据假设",
+            "时序假设",
+            "依赖假设"
+          ]
+        },
+        {
+          "name": "带如果不呢追问",
+          "type": "content_match_or",
+          "targets": [
+            "如果不呢",
+            "如果不",
+            "会怎样",
+            "追问"
+          ]
+        },
+        {
+          "name": "应用5W1H或逆向思维",
+          "type": "content_match_or",
+          "targets": [
+            "5W1H",
+            "逆向思维",
+            "What",
+            "Why"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "requires_e2e": false,
+      "skill": "qa-risk-intuition",
+      "prompt": "对电商支付模块做风险评估。支付链路包含：下单→支付网关→银行回调→订单状态更新。已知：该模块上周发版变更了回调处理逻辑；历史缺陷多发；涉及资金。请用风险等级公式（业务影响×发生概率×技术复杂度）评估，每个维度给出1-5分及理由，输出风险矩阵和测试资源分配建议。",
+      "expected_output": "风险评估报告，含风险矩阵（业务影响/发生概率/技术复杂度各1-5分）、风险分数计算、风险等级判定、测试资源分配建议",
+      "expectations": [
+        "输出了风险评估报告",
+        "业务影响维度有1-5分及理由",
+        "发生概率维度有1-5分及理由",
+        "技术复杂度维度有1-5分及理由",
+        "计算了风险分数（三维乘积）",
+        "根据分数判定风险等级（≥75高/25-74中/≤24低）",
+        "输出了测试资源分配建议",
+        "识别了变更风险信号（上周发版变更回调逻辑）"
+      ],
+      "assertions": [
+        {
+          "name": "风险评估报告",
+          "type": "content_match_or",
+          "targets": [
+            "风险评估",
+            "risk_assessment",
+            "风险矩阵"
+          ]
+        },
+        {
+          "name": "业务影响评分",
+          "type": "content_match_or",
+          "targets": [
+            "业务影响",
+            "业务风险",
+            "business_impact"
+          ]
+        },
+        {
+          "name": "发生概率评分",
+          "type": "content_match_or",
+          "targets": [
+            "发生概率",
+            "概率",
+            "probability"
+          ]
+        },
+        {
+          "name": "技术复杂度评分",
+          "type": "content_match_or",
+          "targets": [
+            "技术复杂度",
+            "复杂度",
+            "complexity"
+          ]
+        },
+        {
+          "name": "风险分数计算",
+          "type": "content_match",
+          "target": "风险分数"
+        },
+        {
+          "name": "风险等级判定",
+          "type": "content_match_or",
+          "targets": [
+            "高风险",
+            "中风险",
+            "低风险",
+            "风险等级"
+          ]
+        },
+        {
+          "name": "测试资源分配建议",
+          "type": "content_match_or",
+          "targets": [
+            "测试资源",
+            "资源分配",
+            "深测",
+            "冒烟"
+          ]
+        },
+        {
+          "name": "识别变更风险信号",
+          "type": "content_match_or",
+          "targets": [
+            "变更",
+            "上周发版",
+            "回调",
+            "变更风险"
+          ]
+        },
+        {
+          "name": "风险维度数≥3",
+          "type": "min_count",
+          "target": "维度",
+          "min": 3
+        },
+        {
+          "name": "风险点数≥5",
+          "type": "min_count",
+          "target": "RISK-",
+          "min": 5
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "requires_e2e": false,
+      "skill": "qa-question-framework",
+      "prompt": "QA收到一份PRD，只写了'做一个会员积分系统，用户消费攒积分，积分能换优惠券'。没有任何字段定义、积分规则、有效期、并发约束。请用提问框架，列出至少6个需要向PM澄清的关键问题，每个问题标注信息缺口类型（业务规则/数据定义/边界条件/时序约束/权限/性能）。",
+      "expected_output": "澄清问题清单（≥6个），每个问题标注信息缺口类型，覆盖业务规则、数据定义、边界条件等维度",
+      "expectations": [
+        "输出了澄清问题清单",
+        "至少识别6个澄清问题",
+        "覆盖业务规则信息缺口",
+        "覆盖数据定义信息缺口",
+        "覆盖边界条件信息缺口",
+        "覆盖时序约束信息缺口",
+        "每个问题标注了信息缺口类型"
+      ],
+      "assertions": [
+        {
+          "name": "澄清问题清单",
+          "type": "content_match_or",
+          "targets": [
+            "澄清问题",
+            "提问清单",
+            "question"
+          ]
+        },
+        {
+          "name": "至少6个问题",
+          "type": "min_count",
+          "target": "问题",
+          "min": 6,
+          "match_pattern": "问题[\\d#：:]|Q\\d+|Q[：:]"
+        },
+        {
+          "name": "覆盖业务规则缺口",
+          "type": "content_match_or",
+          "targets": [
+            "业务规则",
+            "积分规则",
+            "换券规则"
+          ]
+        },
+        {
+          "name": "覆盖数据定义缺口",
+          "type": "content_match_or",
+          "targets": [
+            "数据定义",
+            "字段定义",
+            "积分字段"
+          ]
+        },
+        {
+          "name": "覆盖边界条件缺口",
+          "type": "content_match_or",
+          "targets": [
+            "边界条件",
+            "积分上限",
+            "最小积分"
+          ]
+        },
+        {
+          "name": "覆盖时序约束缺口",
+          "type": "content_match_or",
+          "targets": [
+            "时序约束",
+            "并发",
+            "有效期",
+            "过期"
+          ]
+        },
+        {
+          "name": "标注信息缺口类型",
+          "type": "content_match_or",
+          "targets": [
+            "信息缺口",
+            "缺口类型",
+            "gap_type"
+          ]
+        },
+        {
+          "name": "信息缺口类型数≥4",
+          "type": "min_count",
+          "target": "业务|数据|边界|时序|权限|性能",
+          "min": 4
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "requires_e2e": false,
+      "skill": "qa-boundary-deep-dive",
+      "prompt": "对购物车'修改商品数量'功能做边界深度分析。字段约束：数量为正整数、1≤数量≤99、库存上限200。场景：用户修改数量→校验→更新购物车→刷新合计。请从输入/状态/时间/资源四维识别边界条件，每个边界标注 BD-XXXX 编号、风险等级、预期结果，并关联场景 ID。",
+      "expected_output": "边界清单（BD-XXXX 编号），覆盖输入/状态/时间/资源至少3个维度，每条带风险等级与预期结果",
+      "expectations": [
+        "输出了边界清单",
+        "覆盖输入边界维度",
+        "覆盖状态边界维度",
+        "覆盖时间或资源边界维度",
+        "每条边界带 BD-XXXX 编号",
+        "每条边界标注风险等级",
+        "每条边界给出预期结果",
+        "边界条数至少8条"
+      ],
+      "assertions": [
+        {
+          "name": "边界清单",
+          "type": "content_match_or",
+          "targets": [
+            "边界清单",
+            "boundary",
+            "BD-"
+          ]
+        },
+        {
+          "name": "输入边界维度",
+          "type": "content_match_or",
+          "targets": [
+            "输入边界",
+            "数量边界",
+            "1≤数量",
+            "数量≤99"
+          ]
+        },
+        {
+          "name": "状态边界维度",
+          "type": "content_match_or",
+          "targets": [
+            "状态边界",
+            "购物车状态",
+            "库存边界"
+          ]
+        },
+        {
+          "name": "时间或资源边界",
+          "type": "content_match_or",
+          "targets": [
+            "时间边界",
+            "资源边界",
+            "库存上限",
+            "200"
+          ]
+        },
+        {
+          "name": "BD-XXXX 编号",
+          "type": "content_match",
+          "target": "BD-"
+        },
+        {
+          "name": "风险等级标注",
+          "type": "content_match_or",
+          "targets": [
+            "风险等级",
+            "高风险",
+            "中风险",
+            "低风险"
+          ]
+        },
+        {
+          "name": "预期结果",
+          "type": "content_match",
+          "target": "预期"
+        },
+        {
+          "name": "边界条数≥8",
+          "type": "min_count",
+          "target": "BD-",
+          "min": 8
+        },
+        {
+          "name": "BD-XXXX 编号数≥8",
+          "type": "min_count",
+          "target": "BD-",
+          "min": 8
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "requires_e2e": false,
+      "skill": "qa-combination-strategy",
+      "prompt": "支付方式选择功能需组合测试。参数：支付方式（微信/支付宝/银行卡/余额）× 终端（App/H5/小程序/PC）× 网络环境（WiFi/4G/5G/弱网）。全组合=4×4×4=64条。请用 Pairwise 策略简化组合，输出组合覆盖矩阵（COMBO-XXXX 编号），标注覆盖遗漏与 N 维组合分析，组合数必须少于64。",
+      "expected_output": "组合覆盖矩阵（COMBO-XXXX），Pairwise 组合数 < 64，含覆盖遗漏与 N 维组合分析",
+      "expectations": [
+        "输出了组合覆盖矩阵",
+        "使用了 Pairwise 策略",
+        "组合数少于64条",
+        "每条组合带 COMBO-XXXX 编号",
+        "标注了组合覆盖遗漏",
+        "输出了 N 维组合分析",
+        "关联了场景 ID"
+      ],
+      "assertions": [
+        {
+          "name": "组合覆盖矩阵",
+          "type": "content_match_or",
+          "targets": [
+            "组合矩阵",
+            "combination_matrix",
+            "COMBO-"
+          ]
+        },
+        {
+          "name": "Pairwise 策略",
+          "type": "content_match_or",
+          "targets": [
+            "Pairwise",
+            "pairwise",
+            "成对组合"
+          ]
+        },
+        {
+          "name": "组合数<64",
+          "type": "content_match",
+          "target": "组合数"
+        },
+        {
+          "name": "COMBO-XXXX 编号",
+          "type": "content_match",
+          "target": "COMBO-"
+        },
+        {
+          "name": "覆盖遗漏",
+          "type": "content_match_or",
+          "targets": [
+            "覆盖遗漏",
+            "coverage_gaps",
+            "遗漏"
+          ]
+        },
+        {
+          "name": "N维组合分析",
+          "type": "content_match_or",
+          "targets": [
+            "N维组合",
+            "n_way",
+            "N-way"
+          ]
+        },
+        {
+          "name": "组合条数≥4",
+          "type": "min_count",
+          "target": "COMBO-",
+          "min": 4
+        },
+        {
+          "name": "COMBO-XXXX 编号数≥4",
+          "type": "min_count",
+          "target": "COMBO-",
+          "min": 4
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "requires_e2e": false,
+      "skill": "qa-req-deconstruction (golden)",
+      "prompt": "分析登录功能的显隐性需求：用户输入用户名和密码登录，密码错误显示提示，连续5次错误锁定30分钟，支持记住密码。",
+      "expected_output": "需求解构表，golden 关键词集：显性需求≥3、隐性需求≥2、衍生需求≥2、五维拆解、REQ-XXXX 编号",
+      "expectations": [
+        "输出了需求解构表",
+        "显性需求覆盖登录/验证/锁定/记住密码",
+        "隐性需求覆盖安全/会话/并发",
+        "包含五维拆解",
+        "REQ-XXXX 编号齐全"
+      ],
+      "assertions": [
+        {
+          "name": "golden 比对 ≥50%",
+          "type": "golden_compare",
+          "target": "examples/ecommerce-project/test-cases.md",
+          "min_overlap": 0.5,
+          "keywords": [
+            "显性",
+            "隐性",
+            "衍生",
+            "五维",
+            "REQ-"
+          ]
+        },
+        {
+          "name": "显性需求≥3条",
+          "type": "min_count",
+          "target": "显性",
+          "min": 3
+        },
+        {
+          "name": "隐性需求≥2条",
+          "type": "min_count",
+          "target": "隐性",
+          "min": 2
+        },
+        {
+          "name": "REQ-XXXX 编号",
+          "type": "content_match",
+          "target": "REQ-"
+        },
+        {
+          "name": "五维拆解",
+          "type": "content_match",
+          "target": "五维"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "requires_e2e": false,
+      "skill": "qa-boundary-deep-dive (golden)",
+      "prompt": "对购物车'修改商品数量'做边界分析。数量为正整数、1≤数量≤99、库存上限200。",
+      "expected_output": "边界清单 BD-XXXX，golden 关键词集：输入边界、状态边界、时间边界、资源边界、风险等级、预期结果",
+      "expectations": [
+        "输出了边界清单",
+        "覆盖输入/状态/时间/资源四维",
+        "BD-XXXX 编号齐全",
+        "标注风险等级"
+      ],
+      "assertions": [
+        {
+          "name": "golden 比对 ≥50%",
+          "type": "golden_compare",
+          "target": "examples/ecommerce-project/test-cases.md",
+          "min_overlap": 0.5,
+          "keywords": [
+            "输入边界",
+            "状态边界",
+            "时间边界",
+            "资源边界",
+            "BD-"
+          ]
+        },
+        {
+          "name": "BD-XXXX 编号数≥6",
+          "type": "min_count",
+          "target": "BD-",
+          "min": 6
+        },
+        {
+          "name": "风险等级标注",
+          "type": "content_match_or",
+          "targets": [
+            "高风险",
+            "中风险",
+            "低风险"
+          ]
+        },
+        {
+          "name": "预期结果",
+          "type": "content_match",
+          "target": "预期"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "requires_e2e": false,
+      "skill": "qa-combination-strategy (golden)",
+      "prompt": "支付方式选择功能组合测试。参数：支付方式（微信/支付宝/银行卡/余额）× 终端（App/H5/小程序/PC）× 网络环境（WiFi/4G/5G/弱网）。全组合=64。请用 Pairwise 简化。",
+      "expected_output": "组合矩阵 COMBO-XXXX，golden 关键词集：Pairwise、组合数<64、覆盖遗漏、N维组合、关联场景",
+      "expectations": [
+        "输出了组合覆盖矩阵",
+        "组合数少于64",
+        "使用 Pairwise 策略",
+        "标注覆盖遗漏"
+      ],
+      "assertions": [
+        {
+          "name": "golden 比对 ≥50%",
+          "type": "golden_compare",
+          "target": "examples/ecommerce-project/test-cases.md",
+          "min_overlap": 0.5,
+          "keywords": [
+            "Pairwise",
+            "COMBO-",
+            "覆盖遗漏",
+            "N维"
+          ]
+        },
+        {
+          "name": "COMBO-XXXX 编号数≥4",
+          "type": "min_count",
+          "target": "COMBO-",
+          "min": 4
+        },
+        {
+          "name": "组合数<64",
+          "type": "content_match",
+          "target": "组合"
+        },
+        {
+          "name": "覆盖遗漏",
+          "type": "content_match_or",
+          "targets": [
+            "覆盖遗漏",
+            "coverage_gaps"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "requires_e2e": false,
+      "skill": "qa-critical-thinking (golden)",
+      "prompt": "对'用户登录'测试设计做批判性质疑。用例集覆盖登录正向、密码错误、账号锁定。请用5W1H质疑法和假设挖掘，列出至少5个隐含假设挑战。",
+      "expected_output": "假设挑战清单，golden 关键词集：隐含假设、用户行为假设、环境假设、数据假设、时序假设、依赖假设、如果不呢",
+      "expectations": [
+        "输出了隐含假设挑战清单",
+        "至少识别5个隐含假设",
+        "覆盖用户行为假设类型",
+        "覆盖环境或数据或时序或依赖假设类型",
+        "每个假设带'如果不呢'追问"
+      ],
+      "assertions": [
+        {
+          "name": "golden 比对 ≥50%",
+          "type": "golden_compare",
+          "target": "examples/ecommerce-project/test-cases.md",
+          "min_overlap": 0.5,
+          "keywords": [
+            "隐含假设",
+            "假设挑战",
+            "用户行为假设",
+            "环境假设",
+            "数据假设",
+            "时序假设",
+            "依赖假设",
+            "如果不呢"
+          ]
+        },
+        {
+          "name": "至少5个假设",
+          "type": "min_count",
+          "target": "假设",
+          "min": 5
+        },
+        {
+          "name": "用户行为假设",
+          "type": "content_match_or",
+          "targets": [
+            "用户行为假设",
+            "用户会按预期操作",
+            "用户误操作"
+          ]
+        },
+        {
+          "name": "其他假设类型",
+          "type": "content_match_or",
+          "targets": [
+            "环境假设",
+            "数据假设",
+            "时序假设",
+            "依赖假设"
+          ]
+        },
+        {
+          "name": "带如果不呢追问",
+          "type": "content_match_or",
+          "targets": [
+            "如果不呢",
+            "如果不",
+            "会怎样"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "requires_e2e": false,
+      "skill": "qa-risk-intuition (golden)",
+      "prompt": "对电商支付模块做风险评估。支付链路：下单→支付网关→银行回调→订单状态更新。已知：上周变更回调处理逻辑、历史缺陷多发、涉及资金。请用风险等级公式评估。",
+      "expected_output": "风险评估报告，golden 关键词集：风险矩阵、业务影响、发生概率、技术复杂度、风险分数、风险等级、测试资源分配、变更风险信号",
+      "expectations": [
+        "输出了风险评估报告",
+        "业务影响维度有1-5分及理由",
+        "发生概率维度有1-5分及理由",
+        "技术复杂度维度有1-5分及理由",
+        "计算了风险分数",
+        "根据分数判定风险等级",
+        "输出了测试资源分配建议",
+        "识别了变更风险信号"
+      ],
+      "assertions": [
+        {
+          "name": "golden 比对 ≥50%",
+          "type": "golden_compare",
+          "target": "examples/ecommerce-project/test-cases.md",
+          "min_overlap": 0.5,
+          "keywords": [
+            "风险评估",
+            "风险矩阵",
+            "业务影响",
+            "发生概率",
+            "技术复杂度",
+            "风险分数",
+            "风险等级",
+            "测试资源",
+            "变更"
+          ]
+        },
+        {
+          "name": "业务影响评分",
+          "type": "content_match_or",
+          "targets": [
+            "业务影响",
+            "业务风险"
+          ]
+        },
+        {
+          "name": "发生概率评分",
+          "type": "content_match_or",
+          "targets": [
+            "发生概率",
+            "概率"
+          ]
+        },
+        {
+          "name": "技术复杂度评分",
+          "type": "content_match_or",
+          "targets": [
+            "技术复杂度",
+            "复杂度"
+          ]
+        },
+        {
+          "name": "风险分数计算",
+          "type": "content_match",
+          "target": "风险分数"
+        },
+        {
+          "name": "风险等级判定",
+          "type": "content_match_or",
+          "targets": [
+            "高风险",
+            "中风险",
+            "低风险",
+            "风险等级"
+          ]
+        },
+        {
+          "name": "测试资源分配建议",
+          "type": "content_match_or",
+          "targets": [
+            "测试资源",
+            "资源分配",
+            "深测",
+            "冒烟"
+          ]
+        },
+        {
+          "name": "识别变更风险信号",
+          "type": "content_match_or",
+          "targets": [
+            "变更",
+            "上周发版",
+            "回调",
+            "变更风险"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "requires_e2e": false,
+      "skill": "qa-question-framework (golden)",
+      "prompt": "QA收到一份PRD，只写了'做一个会员积分系统，用户消费攒积分，积分能换优惠券'。没有任何字段定义、积分规则、有效期、并发约束。请用提问框架，列出至少6个需要向PM澄清的关键问题。",
+      "expected_output": "澄清问题清单≥6，golden 关键词集：业务规则、数据定义、边界条件、时序约束、权限、性能、信息缺口类型",
+      "expectations": [
+        "输出了澄清问题清单",
+        "至少识别6个澄清问题",
+        "覆盖业务规则信息缺口",
+        "覆盖数据定义信息缺口",
+        "覆盖边界条件信息缺口",
+        "覆盖时序约束信息缺口",
+        "每个问题标注了信息缺口类型"
+      ],
+      "assertions": [
+        {
+          "name": "golden 比对 ≥50%",
+          "type": "golden_compare",
+          "target": "examples/ecommerce-project/test-cases.md",
+          "min_overlap": 0.5,
+          "keywords": [
+            "澄清问题",
+            "提问清单",
+            "业务规则",
+            "数据定义",
+            "边界条件",
+            "时序约束",
+            "权限",
+            "性能",
+            "信息缺口"
+          ]
+        },
+        {
+          "name": "至少6个问题",
+          "type": "min_count",
+          "target": "问题",
+          "min": 6
+        },
+        {
+          "name": "覆盖业务规则缺口",
+          "type": "content_match_or",
+          "targets": [
+            "业务规则",
+            "积分规则",
+            "换券规则"
+          ]
+        },
+        {
+          "name": "覆盖数据定义缺口",
+          "type": "content_match_or",
+          "targets": [
+            "数据定义",
+            "字段定义",
+            "积分字段"
+          ]
+        },
+        {
+          "name": "覆盖边界条件缺口",
+          "type": "content_match_or",
+          "targets": [
+            "边界条件",
+            "积分上限",
+            "最小积分"
+          ]
+        },
+        {
+          "name": "覆盖时序约束缺口",
+          "type": "content_match_or",
+          "targets": [
+            "时序约束",
+            "并发",
+            "有效期",
+            "过期"
+          ]
+        },
+        {
+          "name": "标注信息缺口类型",
+          "type": "content_match_or",
+          "targets": [
+            "信息缺口",
+            "缺口类型",
+            "gap_type"
+          ]
         }
       ]
     }
