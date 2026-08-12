@@ -2,9 +2,9 @@
 name: qa-ai-output-critique
 slug: qa-ai-output-critique
 displayName: Ai Output Critique
-version: 1.6.0
+version: 1.6.3
 description: >-
-  对AI生成的测试用例进行六维评审（完整性、准确性、可执行性、风险覆盖、规范性、追溯性），是AI生成用例后的第一个质量门禁。当AI刚刚生成了一大批测试用例、你需要确保这些用例真的有价值而不是"看起来不错"时，应当使用此技能。不要假设AI输出的都是对的——AI经常生成语义正确但实际操作不了的用例。每个维度评分低于7分的必须标注问题并使用MISSING/WRONG/VAGUE等规范格式标记。
+  对AI生成的测试用例进行八维评审（完整性、正确性、可执行性、风险覆盖、规范性、一致性、追溯性、冗余度），是AI生成用例后的第一个质量门禁。当AI刚刚生成了一大批测试用例、你需要确保这些用例真的有价值而不是"看起来不错"时，应当使用此技能。不要假设AI输出的都是对的——AI经常生成语义正确但实际操作不了的用例。每个维度评分低于7分的必须标注问题并使用MISSING/WRONG/VAGUE等规范格式标记。无上游场景树/风险清单时降级为六维评审（跳过追溯性、简化完整性）。
 
 when_to_use: AI生成用例后自动激活（最终输出前的必过门禁）；用户说"检查一下输出"、"评审用例质量"、"验证完整性"、"这个用例对吗"、"自动检查"时
 allowed-tools: Read Grep Glob
@@ -36,7 +36,7 @@ output_format:
   traceability:
     - 本技能评审用例，不新增唯一ID；评审问题关联到原用例ID（TC-XXXX）
   structure:
-    - critique_report: 六维评审报告
+    - critique_report: 八维评审报告（降级模式为六维）
     - coverage_gaps: 覆盖遗漏清单
     - quality_score: 质量评分
     - improvement_suggestions: 改进建议列表
