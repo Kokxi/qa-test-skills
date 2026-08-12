@@ -1,6 +1,8 @@
 # QA Test Skills - 软件测试技能集 | AI辅助测试用例设计专家
 
-> **48个专家级测试技能 + 1个入口工作流，覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
+> **48个专家级测试技能 + 1个入口工作流（共 49 个 SKILL.md 文件），覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
+
+> **文件构成说明**：`skills/` 目录下 48 个子技能各一个 `SKILL.md`；根目录的 `SKILL.md` 是入口工作流，编排这 48 个子技能为 12 步流水线。所以"48 个技能 + 1 个入口"指的是 49 个 `SKILL.md` 文件，而非 49 个独立技能。
 
 ![Version](https://img.shields.io/badge/version-1.6.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
