@@ -2,7 +2,7 @@
 name: qa-test-strategy-design
 slug: qa-test-strategy-design
 displayName: Test Strategy Design
-version: 1.6.0
+version: 1.6.3
 description: >-
   当新项目启动需要制定测试方案、或者迭代开始前需要确定"这期怎么测"时使用此技能。根据项目特征（新项目/迭代/重构/紧急修复）、风险分布和资源约束设计分层测试策略，明确测试范围、测试手段、准入准出标准和工具选型。一个好的测试策略让团队知道"测什么、不测什么、为什么"。输出包含风险矩阵、分级测试方案的测试策略文档。
 

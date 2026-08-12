@@ -2,7 +2,7 @@
 
 > **48个专家级测试技能 + 1个入口工作流，覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
 
-![Version](https://img.shields.io/badge/version-1.5.0-blue)
+![Version](https://img.shields.io/badge/version-1.6.3-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skills](https://img.shields.io/badge/skills-48-orange)
 ![AI](https://img.shields.io/badge/AI-协作-purple)
@@ -27,7 +27,7 @@ AI辅助测试正在普及，但多数团队面临同一个困境：**新人用A
 
 **2. 不是散装技能，是有序工作流**
 
-48个技能通过根目录的 SKILL.md 作为入口工作流编排为10步有序流水线：从需求输入到测试报告，每一步的输入输出都有明确依赖关系。
+48个技能通过根目录的 SKILL.md 作为入口工作流编排为12步有序流水线（第0步文档解析 → 第11步专家评审）：从需求输入到测试报告，每一步的输入输出都有明确依赖关系。
 
 **3. 同一份内容，两个读者各取所需**
 
@@ -44,6 +44,55 @@ AI辅助测试正在普及，但多数团队面临同一个困境：**新人用A
 - **完整追溯链**：需求→场景→用例→评审，全程可追溯，每一步都有对应技能支撑
 - **防止AI泛化**：限制AI读取代码，确保测试用例基于需求文档，不做捷径
 - **统一用例格式**：标准化输出，便于团队协作和评审
+
+### 一图看懂：12 步工作流
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  第 0 步  需求文档解析      (.md / .docx / .pdf / URL)          │
+│  第 1 步  qa-requirement-review    需求评审报告                 │
+│  第 2 步  qa-req-deconstruction    需求解构表（显/隐/衍生）     │
+│  第 3 步  并行：风险直觉 + 启发式清单 + 场景树                  │
+│  第 4 步  并行：边界深挖 + 组合策略 + 状态转换 + 领域建模       │
+│  第 5 步  qa-regression-testing    回归策略                     │
+│  第 6 步  qa-ai-context-engineering  AI 上下文包                │
+│  第 7 步  qa-ai-prompt-strategy    AI 提示词  ⚠️ 不得跳过       │
+│         → [AI 生成测试用例初版]                                 │
+│  第 8 步  qa-ai-output-critique + 补盲  ⚠️ 不得跳过             │
+│  第 9 步  qa-test-reporting        最终测试用例 + 测试报告      │
+│  第10步  qa-output-validation      输出验证（防幻觉/追溯）      │
+│  第11步  qa-expert-review（可选）  专家评审                     │
+└─────────────────────────────────────────────────────────────────┘
+        输入：一份 PRD                  输出：可追溯的测试用例集
+```
+
+### Before / After：新人用 AI 测登录功能
+
+**Before（裸 AI，无技能）**
+
+```
+用户：帮我测试登录功能
+AI：   1. 输入正确账号密码，验证登录成功
+       2. 输入错误密码，验证提示错误
+       3. 输入空用户名，验证提示必填
+（泛泛而谈，3 条正向用例，无边界/无并发/无安全，换个功能依然不会）
+```
+
+**After（加载 qa-test-skills 后）**
+
+```
+用户：帮我测试登录功能
+AI：   [自动执行 12 步工作流]
+       ├─ 需求解构：显性 5 / 隐性 4 / 衍生 3
+       ├─ 风险评估：资金链路 ×5、账户安全 ×5 → 高风险深测
+       ├─ 边界深挖 BD-001~BD-012：密码长度 0/1/7/8/9/100、Unicode、emoji、SQL 注入
+       ├─ 组合策略 COMBO-001~COMBO-009：支付方式 × 终端 × 网络 Pairwise
+       ├─ 批判性质疑：假设用户会正常操作？假设网络会正常？假设密码不会含特殊字符？
+       ├─ 输出 P0~P3 分级用例 TC_AUTH_001~TC_AUTH_024，关联 REQ-/SC-
+       └─ 输出验证：事实核查 + 一致性 + 可执行性 + 来源追溯 ✓
+
+（结构化输出 24 条用例，边界/组合/并发全覆盖，每个用例可追溯到需求 ID）
+```
 
 ---
 
@@ -156,6 +205,23 @@ npx skills add Kokxi/qa-test-skills --skill qa-test-skills
 # 安装完整插件（一键获取全部技能）
 openclaw plugins install clawhub:@kokxi/qa-test-skills
 ```
+
+#### 🚀 快速试用单 skill
+
+不想一次性装 48 个技能？可以只试用一个认知型 skill，3 秒上手：
+
+```bash
+# 推荐入门：批判性思维（无需完整工作流，单点高价值）
+openclaw plugins install clawhub:@kokxi/qa-test-skills --skill qa-critical-thinking
+
+# 风险直觉：测试资源有限时判断重点
+openclaw plugins install clawhub:@kokxi/qa-test-skills --skill qa-risk-intuition
+
+# 提问框架：PRD 信息不全时澄清需求
+openclaw plugins install clawhub:@kokxi/qa-test-skills --skill qa-question-framework
+```
+
+> 试用满意后，用 `openclaw plugins install clawhub:@kokxi/qa-test-skills` 一键获取全部 48 个技能 + 入口工作流。
 
 ### 方式3：从GitHub安装
 

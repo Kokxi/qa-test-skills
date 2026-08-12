@@ -30,16 +30,16 @@ for d in skills:
     if nm and nm.group(1).strip() != d.name:
         name_issues.append((d.name, nm.group(1).strip()))
 
-# 3. version 全 1.6.0
+# 3. version 全 1.6.3
 ver_issues = []
 for d in skills:
     fm = re.match(r'^---\n(.*?)\n---\n', (d/'SKILL.md').read_text(encoding='utf-8').replace('\r\n','\n'), re.S).group(1)
     vm = re.search(r'^version:\s*([^"\'\n]+)', fm, re.M)
-    if vm and vm.group(1).strip() != '1.6.0':
+    if vm and vm.group(1).strip() != '1.6.3':
         ver_issues.append((d.name, vm.group(1).strip()))
 rfm = re.match(r'^---\n(.*?)\n---\n', (ROOT/'SKILL.md').read_text(encoding='utf-8').replace('\r\n','\n'), re.S).group(1)
 rvm = re.search(r'^version:\s*([^"\'\n]+)', rfm, re.M)
-if rvm and rvm.group(1).strip() != '1.6.0':
+if rvm and rvm.group(1).strip() != '1.6.3':
     ver_issues.append(('ROOT', rvm.group(1).strip()))
 
 # 4. related_skills 悬空 + 对称性

@@ -1,6 +1,6 @@
 ---
 name: qa-test-skills
-version: 1.6.0
+version: 1.6.3
 description: >-
   从需求文档自动生成结构化测试用例，覆盖功能测试、边界分析、组合测试和回归测试全流程。自动串联48个专家级子技能，按12步工作流编排执行。适用于：上传需求文档（PRD/Word/PDF/URL）需要完整测试用例时、不知道如何设计测试场景或担心遗漏边界条件时、需要AI评审测试输出并补充测试盲区时。每个步骤都有独立技能支撑，输出格式统一、需求可追溯、覆盖率可量化。
 when_to_use: >-
@@ -101,6 +101,8 @@ output_format:
 > 末尾的"维度覆盖统计"必须确认 N/N 全覆盖，缺一项即格式校验失败。
 
 > 强制执行规则详见 [`references/enforcement.md`](references/enforcement.md)。
+
+> 各 skill 深度量化基准（`depth_requirement_quantification`）的乘数档位来源与判定指引详见 [`references/depth-benchmarks.md`](references/depth-benchmarks.md)。
 
 > 输入识别、路由规则和可选增强流程详见 [`references/routing.md`](references/routing.md)。
 

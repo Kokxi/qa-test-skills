@@ -2,7 +2,7 @@
 name: qa-mobile-testing
 slug: qa-mobile-testing
 displayName: Mobile Testing
-version: 1.6.0
+version: 1.6.3
 description: >-
   当需要测试 iOS/Android 原生 App、H5 页面或小程序的移动端专项场景时使用此技能。移动端的坑主要不在功能逻辑上——中断（电话/通知/低电量）、弱网/断网/网络切换、前后台切换、系统权限管理、多机型适配和各种系统版本兼容才是重灾区。不要只测功能流程，移动端的 Bug 有一半以上是中断和兼容性相关的。输出按中断/网络/权限/兼容/性能分类的测试要点清单。
 
@@ -16,7 +16,6 @@ related_skills:
     - qa-ci-cd-testing           # 输出：移动端测试用于CI/CD
     - qa-release-risk-governance # 输出：测试结果用于发布评估
 references:
-  - references/platform-desktop.md
   - references/platform-mini-program.md
   - references/platform-mobile-app.md
   - references/platform-mobile-web.md
@@ -79,8 +78,8 @@ depth_requirement_quantification:
 > - [`references/platform-mobile-app.md`](references/platform-mobile-app.md) — iOS/Android 原生 App 专项
 > - [`references/platform-mobile-web.md`](references/platform-mobile-web.md) — H5/移动 Web 专项
 > - [`references/platform-mini-program.md`](references/platform-mini-program.md) — 小程序专项
-> - [`references/platform-desktop.md`](references/platform-desktop.md) — 桌面端（非移动）专项
-> - [`references/platform-pc-web.md`](references/platform-pc-web.md) — PC Web 专项
+>
+> 桌面端 / PC Web 专项不属于本技能范围，如需测试桌面端或 PC Web 请使用通用测试策略技能。
 
 ## 移动端测试检查清单
 
