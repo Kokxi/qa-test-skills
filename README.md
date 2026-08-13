@@ -235,11 +235,14 @@ AI 接收到测试需求后，自动执行标准化工作流：
 ### 安装
 
 ```bash
-# 推荐：一键安装
+# 推荐：一键安装（skills.sh）
 npx skills add Kokxi/qa-test-skills
 
 # ClawHub 插件
 openclaw plugins install clawhub:@kokxi/qa-test-skills
+
+# SkillHub（国内加速）
+skillhub install qa-test-skills --dir <skills-dir>
 
 # 手动克隆
 git clone https://github.com/Kokxi/qa-test-skills.git
@@ -629,19 +632,7 @@ AI工作流：
 
 ### 全平台安装
 
-```bash
-# skills.sh（推荐）
-npx skills add Kokxi/qa-test-skills
-
-# ClawHub 插件
-openclaw plugins install clawhub:@kokxi/qa-test-skills
-
-# SkillHub（国内加速）
-skillhub install qa-test-skills --dir <skills-dir>
-
-# GitHub 克隆
-git clone https://github.com/Kokxi/qa-test-skills.git
-```
+安装方式见上文「[快速开始 → 安装](#安装)」，支持 skills.sh / ClawHub / SkillHub / GitHub 四种方式。
 
 Star 越多，更多测试人员能发现这个项目，一起成长。
 
