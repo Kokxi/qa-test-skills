@@ -30,3 +30,5 @@ Thumbs.db
 output/
 workspace/
 temp/
+# opencode 运行时缓存
+.opencode/
