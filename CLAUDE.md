@@ -27,8 +27,8 @@ AI 辅助测试用例设计技能集：`skills/` 下 **49 个技能**（入口�
 
 ```
 skills/qa-test-skills/SKILL.md      ← 入口工作流（12 步编排，name: qa-test-skills）
+skills/qa-test-skills/references/   ← 工作流详细展开（含每步执行格式）
 skills/qa-*/SKILL.md                ← 48 个专家级子技能
-references/                         ← 工作流详细展开（含每步执行格式）
 examples/                           ← 示例项目（ecommerce / agent）
 ```
 
@@ -42,5 +42,5 @@ examples/                           ← 示例项目（ecommerce / agent）
 ## 开发者说明
 
 - 发布/优化前检查清单见 `docs/optimization-checklist.md`
-- 12 步工作流详细执行指南见 `references/workflow-detail.md`
+- 12 步工作流详细执行指南见 `skills/qa-test-skills/references/workflow-detail.md`
 - 安装方式见 `README.md`
