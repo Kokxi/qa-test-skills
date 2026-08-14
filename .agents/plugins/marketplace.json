@@ -1,6 +1,6 @@
 {
   "name": "qa-test-skills",
-  "description": "AI辅助测试用例设计技能集——49个平级技能（入口工作流 qa-test-skills + 48个专家级子技能），覆盖需求分析→测试设计→AI协作→执行洞察→质量度量全链路。",
+  "description": "AI辅助测试用例设计技能集——49个技能（入口工作流 qa-test-skills + 48个专家级子技能），覆盖需求分析→测试设计→AI协作→执行洞察→质量度量全链路。",
   "version": "1.6.3",
   "author": {
     "name": "kokxi",
@@ -20,7 +20,7 @@
       },
       "license": "MIT",
       "repository": "https://github.com/Kokxi/qa-test-skills",
-      "description": "49个平级技能：从需求文档自动生成结构化测试用例，12步工作流编排，覆盖率可量化、需求可追溯。",
+      "description": "49个技能：从需求文档自动生成结构化测试用例，12步工作流编排，覆盖率可量化、需求可追溯。",
       "platforms": ["cursor", "codex", "claude-code", "windsurf", "gemini-cli", "github-copilot"],
       "install": {
         "skills-dir": "skills"

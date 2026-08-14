@@ -1,6 +1,6 @@
 {
   "name": "QA Test Skills",
-  "description": "49个平级技能（入口工作流 qa-test-skills + 48个专家级子技能），覆盖测试全生命周期。AI辅助测试用例设计，让初级测试人员输出专家级测试用例。",
+  "description": "49个技能（入口工作流 qa-test-skills + 48个专家级子技能），覆盖测试全生命周期。AI辅助测试用例设计，让初级测试人员输出专家级测试用例。",
   "groups": [
     {
       "name": "AI协作",

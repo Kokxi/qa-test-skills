@@ -27,11 +27,11 @@ ln -s "$(pwd)/qa-test-skills/skills" .opencode/skills
 ## 结构说明
 
 ```
-skills/                     ← 49 个平级技能目录
+skills/                     ← 49 个技能目录
 ├── qa-test-skills/SKILL.md         ← 入口工作流（12步编排，name: qa-test-skills）
 ├── qa-requirement-review/SKILL.md  ← 48 个专家级子技能
 ├── qa-test-case-design/SKILL.md
-└── ... (共 49 个，全部平级，可被 / 直接调用)
+└── ... (共 49 个，可被 / 直接调用)
 ```
 
 ## 使用

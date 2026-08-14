@@ -8,7 +8,7 @@
 
 ```
 项目形态 = 纯 Prompt AI 技能包（无 HTTP server，靠 LLM 按 SKILL.md 执行）
-入口 = skills/qa-test-skills/SKILL.md（根编排引擎 + 12 步工作流，平级迁移后与其他技能同级）
+入口 = skills/qa-test-skills/SKILL.md（根编排引擎 + 12 步工作流）
 子技能 = skills/qa-*/SKILL.md（48 个专家级子技能）
 评估 = evals/evals.json（38 条 eval，230 条 assertion）
 归档 = evals/history/llm_run_*/（每轮 LLM 评测报告）
