@@ -1,18 +1,7 @@
 # QA Test Skills - Project Context
 
-## 优化工作流 - 前置检查清单
+AI 辅助测试用例设计技能集：`skills/` 下 49 个平级技能（入口工作流 `qa-test-skills` + 48 个专家级子技能），入口将子技能编排为 12 步流水线，从需求文档自动生成结构化测试用例。
 
-每次优化/修改 skill 时需要检查：
-
-### ClawHub 安全审计检查
-1. 在 ClawHub 上找到对应技能的 security-audit 页面：
-   - `https://clawhub.ai/kokxi/skills/{skill-slug}/security-audit`
-2. 查看是否有未通过的审计发现（Vague Triggers、Missing User Warnings、Hidden Instructions 等）
-3. 如有发现，先修复后再发布新版
-4. 修复后通过 `clawhub skill verify {slug} --version {version}` 验证审计状态
-5. 审计状态变为 pass 才算修复完成
-
-### 常见修复方式
-- **Vague Triggers**: 收窄 `when_to_use`，去掉过于泛化的关键词
-- **Missing User Warnings**: 在技能内容开头添加 `> **⚠️ 安全警告**` 区块，说明操作前需确认的条件
-- **Hidden Instructions**: 通常是 YAML folded scalar `>-` 的误报，可忽略
+- 完整使用指引见 `AGENTS.md`
+- 发布/优化前检查清单见 `docs/optimization-checklist.md`
+- 12 步工作流详细执行指南见 `references/workflow-detail.md`
