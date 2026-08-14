@@ -2,7 +2,7 @@
 name: qa-agent-testing
 slug: qa-agent-testing
 displayName: Agent Testing
-version: 1.6.3
+version: 1.7.0
 description: >-
   当需要测试 AI Agent（智能体、聊天机器人、AI 助手）时使用此技能。Agent 测试和传统功能测试完全不同——你要测的不是"点按钮看结果"，而是它的推理链路、工具调用时机、幻觉率、Prompt 注入防护、角色边界保持和记忆一致性。如果 Agent 能乱调用工具或泄漏系统 Prompt，那就是安全事件。⚠️ Agent 测试必须包含功能安全可控可靠九维覆盖，缺一不可。
 

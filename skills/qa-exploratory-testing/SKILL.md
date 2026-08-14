@@ -2,7 +2,7 @@
 name: qa-exploratory-testing
 slug: qa-exploratory-testing
 displayName: Exploratory Testing
-version: 1.6.3
+version: 1.7.0
 description: >-
   当脚本化测试覆盖得差不多了、但直觉告诉你"可能还有东西没测到"时使用此技能。用系统化的探索方法（场景漫游、角色扮演、失败路径、标杆对比）来发现预设测试用例覆盖不到的问题。探索式测试不是随便点——它是有明确 charter（任务书）和时长的有目的探索。每次探索需要记录 session 笔记和发现的问题列表。
 

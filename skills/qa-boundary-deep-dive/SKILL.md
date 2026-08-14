@@ -2,7 +2,7 @@
 name: qa-boundary-deep-dive
 slug: qa-boundary-deep-dive
 displayName: Boundary Deep Dive
-version: 1.6.3
+version: 1.7.0
 description: >-
   从输入、状态、时间、资源四个维度系统化识别边界条件。真正的 Bug 往往在"看起来不是边界"的地方——比如用户名字段没测超长 Unicode、订单支付刚好在超时前1秒完成、1000人同时下单。当需要补充边界测试、等价类划分完成后需要补边界值、或者直觉告诉你某些边界可能有问题时，应当使用此技能。每个边界条件都需要标注风险等级并给出明确的预期结果。适用于任何有输入字段、状态变化、时间约束或资源限制的系统。
 

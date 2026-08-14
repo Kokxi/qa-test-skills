@@ -2,7 +2,7 @@
 
 > **49个技能（入口工作流 qa-test-skills + 48个专家级子技能），覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
 
-![Version](https://img.shields.io/badge/version-1.6.3-blue)
+![Version](https://img.shields.io/badge/version-1.7.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skills](https://img.shields.io/badge/skills-49-orange)
 ![AI](https://img.shields.io/badge/AI-协作-purple)

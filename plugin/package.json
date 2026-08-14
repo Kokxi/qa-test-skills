@@ -1,6 +1,6 @@
 {
   "name": "@kokxi/qa-test-skills",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "description": "49个技能（入口工作流 qa-test-skills + 48个专家级子技能），覆盖测试全生命周期。AI辅助测试用例设计，含12步工作流和认知型技能，让AI输出专家级用例，新人也能从技能原文学习测试方法。",
   "type": "module",
   "main": "./index.js",
