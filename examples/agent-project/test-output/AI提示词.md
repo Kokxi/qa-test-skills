@@ -8,7 +8,7 @@
 
 ## 二、任务
 
-基于【AI 上下文包】（见 docs/workflow-output/AI上下文包.md），为"AI 客服 Agent"生成初版测试用例。
+基于【AI 上下文包】（见 test-output/AI上下文包.md），为"AI 客服 Agent"生成初版测试用例。
 
 ## 三、上下文注入
 
