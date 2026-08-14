@@ -6,7 +6,7 @@
 
 ![Version](https://img.shields.io/badge/version-1.6.3-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Skills](https://img.shields.io/badge/skills-48-orange)
+![Skills](https://img.shields.io/badge/skills-49-orange)
 ![Eval](https://img.shields.io/badge/benchmark-38%20evals-brightgreen)
 ![Pass Rate](https://img.shields.io/badge/pass%20rate-95.4%25-success)
 ![AI](https://img.shields.io/badge/AI-协作-purple)
