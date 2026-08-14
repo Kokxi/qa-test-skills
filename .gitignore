@@ -32,3 +32,6 @@ workspace/
 temp/
 # opencode 运行时缓存（examples 下测试生成的 node_modules 等）
 examples/**/.opencode/
+
+# AtomCode 工具自身配置
+.atomcode/
