@@ -1,8 +1,8 @@
 # QA Test Skills 集合评测报告
 
 > 评测日期：2026-08-13
-> 评测方式：真实 LLM 端到端执行（加载根 SKILL.md + 电商项目 PRD，无人工约束，LLM 自行决策）
-> 评测对象：qa-test-skills V1.6.3（根 SKILL.md + 48 子技能）
+> 评测方式：真实 LLM 端到端执行（加载 skills/qa-test-skills/SKILL.md 入口工作流 + 电商项目 PRD，无人工约束，LLM 自行决策）
+> 评测对象：qa-test-skills V1.6.3（skills/qa-test-skills/SKILL.md 入口 + 48 子技能）
 > 被测输入：examples/ecommerce-project（6 模块需求 + 主 PRD）
 
 ## 一、评测环境
@@ -10,7 +10,7 @@
 | 项 | 值 |
 |----|-----|
 | 模型 | deepseek-chat（中转站 api.asxs.top） |
-| System Prompt | 根 SKILL.md（7046 chars，完整工作流编排引擎） |
+| System Prompt | skills/qa-test-skills/SKILL.md（7046 chars，完整工作流编排引擎） |
 | User Message | 主 PRD + 6 模块需求（5124 chars） |
 | 约束 | 无（刻意不加任何人为约束，测试 skill 自身编排能力） |
 | 原始产出 | examples/ecommerce-project/docs/workflow-output.md（12 章，27433 bytes） |
@@ -84,7 +84,7 @@
 
 - 覆盖率报告明确标注口径："**基于现有需求文档的覆盖率**，不代表完整电商业务闭环 100% 覆盖"
 - 缺口清单独立成节（"基于现有需求文档的覆盖缺口"）
-- **改进已落地**：SKILL.md 新增"覆盖率与缺口诚实性硬约束"（本次评测发现的真实改进点）
+- **改进已落地**：skills/qa-test-skills/SKILL.md 新增"覆盖率与缺口诚实性硬约束"（本次评测发现的真实改进点）
 
 ### 4.4 追溯完整性 ✅ 通过
 

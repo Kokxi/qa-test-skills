@@ -1,5 +1,5 @@
 // QA Test Skills Plugin
-// 48个专家级测试技能 + 1个入口工作流
+// 49个技能（含入口工作流 qa-test-skills + 48个专家级子技能）
 
 import { readFileSync, readdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
@@ -7,32 +7,14 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const skillsDir = join(__dirname, '..', 'skills');
-const rootSkillFile = join(__dirname, '..', 'SKILL.md');
 
 /**
- * 获取所有可用的skills（含根入口工作流）
+ * 获取所有可用的skills（含入口工作流 qa-test-skills）
+ * 入口工作流已平级迁移到 skills/qa-test-skills/，由扫描自动发现
  */
 export function getSkills() {
   const skills = [];
   
-  // 加载根入口工作流
-  if (existsSync(rootSkillFile)) {
-    try {
-      const content = readFileSync(rootSkillFile, 'utf-8');
-      const metadata = parseSkillMetadata(content);
-      if (metadata.name) {
-        skills.push({
-          name: metadata.name,
-          ...metadata,
-          path: join(__dirname, '..')
-        });
-      }
-    } catch (error) {
-      console.error('Failed to load root SKILL.md:', error);
-    }
-  }
-  
-  // 加载 skills/ 下的子技能
   if (!existsSync(skillsDir)) {
     return skills;
   }
@@ -48,7 +30,7 @@ export function getSkills() {
         const content = readFileSync(skillFile, 'utf-8');
         const metadata = parseSkillMetadata(content);
         skills.push({
-          name: skillName,
+          name: metadata.name || skillName,
           ...metadata,
           path: join(skillsDir, skillName)
         });
@@ -86,21 +68,12 @@ function parseSkillMetadata(content) {
 }
 
 /**
- * 获取指定skill的内容（先查 skills/，再查根 SKILL.md）
+ * 获取指定skill的内容（按 skills/ 下目录查找）
  */
 export function getSkillContent(skillName) {
-  // 先查 skills/ 下的子技能
   const skillFile = join(skillsDir, skillName, 'SKILL.md');
   if (existsSync(skillFile)) {
     return readFileSync(skillFile, 'utf-8');
-  }
-  // 再查根 SKILL.md
-  if (existsSync(rootSkillFile)) {
-    const content = readFileSync(rootSkillFile, 'utf-8');
-    const metadata = parseSkillMetadata(content);
-    if (metadata.name === skillName) {
-      return content;
-    }
   }
   return null;
 }

@@ -8,7 +8,7 @@
 
 ```
 项目形态 = 纯 Prompt AI 技能包（无 HTTP server，靠 LLM 按 SKILL.md 执行）
-入口 = SKILL.md（根编排引擎 + 12 步工作流）
+入口 = skills/qa-test-skills/SKILL.md（根编排引擎 + 12 步工作流，平级迁移后与其他技能同级）
 子技能 = skills/qa-*/SKILL.md（48 个专家级子技能）
 评估 = evals/evals.json（38 条 eval，230 条 assertion）
 归档 = evals/history/llm_run_*/（每轮 LLM 评测报告）
@@ -85,7 +85,7 @@ python scripts/run_qa.py smoke                  # 冒烟管线
 **架构**：
 ```
 读 evals/evals.json 每条 eval
-  → 加载根 SKILL.md 作为 system prompt
+  → 加载 skills/qa-test-skills/SKILL.md 作为 system prompt
   → eval 的 prompt 字段作为 user message
   → 调 worker 模型（DeepSeek/Kimi）生成产出
   → 对每条 assertion 跑 grade_evals.check_assertion 判定 pass/fail
@@ -167,7 +167,7 @@ DS_KEY=sk-xxx python scripts/run_llm_eval.py --provider deepseek --offset 13 --l
 
 **命中 eval**：eval-2（显性需求 ≥3 只输出2条）、eval-3（缺 TC_ 格式）、eval-37（补盲用例 0 条）
 
-**修复模板**（加到 SKILL.md 核心原则）：
+**修复模板**（加到 skills/qa-test-skills/SKILL.md 核心原则）：
 ```
 > ⚠️ **N 个维度全必输出硬约束**：必须按编号 1-N 逐条输出，未发现问题的也要输出占位行。
 > 不适用的也要输出标注"不适用+原因"的占位项，而非省略。
@@ -182,7 +182,7 @@ DS_KEY=sk-xxx python scripts/run_llm_eval.py --provider deepseek --offset 13 --l
 
 **命中 eval**：eval-1（只输出 228 chars "I'll help you test..."）、eval-38（只输出 180 chars）
 
-**修复模板**（加到 SKILL.md 核心原则）：
+**修复模板**（加到 skills/qa-test-skills/SKILL.md 核心原则）：
 ```
 > ⚠️ **必须直接输出完整内容，不得只承诺生成**：
 > 必须在本次响应中直接输出完整内容，不得只输出"我将生成"等承诺性表述。
@@ -200,7 +200,7 @@ DS_KEY=sk-xxx python scripts/run_llm_eval.py --provider deepseek --offset 13 --l
 
 ```
 STEP 1: 探查项目结构
-  - ls skills/ SKILL.md evals/ scripts/ docs/
+  - ls skills/ evals/ scripts/ docs/
   - 确认项目形态（纯 Prompt / 有 server）
 
 STEP 2: 跑层 1 静态校验
@@ -286,4 +286,4 @@ Agent 在后续迭代或其他 skill 项目复用时，逐项确认：
 - [ ] 跑了 `scripts/run_qa.py audit`（安全审计 pass）
 - [ ] 归档了每轮报告到 `evals/history/`
 - [ ] README.md benchmark 表同步更新
-- [ ] 版本号全统一（SKILL.md + 子技能 + plugin.json + integrity_check）
+- [ ] 版本号全统一（skills/qa-test-skills/SKILL.md + 子技能 + plugin.json + integrity_check）
