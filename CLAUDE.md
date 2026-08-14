@@ -2,35 +2,26 @@
 
 AI 辅助测试用例设计技能集：`skills/` 下 **49 个平级技能**（入口工作流 `qa-test-skills` + 48 个专家级子技能），入口将子技能编排为 12 步流水线，从需求文档自动生成结构化测试用例。
 
-## 安装
+## 触发条件
 
-```bash
-# 推荐：一键安装（skills.sh，支持 cursor/codex/claude-code/windsurf/cline/gemini-cli/github-copilot/openclaw）
-npx skills add Kokxi/qa-test-skills
+用户表达以下意图时，激活入口工作流 `qa-test-skills` 并执行 12 步：
 
-# 指定 Agent 安装
-npx skills add Kokxi/qa-test-skills -a claude-code -a cursor
+- "生成测试用例" / "帮我测试" / "设计测试"
+- "上传需求" / 上传需求文档（PRD/Word/PDF/URL）
+- 需要完整测试流程时
 
-# ClawHub 插件
-openclaw plugins install clawhub:@kokxi/qa-test-skills
-```
-
-安装后技能落入各 Agent 的 skills 目录（Claude Code 为 `.claude/skills/`，Cursor/Codex 为 `.agents/skills/`）。
-
-## 使用
-
-对 Agent 说以下任一指令，入口工作流自动激活并执行 12 步：
-
-- "生成测试用例"
-- "帮我测试"
-- "设计测试"
-- "上传需求"
-
-或显式调用入口技能：
+也可显式调用入口技能：
 
 ```
 /qa-test-skills 帮我测试这个项目：docs/prd.md
 ```
+
+## 工作方式
+
+1. 读取 `skills/qa-test-skills/SKILL.md`（入口工作流）
+2. 按 12 步执行，每步读取对应子技能 `skills/qa-xxx/SKILL.md`
+3. 每步产出独立文件到 `test-output/`
+4. 最终产出 `测试用例.csv`
 
 ## 目录结构
 
@@ -52,4 +43,4 @@ examples/                           ← 示例项目（ecommerce / agent）
 
 - 发布/优化前检查清单见 `docs/optimization-checklist.md`
 - 12 步工作流详细执行指南见 `references/workflow-detail.md`
-- Agent 执行指引见 `AGENTS.md`
+- 安装方式见 `README.md`
