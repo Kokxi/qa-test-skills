@@ -26,6 +26,10 @@ Thumbs.db
 *.bat
 *.txt
 
+# 推送脚本例外（正式发布的发布脚本需入库）
+!scripts/push-clawhub.bat
+!scripts/push-skillhub.bat
+
 # tmp
 output/
 workspace/
