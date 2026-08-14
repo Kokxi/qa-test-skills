@@ -97,6 +97,13 @@
         "qa-team-coaching",
         "qa-retrospective"
       ]
+    },
+    {
+      "name": "主工作流",
+      "description": "12步工作流入口编排引擎",
+      "skills": [
+        "qa-test-skills"
+      ]
     }
   ]
 }
