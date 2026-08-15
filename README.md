@@ -406,8 +406,8 @@ test-output/
 ### 如何使用示例项目
 
 ```bash
-# 使用 skills/qa-test-skills/ 入口工作流处理示例项目
-请帮我测试这个项目：examples/ecommerce-project/docs/prd.md
+# 使用入口工作流处理示例项目
+/qa-test-skills 请帮我测试这个项目，需求文档在docs目录
 ```
 
 ---
