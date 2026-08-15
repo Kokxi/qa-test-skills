@@ -250,6 +250,13 @@ git clone https://github.com/Kokxi/qa-test-skills.git
 # 指定 Agent 安装（支持 cursor/codex/claude-code/windsurf/cline/gemini-cli/github-copilot/openclaw）
 npx skills add Kokxi/qa-test-skills -a cursor -a codex -a claude-code
 
+# 手动安装：clone 本项目后，把 skills/ 下 49 个子目录拷贝到 Agent 或项目的对应 skills 目录
+git clone https://github.com/Kokxi/qa-test-skills.git
+cp -r qa-test-skills/skills/* ~/.claude/skills/        # Claude Code 全局
+cp -r qa-test-skills/skills/* .claude/skills/          # Claude Code 项目级
+cp -r qa-test-skills/skills/* ~/.codex/skills/         # Codex 全局
+cp -r qa-test-skills/skills/* .agents/skills/          # Cursor/Codex 项目级
+
 ```
 
 ### Agent 安装路径对照
