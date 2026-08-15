@@ -263,6 +263,34 @@ npx skills add Kokxi/qa-test-skills -a cursor -a codex -a claude-code
 | OpenClaw    | `skills/`           | `~/.openclaw/skills/`         |
 | OpenCode    | `skills/`           | `~/.opencode/skills/`         |
 
+### Claude Code / Codex 专项安装
+
+```bash
+# Claude Code（全局）
+npx skills add Kokxi/qa-test-skills -a claude-code
+
+# Codex（全局）
+npx skills add Kokxi/qa-test-skills -a codex
+```
+
+安装后技能落在 `~/.claude/skills/`（Claude Code）或 `~/.codex/skills/`（Codex），共 **49 个技能目录**：
+
+```
+~/.claude/skills/
+├── qa-test-skills/              ← 入口工作流（12 步编排）
+├── qa-requirement-review/       ← 48 个专家级子技能
+├── qa-test-case-design/
+└── ...（共 49 个）
+```
+
+### 三种触发方式
+
+| 方式 | 操作 | 说明 |
+|------|------|------|
+| **对话自动触发（推荐）** | 直接说"帮我测试这个项目：docs/prd.md" | 入口工作流根据 `when_to_use` 自动激活，无需配置 |
+| **显式调用入口** | Claude Code：`/qa-test-skills`；Codex：`@qa-test-skills` | 手动指定入口技能 |
+| **单独调用子技能** | "帮我评审这份需求" / "分析登录边界场景" | 直接激活对应子技能，无需跑完整工作流 |
+
 ### 使用示例
 
 #### 示例1：生成登录模块测试用例
@@ -337,6 +365,36 @@ examples/ecommerce-project/
 - **覆盖率分析**：提供需求覆盖率和测试用例分布分析
 - **完整工作流产物**：`test-output/` 收录 opencode 真实执行 12 步工作流的全部过程文件（需求评审/解构/场景树/边界/组合/状态机/领域模型/回归策略/AI上下文/提示词/初版用例/评审报告/盲区补偿/测试报告/输出验证/专家评审）
 - **Agent 测试示例**：`examples/agent-project/` 为 AI 客服 Agent 专项测试示例（88 条用例，含幻觉/工具调用/可控性维度）
+
+### 完整执行产物（test-output/）
+
+执行 12 步工作流后，`test-output/` 生成 20 个独立文件：
+
+```
+test-output/
+├── 需求文档集合.md        ← 第0步 需求解析
+├── 需求评审报告.md        ← 第1步 需求评审
+├── 需求解构表.md          ← 第2步 需求解构
+├── 风险评估.md / 启发式清单.md / 场景树.md   ← 第3步 场景构建
+├── 边界清单.md / 组合矩阵.md / 状态转换图.md / 领域模型.md  ← 第4步 深度设计
+├── 回归策略.md            ← 第5步 回归策略
+├── AI上下文包.md          ← 第6步 上下文工程
+├── AI提示词.md            ← 第7步 提示词生成
+├── 测试用例_初版.csv      ← AI 生成用例
+├── 用例评审报告.md / 盲区补偿用例.md  ← 第8步 评审补盲
+├── 测试报告.md            ← 第9步 测试报告
+├── 测试用例.csv           ← ★ 最终交付（标准 CSV，Excel 可直接打开）
+├── 输出验证报告.md        ← 第10步 输出验证
+└── 专家评审报告.md        ← 第11步 专家评审（可选）
+```
+
+**真实执行数据**（参考 `examples/ecommerce-project/test-output/`、`examples/agent-project/test-output/`）：
+
+| 指标 | ecommerce 示例 | agent 示例 |
+|------|:---:|:---:|
+| 测试用例 | 116 条（P0 19 / P1 53 / P2 38 / P3 6） | 88 条 |
+| 覆盖率 | 26/26 需求点（基于现有需求文档） | — |
+| 过程文件 | 20 个（12 步全流程） | 20 个 |
 
 ### 如何使用示例项目
 
@@ -601,6 +659,34 @@ AI工作流：
 
 输出：覆盖页面跳转、参数传递、状态同步的测试用例
 ```
+
+---
+
+## 常见问题（FAQ）
+
+**Q：安装后 Agent 没有自动触发怎么办？**
+
+显式调用入口技能：Claude Code 输入 `/qa-test-skills`，Codex 输入 `@qa-test-skills`。
+
+**Q：想了解技能集包含哪些技能？**
+
+对 Agent 说"QA Test Skills 包含哪些技能"，入口工作流会自动列出 49 个技能及分类。
+
+**Q：安装路径在哪里？**
+
+| Agent | 全局路径 | 项目路径 |
+|-------|----------|----------|
+| Claude Code | `~/.claude/skills/` | `.claude/skills/` |
+| Codex | `~/.codex/skills/` | `.agents/skills/` |
+| Cursor | `~/.cursor/skills/` | `.agents/skills/` |
+
+**Q：技能装好后要不要额外配置？**
+
+不需要。入口工作流的 `when_to_use` 会自动识别"生成测试用例/帮我测试/上传需求"等触发词并激活；也支持 `/qa-test-skills` 显式调用。
+
+**Q：生成结果存在哪里？**
+
+12 步工作流每步产出独立文件到 `test-output/`，最终交付为 `test-output/测试用例.csv`（标准 CSV，Excel 可直接打开）。
 
 ---
 
