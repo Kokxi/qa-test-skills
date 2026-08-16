@@ -2,46 +2,41 @@
 setlocal
 
 REM ============================================================
-REM  Push All Skills to SkillHub
+REM  Push All Skills to SkillHub (official CLI)
 REM  Publish 49 skills one by one with delay control
 REM  (SkillHub has publish rate limits)
 REM
 REM  Usage:
-REM    push-skillhub.bat [namespace] [delay_seconds]
-REM      default namespace=kokxi  delay=10 (seconds)
+REM    push-skillhub.bat [version] [delay_seconds]
+REM      default version=1.7.0  delay=15 (seconds)
 REM
 REM  Prerequisites:
-REM    - skillhub CLI installed (if missing: npm install -g skillhub)
-REM    - logged in: skillhub login (browser OAuth, token in ~/.skillhub/auth.json)
+REM    - Official CLI: ~/.skillhub/skills_store_cli.py (skillhub 2026.8.5+)
+REM      NOT the npm "skillhub" package (it has no publish command)
+REM    - Logged in: python ~/.skillhub/skills_store_cli.py auth whoami
 REM
 REM  Notes:
 REM    - Publishes all 49 skills (entry qa-test-skills + 48 subs)
 REM    - Waits DELAY seconds after each push to avoid rate limit
-REM    - Version is read from each skill's SKILL.md frontmatter
+REM      (8s is too short - gets rate-limited; 15s works)
 REM    - Failed skills are recorded in push-skillhub-failed.txt for retry
 REM ============================================================
 
-set "NS=%~1"
-if "%NS%"=="" set "NS=kokxi"
+set "VER=%~1"
+if "%VER%"=="" set "VER=1.7.0"
 
 set "DELAY=%~2"
-if "%DELAY%"=="" set "DELAY=10"
+if "%DELAY%"=="" set "DELAY=15"
+
+set "CLI=%~dp0skills_store_cli.py"
+if defined SKILLHUB_CLI set "CLI=%SKILLHUB_CLI%"
 
 echo ============================================
 echo  Pushing 49 skills to SkillHub
-echo  Namespace: %NS%
+echo  Version: %VER%
 echo  Delay between pushes: %DELAY%s
 echo ============================================
 echo.
-
-REM Prerequisite check: skillhub CLI must be available
-where skillhub >nul 2>&1
-if errorlevel 1 (
-  echo [ERROR] skillhub CLI not found. Install with: npm install -g skillhub
-  echo         Then run: skillhub login
-  endlocal
-  exit /b 1
-)
 
 set "FAILED_FILE=push-skillhub-failed.txt"
 if exist "%FAILED_FILE%" del "%FAILED_FILE%"
@@ -100,7 +95,7 @@ call :push qa-testability-advocacy
 
 echo.
 echo ============================================
-echo  Done. Pushed %COUNT%/49 skills to SkillHub (%NS%)
+echo  Done. Pushed %COUNT%/49 skills to SkillHub (v%VER%)
 if exist "%FAILED_FILE%" (
   echo  FAILED skills recorded in %FAILED_FILE%:
   type "%FAILED_FILE%"
@@ -118,7 +113,7 @@ REM ------------------------------------------------------------
 set "SLUG=%~1"
 set /a COUNT+=1
 echo [%COUNT%/49] Publishing %SLUG% ...
-call skillhub publish "./skills/%SLUG%" --namespace %NS%
+python "%CLI%" publish "skills/%SLUG%" --version %VER% --changelog "%VER%"
 if errorlevel 1 (
   echo  !! FAILED: %SLUG% 1>>"%FAILED_FILE%"
   echo  !! %SLUG% FAILED (see %FAILED_FILE%)
