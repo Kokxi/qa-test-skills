@@ -456,8 +456,7 @@ examples/ecommerce-project/
 │       ├── 02-user.md            # 用户管理模块需求
 │       ├── 03-product.md         # 商品管理模块需求
 │       └── 04-order.md           # 订单管理模块需求
-├── test-cases.md                 # 生成的测试用例
-└── README.md                     # 示例说明文件
+└── test-output/                  # opencode 真实执行 12 步工作流的完整产物（20 个文件）
 ```
 
 ### 使用示例
