@@ -1,7 +1,7 @@
 ---
 name: qa-code-review-for-test
 slug: qa-code-review-for-test
-displayName: Code Review For Test
+displayName: 测试视角代码评审
 version: 1.7.0
 description: >-
   当开发提了 PR、代码变更需要确定测试范围、或者想通过分析代码来预测可能出 Bug 的区域时使用此技能。从测试视角分析代码变更的影响范围、识别高危模式和典型风险区域。不要看完整代码逻辑——你只需要关注变更类型（新增/修改/删除/重构）、影响范围（接口定义/数据库字段/业务逻辑）和相关依赖，据此确定最小回归测试范围。输出代码变更影响分析报告。

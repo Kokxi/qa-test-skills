@@ -1,7 +1,7 @@
 ---
 name: qa-bug-root-cause-analysis
 slug: qa-bug-root-cause-analysis
-displayName: Bug Root Cause Analysis
+displayName: 缺陷根因分析
 version: 1.7.0
 description: >-
   当某个 Bug 频繁复现、线上有缺陷需要做事后分析、或者发现同一类问题反复出现需要根治时使用此技能。从症状出发用 5Why、因果图和鱼骨图等方法系统化定位缺陷根源，区分直接原因、间接原因和系统原因。不要只修症状——根因分析的价值在于找到让同类 Bug 不再发生的系统性改进措施，同时分析漏测原因来优化测试设计。 ⚠️ 本技能示例可能调用外部日志/监控工具，请在受控环境执行。

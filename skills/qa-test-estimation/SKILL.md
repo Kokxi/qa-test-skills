@@ -1,7 +1,7 @@
 ---
 name: qa-test-estimation
 slug: qa-test-estimation
-displayName: Test Estimation
+displayName: 测试估算
 version: 1.7.0
 description: >-
   当项目经理问"这个版本多久测完"或者需要给测试排期做资源规划时使用此技能。基于需求复杂度、变更范围和历史数据系统化估算测试人天，输出包含冒烟/功能/回归/专项的逐阶段预估。不要拍脑袋——估算必须有依据（复杂度分级 + 历史基线 + 风险系数），同时标注置信度区间和风险预留。
