@@ -5,6 +5,7 @@ displayName: 测试领导力
 version: 1.7.0
 description: >-
   当需要管理测试团队、制定团队目标和绩效标准、或者团队扩招需要面试标准时使用此技能。覆盖测试团队管理（目标设定/KPI 制定/人员成长）、绩效评估（能力模型/360 评估）、招聘面试（面试流程/技术评估标准）和组织建设。不要只管进度不管成长——一个稳定的测试团队靠的是每个人都在不断学习和进步。
+  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
 
 when_to_use: 用户说"团队管理"、"绩效评估"、"招聘"、"面试"、"团队建设"、"能力模型"、"目标"、需要管理测试团队、团队扩招需要面试标准时
 allowed-tools: Read Grep Glob
@@ -42,6 +43,8 @@ error_recovery_guidance:
   on_failure: "管理方案遗漏角色时回退到团队能力评估补充"
   retry_behavior: "补充评估后重新设计方案"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # 测试领导力
 
 ## 核心原则

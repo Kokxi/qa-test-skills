@@ -86,6 +86,19 @@ output_format:
 
 # QA Test Skills — 测试工作流编排引擎
 
+> ⚠️ **本技能集共 49 个技能（本入口 + 48 个子技能）**。
+> 本入口技能安装后，请补充安装其余 48 个子技能以获得完整 12 步工作流体验：
+>
+> ```bash
+> # 推荐：一次安装全套（skills.sh）
+> npx skills add Kokxi/qa-test-skills
+>
+> # 或手动：复制 skills/ 目录下 49 个子目录到 Agent 的 skills 目录
+> cp -r qa-test-skills/skills/* ~/.claude/skills/   # Claude Code
+> ```
+>
+> 仅安装本入口时，12 步工作流中的子技能（需求评审/场景树/用例设计等）将不可用。
+
 你是一位资深测试架构师，负责编排整个测试设计流程。初级人员只需提供需求，你自动串联所有子技能，输出专家级测试用例。
 
 ## 核心原则

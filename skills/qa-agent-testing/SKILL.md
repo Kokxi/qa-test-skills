@@ -5,6 +5,7 @@ displayName: Agent 测试
 version: 1.7.0
 description: >-
   当需要测试 AI Agent（智能体、聊天机器人、AI 助手）时使用此技能。Agent 测试和传统功能测试完全不同——你要测的不是"点按钮看结果"，而是它的推理链路、工具调用时机、幻觉率、Prompt 注入防护、角色边界保持和记忆一致性。如果 Agent 能乱调用工具或泄漏系统 Prompt，那就是安全事件。⚠️ Agent 测试必须包含功能安全可控可靠九维覆盖，缺一不可。
+  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
 
 when_to_use: 用户说"Agent测试"、"智能体测试"、"AI助手"、"聊天机器人"、"Agent幻觉"、"Prompt注入"、"AI安全审计"、"LLM测试"、需要测试AI Agent或评估AI行为时
 allowed-tools: Read Grep Glob Bash WebFetch
@@ -46,6 +47,8 @@ depth_requirement_quantification:
   reference_value: "根据Agent复杂度和风险等级调整测试深度：简单×1/中等×2/复杂×3"
   minimum: "至少覆盖工具调用、幻觉检测、安全审计3个维度中的2个"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # AI Agent测试专项
 
 ## 核心原则

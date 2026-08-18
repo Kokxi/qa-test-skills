@@ -5,6 +5,7 @@ displayName: 需求评审
 version: 1.7.0
 description: >-
   从完整性、清晰性、一致性、可测试性、可实现性五个维度系统化评审需求文档质量。当用户要求"评审这份需求"、"看看这个PRD写得怎么样"、或者测试用例设计前需要先评估需求质量时，应当使用此技能。如果需求本身有问题（模糊/矛盾/不可测试），后续的测试设计都是徒劳。不要只在用户明确说"需求评审"时才用——任何涉及需求文档的测试任务都应先过一遍需求评审。
+  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
 
 when_to_use: 用户说"需求评审"、"评审需求"、"需求质量"、"PRD评审"、"需求检查"、"需求写得好不好"、"评审这份需求"、需要评审需求文档、需求提交测试前预审时
 allowed-tools: Read Grep Glob WebFetch
@@ -49,6 +50,8 @@ depth_requirement_quantification:
   reference_value: "根据需求复杂度调整评审深度：简单×1/中等×2/复杂×3"
   minimum: "至少评审完整性、清晰性、一致性、可测试性、可实现性5个维度"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # 需求评审专项
 
 ## 核心原则

@@ -5,6 +5,7 @@ displayName: 专项测试
 version: 1.7.0
 description: >-
   当功能测试做完之后需要做进一步的质量验证时使用此技能。覆盖性能测试（负载/压力/稳定性）、安全测试（OWASP Top 10 TOP 漏洞）、兼容性测试（多浏览器/多设备）的测试方法。不要在功能测试还没做完时就做专项——先保证功能正确，再评估性能和安全。专项测试的产出是一组可复用的测试方案（性能指标基线、安全渗透用例、兼容性矩阵）。
+  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
 
 when_to_use: 用户说"性能测试"、"安全测试（专项）"、"兼容性测试"、"专项测试"、"压力测试"、"渗透测试"、"SQL注入测试"、"跨浏览器测试"、需要进行专项测试、功能测试完成后需要补充专项测试时
 allowed-tools: Read Grep Glob Bash
@@ -45,6 +46,8 @@ error_recovery_guidance:
   on_failure: "专项测试遗漏维度时回退到测试策略补充范围"
   retry_behavior: "补全范围后重新执行专项测试"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # 专项测试能力
 
 ## 核心原则

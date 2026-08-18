@@ -5,6 +5,7 @@ displayName: 专家评审
 version: 1.7.0
 description: >-
   当 AI 生成的测试用例已经过输出评审和盲区补盲、准备终审上线时使用此技能。由资深测试对 AI 输出的用例做人工抽样校验，从业务有效性、场景完整性、可执行性三个维度做最后把关。⚠️ 如果发现系统性问题（比如遗漏了某个关键模块），需要回退修正并记录到 Prompt 优化反馈库。专家评审不是走形式——发现的问题必须闭环。
+  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
 
 when_to_use: 用户说"专家评审"、"用例审查"、"校正反馈"、"评审用例"、"检查用例"、"终审"、需要对AI输出进行质量把关、用例上线前需要终审时
 allowed-tools: Read Grep Glob
@@ -48,6 +49,8 @@ error_recovery_guidance:
   on_failure: "评审发现系统性问题时回退到输出评审步骤修正"
   retry_behavior: "修正后重新抽样校验"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # 专家评审与元学习
 
 ## 核心原则
