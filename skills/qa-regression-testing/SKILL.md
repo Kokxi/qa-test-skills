@@ -2,7 +2,7 @@
 name: qa-regression-testing
 slug: qa-regression-testing
 displayName: Regression Testing
-version: 1.7.0
+version: 1.7.5
 description: >-
   根据变更范围、风险等级和时间约束制定分级精准回归方案。当版本迭代了、代码改动了、你需要确定"到底哪些功能要重新测一遍"的时候使用此技能。回归的时间永远不够——此技能帮你做出取舍决策：冒烟回归（P0核心流程）、核心回归（高影响区域）、全量回归（有余力时）。基于变更分析和风险评估选择最省时的回归策略，而不是盲目全量回归。
 

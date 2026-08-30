@@ -2,7 +2,7 @@
 name: qa-test-automation-arch
 slug: qa-test-automation-arch
 displayName: Test Automation Arch
-version: 1.7.0
+version: 1.7.5
 description: >-
   当需要设计自动化测试框架、或者现有框架维护成本太高需要重构时使用此技能。运用 PageObject、分层测试、关键字驱动、数据驱动等模式设计可维护可扩展的自动化架构。不要直接写测试代码——先设计架构：选型（UI/API/单元）、分层（测试层/业务层/基础设施层）、数据管理（测试数据与脚本分离）和 CI 集成方案。好的自动化架构应该让写用例的人不需要懂底层实现。
 

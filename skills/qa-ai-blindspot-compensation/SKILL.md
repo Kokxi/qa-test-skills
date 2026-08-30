@@ -2,7 +2,7 @@
 name: qa-ai-blindspot-compensation
 slug: qa-ai-blindspot-compensation
 displayName: Ai Blindspot Compensation
-version: 1.7.0
+version: 1.7.5
 description: >-
   AI在生成测试用例时存在六大系统性盲区：时序依赖、并发冲突、资源竞争、状态累积、数据一致性、第三方集成差异。评审完AI生成的用例之后，必须用此技能做盲区补盲——因为AI几乎一定会漏掉这些。如果你心里觉得"好像还差点什么但说不上来"，这就是答案。每个盲区维度至少补2-3个场景，总补盲数12-18个。
 
