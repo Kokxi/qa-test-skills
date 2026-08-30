@@ -2,7 +2,7 @@
 name: qa-team-coaching
 slug: qa-team-coaching
 displayName: 测试团队赋能
-version: 1.7.0
+version: 1.7.5
 description: >-
   当团队里有测试新人需要带、想提升团队整体测试水平、或者需要把个人经验转化为团队能力时使用此技能。通过 Pair 测试、经验分享、checklist 沉淀、模板建设和培训材料等方式赋能团队。不要等着新人犯错再教——好的赋能是提前给工具和方法论，让新人在第一次做之前就知道"正确的做法是什么"。
   本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills

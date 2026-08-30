@@ -2,7 +2,7 @@
 name: qa-question-framework
 slug: qa-question-framework
 displayName: 测试提问框架
-version: 1.7.0
+version: 1.7.5
 description: >-
   当需求文档信息不够、不知道接下来该问产品什么、或者需要从开发那边获取更多技术细节时使用此技能。很多人测不好不是因为不会设计用例，而是因为一开始就没问对问题。提供需求调研、边界确认、规则挖掘、技术细节追问等不同场景的结构化提问模板，确保在测试设计前获取到足够上下文。每一个问题都标注了问谁、怎么问、什么时候问。
   本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills

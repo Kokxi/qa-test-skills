@@ -2,7 +2,7 @@
 name: qa-ci-cd-testing
 slug: qa-ci-cd-testing
 displayName: CI/CD 测试
-version: 1.7.0
+version: 1.7.5
 description: >-
   当需要把测试集成到 CI/CD 流水线中、或者现有流水线的测试环节跑起来效率低不可靠时使用此技能。覆盖流水线各阶段的分层测试卡点设计（提交检查→单元测试→接口测试→UI 测试→回归测试）、工具集成策略和质量门禁配置。不要在 CI 里堆满慢的 UI 测试——而是构建测试金字塔：提交阶段跑最快的（<5min），合码阶段跑核心的（<15min），夜间跑全量的。
   本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills

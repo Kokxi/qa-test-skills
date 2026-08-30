@@ -2,7 +2,7 @@
 name: qa-domain-modeling
 slug: qa-domain-modeling
 displayName: 测试领域建模
-version: 1.7.0
+version: 1.7.5
 description: >-
   通过构建状态机、数据流图和服务依赖图来理清复杂的业务逻辑和系统边界。当需求文档复杂、涉及多个子系统交互、或者你搞不清楚数据在不同模块之间怎么流转的时候，应当使用此技能。领域建模不是为了画图而画图——它帮你发现那些"需求文档里没写的"隐式业务规则和系统边界。适用于复杂业务流程的测试范围可视化。
   本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
