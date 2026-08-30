@@ -39,6 +39,8 @@ input_format:
       description: 业务目标和用户角色
 output_format:
   structure:
+    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
+    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
     - test_case_id: "TC_模块_功能_序列"
     - test_type: "功能/性能/安全/兼容性"
     - priority: "P0/P1/P2/P3"
@@ -47,9 +49,9 @@ output_format:
     - test_steps: "留空（用户补充）"
     - expected_results: "预期结果"
   traceability:
-    - 每个用例带唯一ID（TC-XXXX）
-    - 关联需求ID（REQ-XXXX）
-    - 关联场景ID（SC-XXXX）
+    - 每个用例带唯一ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）
+    - 关联需求ID（TC_{需求模块缩写}_{功能缩写}_{序号}）
+    - 关联场景ID（TC_{场景模块缩写}_{功能缩写}_{序号}）
 depth_requirement_quantification:
   reference_value: "根据需求复杂度调整用例设计深度：简单×2/中等×3/复杂×4"
   minimum: "用例总数不低于需求点的3倍"

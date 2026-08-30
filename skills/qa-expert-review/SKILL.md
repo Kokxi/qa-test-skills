@@ -30,6 +30,9 @@ input_format:
       description: 历史评审的校正记录，用于模式分析
 output_format:
   structure:
+    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
+    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
+    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
     - review_id: "REV-XXXX"
     - review_summary: "评审摘要"
     - sampling_rate: "抽样比例"
@@ -39,8 +42,8 @@ output_format:
     - prompt_optimization: "Prompt优化建议"
   traceability:
     - 每次评审带唯一ID（REV-XXXX）
-    - 关联用例ID（TC-XXXX）
-    - 关联需求ID（REQ-XXXX）
+    - 关联用例ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）
+    - 关联需求ID（TC_{需求模块缩写}_{功能缩写}_{序号}）
 depth_requirement_quantification:
   reference_value: "根据项目重要性和风险等级调整评审深度：简单x1/中等x2/复杂x3"
   minimum: "至少覆盖功能完整性、边界充分性、异常覆盖性3个维度"

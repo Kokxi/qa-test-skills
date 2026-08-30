@@ -79,7 +79,7 @@ output_format:
     - risk_areas: "风险区域"
     - test_report: "测试报告"
   traceability:
-    - 每个测试用例带唯一ID（TC-XXXX）
+    - 每个测试用例带唯一ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）
     - 关联需求ID（REQ-XXXX）
     - 关联场景ID（SC-XXXX）
 ---

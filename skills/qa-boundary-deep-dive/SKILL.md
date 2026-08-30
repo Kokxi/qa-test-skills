@@ -28,6 +28,9 @@ input_format:
       description: 来自qa-risk-intuition的输出，标识高风险区域
 output_format:
   structure:
+    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
+    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
+    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
     - boundary_id: "BD-XXXX"
     - scenario_ids: ["SC-XXXX"]
     - input_boundary: "输入边界"
@@ -36,7 +39,7 @@ output_format:
     - resource_boundary: "资源边界"
   traceability:
     - 每个边界带唯一ID（BD-XXXX）
-    - 关联场景ID（SC-XXXX）
+    - 关联场景ID（TC_{场景模块缩写}_{功能缩写}_{序号}）
 depth_requirement_quantification:
   reference_value: "根据需求复杂度调整分析深度：简单×2/中等×3/复杂×4"
   minimum: "至少覆盖输入/状态/时间/资源4个维度中的3个"
