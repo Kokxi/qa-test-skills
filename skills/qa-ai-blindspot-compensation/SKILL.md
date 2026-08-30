@@ -31,15 +31,18 @@ input_format:
       description: 来自qa-ai-output-critique的评审结果
 output_format:
   structure:
+    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
+    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
+    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
     - blindspot_id: "BS-XXXX"
     - requirement_ids: ["REQ-XXXX"]
-    - original_tc_ids: ["TC-XXXX"]
+    - original_tc_ids: ["TC_{模块缩写}_{功能缩写}_{序号}"]
     - blindspot_type: "盲区类型"
     - new_test_cases: "补盲用例列表"
   traceability:
     - 每个补盲用例带唯一ID（BS-XXXX）
-    - 关联原始用例ID（TC-XXXX）
-    - 关联需求ID（REQ-XXXX）
+    - 关联原始用例ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）
+    - 关联需求ID（TC_{需求模块缩写}_{功能缩写}_{序号}）
 depth_requirement_quantification:
   reference_value: "根据测试复杂度和风险等级调整补盲深度：简单x1/中等x2/复杂x3"
   minimum: "至少覆盖边界盲区、场景盲区、数据盲区3个维度中的2个"

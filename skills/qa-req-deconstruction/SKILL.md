@@ -35,6 +35,9 @@ input_format:
       description: 同类功能历史缺陷模式
 output_format:
   structure:
+    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
+    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
+    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
     - requirement_id: "REQ-XXXX"
     - explicit_requirements: "显性需求列表"
     - implicit_requirements: "隐性需求列表"
@@ -43,7 +46,7 @@ output_format:
     - five_dimensions: "五维拆解"
     - risk_points: "风险点列表"
   traceability:
-    - 每个需求带唯一ID（REQ-XXXX）
+    - 每个需求带唯一ID（TC_{需求模块缩写}_{功能缩写}_{序号}）
     - 每个风险点带唯一ID（RISK-XXXX）
 depth_requirement_quantification:
   reference_value: "根据需求复杂度调整解构深度：简单×2/中等×3/复杂×4"
