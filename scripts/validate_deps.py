@@ -11,7 +11,7 @@ from collections import defaultdict
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SKILLS_DIR = BASE_DIR / 'skills'
-ROOT_SKILL = BASE_DIR / 'SKILL.md'
+ROOT_SKILL = BASE_DIR / 'skills' / 'qa-test-skills' / 'SKILL.md'  # 入口工作流（已从根目录平级迁移到 skills/ 下）
 
 errors = []
 warnings = []

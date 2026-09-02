@@ -3,20 +3,25 @@
 import pathlib, re, json, subprocess
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+ROOT_SKILL = ROOT/'skills'/'qa-test-skills'/'SKILL.md'  # 入口工作流（已从根目录平级迁移到 skills/ 下）
 skills = sorted((ROOT/'skills').glob('qa-*'))
 issues = []
 
 # 1. frontmatter 12 字段 + traceability
+# 入口工作流（qa-test-skills）是编排器，categories/depth_requirement_quantification/
+# error_recovery_guidance 为叶子技能专属字段，不要求（迁移前入口在根目录、天然不在此检查范围）
 required = ['name','version','description','when_to_use','allowed-tools',
            'related_skills','input_format','output_format','categories',
            'depth_requirement_quantification','error_recovery_guidance']
+entry_only_required = [f for f in required if f not in
+                       ('categories','depth_requirement_quantification','error_recovery_guidance')]
 fm_issues = []
 for d in skills:
     f = d/'SKILL.md'
     fm = re.match(r'^---\n(.*?)\n---\n', f.read_text(encoding='utf-8').replace('\r\n','\n'), re.S)
     if not fm: fm_issues.append(f"{d.name}: 无 frontmatter"); continue
     fm = fm.group(1)
-    for fld in required:
+    for fld in (entry_only_required if d.name == 'qa-test-skills' else required):
         if not re.search(r'^'+re.escape(fld)+r':', fm, re.M):
             fm_issues.append(f"{d.name}: 缺 {fld}")
     if not re.search(r'^\s*traceability:', fm, re.M):
@@ -30,17 +35,18 @@ for d in skills:
     if nm and nm.group(1).strip() != d.name:
         name_issues.append((d.name, nm.group(1).strip()))
 
-# 3. version 全 1.6.3
+# 3. version 一致性（以入口工作流的 version 为基准，不硬编码具体版本号）
+rfm = re.match(r'^---\n(.*?)\n---\n', ROOT_SKILL.read_text(encoding='utf-8').replace('\r\n','\n'), re.S)
+rvm = re.search(r'^version:\s*([^"\'\n]+)', rfm.group(1), re.M) if rfm else None
+expected_ver = rvm.group(1).strip() if rvm else None
 ver_issues = []
+if not expected_ver:
+    ver_issues.append(('ROOT', '入口 SKILL.md 缺 version 字段'))
 for d in skills:
     fm = re.match(r'^---\n(.*?)\n---\n', (d/'SKILL.md').read_text(encoding='utf-8').replace('\r\n','\n'), re.S).group(1)
     vm = re.search(r'^version:\s*([^"\'\n]+)', fm, re.M)
-    if vm and vm.group(1).strip() != '1.6.3':
-        ver_issues.append((d.name, vm.group(1).strip()))
-rfm = re.match(r'^---\n(.*?)\n---\n', (ROOT/'SKILL.md').read_text(encoding='utf-8').replace('\r\n','\n'), re.S).group(1)
-rvm = re.search(r'^version:\s*([^"\'\n]+)', rfm, re.M)
-if rvm and rvm.group(1).strip() != '1.6.3':
-    ver_issues.append(('ROOT', rvm.group(1).strip()))
+    if vm and expected_ver and vm.group(1).strip() != expected_ver:
+        ver_issues.append((d.name, f"{vm.group(1).strip()} (期望 {expected_ver})"))
 
 # 4. related_skills 悬空 + 对称性
 all_names = set(d.name for d in skills) | {'qa-test-skills'}  # 根入口技能也算合法引用
@@ -64,10 +70,10 @@ for d in skills:
     body = txt.split('---\n',2)[-1]
     for m in re.finditer(r'references/([\w.-]+\.md)', body):
         ref = m.group(1)
-        if not (d/'references'/ref).exists() and not (ROOT/'references'/ref).exists():
+        if not (d/'references'/ref).exists() and not (ROOT_SKILL.parent/'references'/ref).exists():
             ref_file_issues.append(f"{d.name}: 正文引用 references/{ref} 不存在")
-for m in re.finditer(r'references/([\w.-]+\.md)', (ROOT/'SKILL.md').read_text(encoding='utf-8').replace('\r\n','\n')):
-    if not (ROOT/m.group(0)).exists():
+for m in re.finditer(r'references/([\w.-]+\.md)', ROOT_SKILL.read_text(encoding='utf-8').replace('\r\n','\n')):
+    if not (ROOT_SKILL.parent/m.group(0)).exists():
         ref_file_issues.append(f"ROOT: {m.group(0)} 不存在")
 
 # 6. ID 规范一致性
@@ -92,7 +98,7 @@ bom_issues = []
 for d in skills:
     if (d/'SKILL.md').read_bytes().startswith(b'\xef\xbb\xbf'):
         bom_issues.append(d.name)
-for f in [ROOT/'SKILL.md'] + list((ROOT/'scripts').glob('*.py')) + list((ROOT/'evals').glob('*.json')):
+for f in [ROOT_SKILL] + list((ROOT/'scripts').glob('*.py')) + list((ROOT/'evals').glob('*.json')):
     if f.read_bytes().startswith(b'\xef\xbb\xbf'):
         bom_issues.append(str(f.relative_to(ROOT)))
 

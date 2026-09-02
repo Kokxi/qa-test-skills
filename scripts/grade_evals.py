@@ -32,10 +32,16 @@ def check_assertion(assertion, output_text):
         return {'text': name, 'passed': any_found, 'evidence': f'any match: {any_found} in {targets}'}
     
     elif atype == 'min_count':
+        # 兼容两种 schema：
+        #   A) target=阈值(int) + keyword=模式
+        #   B) target=模式(str) + min=阈值(int)
         keyword = assertion.get('keyword', '')
         target = assertion.get('target', 0)
+        if isinstance(target, str):
+            keyword = keyword or target
+            target = assertion.get('min', 1)
         count = len(re.findall(keyword, output_text, re.IGNORECASE)) if keyword else len(output_text.split())
-        return {'text': name, 'passed': count >= target, 'evidence': f'count={count}, min={target}'}
+        return {'text': name, 'passed': count >= target, 'evidence': f'count={count}, min={target}, keyword={keyword!r}'}
 
     elif atype == 'regex_match':
         # Full regex match (no auto-ignorecase); use re.MULTILINE for ^..$ per-line matching

@@ -12,7 +12,7 @@ from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILL_FILE = ROOT / 'SKILL.md'
+SKILL_FILE = ROOT / 'skills' / 'qa-test-skills' / 'SKILL.md'  # 入口工作流（已从根目录平级迁移到 skills/ 下）
 
 # 目标项目配置（--project 参数选择）
 PROJECTS = {

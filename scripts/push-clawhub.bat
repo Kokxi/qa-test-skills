@@ -8,7 +8,7 @@ REM  (ClawHub has publish rate limits)
 REM
 REM  Usage:
 REM    push-clawhub.bat [version] [delay_seconds]
-REM      default version=1.7.0  delay=10 (seconds)
+REM      default version=1.7.5  delay=10 (seconds)
 REM
 REM  Notes:
 REM    - Publishes all 49 skills (entry qa-test-skills + 48 subs)
@@ -17,7 +17,7 @@ REM    - Failed skills are recorded in push-failed.txt for retry
 REM ============================================================
 
 set "VER=%~1"
-if "%VER%"=="" set "VER=1.7.0"
+if "%VER%"=="" set "VER=1.7.5"
 
 set "DELAY=%~2"
 if "%DELAY%"=="" set "DELAY=10"

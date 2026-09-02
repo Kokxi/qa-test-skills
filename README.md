@@ -4,10 +4,10 @@
 
 > **文件构成说明**：`skills/` 目录下 49 个技能各一个 `SKILL.md`；其中 `skills/qa-test-skills/SKILL.md` 是入口工作流，编排其余 48 个子技能为 12 步流水线。所以"48 个技能 + 1 个入口"指的是 49 个 `SKILL.md` 文件，而非 49 个独立技能。
 
-![Version](https://img.shields.io/badge/version-1.7.0-blue)
+![Version](https://img.shields.io/badge/version-1.7.5-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skills](https://img.shields.io/badge/skills-49-orange)
-![Eval](https://img.shields.io/badge/benchmark-38%20evals-brightgreen)
+![Eval](https://img.shields.io/badge/benchmark-49%20evals-brightgreen)
 ![Pass Rate](https://img.shields.io/badge/pass%20rate-95.4%25-success)
 ![AI](https://img.shields.io/badge/AI-协作-purple)
 
@@ -30,7 +30,7 @@
 - **分类**：软件测试 > 测试工具 > AI测试
 - **标签**：`软件测试` `测试用例` `测试设计` `AI协作` `AI测试` `测试自动化`
 - **适用人群**：测试工程师、测试经理、产品经理
-- **更新时间**：2026-08-15
+- **更新时间**：2026-09-02
 
 ---
 
@@ -215,16 +215,19 @@ AI 接收到测试需求后，自动执行标准化工作流：
 
 ## 质量基准
 
-本项目建立了完整的评估体系，8 轮迭代、38 个 Eval、230 条断言，持续验证技能质量：
+本项目建立了完整的评估体系：49 个 Eval、383 条断言，18 轮 LLM E2E 迭代，持续验证技能质量：
 
 | 指标                     | 数据                   |
 | ------------------------ | ---------------------- |
-| With Skill 平均通过率    | **95.4%**        |
-| Without Skill 平均通过率 | 62.4%                  |
-| Skill 增量价值（Δ）     | **+33.0%**       |
-| 覆盖子 Skill 数          | **38/48（79%）** |
-| 评估轮次                 | 8 轮迭代 + LLM E2E    |
-| 稳定性（标准差）         | 0.0（6/8 轮）          |
+| Eval 总数                | **49 个（383 条断言）** |
+| 专项 Eval 覆盖子 Skill 数 | **11 个（其中 6 个含 golden 对比）** |
+| With Skill 平均通过率（V1.6.3 全量口径） | **95.4%** |
+| Without Skill 平均通过率（同口径） | 62.4% |
+| Skill 增量价值 Δ（同口径） | **+33.0%** |
+| 评估轮次                 | 18 轮 LLM E2E（见 `evals/history/`） |
+
+> 通过率口径说明：95.4% / 62.4% / +33.0% 为 V1.6.3 版本 38 个 Eval 全量运行的实测值（DeepSeek 端到端），
+> 详见 `docs/agent-notes-skill-validation.md`；当前 49 个 Eval 已扩充 golden 对比与 E2E 专项。
 
 > 评估工具链：`scripts/grade_evals.py` 分级 → `scripts/aggregate_benchmark.py` 聚合 → `docs/full-report.html` 可视化对比
 
@@ -593,7 +596,7 @@ Step 3: 执行测试
 - **字段级验证**：每个表单字段的边界、格式、注入、特殊字符全覆盖
 - **好/坏对比示例**：每个技能都包含好示例和坏示例的对比，帮助 AI 和新人理解"好"的标准
 - **量化指标驱动**：每个技能包含明确的深度要求（如"简单×2/中等×3/复杂×4"），避免泛泛产出
-- **评估闭环**：38 个 Eval 持续监控技能质量，每次修改可验证效果
+- **评估闭环**：49 个 Eval 持续监控技能质量，每次修改可验证效果
 
 ---
 

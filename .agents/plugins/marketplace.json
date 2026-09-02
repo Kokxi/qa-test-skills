@@ -1,7 +1,7 @@
 {
   "name": "qa-test-skills",
   "description": "AI辅助测试用例设计技能集——49个技能（入口工作流 qa-test-skills + 48个专家级子技能），覆盖需求分析→测试设计→AI协作→执行洞察→质量度量全链路。",
-  "version": "1.7.0",
+  "version": "1.7.5",
   "author": {
     "name": "kokxi",
     "email": "no19@foxmail.com"
@@ -13,7 +13,7 @@
     {
       "name": "qa-test-skills",
       "source": "github.com/Kokxi/qa-test-skills",
-      "version": "1.7.0",
+      "version": "1.7.5",
       "author": {
         "name": "kokxi",
         "email": "no19@foxmail.com"
