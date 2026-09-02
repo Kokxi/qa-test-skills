@@ -2,7 +2,7 @@
 name: qa-test-case-design
 slug: qa-test-case-design
 displayName: 测试用例设计
-version: 1.7.5
+version: 1.7.7
 description: >-
   当所有分析（需求解构、场景树、边界清单、组合矩阵）都已完成，需要把分析结果转化为结构化的测试用例时使用此技能。专注用例结构规范、分类体系、覆盖策略和优先级编排。不要在分析还没做完时就跳到用例生成——没有充分的输入，用例一定是泛泛的。适用于将前面的分析产出物整合为 P0-P3 分级、可追溯的标准格式测试用例。
   本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills

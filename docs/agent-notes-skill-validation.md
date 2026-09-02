@@ -1,8 +1,8 @@
-# QA Test Skills 质量验证实战笔记（V1.7.5）
+# QA Test Skills 质量验证实战笔记（V1.7.7）
 
-> 本文档由 qa-test-skills V1.7.5 发版实战提炼，记录本项目建立的分层验证金字塔、实际跑出的基线、踩过的坑。给 Agent 在本项目后续迭代或其他 skill 项目复用时直接照做。
+> 本文档由 qa-test-skills V1.7.7 发版实战提炼，记录本项目建立的分层验证金字塔、实际跑出的基线、踩过的坑。给 Agent 在本项目后续迭代或其他 skill 项目复用时直接照做。
 >
-> **本项目实测成果（V1.7.5 当前）**：49 技能（1 入口 + 48 子）+ 49 eval + 383 断言，18 轮 LLM E2E 已归档（`evals/history/`），ClawHub 安全审计本地预检 **49/49 pass**，静态层 `integrity_check` 0 硬问题。
+> **本项目实测成果（V1.7.7 当前）**：49 技能（1 入口 + 48 子）+ 49 eval + 383 断言，18 轮 LLM E2E 已归档（`evals/history/`），ClawHub 安全审计本地预检 **49/49 pass**，静态层 `integrity_check` 0 硬问题。
 > 历史基线：V1.6.3 的 38-eval 集全量实测 LLM 端到端通过率 **95.4%**（DeepSeek，排除 requires_e2e 项）。49-eval 集扩充后尚未跑全量对照基准，需按第 5 节 STEP 5 补跑。
 
 ## 0. 项目形态判定
@@ -18,7 +18,7 @@
 统一入口 = python scripts/run_qa.py {validate|grade|benchmark|smoke|audit|standards}
 ```
 
-**版本号单一事实源**：入口 `skills/qa-test-skills/SKILL.md` 的 frontmatter `version` 字段（当前 1.7.5）。
+**版本号单一事实源**：入口 `skills/qa-test-skills/SKILL.md` 的 frontmatter `version` 字段（当前 1.7.7）。
 所有配置/文档同步该值；任何脚本做版本一致性检查时**必须动态读入口值，禁止硬编码具体版本号**。
 注意：`scripts/metadata.json` 里的 `self_update_manifest_url` 指向的是 SkillHub CLI 自更新清单（云端 version.json），
 与本项目版本号无关，项目内不存放该文件。
@@ -48,7 +48,7 @@
 **10 项必查**：
 1. frontmatter 12 字段 + traceability 全覆盖（入口编排器豁免 3 个叶子技能专属字段：`categories` / `depth_requirement_quantification` / `error_recovery_guidance`）
 2. name 与目录名一致
-3. version 全统一（动态以入口 `skills/qa-test-skills/SKILL.md` 的 version 为基准，当前 1.7.5）
+3. version 全统一（动态以入口 `skills/qa-test-skills/SKILL.md` 的 version 为基准，当前 1.7.7）
 4. related_skills 悬空引用 + upstream/downstream 对称性
 5. references/ 引用完整（技能目录内 + 入口 references/ 兜底）
 6. ID 规范一致性（与 `docs/standards.md` 前缀定义对照）
@@ -66,7 +66,7 @@ python scripts/integrity_check.py
 **实测踩坑**：
 - V1.5.1 遗留：5 技能 description 嵌了 `hen_to_use:` 文本（YAML folded scalar 吸收下一字段）
 - V1.5.1 遗留：`qa-risk-intuition` 缺 `input_format:` 键，required/optional 变 orphan
-- **V1.7.5 命中**：入口从根目录迁到 `skills/` 后，脚本的 `skills/qa-*` glob 把入口扫进了 12 字段检查，
+- **V1.7.7 命中**：入口从根目录迁到 `skills/` 后，脚本的 `skills/qa-*` glob 把入口扫进了 12 字段检查，
   报 3 项 ❌（入口是编排器，无叶子技能专属字段）→ 按迁移前语义为入口豁免这 3 项，而非给入口补凑字段
 
 ### 层 2：契约断言（`scripts/validate_deps.py` + `scripts/validate_standards.py` + `scripts/grade_evals.py`）
@@ -78,7 +78,7 @@ python scripts/integrity_check.py
 **`grade_evals.py`**：断言引擎，支持 8 种 assertion 类型：
 - `file_exists` / `file_exists_or`：输出文本里含指定文件名
 - `content_match` / `content_match_or`：正则匹配内容
-- `min_count`：模式出现次数 ≥ N。**兼容两种 schema**：A) `target`=阈值(int) + `keyword`=模式；B) `target`=模式(str) + `min`=阈值(int)（V1.7.5 修复，见模式 F）
+- `min_count`：模式出现次数 ≥ N。**兼容两种 schema**：A) `target`=阈值(int) + `keyword`=模式；B) `target`=模式(str) + `min`=阈值(int)（V1.7.7 修复，见模式 F）
 - `regex_match`：完整正则匹配（默认 MULTILINE，可选 IGNORECASE）
 - `json_valid`：JSON 块可解析 + dot-path 键存在
 - `id_consistency`：ID 命名空间一致性（单前缀/跨前缀/同前缀行内引用 3 种模式）
@@ -171,7 +171,7 @@ DS_KEY=sk-xxx python scripts/run_llm_eval.py --provider deepseek --offset 13 --l
     └→ 该指令 eval assertion 描述有误 → 修 eval
 ```
 
-**V1.7.5 新增分支——脚本自身报错（管线故障，不是 prompt 问题）**：
+**V1.7.7 新增分支——脚本自身报错（管线故障，不是 prompt 问题）**：
 ```
 run_qa / grade_evals 直接 traceback
 ├─ FileNotFoundError: SKILL.md → 入口已迁移到 skills/ 下，脚本硬编码的根路径失效
@@ -212,7 +212,7 @@ run_qa / grade_evals 直接 traceback
 
 **实测效果**：修复后整体通过率从 88.8% → 95.4%。
 
-### 模式 F：管线脚本与数据 schema 漂移（V1.7.5 实测命中）
+### 模式 F：管线脚本与数据 schema 漂移（V1.7.7 实测命中）
 
 **症状**：`run_qa.py smoke` / `grade_evals.py` 直接 `TypeError: '>=' not supported between instances of 'int' and 'str'`，
 smoke 由 ✅ 变 ❌，且**任何 eval 都跑不到判定**。
@@ -231,7 +231,7 @@ if isinstance(target, str):
 
 **实测效果**：smoke 恢复 ✅；`run_llm_eval.py` 复用同一 `check_assertion`，一并修复。
 
-### 模式 G：结构迁移后配套资产断链（V1.7.5 实测命中）
+### 模式 G：结构迁移后配套资产断链（V1.7.7 实测命中）
 
 **症状**：入口 SKILL.md 从仓库根平级迁移到 `skills/qa-test-skills/` 后，
 `validate_deps.py` / `integrity_check.py` / `validate_standards.py` / `gen_example_cases.py` 全部 `FileNotFoundError`，
@@ -321,7 +321,7 @@ STEP 9: 归档 + 报告 + 版本同步
 
 ## 7. 成果基线参考
 
-### V1.7.5 当前状态（2026-09-02 自检实测）
+### V1.7.7 当前状态（2026-09-02 自检实测）
 
 | 项 | 数据 | 来源 |
 |----|------|------|

@@ -2,7 +2,7 @@
 name: qa-stakeholder-communication
 slug: qa-stakeholder-communication
 displayName: 测试干系人沟通
-version: 1.7.5
+version: 1.7.7
 description: >-
   当需要告诉开发"这个 Bug 必须修"、跟产品经理沟通需求变更的影响、或者向管理层汇报质量风险时使用此技能。不同角色关注的事情不同——开发要的是复现步骤和定位信息，产品要的是影响范围和优先级建议，管理层要的是风险判断和决策依据。此技能提供针对开发/产品/管理层的沟通模板和策略。产出根据不同角色定制的沟通话术和汇报材料模板。
   本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills

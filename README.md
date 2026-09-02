@@ -4,7 +4,7 @@
 
 > **文件构成说明**：`skills/` 目录下 49 个技能各一个 `SKILL.md`；其中 `skills/qa-test-skills/SKILL.md` 是入口工作流，编排其余 48 个子技能为 12 步流水线。所以"48 个技能 + 1 个入口"指的是 49 个 `SKILL.md` 文件，而非 49 个独立技能。
 
-![Version](https://img.shields.io/badge/version-1.7.5-blue)
+![Version](https://img.shields.io/badge/version-1.7.7-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skills](https://img.shields.io/badge/skills-49-orange)
 ![Eval](https://img.shields.io/badge/benchmark-49%20evals-brightgreen)

@@ -8,7 +8,7 @@ REM  (SkillHub has publish rate limits)
 REM
 REM  Usage:
 REM    push-skillhub.bat [version] [delay_seconds]
-REM      default version=1.7.5  delay=15 (seconds)
+REM      default version=1.7.7  delay=15 (seconds)
 REM
 REM  Prerequisites:
 REM    - Official CLI: ~/.skillhub/skills_store_cli.py (skillhub 2026.8.5+)
@@ -23,7 +23,7 @@ REM    - Failed skills are recorded in push-skillhub-failed.txt for retry
 REM ============================================================
 
 set "VER=%~1"
-if "%VER%"=="" set "VER=1.7.5"
+if "%VER%"=="" set "VER=1.7.7"
 
 set "DELAY=%~2"
 if "%DELAY%"=="" set "DELAY=15"
