@@ -45,25 +45,46 @@ export function getSkills() {
 
 /**
  * 解析SKILL.md的YAML frontmatter
+ * 支持两种标量写法：
+ *   - 行内标量：  name: qa-xxx
+ *   - 折叠/字面量块标量：description: >-
+ *                         多行内容（缩进行）
  */
 function parseSkillMetadata(content) {
   const match = content.match(/^---\s*\n([\s\S]*?)\n---/);
   if (!match) {
     return { description: '' };
   }
-  
-  const yaml = match[1];
+
+  const lines = match[1].replace(/\r\n/g, '\n').split('\n');
   const metadata = {};
-  
-  // 解析简单的YAML字段
+
   const fields = ['name', 'description', 'when_to_use'];
   for (const field of fields) {
-    const fieldMatch = yaml.match(new RegExp(`${field}:\\s*(.+)`));
-    if (fieldMatch) {
-      metadata[field] = fieldMatch[1].trim();
+    for (let i = 0; i < lines.length; i++) {
+      const m = lines[i].match(new RegExp(`^${field}:\\s*(.*)$`));
+      if (!m) continue;
+      const inline = m[1].trim();
+      if (inline === '' || /^[>|][+-]?$/.test(inline)) {
+        // 块标量（>- / > / |- / |）：收集后续缩进行，折叠为单行文本
+        const parts = [];
+        for (let j = i + 1; j < lines.length; j++) {
+          const line = lines[j];
+          if (line.trim() === '') {
+            parts.push('');
+            continue;
+          }
+          if (!/^\s/.test(line)) break; // 遇到下一个顶层键，结束
+          parts.push(line.trim());
+        }
+        metadata[field] = parts.join(' ').replace(/\s+/g, ' ').trim();
+      } else {
+        metadata[field] = inline.replace(/^["']|["']$/g, '').trim();
+      }
+      break;
     }
   }
-  
+
   return metadata;
 }
 

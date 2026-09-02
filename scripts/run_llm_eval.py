@@ -4,7 +4,7 @@ LLM 端到端评测（Layer 5）。
 用 worker 模型生成产出，再用 grade_evals.py 的 check_assertion 做断言判定。
 
 用法：
-  python scripts/run_llm_eval.py                                    # 全量 38 条 eval（默认 deepseek）
+  python scripts/run_llm_eval.py                                    # 全量 49 条 eval（默认 deepseek）
   python scripts/run_llm_eval.py --smoke                            # 冒烟（只跑第 1 条）
   python scripts/run_llm_eval.py --provider deepseek                # 用 DeepSeek
   python scripts/run_llm_eval.py --provider kimi                    # 用 Kimi
@@ -27,7 +27,7 @@ from urllib.error import HTTPError
 ROOT = Path(__file__).resolve().parent.parent
 EVALS_FILE = ROOT / 'evals' / 'evals.json'
 HISTORY_DIR = ROOT / 'evals' / 'history'
-SKILL_FILE = ROOT / 'SKILL.md'
+SKILL_FILE = ROOT / 'skills' / 'qa-test-skills' / 'SKILL.md'  # 入口工作流（已从根目录平级迁移到 skills/ 下）
 
 # Provider 配置
 PROVIDERS = {

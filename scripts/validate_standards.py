@@ -8,9 +8,9 @@ import re, pathlib, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 def check_workflow_warnings():
-    """根 SKILL.md 工作流表里的⚠️不得跳过标注，应与 enforcement.md 的强制步骤一致。"""
-    root = (ROOT / 'SKILL.md').read_text(encoding='utf-8').replace('\r\n', '\n')
-    enf = (ROOT / 'references' / 'enforcement.md').read_text(encoding='utf-8').replace('\r\n', '\n')
+    """入口工作流 SKILL.md 工作流表里的⚠️不得跳过标注，应与 enforcement.md 的强制步骤一致。"""
+    root = (ROOT / 'skills' / 'qa-test-skills' / 'SKILL.md').read_text(encoding='utf-8').replace('\r\n', '\n')
+    enf = (ROOT / 'skills' / 'qa-test-skills' / 'references' / 'enforcement.md').read_text(encoding='utf-8').replace('\r\n', '\n')
     # enforcement.md 声明不得跳过步骤 7（提示词）和 8（输出评审）
     must_not_skip = set(re.findall(r'步骤(\d+)', enf))
     # 根 SKILL.md 工作流表里的⚠️标注
