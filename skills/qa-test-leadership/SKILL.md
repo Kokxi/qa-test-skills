@@ -2,7 +2,7 @@
 name: qa-test-leadership
 slug: qa-test-leadership
 displayName: Test Leadership
-version: 1.7.5
+version: 1.7.7
 description: >-
   当需要管理测试团队、制定团队目标和绩效标准、或者团队扩招需要面试标准时使用此技能。覆盖测试团队管理（目标设定/KPI 制定/人员成长）、绩效评估（能力模型/360 评估）、招聘面试（面试流程/技术评估标准）和组织建设。不要只管进度不管成长——一个稳定的测试团队靠的是每个人都在不断学习和进步。
 

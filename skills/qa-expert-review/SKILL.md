@@ -2,7 +2,7 @@
 name: qa-expert-review
 slug: qa-expert-review
 displayName: Expert Review
-version: 1.7.5
+version: 1.7.7
 description: >-
   当 AI 生成的测试用例已经过输出评审和盲区补盲、准备终审上线时使用此技能。由资深测试对 AI 输出的用例做人工抽样校验，从业务有效性、场景完整性、可执行性三个维度做最后把关。⚠️ 如果发现系统性问题（比如遗漏了某个关键模块），需要回退修正并记录到 Prompt 优化反馈库。专家评审不是走形式——发现的问题必须闭环。
 

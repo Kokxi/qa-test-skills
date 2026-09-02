@@ -2,7 +2,7 @@
 name: qa-state-transition
 slug: qa-state-transition
 displayName: State Transition
-version: 1.7.5
+version: 1.7.7
 description: >-
   系统化测试状态机的合法转换、非法转换、边界转换和并发转换场景。当业务对象经历了多种状态（如订单：待支付→已支付→已发货→已完成）、或者需要验证状态变化时的数据一致性时，应当使用此技能。最容易遗漏的是非法转换（业务不允许的操作如"已完成→待支付"）和并发转换（同一订单同时被支付和取消）。每个状态转换需标注触发条件、前置状态、后置状态和验证点。
 

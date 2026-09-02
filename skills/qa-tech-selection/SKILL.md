@@ -2,7 +2,7 @@
 name: qa-tech-selection
 slug: qa-tech-selection
 displayName: Tech Selection
-version: 1.7.5
+version: 1.7.7
 description: >-
   当团队要选测试工具（自动化框架/性能工具/管理平台）、现有工具不能满足需求需要替换、或者公司要求做技术评估时使用此技能。通过多维度对比评估（功能覆盖/学习成本/社区活跃度/维护成本/扩展性）输出推荐方案和迁移实施建议。不要只看 Gartner 象限或者技术网红推荐——工具好不好取决于你的团队能力、技术栈和实际场景。每个推荐方案附带 POC 验证计划和风险提示。
 
