@@ -115,6 +115,11 @@ examples/                           ← 示例项目（ecommerce / agent）
 - **ID 前缀不得混用**：`TC_` 用例 / `REQ-` 需求 / `SC-` 场景 / `BD-` 边界 /
   `RULE-` 业务规则 / `RISK-` 风险点。前缀以 `docs/standards.md` 为准。
   「关联需求ID」写 `REQ-`、「关联场景ID」写 `SC-`，历史上曾 9 处误写成 `TC_`（已修）
+- **分支同步约定（dev-zh ↔ master）**：master 用 dev-zh 的规范形态 frontmatter，
+  唯一分叉点是**展示名**——dev-zh 的 `metadata.display-name` 是中文（供 SkillHub 中文平台），
+  master 必须保持**英文**（如 `Api Testing`，供 GitHub/ClawHub）。
+  同步方式：merge dev-zh 后，把 master 上 49 个 SKILL.md 的 `display-name` 改回英文再提交；
+  `name` 字段两侧都是英文 slug，不要动。
 - **新增 references/ 或 assets/ 文件必须登记进 `metadata.references`**，
   否则加载时机地图指向了客户端看不到的文件（检查项 15 会拦）
 - 详见 `docs/optimization-checklist.md` 与 `docs/skill-content-layout.md`
