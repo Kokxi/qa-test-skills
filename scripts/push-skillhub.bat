@@ -20,6 +20,9 @@ REM    - Publishes all 49 skills (entry qa-test-skills + 48 subs)
 REM    - Waits DELAY seconds after each push to avoid rate limit
 REM      (8s is too short - gets rate-limited; 15s works)
 REM    - Failed skills are recorded in push-skillhub-failed.txt for retry
+REM    - If push-skillhub-pending.txt exists, only those skills are pushed
+REM      (rate-limit retry; avoids re-publishing completed ones).
+REM      Delete that file to go back to publishing all 49.
 REM    - Staging via stage_for_publish.py --platform skillhub adds a TOP-LEVEL
 REM      displayName. The SkillHub CLI's frontmatter parser does not understand
 REM      nesting and looks for the exact key "displayName"; the repo uses the
@@ -52,7 +55,7 @@ if exist "%STAGE%" rmdir /s /q "%STAGE%"
 if not exist "%STAGE%" mkdir "%STAGE%"
 
 echo ============================================
-echo  Pushing 49 skills to SkillHub
+echo  Pushing skills to SkillHub
 echo  Version: %VER%
 echo  Delay between pushes: %DELAY%s
 echo ============================================
@@ -61,7 +64,26 @@ echo.
 set "FAILED_FILE=push-skillhub-failed.txt"
 if exist "%FAILED_FILE%" del "%FAILED_FILE%"
 
+REM 待重试模式：存在 push-skillhub-pending.txt 时只推清单内的技能，
+REM 避免重推已完成的（限流后重试场景）。删掉该文件即回到全量模式。
+set "PENDING_FILE=push-skillhub-pending.txt"
+set "ONLY_PENDING="
 set "COUNT=0"
+set "PLANNED=49"
+if exist "%PENDING_FILE%" (
+  set "ONLY_PENDING=1"
+  set "PLANNED=0"
+  for /f "usebackq delims=" %%L in ("%PENDING_FILE%") do set /a PLANNED+=1
+) else (
+  set "ONLY_PENDING="
+  set "PLANNED=49"
+)
+REM echo 必须放在计数循环【之后】：批处理读到该行时就展开了 %PLANNED%
+if defined ONLY_PENDING (
+  echo  Mode: PENDING-ONLY, %PLANNED% skills from %PENDING_FILE%
+) else (
+  echo  Mode: ALL, %PLANNED% skills
+)
 
 call :push qa-test-skills
 call :push qa-agent-testing
@@ -115,12 +137,12 @@ call :push qa-testability-advocacy
 
 echo.
 echo ============================================
-echo  Done. Pushed %COUNT%/49 skills to SkillHub (v%VER%)
+echo  Done. Pushed %COUNT%/%PLANNED% skills to SkillHub (v%VER%)
 if exist "%FAILED_FILE%" (
   echo  FAILED skills recorded in %FAILED_FILE%:
   type "%FAILED_FILE%"
 ) else (
-  echo  All 49 skills published successfully!
+  echo  All %PLANNED% skills published successfully!
 )
 echo ============================================
 endlocal
@@ -131,6 +153,13 @@ REM  push <slug> - publish one skill, then wait DELAY seconds
 REM ------------------------------------------------------------
 :push
 set "SLUG=%~1"
+
+REM pending 模式：不在清单里的直接跳过
+if defined ONLY_PENDING (
+  findstr /x /l /c:"%SLUG%" "%PENDING_FILE%" >nul
+  if errorlevel 1 exit /b 0
+)
+
 set /a COUNT+=1
 
 REM 先暂存：补顶层 displayName（SkillHub CLI 的解析器不认嵌套键）
@@ -142,13 +171,13 @@ REM         STAGE 路径本身不含空格，所以直接不加引号。
 set "DIR="
 for /f "delims=" %%P in ('python scripts\stage_for_publish.py %SLUG% --platform skillhub --out %STAGE% 2^>nul') do set "DIR=%%P"
 if not defined DIR (
-  echo [%COUNT%/49] Publishing %SLUG% ...
+  echo [%COUNT%/%PLANNED%] Publishing %SLUG% ...
   echo  !! STAGE FAILED: %SLUG% 1>>"%FAILED_FILE%"
   timeout /t %DELAY% /nobreak >nul
   exit /b 0
 )
 
-echo [%COUNT%/49] Publishing %SLUG% ...
+echo [%COUNT%/%PLANNED%] Publishing %SLUG% ...
 python "%CLI%" publish "%DIR%" --version %VER% --changelog "%VER%"
 if errorlevel 1 (
   echo  !! FAILED: %SLUG% 1>>"%FAILED_FILE%"
