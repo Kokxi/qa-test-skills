@@ -1,8 +1,8 @@
-# QA Test Skills Plugin - 软件测试技能集 | AI辅助测试用例设计专家
+﻿# QA Test Skills Plugin - 软件测试技能集 | AI辅助测试用例设计专家
 
 > **49个技能（入口工作流 qa-test-skills + 48个专家级子技能），覆盖测试全生命周期** | 让初级测试人员输出专家级测试用例 | AI辅助测试设计最佳实践
 
-![Version](https://img.shields.io/badge/version-1.7.7-blue)
+![Version](https://img.shields.io/badge/version-1.8.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skills](https://img.shields.io/badge/skills-49-orange)
 ![AI](https://img.shields.io/badge/AI-协作-purple)
@@ -506,14 +506,24 @@ examples/ecommerce-project/
 
 1. **Fork 本项目**
 2. **在 `skills/` 目录下创建新技能**
-3. **确保符合 Claude Code skills 规范**
+3. **确保符合 [Agent Skills 开放规范](https://agentskills.io/specification)**
 4. **提交 PR**
 
 ### 技能规范
 
-- **YAML frontmatter**：必须包含 name、description、when_to_use、related_skills、input_format、output_format
+- **YAML frontmatter**：遵循 Agent Skills 规范，顶层只允许 6 个字段
+  （`name` / `description` / `license` / `compatibility` / `metadata` / `allowed-tools`）。
+  本技能集的自定义字段全部收在 `metadata` 下（string → string，复杂值用紧凑 JSON 字符串）：
+  `version` / `display-name` / `when-to-use` / `related-skills` / `references` /
+  `input-format` / `output-format` / `categories` / `error-recovery-guidance` / `depth-requirement`
+- **触发词写进 `description`**：规范规定 `description` 是技能唯一的触发依据，中英文触发词都必须落在
+  `description` 里；`metadata.when-to-use` 仅作机器可读备份。英文触发词表见 `scripts/i18n_triggers.json`
+- **正文体量**：`SKILL.md` 控制在 500 行内，细节下沉到 `references/`，并写明加载时机
+- **引用不越技能根目录**：正文链接只能是 `references/xxx.md`，不得用 `../../docs/...`
+  （单独安装某个技能时这类链接会直接失效）
 - **内容结构**：核心原则、检查清单、输出格式
 - **格式要求**：使用中文，结构清晰，便于AI阅读
+- **提交前门禁**：`python scripts/check_spec_compliance.py` 与 `python scripts/integrity_check.py` 必须全绿
 
 ---
 

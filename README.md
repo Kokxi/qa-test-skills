@@ -4,7 +4,7 @@
 
 > **文件构成说明**：`skills/` 目录下 49 个技能各一个 `SKILL.md`；其中 `skills/qa-test-skills/SKILL.md` 是入口工作流，编排其余 48 个子技能为 12 步流水线。所以"48 个技能 + 1 个入口"指的是 49 个 `SKILL.md` 文件，而非 49 个独立技能。
 
-![Version](https://img.shields.io/badge/version-1.7.7-blue)
+![Version](https://img.shields.io/badge/version-1.8.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skills](https://img.shields.io/badge/skills-49-orange)
 ![Eval](https://img.shields.io/badge/benchmark-49%20evals-brightgreen)
@@ -30,7 +30,37 @@
 - **分类**：软件测试 > 测试工具 > AI测试
 - **标签**：`软件测试` `测试用例` `测试设计` `AI协作` `AI测试` `测试自动化`
 - **适用人群**：测试工程师、测试经理、产品经理
-- **更新时间**：2026-09-02
+- **当前版本**：1.8.0
+
+### 分支与发布
+
+代码**只维护一份**（`dev-zh` 分支，带 `metadata.slug`），两个发布渠道在推送时分流：
+
+| 渠道 | 脚本 | `metadata.slug` | 原因 |
+|------|------|-----------------|------|
+| [SkillHub](https://skillhub.cn) | `scripts/push-skillhub.bat` | **保留** | SkillHub 用 slug 做技能唯一标识 |
+| [ClawHub](https://clawhub.ai/plugins/@kokxi/qa-test-skills) | `scripts/push-clawhub.bat` | **发布时剥离** | ClawHub 用目录名识别技能，不认这个键 |
+
+ClawHub 侧不维护独立分支，因为两个分支的内容会随每次改动漂移。改为在发布前做一次
+可验证的暂存：
+
+```bash
+# 单独跑暂存，检查剥离结果（不改任何源文件）
+python scripts/stage_for_clawhub.py --all --out .publish-staging/clawhub
+
+# 检查暂存副本里还有没有 slug
+grep -r "^\s*slug:" .publish-staging/clawhub --include=SKILL.md
+```
+
+- 剥离只发生在 `.publish-staging/` 下的副本里，`skills/` 源文件不动
+- 只删 frontmatter 里缩进的那一行，正文中的同名字段不受影响
+- 剥完的副本仍需通过官方 `skills-ref validate`（自测里已覆盖）
+- `scripts/push-clawhub.bat` 里的 `--slug` 参数是 **ClawHub CLI 的目标名**，
+  和被剥掉的 metadata 字段是两回事，不要混
+
+> 任何门禁都不要求 `metadata.slug` 存在，所以剥离不影响门禁全绿。
+> `scripts/metadata.json` 里的 SkillHub 接口（`api.skillhub.cn` / COS 索引）
+> 只在 SkillHub 链路使用。
 
 ---
 
@@ -58,7 +88,7 @@ AI辅助测试正在普及，但多数团队面临同一个困境：**新人用A
 
 **3. 写给AI的，同时也是写给人的**
 
-每个技能的正文本身就是一篇结构化的测试方法论笔记。AI加载它获得执行指令，新人阅读它补齐知识盲区。`description` 里的触发关键词让AI知道何时激活，`when_to_use` 里的场景描述让新人知道这个技能解决什么问题。**同一份内容，两个读者各取所需。**
+每个技能的正文本身就是一篇结构化的测试方法论笔记。AI加载它获得执行指令，新人阅读它补齐知识盲区。`description` 里的触发关键词决定AI何时激活（规范规定它是唯一的触发依据），正文的场景说明让新人知道这个技能解决什么问题。**同一份内容，两个读者各取所需。**
 
 **4. 来自一线实践，不是教科书搬运**
 
@@ -171,45 +201,42 @@ AI 接收到测试需求后，自动执行标准化工作流：
 
 ### 5. 标准化输出格式
 
-```markdown
-## 测试用例
+全项目**固定 9 列**，唯一真源是
+[`skills/qa-test-case-design/references/output-template-full.md`](skills/qa-test-case-design/references/output-template-full.md)。
+交付物为标准 CSV（半角逗号分隔 / RFC 4180 引号转义 / UTF-8 含 BOM / Excel 可直接打开）。
 
-### 基本信息
-- 用例编号：TC_AUTH_LOGIN_001
-- 测试类型：功能测试
-- 功能模块：用户认证
-- 子功能：登录
-- 测试标题：验证正确用户名和密码可以成功登录
-- 用例级别：P0
-- 需求追溯ID：REQ-AUTH-001
-- 测试方法：等价类划分法、边界值分析法
+| # | 列名 | 说明 |
+|---|------|------|
+| 1 | 用例编号 | `TC_{模块缩写}_{功能缩写}_{三位序号}`，全局唯一 |
+| 2 | 测试类型 | 功能 / 接口 / 安全 / 性能 / 兼容性 / 可靠性 |
+| 3 | 功能模块 | 业务模块名，需要时写 `模块/子功能` |
+| 4 | 测试标题 | 一句话说明被验证的行为 |
+| 5 | 用例级别 | P0 / P1 / P2 / P3 |
+| 6 | 预置条件 | 数据 + 环境 + 前置依赖 |
+| 7 | 测试步骤 | 协议/接口/规则/计算类**必填**；UI/业务流程类可留空并标注「由执行人按实际系统补充」 |
+| 8 | 预期结果 | 可观测的具体状态或结构 |
+| 9 | 风险等级 | 高 / 中 / 低 |
 
-### 预置条件
-1. 用户已注册账号
-2. 账号状态正常
-3. 网络连接正常
-4. 前置依赖：无
-
-### 测试步骤
-（留空，由用户根据实际系统补充）
-
-### 预期结果
-1. 登录成功，跳转至首页
-2. 页面显示当前登录用户信息
-3. 登录状态保持正常
-
-### 字段级验证（如适用）
-- 用户名字段：
-  - 长度边界：1位、20位、21位
-  - 格式校验：无特殊格式要求
-  - 注入测试：SQL注入、XSS攻击
-  - 特殊字符：空格、@、#等
-- 密码字段：
-  - 长度边界：1位、8位、9位
-  - 格式校验：至少8位，包含字母、数字、特殊字符
-  - 注入测试：SQL注入、XSS攻击
-  - 特殊字符：空格、@、#等
+```csv
+用例编号,测试类型,功能模块,测试标题,用例级别,预置条件,测试步骤,预期结果,风险等级
+TC_AUTH_LOGIN_001,功能测试,用户认证/登录,验证正确用户名和密码可以成功登录,P0,"用户已注册且账号状态正常；网络正常",1. 打开登录页  2. 输入有效账号密码  3. 点击登录,"登录成功跳转首页；页面显示当前登录用户；登录状态保持",中
+TC_AUTH_LOGIN_002,功能测试,用户认证/登录,验证连续错误密码触发账号锁定,P0,"用户已注册；账号未锁定","1. 连续 5 次输入错误密码  2. 第 6 次输入正确密码",提示账号已锁定且正确密码也无法登录,高
 ```
+
+三点容易踩的坑（已在 `AGENTS.md` 与真源文档中固定）：
+
+- **没有「实际结果」列** —— 那是执行阶段（`qa-execution-observation`）的记录字段，不属于用例定义
+- **没有独立「子功能」列** —— 并入「功能模块」，写成 `模块/子功能`
+- **不用场景后缀** —— 编号是 3 段式，不要 `_NORMAL` / `_JUMP` 这类后缀，场景信息由测试标题承载
+
+交付前跑校验器，报错先修再交付：
+
+```bash
+python scripts/validate_testcase_table.py test-output/测试用例.csv
+```
+
+> 用例数少于 10 条时，P0≤20% 之类的占比配额在数学上无法成立。加 `--no-quota` 跳过，
+> 并在报告里说明口径——**不要为凑比例编造用例**。
 
 ---
 
@@ -297,7 +324,7 @@ npx skills add Kokxi/qa-test-skills -a codex
 
 | 方式 | 操作 | 说明 |
 |------|------|------|
-| **对话自动触发（推荐）** | 直接说"帮我测试这个项目：docs/prd.md" | 入口工作流根据 `when_to_use` 自动激活，无需配置 |
+| **对话自动触发（推荐）** | 直接说"帮我测试这个项目：docs/prd.md" | 入口工作流根据 `description` 触发词自动激活，无需配置 |
 | **显式调用入口** | Claude Code：`/qa-test-skills`；Codex：`@qa-test-skills` | 手动指定入口技能 |
 | **单独调用子技能** | "帮我评审这份需求" / "分析登录边界场景" | 直接激活对应子技能，无需跑完整工作流 |
 
@@ -693,7 +720,7 @@ AI工作流：
 
 **Q：技能装好后要不要额外配置？**
 
-不需要。入口工作流的 `when_to_use` 会自动识别"生成测试用例/帮我测试/上传需求"等触发词并激活；也支持 `/qa-test-skills` 显式调用。
+不需要。入口工作流的 `description` 触发词会自动识别"生成测试用例/帮我测试/上传需求"等触发词并激活；也支持 `/qa-test-skills` 显式调用。
 
 **Q：生成结果存在哪里？**
 
@@ -707,14 +734,40 @@ AI工作流：
 
 1. **Fork 本项目**
 2. **在 `skills/` 目录下创建新技能**
-3. **确保符合 Claude Code skills 规范**
+3. **确保符合 [Agent Skills 开放规范](https://agentskills.io/specification)**
 4. **提交 PR**
 
 ### 技能规范
 
-- **YAML frontmatter**：必须包含 name、description、when_to_use、related_skills、input_format、output_format
+- **YAML frontmatter**：遵循 Agent Skills 规范，顶层只允许 6 个字段
+  （`name` / `description` / `license` / `compatibility` / `metadata` / `allowed-tools`）。
+  本技能集的自定义字段全部收在 `metadata` 下（string → string，复杂值用紧凑 JSON 字符串）：
+  `version` / `slug`（**SkillHub 独有，发 ClawHub 时由 `stage_for_clawhub.py` 剥离**）/
+  `display-name` / `when-to-use` / `related-skills` /
+  `references` / `input-format` / `output-format` / `categories` /
+  `error-recovery-guidance` / `depth-requirement`
+- **触发词写进 `description`**：规范规定 `description` 是技能唯一的触发依据，中英文触发词都必须落在
+  `description` 里；`metadata.when-to-use` 仅作机器可读备份。英文触发词表见 `scripts/i18n_triggers.json`
+- **正文体量**：`SKILL.md` 控制在 500 行内，细节下沉到 `references/`，并写明加载时机
+  （拆分约定见 `docs/skill-content-layout.md`）
+- **引用不越技能根目录**：正文链接只能是 `references/xxx.md`，不得用 `../../docs/...`
+  （单独安装某个技能时这类链接会直接失效）
+- **用例格式**：9 列，唯一真源是
+  `skills/qa-test-case-design/references/output-template-full.md`，不得自行增删列
 - **内容结构**：核心原则、检查清单、输出格式
 - **格式要求**：使用中文，结构清晰，便于AI阅读
+
+### 提交前门禁
+
+```bash
+python scripts/run_qa.py all        # 规范合规 + 15 项一致性 + 依赖图，必须全绿
+python scripts/check_meta.py --all  # metadata JSON 可解析自检（改完 frontmatter 立刻跑）
+python scripts/gate_selftest.py     # 门禁自身自测（改了 integrity_check.py 才需要跑，约 95s）
+```
+
+> 改了 `integrity_check.py` 的检查逻辑后必须跑 `gate_selftest.py`：它对 15 项检查逐项验证
+> 「该报的报、不该报的不报」。只看「当前仓库仍然通过」证明不了检查是对的——检查坏了的时候
+> 它同样会显示通过。详见 `scripts/README.md` 的「门禁自测」一节。
 
 ---
 
