@@ -32,33 +32,6 @@
 - **适用人群**：测试工程师、测试经理、产品经理
 - **当前版本**：1.8.0
 
-### 分支与发布
-
-代码**只维护一份**（`dev-zh` 分支，frontmatter 保持规范形态），两个渠道在推送时分流：
-
-| 渠道 | 脚本 | 暂存副本的 frontmatter 处理 |
-|------|------|----------------------------|
-| [SkillHub](https://skillhub.cn) | `scripts/push-skillhub.bat` | 补**顶层 `displayName`** |
-| [ClawHub](https://clawhub.ai/plugins/@kokxi/qa-test-skills) | `scripts/push-clawhub.bat` | 剥掉 `metadata.slug` |
-
-两个平台的 CLI 要求都与规范形态冲突（详见
-[`scripts/README.md` 的「为什么需要暂存」](scripts/README.md#为什么需要暂存两个平台的要求与规范形态都冲突)），
-所以在发布前做一次**可验证的暂存**：
-
-```bash
-# 单独跑暂存检查结果，不改任何源文件
-python scripts/stage_for_publish.py --all --platform skillhub
-python scripts/stage_for_publish.py --all --platform clawhub
-```
-
-- 调整只发生在 `.publish-staging/` 下的副本里，`skills/` 源文件不动
-- `.publish-staging/` 是构建产物，已在 `.gitignore`
-- `push-clawhub.bat` 里的 `--slug` 参数是 **ClawHub CLI 的目标名**，
-  和被剥掉的 metadata 字段是两回事，不要混
-
-> 任何门禁都不要求 `metadata.slug` 存在，暂存调整不影响门禁全绿。
-> `scripts/metadata.json` 里的 SkillHub 接口只在 SkillHub 链路使用。
-
 ---
 
 ## 设计初衷
