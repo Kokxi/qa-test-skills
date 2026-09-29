@@ -114,6 +114,50 @@ SkillHub CLI 的 frontmatter 解析器**不认缩进**（`key.strip()`），所�
 > 否则不带参数运行会把已发布版本覆盖成更低的版本号。
 > `integrity_check.py` 检查项 12 会校验（含注释里的版本号）。
 
+## SkillHub 发布后如何校验（必须等安全扫描）
+
+SkillHub 上架后有**安全扫描**，`publish` 返回成功不等于用户立刻能看到。
+实测踩了三个坑才搞清判据，**别再用错方式校验**：
+
+| 判据 | 反映什么 | 能不能用 |
+|------|----------|----------|
+| `push-skillhub-failed.txt` | 脚本的失败清单 | ❌ 混着编码误报和真限流，整份是噪音 |
+| 日志里的 `OK:` 计数 | 脚本自己的 echo | ❌ 曾经因 `if/else` 双分支而无条件打印 |
+| `search` | 搜索索引 | ❌ 传播最慢，会把已发布的误判成没发 |
+| `/versions` 列表 | **已提交**（立即可见，`securityReports` 为 queued） | ⚠️ 能确认提交，但不能确认生效 |
+| `latestVersion` | **已生效** | ✅ 唯一可信，但**必须等扫描完成** |
+
+### 正确流程
+
+```bash
+# 1. 发布
+scripts\push-skillhub.bat 1.8.0 30
+
+# 2. 等安全扫描（几分钟）。这一步不能省
+#    立刻查 latestVersion 会得到「一个都没推上去」的错误结论
+
+# 3. 用这两个接口核对
+curl -H "Authorization: Bearer $TOKEN" \
+  "https://api.skillhub.cn/api/v1/skills/<slug>/versions?namespace=<ns>"   # 已提交
+curl -H "Authorization: Bearer $TOKEN" \
+  "https://api.skillhub.cn/api/v1/skills/<slug>?namespace=<ns>"              # 已生效
+
+# 4. 只把「两者都没有」的写进 push-skillhub-pending.txt 重推
+```
+
+### 实测数据
+
+- 限流按**配额**而非间隔：18s 间隔放行 9 个，30s 间隔只放行 6 个
+- 同一批里 6 个 CLI 报成功，等扫描完成后 **6 个全部生效**——
+  中途查会以为只有 5 个（有一个版本记录出现得晚）
+- `securityReports` 显示 `queued` **不阻塞** `latestVersion` 升版，
+  只是扫描结果还没回填。不必因此重推
+
+### 限流的实际配额
+
+单个时间窗大约放行 5-9 次发布。49 个技能需要多轮推完，
+每轮推完必须等扫描完成再决定下一轮推哪些，否则会重复推已生效的。
+
 ## ⚠️ 改 .bat 的三个硬约束
 
 `.bat` 和仓库里其他文件不一样，**用普通编辑工具改会静默改坏**。这三个坑本项目全踩过：
