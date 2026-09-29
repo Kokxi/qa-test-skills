@@ -14,6 +14,7 @@ REM  Notes:
 REM    - Publishes all 49 skills (entry qa-test-skills + 48 subs)
 REM    - Waits DELAY seconds after each push to avoid rate limit
 REM    - Failed skills are recorded in push-failed.txt for retry
+REM      NOTE: verify with the platform, not this file.
 REM    - Strips metadata.slug via stage_for_clawhub.py before publishing.
 REM      metadata.slug is SkillHub-only; ClawHub identifies skills by
 REM      directory name and does not need it. The repo keeps slug on
@@ -130,11 +131,18 @@ if not defined DIR (
 
 echo [%COUNT%/49] Publishing %SLUG% ...
 call clawhub skill publish "%DIR%" --slug %SLUG% --version %VER%
-if errorlevel 1 (
-  echo  !! FAILED: %SLUG% 1>>"%FAILED_FILE%"
-  echo  !! %SLUG% FAILED (see %FAILED_FILE%)
-) else (
-  echo  OK: %SLUG%
-)
+
+REM No if/else parenthesised block: that construct printed BOTH branches
+REM in push-skillhub.bat, making OK: unconditional and the log useless.
+REM goto has none of those hazards. Success signal = the CLI exit code only.
+if errorlevel 1 goto :push_failed
+echo  OK: %SLUG%
+goto :push_finished
+
+:push_failed
+echo  %SLUG% 1>>"%FAILED_FILE%"
+echo  !! %SLUG% FAILED ^(see %FAILED_FILE%^)
+
+:push_finished
 timeout /t %DELAY% /nobreak >nul
 exit /b 0
