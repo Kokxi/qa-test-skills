@@ -1,50 +1,21 @@
 ---
 name: qa-test-leadership
-slug: qa-test-leadership
-displayName: 测试领导力
-version: 1.7.7
 description: >-
-  当需要管理测试团队、制定团队目标和绩效标准、或者团队扩招需要面试标准时使用此技能。覆盖测试团队管理（目标设定/KPI 制定/人员成长）、绩效评估（能力模型/360 评估）、招聘面试（面试流程/技术评估标准）和组织建设。不要只管进度不管成长——一个稳定的测试团队靠的是每个人都在不断学习和进步。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: 用户说"团队管理"、"绩效评估"、"招聘"、"面试"、"团队建设"、"能力模型"、"目标"、需要管理测试团队、团队扩招需要面试标准时
+  当需要管理测试团队、制定团队目标和绩效标准、或者团队扩招需要面试标准时使用此技能。覆盖测试团队管理（目标设定/KPI 制定/人员成长）、绩效评估（能力模型/360 评估）、招聘面试（面试流程/技术评估标准）和组织建设。不要只管进度不管成长——一个稳定的测试团队靠的是每个人都在不断学习和进步。 触发场景：团队管理、绩效评估、招聘、面试、团队建设、能力模型、目标、团队扩招需要面试标准时。 Use when the user asks about: QA team leadership — goal setting, KPI definition, performance review, hiring interviews, and capability models.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-team-coaching           # 输入：团队赋能方法
-    - qa-retrospective           # 输入：复盘结果
-  downstream:
-    - qa-stakeholder-communication # 输出：团队管理用于沟通
-input_format:
-  required:
-    - name: 团队现状
-      type: string
-      description: 测试团队当前状态评估
-    - name: 组织目标
-      type: string
-      description: 组织质量目标和愿景
-  optional:
-    - name: 资源预算
-      type: string
-      description: 可用资源和预算
-output_format:
-  traceability:
-    - 每份管理方案带唯一ID（LEAD-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - team_assessment: 团队评估报告
-    - improvement_roadmap: 改进路线图
-    - stakeholder_plan: 干系人管理计划
-    - metrics_framework: 度量框架设计
-categories: ['Development','Testing','DevOps']
-depth_requirement_quantification:
-  reference_value: "根据团队规模调整管理深度：简单×1/中等×2/复杂×3"
-  minimum: "至少覆盖能力模型、绩效评估、招聘标准3项"
-error_recovery_guidance:
-  on_failure: "管理方案遗漏角色时回退到团队能力评估补充"
-  retry_behavior: "补充评估后重新设计方案"
+metadata:
+  slug: "qa-test-leadership"
+  display-name: "测试领导力"
+  version: "1.8.0"
+  when-to-use: "用户说\"团队管理\"、\"绩效评估\"、\"招聘\"、\"面试\"、\"团队建设\"、\"能力模型\"、\"目标\"、需要管理测试团队、团队扩招需要面试标准时"
+  related-skills: "{\"upstream\":[\"qa-team-coaching\",\"qa-retrospective\"],\"downstream\":[\"qa-stakeholder-communication\"]}"
+  references: "[\"references/performance-review.md\"]"
+  input-format: "{\"required\":[{\"name\":\"团队现状\",\"type\":\"string\",\"description\":\"测试团队当前状态评估\"},{\"name\":\"组织目标\",\"type\":\"string\",\"description\":\"组织质量目标和愿景\"}],\"optional\":[{\"name\":\"资源预算\",\"type\":\"string\",\"description\":\"可用资源和预算\"}]}"
+  output-format: "{\"traceability\":[\"每份管理方案带唯一ID（LEAD-XXXX）\"],\"structure\":[{\"team_assessment\":\"团队评估报告\"},{\"improvement_roadmap\":\"改进路线图\"},{\"stakeholder_plan\":\"干系人管理计划\"},{\"metrics_framework\":\"度量框架设计\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"管理方案遗漏角色时回退到团队能力评估补充\",\"retry_behavior\":\"补充评估后重新设计方案\"}"
+  categories: "[\"Development\",\"Testing\",\"DevOps\"]"
+  depth-requirement: "{\"reference_value\":\"根据团队规模调整管理深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少覆盖能力模型、绩效评估、招聘标准3项\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -113,72 +84,13 @@ error_recovery_guidance:
     └─ 产出：自动化脚本、测试工具、测试框架
 ```
 
-## 绩效评估
+## 加载时机
 
-### 评估维度
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 做绩效评估与能力模型时 | [`references/performance-review.md`](references/performance-review.md) |
 
-```text
-├─ 技术能力
-│   ├─ 测试设计能力
-│   ├─ 缺陷发现能力
-│   ├─ 工具使用能力
-│   └─ 技术深度
-│
-├─ 业务能力
-│   ├─ 业务理解能力
-│   ├─ 需求分析能力
-│   ├─ 风险识别能力
-│   └─ 质量把控能力
-│
-├─ 协作能力
-│   ├─ 沟通能力
-│   ├─ 团队协作
-│   ├─ 问题解决
-│   └─ 推动能力
-│
-└─ 成长能力
-    ├─ 学习能力
-    ├─ 创新能力
-    ├─ 总结能力
-    └─ 影响力
-```
-
-### 评估方法
-
-```text
-├─ KPI考核
-│   ├─ 缺陷发现数
-│   ├─ 测试覆盖率
-│   ├─ 测试效率
-│   └─ 质量指标
-│
-├─ 360度评估
-│   ├─ 上级评估
-│   ├─ 同事评估
-│   ├─ 下级评估
-│   └─ 自我评估
-│
-├─ OKR管理
-│   ├─ 目标设定
-│   ├─ 关键结果
-│   ├─ 进度跟踪
-│   └─ 结果评估
-│
-└─ 能力评估
-    ├─ 技能测试
-    ├─ 项目评审
-    ├─ 知识分享
-    └─ 成长记录
-```
-
-### 评估周期
-
-```text
-├─ 日常：1对1沟通（每周/双周）
-├─ 月度：工作回顾、目标跟踪
-├─ 季度：绩效评估、能力评估
-└─ 年度：年度总结、晋升评估
-```
+> `绩效评估`的完整内容已下沉至 `references/performance-review.md`，避免每次触发都占用上下文。
 
 ## 招聘面试
 

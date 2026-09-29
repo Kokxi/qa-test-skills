@@ -9,6 +9,9 @@
   {"query": "哎这个新功能需求写好了，但我不知道从哪开始测，帮我看一下", "should_trigger": true},
   {"query": "需要设计测试用例覆盖主流程和异常场景，需求文档见附件", "should_trigger": true},
   {"query": "我上传了一个PRD文档，帮我分析需求并生成测试方案", "should_trigger": true},
+  {"query": "帮我设计RESTful接口的测试用例，需要覆盖正常和异常场景", "should_trigger": true},
+  {"query": "我们需要做API接口测试，有OpenAPI文档，帮我们出接口测试方案", "should_trigger": true},
+  {"query": "GraphQL接口要做契约测试，验证响应结构是否符合schema定义", "should_trigger": true},
   {"query": "发现了一个Bug，付款页面点了支付没反应，帮我分析一下根因", "should_trigger": false},
   {"query": "这个接口返回的数据不对，帮我调试一下看看为什么", "should_trigger": false},
   {"query": "帮我把这份需求文档翻译成英文，客户要看的", "should_trigger": false},
@@ -17,6 +20,7 @@
   {"query": "帮我写一份测试周报，数据如下：执行用例200条，通过180条，发现Bug15个", "should_trigger": false},
   {"query": "自动化脚本跑不过了，登录用例一直报元素找不到，帮忙看看", "should_trigger": false},
   {"query": "帮我评审一下这段代码有没有安全问题，这是个Spring Boot的API", "should_trigger": false},
+  {"query": "帮我把这个RESTful API文档翻译成英文，给海外团队看", "should_trigger": false},
   {"query": "我要做个性能测试，帮我设计一下压测方案和性能指标", "should_trigger": false},
   {"query": "我们项目要做回归测试，之前用例库有1200条，帮我设计一下回归策略", "should_trigger": false}
 ]

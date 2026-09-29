@@ -1,0 +1,82 @@
+[
+  {
+    "query": "帮我测下这个支付接口的鉴权，POST /api/pay，我担心有人能改金额",
+    "should_trigger": true
+  },
+  {
+    "query": "接口测试",
+    "should_trigger": true
+  },
+  {
+    "query": "我们的 GraphQL 接口查询特别慢，N+1 好像很严重，帮我看看怎么测",
+    "should_trigger": true
+  },
+  {
+    "query": "payment callback keeps firing twice and double-charging the customer, need to figure out idempotency testing for this webhook",
+    "should_trigger": true
+  },
+  {
+    "query": "后端把 /api/v1/users 改成了 /api/v2/users，我们老客户端全挂了，这属于哪类问题要怎么测",
+    "should_trigger": true
+  },
+  {
+    "query": "想给我们的 REST 接口做个契约测试，用 Pact 还是 Schemathesis 比较好？我们有 6 个下游团队",
+    "should_trigger": true
+  },
+  {
+    "query": "gRPC 服务那块 streaming 的测试怎么做，流中途断了资源会不会漏",
+    "should_trigger": true
+  },
+  {
+    "query": "接口自动化怎么搞，想用 python 写一套能跑 CI 的",
+    "should_trigger": true
+  },
+  {
+    "query": "BOLA 怎么测？我想知道怎么验证用户能不能访问别人的订单",
+    "should_trigger": true
+  },
+  {
+    "query": "第三方支付回调有时候超时重试，偶尔会重复扣款，帮我设计测试场景",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我写一个 pytest 的接口测试框架",
+    "should_trigger": true
+  },
+  {
+    "query": "我们的前端页面有个 bug，点了按钮没反应，帮我看看",
+    "should_trigger": false
+  },
+  {
+    "query": "这个网站首页加载很慢，帮我做一下性能优化",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我写个爬虫把豆瓣电影数据抓下来",
+    "should_trigger": false
+  },
+  {
+    "query": "数据库慢查询怎么优化，order 表有 2000 万行",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我分析这份 PRD 的需求质量，看看有没有写不清楚的地方",
+    "should_trigger": false
+  },
+  {
+    "query": "用 docker 起个 nginx 反向代理，配个 https 证书",
+    "should_trigger": false
+  },
+  {
+    "query": "把这段 python 代码翻译成 go",
+    "should_trigger": false
+  },
+  {
+    "query": "我们的 App 在 iPhone 15 上切后台回来会闪退，帮我分析",
+    "should_trigger": false
+  },
+  {
+    "query": "登录接口偶尔 500，帮我看看日志里到底发生了什么",
+    "should_trigger": false
+  }
+]

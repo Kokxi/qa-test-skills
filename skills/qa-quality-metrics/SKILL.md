@@ -1,55 +1,21 @@
 ---
 name: qa-quality-metrics
-slug: qa-quality-metrics
-displayName: 测试质量度量
-version: 1.7.7
 description: >-
-  当管理层问"质量到底怎么样"、需要量化质量数据来做决策、或者想建立质量看板来跟踪趋势时使用此技能。从过程质量（需求评审通过率/用例覆盖度）、结果质量（Bug 密度/线上事故数）、效率（测试周期/回归耗时）和健康度（自动化通过率/环境稳定性）四个维度设计度量指标。⚠️ 度量的目的不是打分，是发现问题趋势——如果只报喜不报忧，度量就没用了。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: 用户说"质量度量"、"质量指标"、"怎么量化质量"、"质量看板"、"质量数据"、"趋势分析"、需要建立度量体系、向管理层展示质量数据时
+  当管理层问"质量到底怎么样"、需要量化质量数据来做决策、或者想建立质量看板来跟踪趋势时使用此技能。从过程质量（需求评审通过率/用例覆盖度）、结果质量（Bug 密度/线上事故数）、效率（测试周期/回归耗时）和健康度（自动化通过率/环境稳定性）四个维度设计度量指标。⚠️ 度量的目的不是打分，是发现问题趋势——如果只报喜不报忧，度量就没用了。 触发场景：质量度量、质量指标、怎么量化质量、质量看板、质量数据、趋势分析、向管理层展示质量数据时。 Use when the user asks about: test quality metrics and dashboards — process, result, efficiency, and health indicators for management reporting.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-release-risk-governance # 输入：发布数据
-    - qa-bug-lifecycle        # 输入：缺陷数据
-  downstream:
-    - qa-retrospective           # 输出：度量数据用于复盘
-    - qa-testability-advocacy    # 输出：质量趋势推动改进
-    - qa-stakeholder-communication
-    - qa-tech-debt-management
-    - qa-test-reporting
-input_format:
-  required:
-    - name: 测试数据
-      type: object
-      description: 测试执行数据和结果
-    - name: 缺陷数据
-      type: object
-      description: 缺陷统计和分析数据
-  optional:
-    - name: 历史基线
-      type: object
-      description: 历史质量基线数据
-output_format:
-  traceability:
-    - 每份度量报告带唯一ID（METRIC-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - quality_dashboard: 质量仪表盘
-    - defect_density: 缺陷密度分析
-    - test_coverage: 测试覆盖率
-    - pass_fail_rate: 通过/失败率
-    - trend_analysis: 质量趋势分析
-categories: ['Development','Testing','DevOps']
-depth_requirement_quantification:
-  reference_value: "根据度量维度调整指标深度：简单×1/中等×2/复杂×3"
-  minimum: "至少覆盖过程质量、结果质量、效率、健康度4个维度"
-error_recovery_guidance:
-  on_failure: "度量数据缺失时回退到测试执行和缺陷数据收集"
-  retry_behavior: "补齐数据后重新计算指标"
+metadata:
+  slug: "qa-quality-metrics"
+  display-name: "测试质量度量"
+  version: "1.8.0"
+  when-to-use: "用户说\"质量度量\"、\"质量指标\"、\"怎么量化质量\"、\"质量看板\"、\"质量数据\"、\"趋势分析\"、需要建立度量体系、向管理层展示质量数据时"
+  related-skills: "{\"upstream\":[\"qa-release-risk-governance\",\"qa-bug-lifecycle\"],\"downstream\":[\"qa-retrospective\",\"qa-testability-advocacy\",\"qa-stakeholder-communication\",\"qa-tech-debt-management\",\"qa-test-reporting\"]}"
+  references: "[\"references/metrics-dimensions.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试数据\",\"type\":\"object\",\"description\":\"测试执行数据和结果\"},{\"name\":\"缺陷数据\",\"type\":\"object\",\"description\":\"缺陷统计和分析数据\"}],\"optional\":[{\"name\":\"历史基线\",\"type\":\"object\",\"description\":\"历史质量基线数据\"}]}"
+  output-format: "{\"traceability\":[\"每份度量报告带唯一ID（METRIC-XXXX）\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"quality_dashboard\":\"质量仪表盘\"},{\"defect_density\":\"缺陷密度分析\"},{\"test_coverage\":\"测试覆盖率\"},{\"pass_fail_rate\":\"通过/失败率\"},{\"trend_analysis\":\"质量趋势分析\"},\"覆盖率：涉及覆盖率的结论必须标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述\"]}"
+  error-recovery-guidance: "{\"on_failure\":\"度量数据缺失时回退到测试执行和缺陷数据收集\",\"retry_behavior\":\"补齐数据后重新计算指标\"}"
+  categories: "[\"Development\",\"Testing\",\"DevOps\"]"
+  depth-requirement: "{\"reference_value\":\"根据度量维度调整指标深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少覆盖过程质量、结果质量、效率、健康度4个维度\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -59,103 +25,13 @@ error_recovery_guidance:
 
 质量不是感觉，是可以量化的。
 
-## 四类度量指标
+## 加载时机
 
-### 度量1：过程度量（测试过程质量）
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 选指标、算指标或查数据来源时，取四类详表 | [`references/metrics-dimensions.md`](references/metrics-dimensions.md) |
 
-```text
-核心指标：
-├─ 用例执行率 = 已执行用例数 / 总用例数 × 100%
-│   ├─ 目标：≥ 95%
-│   └─ 意义：测试覆盖完整性
-│
-├─ 用例通过率 = 通过用例数 / 已执行用例数 × 100%
-│   ├─ 目标：≥ 90%
-│   └─ 意义：测试执行质量
-│
-├─ 需求覆盖率 = 已覆盖需求数 / 总需求数 × 100%
-│   ├─ 目标：100%
-│   └─ 意义：需求覆盖完整性
-│
-├─ 自动化覆盖率 = 自动化用例数 / 总用例数 × 100%
-│   ├─ 目标：根据项目定义
-│   └─ 意义：自动化程度
-│
-└─ 用例有效率 = 有效用例数 / 总用例数 × 100%
-    ├─ 目标：≥ 80%
-    └─ 意义：用例设计质量
-```
-
-### 度量2：结果度量（产品质量）
-
-```text
-核心指标：
-├─ 缺陷密度 = 缺陷数 / 功能点数（或代码行数）
-│   ├─ 目标：根据项目定义
-│   └─ 意义：代码质量
-│
-├─ 缺陷修复率 = 已修复缺陷数 / 总缺陷数 × 100%
-│   ├─ 目标：≥ 95%
-│   └─ 意义：缺陷处理效率
-│
-├─ 漏测率 = 线上缺陷数 / 总缺陷数 × 100%
-│   ├─ 目标：≤ 5%
-│   └─ 意义：测试有效性
-│
-├─ 逃逸率 = 线上缺陷数 / (线上缺陷数 + 测试缺陷数) × 100%
-│   ├─ 目标：≤ 10%
-│   └─ 意义：测试拦截能力
-│
-└─ 严重缺陷占比 = 严重缺陷数 / 总缺陷数 × 100%
-    ├─ 目标：≤ 10%
-    └─ 意义：缺陷严重程度分布
-```
-
-### 度量3：效率度量（测试效率）
-
-```text
-核心指标：
-├─ 测试周期 = 测试结束日期 - 测试开始日期
-│   ├─ 目标：根据项目定义
-│   └─ 意义：测试效率
-│
-├─ 用例执行效率 = 执行用例数 / 测试工时
-│   ├─ 目标：根据项目定义
-│   └─ 意义：执行效率
-│
-├─ 缺陷发现效率 = 发现缺陷数 / 测试工时
-│   ├─ 目标：根据项目定义
-│   └─ 意义：缺陷发现能力
-│
-├─ 缺陷修复周期 = 缺陷修复日期 - 缺陷提交日期
-│   ├─ 目标：≤ 3天（严重）
-│   └─ 意义：缺陷处理效率
-│
-└─ 回归测试效率 = 回归用例数 / 回归工时
-    ├─ 目标：根据项目定义
-    └─ 意义：回归测试效率
-```
-
-### 度量4：健康度量（质量趋势）
-
-```text
-核心指标：
-├─ 缺陷趋势：新增缺陷数/天
-│   ├─ 正常：逐渐减少
-│   └─ 异常：突然增加
-│
-├─ 缺陷收敛：累计缺陷曲线
-│   ├─ 正常：趋于平缓
-│   └─ 异常：持续上升
-│
-├─ 质量趋势：缺陷密度/版本
-│   ├─ 正常：逐渐降低
-│   └─ 异常：突然升高
-│
-└─ 风险热力图：模块×缺陷密度
-    ├─ 正常：低密度模块为主
-    └─ 异常：高密度模块集中
-```
+> `四类度量指标`的完整内容已下沉至 `references/metrics-dimensions.md`，避免每次触发都占用上下文。
 
 ## 度量报告模板
 

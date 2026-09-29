@@ -1,56 +1,21 @@
 ---
 name: qa-release-risk-governance
-slug: qa-release-risk-governance
-displayName: 发布测试风险治理
-version: 1.7.7
 description: >-
-  当版本要发布了、需要决定"能不能发"、或者需要设计灰度/回滚方案时使用此技能。系统化评估变更风险（变更范围/影响面/回退成本），设计灰度发布策略（按用户/区域/流量比例），制定回滚方案和线上监控计划。不要问"这个版本稳不稳"——要问"如果出问题了，我们能在几分钟内发现并回滚"。产出发布风险评估报告和灰度发布方案。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: 用户说"发布风险"、"灰度策略"、"回滚方案"、"风险评估"、"版本发布"、"紧急发布"、需要评估发布风险、大版本发布前风险评估时
+  当版本要发布了、需要决定"能不能发"、或者需要设计灰度/回滚方案时使用此技能。系统化评估变更风险（变更范围/影响面/回退成本），设计灰度发布策略（按用户/区域/流量比例），制定回滚方案和线上监控计划。不要问"这个版本稳不稳"——要问"如果出问题了，我们能在几分钟内发现并回滚"。产出发布风险评估报告和灰度发布方案。 触发场景：发布风险、灰度策略、回滚方案、风险评估、版本发布、紧急发布、大版本发布前风险评估时。 Use when the user asks about: release readiness assessment — canary rollout, rollback planning, release risk evaluation, and production monitoring thresholds.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-test-strategy-design    # 输入：测试策略
-    - qa-risk-intuition          # 输入：风险评估
-  downstream:
-    - qa-quality-metrics         # 输出：发布数据用于质量度量
-    - qa-shift-right
-    - qa-stakeholder-communication
-input_format:
-  required:
-    - name: 测试策略
-      type: object
-      description: 来自qa-test-strategy-design的测试策略
-    - name: 风险评估
-      type: object
-      description: 来自qa-risk-intuition的风险评估
-    - name: 发布计划
-      type: string
-      description: 发布时间线和范围
-  optional:
-    - name: 质量度量
-      type: object
-      description: 来自qa-quality-metrics的质量数据
-output_format:
-  traceability:
-    - 每次发布评估带唯一ID（REL-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - release_decision: 发布决策建议
-    - risk_summary: 风险摘要
-    - blocking_issues: 阻塞性问题清单
-    - rollback_plan: 回滚方案
-    - monitoring_recommendations: 上线监控建议
-categories: ['Development','Testing','DevOps']
-depth_requirement_quantification:
-  reference_value: "根据发布规模调整评估深度：简单×1/中等×2/复杂×3"
-  minimum: "至少覆盖变更风险、灰度策略、回滚方案、监控计划4项"
-error_recovery_guidance:
-  on_failure: "发布评估发现阻塞性问题时回退到测试策略补齐"
-  retry_behavior: "修复阻塞问题后重新评估发布"
+metadata:
+  slug: "qa-release-risk-governance"
+  display-name: "发布测试风险治理"
+  version: "1.8.0"
+  when-to-use: "用户说\"发布风险\"、\"灰度策略\"、\"回滚方案\"、\"风险评估\"、\"版本发布\"、\"紧急发布\"、需要评估发布风险、大版本发布前风险评估时"
+  related-skills: "{\"upstream\":[\"qa-test-strategy-design\",\"qa-risk-intuition\"],\"downstream\":[\"qa-quality-metrics\",\"qa-shift-right\",\"qa-stakeholder-communication\"]}"
+  references: "[\"references/canary-rollout.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试策略\",\"type\":\"object\",\"description\":\"来自qa-test-strategy-design的测试策略\"},{\"name\":\"风险评估\",\"type\":\"object\",\"description\":\"来自qa-risk-intuition的风险评估\"},{\"name\":\"发布计划\",\"type\":\"string\",\"description\":\"发布时间线和范围\"}],\"optional\":[{\"name\":\"质量度量\",\"type\":\"object\",\"description\":\"来自qa-quality-metrics的质量数据\"}]}"
+  output-format: "{\"traceability\":[\"每次发布评估带唯一ID（REL-XXXX）\"],\"structure\":[{\"release_decision\":\"发布决策建议\"},{\"risk_summary\":\"风险摘要\"},{\"blocking_issues\":\"阻塞性问题清单\"},{\"rollback_plan\":\"回滚方案\"},{\"monitoring_recommendations\":\"上线监控建议\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"发布评估发现阻塞性问题时回退到测试策略补齐\",\"retry_behavior\":\"修复阻塞问题后重新评估发布\"}"
+  categories: "[\"Development\",\"Testing\",\"DevOps\"]"
+  depth-requirement: "{\"reference_value\":\"根据发布规模调整评估深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少覆盖变更风险、灰度策略、回滚方案、监控计划4项\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -121,69 +86,13 @@ error_recovery_guidance:
 - 低影响：边缘功能/少量用户
 ```
 
-## 灰度策略设计
+## 加载时机
 
-> 📌 本节与 qa-shift-right「阶段1：灰度发布」内容同步，修改时请同步更新两处。
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 设计灰度放量阶梯与回滚阈值时 | [`references/canary-rollout.md`](references/canary-rollout.md) |
 
-### 灰度维度
-
-```text
-灰度策略：
-├─ 用户灰度：按用户ID/比例
-│   ├─ 内部员工 → 白名单用户 → 10% → 50% → 100%
-│   └─ 适用：新功能/高风险功能
-│
-├─ 流量灰度：按流量比例
-│   ├─ 1% → 10% → 30% → 50% → 100%
-│   └─ 适用：性能优化/算法变更
-│
-├─ 地域灰度：按地域
-│   ├─ 某城市 → 某省份 → 全国
-│   └─ 适用：地域性功能
-│
-└─ 时间灰度：按时间段
-    ├─ 低峰期 → 高峰期
-    └─ 适用：定时任务/批处理
-```
-
-### 灰度监控指标
-
-```text
-监控指标：
-├─ 业务指标：
-│   ├─ 订单量/交易量
-│   ├─ 转化率/成功率
-│   └─ 用户活跃度
-│
-├─ 技术指标：
-│   ├─ 错误率/异常率
-│   ├─ 响应时间/吞吐量
-│   └─ 资源使用率
-│
-└─ 用户反馈：
-    ├─ 投诉量
-    ├─ 客服咨询量
-    └─ 社交媒体反馈
-```
-
-### 灰度回滚条件
-
-```text
-回滚触发条件：
-├─ 业务指标异常：
-│   ├─ 订单量下降 > 20%
-│   ├─ 成功率下降 > 5%
-│   └─ 用户投诉增加 > 50%
-│
-├─ 技术指标异常：
-│   ├─ 错误率 > 1%
-│   ├─ 响应时间增加 > 50%
-│   └─ CPU/内存使用率 > 80%
-│
-└─ 用户反馈异常：
-    ├─ 投诉量激增
-    └─ 负面舆情
-```
+> `灰度策略设计`的完整内容已下沉至 `references/canary-rollout.md`，避免每次触发都占用上下文。
 
 ## 回滚方案设计
 

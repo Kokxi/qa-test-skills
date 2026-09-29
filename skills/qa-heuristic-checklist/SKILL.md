@@ -1,53 +1,21 @@
 ---
 name: qa-heuristic-checklist
-slug: qa-heuristic-checklist
-displayName: 测试启发式清单
-version: 1.7.7
 description: >-
-  提供登录、支付、搜索、购物车、导入导出、审批、消息通知、权限管理等不同类型功能的测试要点模板。当面对一个新功能类型不知道从哪里开始测试、或者担心遗漏了某个功能类型的特有测试点时，应当使用此技能。特别适合测试新人——照着清单逐项检查就不会漏掉该功能类型的典型问题。例如支付类要测金额精度和幂等性，导入导出类要测格式兼容和性能，每个功能类型都有其特有的高风险区域。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: 用户说"这个功能怎么测"、"有什么测试要点"、"checklist"、"测试模板"、"表单测试"、"支付测试要点"、"导入怎么测"、面对新功能类型、测试新人需要指引时
+  提供登录、支付、搜索、购物车、导入导出、审批、消息通知、权限管理等不同类型功能的测试要点模板。当面对一个新功能类型不知道从哪里开始测试、或者担心遗漏了某个功能类型的特有测试点时，应当使用此技能。特别适合测试新人——照着清单逐项检查就不会漏掉该功能类型的典型问题。例如支付类要测金额精度和幂等性，导入导出类要测格式兼容和性能，每个功能类型都有其特有的高风险区域。 触发场景：这个功能怎么测、有什么测试要点、checklist、测试模板、表单测试、支付测试要点、导入怎么测、测试新人需要指引时。 Use when the user asks about: heuristic checklists and testing points by feature type — login, payment, search, cart, import/export, approval, notification, and permissions.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-retrospective           # 可选输入：复盘结果更新checklist（无复盘数据时使用内置默认清单）
-  downstream:
-    - qa-scenario-tree           # 输出：checklist指导场景构建
-    - qa-boundary-deep-dive      # 输出：checklist指导边界分析
-    - qa-team-coaching
-references:
-  - references/checklists.md
-input_format:
-  required:
-    - name: 测试上下文
-      type: string
-      description: 待测试的功能或场景描述
-  optional:
-    - name: 测试类型
-      type: string
-      description: 功能/性能/安全/兼容性等
-    - name: 历史缺陷
-      type: array
-      description: 历史缺陷模式
-output_format:
-  traceability:
-    - 本技能应用清单，不新增唯一ID；标注覆盖的启发式编号
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - heuristic_list: 启发式检查清单
-    - covered_areas: 已覆盖领域
-    - uncovered_areas: 未覆盖领域提示
-    - exploration_guide: 探索测试指南
-depth_requirement_quantification:
-  reference_value: "根据功能类型数量调整清单深度：简单×1/中等×2/复杂×3"
-  minimum: "至少应用5个相关启发式"
-categories: ['Development','Testing']
-error_recovery_guidance:
-  on_failure: "清单应用遗漏功能类型时回退到需求解构补充"
-  retry_behavior: "补全功能类型后重新应用清单"
+metadata:
+  slug: "qa-heuristic-checklist"
+  display-name: "测试启发式清单"
+  version: "1.8.0"
+  when-to-use: "用户说\"这个功能怎么测\"、\"有什么测试要点\"、\"checklist\"、\"测试模板\"、\"表单测试\"、\"支付测试要点\"、\"导入怎么测\"、面对新功能类型、测试新人需要指引时"
+  related-skills: "{\"upstream\":[\"qa-retrospective\"],\"downstream\":[\"qa-scenario-tree\",\"qa-boundary-deep-dive\",\"qa-team-coaching\"]}"
+  references: "[\"references/checklists.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试上下文\",\"type\":\"string\",\"description\":\"待测试的功能或场景描述\"}],\"optional\":[{\"name\":\"测试类型\",\"type\":\"string\",\"description\":\"功能/性能/安全/兼容性等\"},{\"name\":\"历史缺陷\",\"type\":\"array\",\"description\":\"历史缺陷模式\"}]}"
+  output-format: "{\"traceability\":[\"本技能应用清单，不新增唯一ID；标注覆盖的启发式编号\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"heuristic_list\":\"启发式检查清单\"},{\"covered_areas\":\"已覆盖领域\"},{\"uncovered_areas\":\"未覆盖领域提示\"},{\"exploration_guide\":\"探索测试指南\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"清单应用遗漏功能类型时回退到需求解构补充\",\"retry_behavior\":\"补全功能类型后重新应用清单\"}"
+  categories: "[\"Development\",\"Testing\"]"
+  depth-requirement: "{\"reference_value\":\"根据功能类型数量调整清单深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少应用5个相关启发式\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -79,6 +47,19 @@ error_recovery_guidance:
 | 权限类 | 角色管理、资源权限 | 越权防护、权限继承、审计 |
 
 > 每个功能类型的**完整检查清单**（输入验证/业务规则/并发/异常等详细测试要点）参见 [`references/checklists.md`](references/checklists.md)。
+
+## 加载时机
+
+**需要时才读，不要一上来全读**：
+
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 拿到一个功能，想知道该测什么 | [`references/checklists.md`](references/checklists.md)（按功能类型的测试要点模板） |
+
+> 本文的速查表只覆盖常见功能类型；完整清单按需加载。
+
+
+---
 
 ## 使用方法
 

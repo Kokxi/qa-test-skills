@@ -1,51 +1,21 @@
 ---
 name: qa-ci-cd-testing
-slug: qa-ci-cd-testing
-displayName: CI/CD 测试
-version: 1.7.7
 description: >-
-  当需要把测试集成到 CI/CD 流水线中、或者现有流水线的测试环节跑起来效率低不可靠时使用此技能。覆盖流水线各阶段的分层测试卡点设计（提交检查→单元测试→接口测试→UI 测试→回归测试）、工具集成策略和质量门禁配置。不要在 CI 里堆满慢的 UI 测试——而是构建测试金字塔：提交阶段跑最快的（<5min），合码阶段跑核心的（<15min），夜间跑全量的。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: 用户说"CI/CD"、"持续测试"、"流水线测试"、"质量门禁"、"自动化回归"、"提交即测试"、需要设计CI/CD测试流程、构建流水线需要加入测试环节时
+  当需要把测试集成到 CI/CD 流水线中、或者现有流水线的测试环节跑起来效率低不可靠时使用此技能。覆盖流水线各阶段的分层测试卡点设计（提交检查→单元测试→接口测试→UI 测试→回归测试）、工具集成策略和质量门禁配置。不要在 CI 里堆满慢的 UI 测试——而是构建测试金字塔：提交阶段跑最快的（<5min），合码阶段跑核心的（<15min），夜间跑全量的。 触发场景：CI/CD、持续测试、流水线测试、质量门禁、自动化回归、提交即测试、构建流水线需要加入测试环节时。 Use when the user asks about: integrating tests into a CI/CD pipeline — layered quality gates, fast commit-stage tests, and release blocking criteria.
+license: MIT
 allowed-tools: Read Grep Glob Bash
-related_skills:
-  upstream:
-    - qa-tech-selection          # 输入：技术选型确定工具栈
-    - qa-test-strategy-design    # 输入：测试策略确定自动化范围
-  downstream:
-    - qa-release-risk-governance # 输出：CI/CD流程支持发布
-    - qa-shift-right
-input_format:
-  required:
-    - name: 测试策略
-      type: object
-      description: 来自qa-test-strategy-design的测试策略
-    - name: 自动化架构
-      type: object
-      description: 来自qa-test-automation-arch的自动化架构
-  optional:
-    - name: 流水线配置
-      type: string
-      description: CI/CD流水线配置信息
-output_format:
-  traceability:
-    - 每条流水线带唯一ID（PIPE-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - pipeline_design: CI/CD流水线设计
-    - test_stages: 各阶段测试配置
-    - quality_gates: 质量门禁设置
-    - feedback_loops: 反馈循环机制
-categories: ['Development','Testing','DevOps']
-depth_requirement_quantification:
-  reference_value: "根据流水线复杂度调整设计深度：简单×1/中等×2/复杂×3"
-  minimum: "至少覆盖提交检查、接口测试、回归测试3个卡点"
-error_recovery_guidance:
-  on_failure: "流水线测试卡点失败时回退到测试策略调整范围"
-  retry_behavior: "调整测试范围或工具后重新配置卡点"
+metadata:
+  slug: "qa-ci-cd-testing"
+  display-name: "CI/CD 测试"
+  version: "1.8.0"
+  when-to-use: "用户说\"CI/CD\"、\"持续测试\"、\"流水线测试\"、\"质量门禁\"、\"自动化回归\"、\"提交即测试\"、需要设计CI/CD测试流程、构建流水线需要加入测试环节时"
+  related-skills: "{\"upstream\":[\"qa-tech-selection\",\"qa-test-strategy-design\"],\"downstream\":[\"qa-release-risk-governance\",\"qa-shift-right\"]}"
+  references: "[\"references/pipeline-design.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试策略\",\"type\":\"object\",\"description\":\"来自qa-test-strategy-design的测试策略\"},{\"name\":\"自动化架构\",\"type\":\"object\",\"description\":\"来自qa-test-automation-arch的自动化架构\"}],\"optional\":[{\"name\":\"流水线配置\",\"type\":\"string\",\"description\":\"CI/CD流水线配置信息\"}]}"
+  output-format: "{\"traceability\":[\"每条流水线带唯一ID（PIPE-XXXX）\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"pipeline_design\":\"CI/CD流水线设计\"},{\"test_stages\":\"各阶段测试配置\"},{\"quality_gates\":\"质量门禁设置\"},{\"feedback_loops\":\"反馈循环机制\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"流水线测试卡点失败时回退到测试策略调整范围\",\"retry_behavior\":\"调整测试范围或工具后重新配置卡点\"}"
+  categories: "[\"Development\",\"Testing\",\"DevOps\"]"
+  depth-requirement: "{\"reference_value\":\"根据流水线复杂度调整设计深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少覆盖提交检查、接口测试、回归测试3个卡点\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -154,77 +124,13 @@ error_recovery_guidance:
 └─ 改进优化：持续改进
 ```
 
-## CI/CD 流水线设计
+## 加载时机
 
-### 流水线阶段
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 设计流水线分层卡点时 | [`references/pipeline-design.md`](references/pipeline-design.md) |
 
-```text
-代码提交 → 代码检查 → 单元测试 → 接口测试 → 集成测试 → 部署 → 冒烟测试 → 灰度发布 → 全量发布
-
-各阶段职责：
-├─ 代码提交：提交代码
-├─ 代码检查：静态代码分析
-├─ 单元测试：执行单元测试
-├─ 接口测试：执行接口测试
-├─ 集成测试：执行集成测试
-├─ 部署：部署到测试环境
-├─ 冒烟测试：执行冒烟测试
-├─ 灰度发布：按比例发布
-└─ 全量发布：全量发布
-```
-
-### 质量门禁
-
-```text
-门禁标准：
-├─ 代码检查
-│   ├─ 代码规范：无严重违规
-│   ├─ 代码重复：< 5%
-│   └─ 圈复杂度：< 10
-│
-├─ 单元测试
-│   ├─ 覆盖率：≥ 80%
-│   ├─ 通过率：100%
-│   └─ 执行时间：< 5分钟
-│
-├─ 接口测试
-│   ├─ 覆盖率：≥ 90%
-│   ├─ 通过率：100%
-│   └─ 执行时间：< 10分钟
-│
-├─ 集成测试
-│   ├─ 通过率：100%
-│   └─ 执行时间：< 30分钟
-│
-└─ 冒烟测试
-    ├─ 通过率：100%
-    └─ 核心功能：全部通过
-```
-
-### 工具选型
-
-```text
-├─ 代码管理
-│   ├─ Git：版本控制
-│   └─ GitLab/GitHub：代码托管
-│
-├─ CI/CD工具
-│   ├─ Jenkins：开源、灵活
-│   ├─ GitLab CI：集成度高
-│   ├─ GitHub Actions：云端友好
-│   └─ CircleCI：云端CI
-│
-├─ 测试工具
-│   ├─ JUnit/TestNG：单元测试
-│   ├─ Pytest：Python测试
-│   ├─ Postman/Newman：接口测试
-│   └─ Selenium/Playwright：UI测试
-│
-└─ 报告工具
-    ├─ Allure：测试报告
-    ├─ SonarQube：代码质量
-    └─ Grafana：监控可视化
-```
+> `CI/CD 流水线设计`的完整内容已下沉至 `references/pipeline-design.md`，避免每次触发都占用上下文。
 
 ## 输出示例
 

@@ -1,54 +1,21 @@
 ---
 name: qa-retrospective
-slug: qa-retrospective
-displayName: 测试复盘
-version: 1.7.7
 description: >-
-  当一个迭代结束、一个项目完成、或者发生线上事故需要事后分析时使用此技能。通过系统性的回顾会议和数据复盘，把个人和团队的经验教训转化为可复用的组织资产。不要沦为"说说好话走个形式"——有效的复盘需要有数据支撑（缺陷趋势/漏测分析/效率数据）、有根因分析（为什么出问题）和有 action items（下次怎么做不一样）。输出复盘报告和改进项追踪表。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: 用户说"测试复盘"、"迭代复盘"、"项目复盘"、"经验沉淀"、"漏测分析"、"回顾总结"、"事后分析"、需要复盘总结经验、反复出现同类问题需要根因改进时
+  当一个迭代结束、一个项目完成、或者发生线上事故需要事后分析时使用此技能。通过系统性的回顾会议和数据复盘，把个人和团队的经验教训转化为可复用的组织资产。不要沦为"说说好话走个形式"——有效的复盘需要有数据支撑（缺陷趋势/漏测分析/效率数据）、有根因分析（为什么出问题）和有 action items（下次怎么做不一样）。输出复盘报告和改进项追踪表。 触发场景：测试复盘、迭代复盘、项目复盘、经验沉淀、漏测分析、回顾总结、事后分析、反复出现同类问题需要根因改进时。 Use when the user asks about: test retrospectives and post-incident review — defect trends, escaped-defect analysis, efficiency data, and turning lessons into reusable assets.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-bug-root-cause-analysis # 输入：根因分析结果
-    - qa-quality-metrics         # 输入：质量度量数据
-    - qa-bug-lifecycle        # 输入：缺陷数据
-  downstream:
-    - qa-heuristic-checklist     # 输出：更新checklist
-    - qa-team-coaching           # 输出：更新培训材料
-    - qa-test-leadership
-input_format:
-  required:
-    - name: 迭代数据
-      type: object
-      description: 迭代的测试和缺陷数据
-    - name: 团队反馈
-      type: array
-      description: 团队成员反馈和意见
-  optional:
-    - name: 历史回顾
-      type: object
-      description: 历史回顾记录
-output_format:
-  traceability:
-    - 每次复盘带唯一ID（RETRO-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - retrospective_report: 复盘报告
-    - what_went_well: 做得好的事项
-    - improvement_areas: 改进领域
-    - action_items: 行动项清单
-    - follow_up_plan: 跟踪计划
-categories: ['Development','Team']
-depth_requirement_quantification:
-  reference_value: "根据迭代数据调整复盘深度：简单×1/中等×2/复杂×3"
-  minimum: "至少包含数据支撑、根因分析、action items 3要素"
-error_recovery_guidance:
-  on_failure: "复盘数据不充分时回退到质量度量收集更多数据"
-  retry_behavior: "补齐数据后重新复盘"
+metadata:
+  slug: "qa-retrospective"
+  display-name: "测试复盘"
+  version: "1.8.0"
+  when-to-use: "用户说\"测试复盘\"、\"迭代复盘\"、\"项目复盘\"、\"经验沉淀\"、\"漏测分析\"、\"回顾总结\"、\"事后分析\"、需要复盘总结经验、反复出现同类问题需要根因改进时"
+  related-skills: "{\"upstream\":[\"qa-bug-root-cause-analysis\",\"qa-quality-metrics\",\"qa-bug-lifecycle\"],\"downstream\":[\"qa-heuristic-checklist\",\"qa-team-coaching\",\"qa-test-leadership\"]}"
+  references: "[\"references/five-steps.md\"]"
+  input-format: "{\"required\":[{\"name\":\"迭代数据\",\"type\":\"object\",\"description\":\"迭代的测试和缺陷数据\"},{\"name\":\"团队反馈\",\"type\":\"array\",\"description\":\"团队成员反馈和意见\"}],\"optional\":[{\"name\":\"历史回顾\",\"type\":\"object\",\"description\":\"历史回顾记录\"}]}"
+  output-format: "{\"traceability\":[\"每次复盘带唯一ID（RETRO-XXXX）\"],\"structure\":[{\"retrospective_report\":\"复盘报告\"},{\"what_went_well\":\"做得好的事项\"},{\"improvement_areas\":\"改进领域\"},{\"action_items\":\"行动项清单\"},{\"follow_up_plan\":\"跟踪计划\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"复盘数据不充分时回退到质量度量收集更多数据\",\"retry_behavior\":\"补齐数据后重新复盘\"}"
+  categories: "[\"Development\",\"Team\"]"
+  depth-requirement: "{\"reference_value\":\"根据迭代数据调整复盘深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少包含数据支撑、根因分析、action items 3要素\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -62,128 +29,13 @@ error_recovery_guidance:
 
 复盘的目的是找到系统性的改进点，而不是找谁背锅。
 
-## 复盘五步法
+## 加载时机
 
-### 第1步：收集数据
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 需要五步法的方法细节时，取对应小节 | [`references/five-steps.md`](references/five-steps.md) |
 
-```text
-数据收集：
-├─ 缺陷数据
-│   ├─ 本迭代新增缺陷数
-│   ├─ 缺陷严重程度分布
-│   ├─ 缺陷类型分布
-│   └─ 缺陷模块分布
-│
-├─ 漏测数据
-│   ├─ 线上缺陷数
-│   ├─ 漏测原因分类
-│   ├─ 漏测影响评估
-│   └─ 漏测修复情况
-│
-├─ 测试数据
-│   ├─ 用例执行率
-│   ├─ 用例通过率
-│   ├─ 测试覆盖率
-│   └─ 测试效率
-│
-└─ 其他数据
-    ├─ 需求变更次数
-    ├─ 测试延期情况
-    ├─ 线上故障情况
-    └─ 用户反馈情况
-```
-
-### 第2步：根因分析（5 Whys）
-
-```text
-5 Whys分析法：
-
-问题：线上出现XX Bug
-├─ Why 1：为什么测试没发现？
-│   └─ 因为测试用例没覆盖这个场景
-├─ Why 2：为什么用例没覆盖？
-│   └─ 因为需求分析时没考虑到
-├─ Why 3：为什么需求分析没考虑到？
-│   └─ 因为对这个业务场景不熟悉
-├─ Why 4：为什么不熟悉？
-│   └─ 因为没有相关的知识沉淀
-├─ Why 5：为什么没有知识沉淀？
-│   └─ 因为没有复盘和总结机制
-
-根因归类：
-├─ 思维盲区：没想到
-├─ 信息缺失：不知道
-├─ 流程问题：流程不完善
-├─ 工具问题：工具不支持
-└─ 能力问题：能力不足
-```
-
-### 第3步：制定改进措施
-
-```text
-改进措施设计：
-├─ 具体：明确做什么
-├─ 可执行：能落地执行
-├─ 可衡量：有明确标准
-├─ 有负责人：明确责任人
-└─ 有时间：明确完成时间
-
-改进措施类型：
-├─ 流程改进：优化测试流程
-├─ 工具改进：引入/优化工具
-├─ 知识沉淀：更新Checklist/模板
-├─ 能力提升：培训/学习
-└─ 协作改进：优化协作方式
-
-示例：
-改进措施：更新登录功能测试Checklist
-├─ 具体：增加验证码相关测试点
-├─ 负责人：XXX
-├─ 完成时间：2024-01-15
-├─ 验收标准：Checklist更新并通知团队
-└─ 效果验证：下次迭代验证效果
-```
-
-### 第4步：资产沉淀
-
-```text
-资产沉淀类型：
-├─ Checklist更新
-│   ├─ 新增测试点
-│   ├─ 修正错误点
-│   └─ 优化检查项
-│
-├─ 模板更新
-│   ├─ 用例模板优化
-│   ├─ Bug报告模板优化
-│   └─ 测试报告模板优化
-│
-├─ 知识库更新
-│   ├─ 常见问题FAQ
-│   ├─ 测试经验总结
-│   └─ 最佳实践
-│
-└─ 流程更新
-    ├─ 测试流程优化
-    ├─ 协作流程优化
-    └─ 发布流程优化
-```
-
-### 第5步：跟踪闭环
-
-```text
-跟踪机制：
-├─ 定期检查：每周/每月检查改进措施执行情况
-├─ 效果验证：验证改进措施是否有效
-├─ 持续优化：根据效果持续优化
-└─ 经验分享：分享改进经验
-
-闭环检查：
-├─ 措施是否执行？
-├─ 效果是否达到？
-├─ 是否需要调整？
-└─ 是否可以推广？
-```
+> `复盘五步法`的完整内容已下沉至 `references/five-steps.md`，避免每次触发都占用上下文。
 
 ## 复盘报告模板
 

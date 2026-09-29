@@ -1,48 +1,21 @@
 ---
 name: qa-input-validation
-slug: qa-input-validation
-displayName: 输入验证
-version: 1.7.7
 description: >-
-  在测试工作流开始前检查用户输入是否包含有效的需求描述和足够的上下文信息。当用户的测试请求过于模糊（只说"帮我测试"却没说测什么）、缺少必要的需求文档或上下文时，应当使用此技能来验证输入完整性。如果输入验证失败，必须返回缺失信息清单要求用户补充。适用于启动任何测试设计流程的第一步。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: 用户说"需求不清楚"、"信息不够"、"这个需求能测吗"、用户输入模糊时自动激活（第一步）
+  在测试工作流开始前检查用户输入是否包含有效的需求描述和足够的上下文信息。当用户的测试请求过于模糊（只说"帮我测试"却没说测什么）、缺少必要的需求文档或上下文时，应当使用此技能来验证输入完整性。如果输入验证失败，必须返回缺失信息清单要求用户补充。适用于启动任何测试设计流程的第一步。 触发场景：需求不清楚、信息不够、这个需求能测吗、用户输入模糊时自动激活（第一步）。 Use when the user asks about: checking whether the user's test request contains enough context before any test design work starts.
+license: MIT
 allowed-tools: Read Grep Glob WebFetch
-related_skills:
-  upstream: []  # 无上游依赖（工作流入口）
-  downstream:
-    - qa-requirement-review  # 验证通过后进入需求评审
-input_format:
-  required:
-    - name: 用户输入
-      type: string
-      description: 用户的需求描述或问题
-  optional:
-    - name: 附件
-      type: file
-      description: 上传的需求文档
-    - name: URL
-      type: string
-      description: 需求文档链接
-output_format:
-  traceability:
-    - 本技能验证输入，不产出唯一ID
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - validation_result: "pass/fail/need_more_info"
-    - input_quality_score: "输入质量评分（1-10）"
-    - missing_info: "缺失信息清单"
-    - clarification_questions: "需要追问的问题"
-error_recovery_guidance:
-  on_failure: "返回缺失信息清单和追问问题，要求用户补充"
-  retry_behavior: "用户补充后重新执行输入验证"
-categories: ['Development','Testing','AI']
-depth_requirement_quantification:
-  reference_value: "根据输入模糊度调整验证深度：简单×1/中等×2/复杂×3"
-  minimum: "至少检查需求明确性、上下文充分性、输入类型3项"
+metadata:
+  slug: "qa-input-validation"
+  display-name: "输入验证"
+  version: "1.8.0"
+  when-to-use: "用户说\"需求不清楚\"、\"信息不够\"、\"这个需求能测吗\"、用户输入模糊时自动激活（第一步）"
+  related-skills: "{\"upstream\":[],\"downstream\":[\"qa-requirement-review\"]}"
+  references: "[\"references/output-formats.md\"]"
+  input-format: "{\"required\":[{\"name\":\"用户输入\",\"type\":\"string\",\"description\":\"用户的需求描述或问题\"}],\"optional\":[{\"name\":\"附件\",\"type\":\"file\",\"description\":\"上传的需求文档\"},{\"name\":\"URL\",\"type\":\"string\",\"description\":\"需求文档链接\"}]}"
+  output-format: "{\"traceability\":[\"本技能验证输入，不产出唯一ID\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"validation_result\":\"pass/fail/need_more_info\"},{\"input_quality_score\":\"输入质量评分（1-10）\"},{\"missing_info\":\"缺失信息清单\"},{\"clarification_questions\":\"需要追问的问题\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"返回缺失信息清单和追问问题，要求用户补充\",\"retry_behavior\":\"用户补充后重新执行输入验证\"}"
+  categories: "[\"Development\",\"Testing\",\"AI\"]"
+  depth-requirement: "{\"reference_value\":\"根据输入模糊度调整验证深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少检查需求明确性、上下文充分性、输入类型3项\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -141,58 +114,13 @@ depth_requirement_quantification:
 └─ fail（失败）：综合评分<4分
 ```
 
-## 输出格式
+## 加载时机
 
-### 通过（pass）
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 校验输入完整性或需要输出格式时 | [`references/output-formats.md`](references/output-formats.md) |
 
-```json
-{
-  "validation_result": "pass",
-  "input_quality_score": 8,
-  "missing_info": [],
-  "recommendation": "输入质量良好，可以继续执行"
-}
-```
-
-### 需要更多信息（need_more_info）
-
-```json
-{
-  "validation_result": "need_more_info",
-  "input_quality_score": 5,
-  "missing_info": [
-    "缺少业务背景描述",
-    "缺少用户角色说明",
-    "缺少约束条件"
-  ],
-  "clarification_questions": [
-    "这个功能的业务目标是什么？",
-    "主要用户有哪些角色？",
-    "有什么技术约束或业务规则？"
-  ],
-  "recommendation": "请补充以上信息后再生成"
-}
-```
-
-### 失败（fail）
-
-```json
-{
-  "validation_result": "fail",
-  "input_quality_score": 2,
-  "missing_info": [
-    "缺少功能描述",
-    "缺少业务背景",
-    "缺少所有必要信息"
-  ],
-  "clarification_questions": [
-    "请描述需要测试的功能是什么",
-    "这个功能的业务背景是什么",
-    "主要用户是谁，核心流程是什么"
-  ],
-  "recommendation": "输入信息严重不足，无法生成有效测试用例"
-}
-```
+> `输出格式`的完整内容已下沉至 `references/output-formats.md`，避免每次触发都占用上下文。
 
 ## 输入类型速查表
 

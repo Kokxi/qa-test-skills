@@ -1,56 +1,21 @@
 ---
 name: qa-ai-blindspot-compensation
-slug: qa-ai-blindspot-compensation
-displayName: AI 测试盲区补偿
-version: 1.7.7
 description: >-
-  AI在生成测试用例时存在六大系统性盲区：时序依赖、并发冲突、资源竞争、状态累积、数据一致性、第三方集成差异。评审完AI生成的用例之后，必须用此技能做盲区补盲——因为AI几乎一定会漏掉这些。如果你心里觉得"好像还差点什么但说不上来"，这就是答案。每个盲区维度至少补2-3个场景，总补盲数12-18个。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: AI输出评审完成后自动激活；用户说"还有什么没测到"、"AI漏了什么"、"补盲"、"全面覆盖"、"是不是不够"、"哪还没测"、"盲区分析"、"遗漏场景"时
+  AI在生成测试用例时存在六大系统性盲区：时序依赖、并发冲突、资源竞争、状态累积、数据一致性、第三方集成差异。评审完AI生成的用例之后，必须用此技能做盲区补盲——因为AI几乎一定会漏掉这些。如果你心里觉得"好像还差点什么但说不上来"，这就是答案。每个盲区维度至少补2-3个场景，总补盲数12-18个。 触发场景：还有什么没测到、AI漏了什么、补盲、全面覆盖、是不是不够、哪还没测、盲区分析、遗漏场景、时。 Use when the user asks about: compensating for known blind spots in AI-generated test cases — timing dependencies, concurrency conflicts, resource contention, state accumulation, data consistency, and third-party integration differences.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-ai-output-critique      # 输入：评审后的测试用例
-  downstream:
-    - qa-test-skills           # 输出：最终测试用例返回给主流程
-    - qa-expert-review
-    - qa-output-validation
-references:
-  - references/blindspot-details.md
-input_format:
-  required:
-    - name: 测试用例
-      type: array
-      description: AI生成的测试用例列表，包含用例编号、需求ID、风险ID
-    - name: 需求解构表
-      type: object
-      description: 来自qa-req-deconstruction，包含需求ID列表
-  optional:
-    - name: 评审报告
-      type: object
-      description: 来自qa-ai-output-critique的评审结果
-output_format:
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - blindspot_id: "BS-XXXX"
-    - requirement_ids: ["REQ-XXXX"]
-    - original_tc_ids: ["TC_{模块缩写}_{功能缩写}_{序号}"]
-    - blindspot_type: "盲区类型"
-    - new_test_cases: "补盲用例列表"
-  traceability:
-    - 每个补盲用例带唯一ID（BS-XXXX）
-    - 关联原始用例ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）
-    - 关联需求ID（TC_{需求模块缩写}_{功能缩写}_{序号}）
-depth_requirement_quantification:
-  reference_value: "根据测试复杂度和风险等级调整补盲深度：简单x1/中等x2/复杂x3"
-  minimum: "至少覆盖边界盲区、场景盲区、数据盲区3个维度中的2个"
-categories: ['Development','Testing','AI']
-error_recovery_guidance:
-  on_failure: "盲区补盲遗漏维度时回退到评审报告定位遗漏点"
-  retry_behavior: "补充遗漏盲区类型后重新生成补盲用例"
+metadata:
+  slug: "qa-ai-blindspot-compensation"
+  display-name: "AI 测试盲区补偿"
+  version: "1.8.0"
+  when-to-use: "AI输出评审完成后自动激活；用户说\"还有什么没测到\"、\"AI漏了什么\"、\"补盲\"、\"全面覆盖\"、\"是不是不够\"、\"哪还没测\"、\"盲区分析\"、\"遗漏场景\"时"
+  related-skills: "{\"upstream\":[\"qa-ai-output-critique\"],\"downstream\":[\"qa-test-skills\",\"qa-expert-review\",\"qa-output-validation\"]}"
+  references: "[\"references/blindspot-details.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试用例\",\"type\":\"array\",\"description\":\"AI生成的测试用例列表，包含用例编号、需求ID、风险ID\"},{\"name\":\"需求解构表\",\"type\":\"object\",\"description\":\"来自qa-req-deconstruction，包含需求ID列表\"}],\"optional\":[{\"name\":\"评审报告\",\"type\":\"object\",\"description\":\"来自qa-ai-output-critique的评审结果\"}]}"
+  output-format: "{\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"blindspot_id\":\"BS-XXXX\"},{\"requirement_ids\":[\"REQ-XXXX\"]},{\"original_tc_ids\":[\"TC_{模块缩写}_{功能缩写}_{序号}\"]},{\"blindspot_type\":\"盲区类型\"},{\"new_test_cases\":\"补盲用例列表\"}],\"traceability\":[\"每个补盲用例带唯一ID（BS-XXXX）\",\"关联原始用例ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）\",\"关联需求ID：REQ-{需求模块缩写}-{序号}\"]}"
+  error-recovery-guidance: "{\"on_failure\":\"盲区补盲遗漏维度时回退到评审报告定位遗漏点\",\"retry_behavior\":\"补充遗漏盲区类型后重新生成补盲用例\"}"
+  categories: "[\"Development\",\"Testing\",\"AI\"]"
+  depth-requirement: "{\"reference_value\":\"根据测试复杂度和风险等级调整补盲深度：简单x1/中等x2/复杂x3\",\"minimum\":\"至少覆盖边界盲区、场景盲区、数据盲区3个维度中的2个\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -114,6 +79,17 @@ AI有系统性的盲区，专家知道在哪些维度上主动补盲。
 |---------|---------|---------|---------|
 | BS_XXX_001 | 时序依赖 | [标题] | REQ-XXXX |
 ```
+
+## 加载时机
+
+**需要时才读，不要一上来全读**：
+
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 知道有六大盲区，但不清楚每类具体漏什么 | [`references/blindspot-details.md`](references/blindspot-details.md)（六类盲区的详细判据与示例） |
+
+
+---
 
 ## 补盲工作流
 

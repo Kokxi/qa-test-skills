@@ -1,54 +1,21 @@
 ---
 name: qa-test-estimation
-slug: qa-test-estimation
-displayName: 测试估算
-version: 1.7.7
 description: >-
-  当项目经理问"这个版本多久测完"或者需要给测试排期做资源规划时使用此技能。基于需求复杂度、变更范围和历史数据系统化估算测试人天，输出包含冒烟/功能/回归/专项的逐阶段预估。不要拍脑袋——估算必须有依据（复杂度分级 + 历史基线 + 风险系数），同时标注置信度区间和风险预留。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: 用户说"工作量估算"、"测试时间"、"排期"、"资源规划"、"估算工时"、"人天"、"工期"、"多久测完"、需要估算测试工作量、项目计划阶段需要测试工时评估时
+  当项目经理问"这个版本多久测完"或者需要给测试排期做资源规划时使用此技能。基于需求复杂度、变更范围和历史数据系统化估算测试人天，输出包含冒烟/功能/回归/专项的逐阶段预估。不要拍脑袋——估算必须有依据（复杂度分级 + 历史基线 + 风险系数），同时标注置信度区间和风险预留。 触发场景：工作量估算、测试时间、排期、资源规划、估算工时、人天、工期、多久测完、项目计划阶段需要测试工时评估时。 Use when the user asks about: estimating test effort in person-days with complexity grading, historical baselines, risk coefficients, and confidence ranges.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-req-deconstruction      # 输入：需求分析确定范围
-    - qa-risk-intuition          # 输入：风险评估确定优先级
-  downstream:
-    - qa-test-strategy-design    # 输出：估算结果用于策略制定
-    - qa-release-risk-governance # 输出：估算结果用于发布计划
-input_format:
-  required:
-    - name: 需求范围
-      type: string
-      description: 测试需求的规模和复杂度
-    - name: 测试策略
-      type: object
-      description: 来自qa-test-strategy-design的测试策略
-  optional:
-    - name: 历史数据
-      type: object
-      description: 历史估算和实际工时数据
-    - name: 团队产能
-      type: string
-      description: 团队测试产能信息
-output_format:
-  traceability:
-    - 每份估算带唯一ID（EST-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - estimation_result: 工作量估算结果
-    - breakdown: 工作分解结构
-    - risk_buffer: 风险缓冲建议
-    - confidence_level: 置信度评估
-categories: ['Development','Testing']
-depth_requirement_quantification:
-  reference_value: "根据项目规模调整估算深度：简单×1/中等×2/复杂×3"
-  minimum: "至少分解到功能模块级工作量"
-error_recovery_guidance:
-  on_failure: "估算遗漏关键模块时回退到需求解构补充范围"
-  retry_behavior: "补全范围后重新估算"
+metadata:
+  slug: "qa-test-estimation"
+  display-name: "测试估算"
+  version: "1.8.0"
+  when-to-use: "用户说\"工作量估算\"、\"测试时间\"、\"排期\"、\"资源规划\"、\"估算工时\"、\"人天\"、\"工期\"、\"多久测完\"、需要估算测试工作量、项目计划阶段需要测试工时评估时"
+  related-skills: "{\"upstream\":[\"qa-req-deconstruction\",\"qa-risk-intuition\"],\"downstream\":[\"qa-test-strategy-design\",\"qa-release-risk-governance\"]}"
+  references: "[\"references/estimation-methods.md\"]"
+  input-format: "{\"required\":[{\"name\":\"需求范围\",\"type\":\"string\",\"description\":\"测试需求的规模和复杂度\"},{\"name\":\"测试策略\",\"type\":\"object\",\"description\":\"来自qa-test-strategy-design的测试策略\"}],\"optional\":[{\"name\":\"历史数据\",\"type\":\"object\",\"description\":\"历史估算和实际工时数据\"},{\"name\":\"团队产能\",\"type\":\"string\",\"description\":\"团队测试产能信息\"}]}"
+  output-format: "{\"traceability\":[\"每份估算带唯一ID（EST-XXXX）\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"estimation_result\":\"工作量估算结果\"},{\"breakdown\":\"工作分解结构\"},{\"risk_buffer\":\"风险缓冲建议\"},{\"confidence_level\":\"置信度评估\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"估算遗漏关键模块时回退到需求解构补充范围\",\"retry_behavior\":\"补全范围后重新估算\"}"
+  categories: "[\"Development\",\"Testing\"]"
+  depth-requirement: "{\"reference_value\":\"根据项目规模调整估算深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少分解到功能模块级工作量\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -62,110 +29,13 @@ error_recovery_guidance:
 
 估算不是猜测，而是基于数据和经验的科学推断。
 
-## 估算方法
+## 加载时机
 
-### 1. 功能点法
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 做估算或查复杂度分级依据时，取对应方法 | [`references/estimation-methods.md`](references/estimation-methods.md) |
 
-**原理**：基于功能点数量估算
-
-**步骤**：
-1. 识别功能点
-2. 评估复杂度（简单/中等/复杂）
-3. 给每个功能点赋予权重
-4. 计算总工作量
-
-**功能点权重**：
-- 简单功能：1人时/功能点
-- 中等功能：2人时/功能点
-- 复杂功能：4人时/功能点
-
-**示例**：
-
-| 功能点 | 数量 | 复杂度 | 权重 | 工作量 |
-|--------|------|--------|------|--------|
-| 用户注册 | 1 | 中等 | 2 | 2人时 |
-| 用户登录 | 1 | 简单 | 1 | 1人时 |
-| 订单创建 | 1 | 复杂 | 4 | 4人时 |
-| 订单查询 | 1 | 中等 | 2 | 2人时 |
-| 合计 | 4 | - | - | 9人时 |
-
-### 2. 用例法
-
-```text
-原理：基于用例数量估算
-
-步骤：
-1. 评估用例总数
-2. 评估用例类型比例
-3. 计算各类用例执行时间
-4. 汇总总工作量
-
-用例执行时间：
-├─ 冒烟用例：5分钟/条
-├─ 功能用例：10分钟/条
-├─ 边界用例：15分钟/条
-├─ 异常用例：20分钟/条
-└─ 探索用例：30分钟/条
-
-示例：
-| 用例类型 | 数量 | 单耗 | 工作量 |
-|---------|------|------|--------|
-| 冒烟用例 | 20条 | 5分钟 | 100分钟 |
-| 功能用例 | 100条 | 10分钟 | 1000分钟 |
-| 边界用例 | 50条 | 15分钟 | 750分钟 |
-| 异常用例 | 30条 | 20分钟 | 600分钟 |
-| 合计 | 200条 | - | 2450分钟≈41人时 |
-```
-
-### 3. 类比法
-
-```text
-原理：基于历史项目类比
-
-步骤：
-1. 寻找相似历史项目
-2. 提取历史数据
-3. 调整差异因素
-4. 得出估算结果
-
-历史数据：
-├─ 项目类型：[类型]
-├─ 功能规模：[功能点数]
-├─ 历史工时：[实际工时]
-└─ 调整系数：[差异调整]
-
-示例：
-| 历史项目 | 功能点 | 实际工时 | 本次项目 | 调整后工时 |
-|---------|--------|---------|---------|-----------|
-| 项目A | 100 | 80人时 | 120 | 96人时 |
-| 项目B | 80 | 60人时 | 120 | 90人时 |
-| 平均 | - | - | - | 93人时 |
-```
-
-### 4. 三点估算法
-
-```text
-原理：基于乐观/悲观/最可能估算
-
-公式：
-期望值 = (乐观 + 4×最可能 + 悲观) / 6
-标准差 = (悲观 - 乐观) / 6
-
-步骤：
-1. 估算乐观值（最好情况）
-2. 估算最可能值（正常情况）
-3. 估算悲观值（最坏情况）
-4. 计算期望值和标准差
-
-示例：
-| 任务 | 乐观 | 最可能 | 悲观 | 期望值 | 标准差 |
-|------|------|--------|------|--------|--------|
-| 需求分析 | 4 | 6 | 10 | 6.3 | 1.0 |
-| 用例设计 | 8 | 12 | 20 | 12.7 | 2.0 |
-| 测试执行 | 16 | 24 | 40 | 25.3 | 4.0 |
-| 回归测试 | 8 | 12 | 20 | 12.7 | 2.0 |
-| 合计 | 36 | 54 | 90 | 57.0 | 9.0 |
-```
+> `估算方法`的完整内容已下沉至 `references/estimation-methods.md`，避免每次触发都占用上下文。
 
 ## 工作量分解
 

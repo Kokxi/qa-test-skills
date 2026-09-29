@@ -1,50 +1,21 @@
 ---
 name: qa-stakeholder-communication
-slug: qa-stakeholder-communication
-displayName: 测试干系人沟通
-version: 1.7.7
 description: >-
-  当需要告诉开发"这个 Bug 必须修"、跟产品经理沟通需求变更的影响、或者向管理层汇报质量风险时使用此技能。不同角色关注的事情不同——开发要的是复现步骤和定位信息，产品要的是影响范围和优先级建议，管理层要的是风险判断和决策依据。此技能提供针对开发/产品/管理层的沟通模板和策略。产出根据不同角色定制的沟通话术和汇报材料模板。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: 用户说"怎么沟通"、"跟开发说"、"跟PM说"、"跟领导说"、"沟通策略"、"向上汇报"、"干系人沟通"、需要与不同角色沟通、推动问题解决需要有效沟通时
+  当需要告诉开发"这个 Bug 必须修"、跟产品经理沟通需求变更的影响、或者向管理层汇报质量风险时使用此技能。不同角色关注的事情不同——开发要的是复现步骤和定位信息，产品要的是影响范围和优先级建议，管理层要的是风险判断和决策依据。此技能提供针对开发/产品/管理层的沟通模板和策略。产出根据不同角色定制的沟通话术和汇报材料模板。 触发场景：怎么沟通、跟开发说、跟PM说、跟领导说、沟通策略、向上汇报、干系人沟通、推动问题解决需要有效沟通时。 Use when the user asks about: communicating test findings to engineers, product managers, and management using role-tailored templates and escalation strategy.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-bug-reporting           # 输入：Bug报告
-    - qa-release-risk-governance # 输入：发布风险评估
-    - qa-quality-metrics         # 输入：质量度量数据
-  downstream: []  # 输出用于沟通
-input_format:
-  required:
-    - name: 测试报告
-      type: object
-      description: 来自qa-test-reporting的测试报告
-    - name: 受众分析
-      type: string
-      description: 报告接收方的角色和信息需求
-  optional:
-    - name: 沟通渠道
-      type: string
-      description: 可用的沟通渠道和频率
-output_format:
-  traceability:
-    - 每份沟通策略带唯一ID（COMM-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - communication_plan: 沟通计划
-    - tailored_report: 定制化报告
-    - key_metrics: 关键指标呈现
-    - risk_highlight: 风险提示
-categories: ['Development','Team']
-depth_requirement_quantification:
-  reference_value: "根据沟通场景调整策略深度：简单×1/中等×2/复杂×3"
-  minimum: "至少覆盖开发、PM、领导3类角色的沟通策略"
-error_recovery_guidance:
-  on_failure: "沟通策略未能推动问题解决时回退到问题定位补充"
-  retry_behavior: "补充定位后重新设计沟通策略"
+metadata:
+  slug: "qa-stakeholder-communication"
+  display-name: "测试干系人沟通"
+  version: "1.8.0"
+  when-to-use: "用户说\"怎么沟通\"、\"跟开发说\"、\"跟PM说\"、\"跟领导说\"、\"沟通策略\"、\"向上汇报\"、\"干系人沟通\"、需要与不同角色沟通、推动问题解决需要有效沟通时"
+  related-skills: "{\"upstream\":[\"qa-bug-reporting\",\"qa-release-risk-governance\",\"qa-quality-metrics\"],\"downstream\":[]}"
+  references: "[\"references/comms-patterns.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试报告\",\"type\":\"object\",\"description\":\"来自qa-test-reporting的测试报告\"},{\"name\":\"受众分析\",\"type\":\"string\",\"description\":\"报告接收方的角色和信息需求\"}],\"optional\":[{\"name\":\"沟通渠道\",\"type\":\"string\",\"description\":\"可用的沟通渠道和频率\"}]}"
+  output-format: "{\"traceability\":[\"每份沟通策略带唯一ID（COMM-XXXX）\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"communication_plan\":\"沟通计划\"},{\"tailored_report\":\"定制化报告\"},{\"key_metrics\":\"关键指标呈现\"},{\"risk_highlight\":\"风险提示\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"沟通策略未能推动问题解决时回退到问题定位补充\",\"retry_behavior\":\"补充定位后重新设计沟通策略\"}"
+  categories: "[\"Development\",\"Team\"]"
+  depth-requirement: "{\"reference_value\":\"根据沟通场景调整策略深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少覆盖开发、PM、领导3类角色的沟通策略\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -58,67 +29,13 @@ error_recovery_guidance:
 
 同样一个Bug，跟不同人说完全不同的表述方式——说对方关心的，而不是你关心的。
 
-## 三类沟通模式
+## 加载时机
 
-### 模式1：跟开发说（技术视角）
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 按受众选沟通话术时 | [`references/comms-patterns.md`](references/comms-patterns.md) |
 
-```text
-沟通重点：
-├─ 精确的复现步骤：每一步操作
-├─ 日志/截图：错误信息、异常堆栈
-├─ 根因推测：可能的原因
-├─ 环境信息：浏览器、系统、配置
-└─ 影响范围：哪些功能受影响
-
-沟通格式：
-[Bug标题] [严重程度]
-复现步骤：
-1. ...
-2. ...
-3. ...
-错误日志：[日志内容]
-截图：[截图描述]
-推测原因：[原因分析]
-影响范围：[影响描述]
-```
-
-### 模式2：跟PM说（业务视角）
-
-```text
-沟通重点：
-├─ 用户影响：哪些用户受影响
-├─ 严重程度：业务影响多大
-├─ 修复优先级：建议优先级
-├─ 对其他功能的阻塞
-└─ 预计修复时间
-
-沟通格式：
-[Bug标题]
-影响：[用户范围]
-严重程度：[业务影响]
-优先级：[P0-P3]
-阻塞：[是否阻塞其他功能]
-预计修复：[时间估算]
-```
-
-### 模式3：跟老板说（决策视角）
-
-```text
-沟通重点：
-├─ 业务影响：对业务的影响
-├─ 发布风险：是否影响发布
-├─ 建议决策：建议怎么做
-├─ 要什么资源：需要什么支持
-└─ 时间节点：什么时候能解决
-
-沟通格式：
-[问题描述]
-业务影响：[影响描述]
-发布风险：[风险评估]
-建议决策：[建议方案]
-资源需求：[需要什么]
-时间节点：[时间计划]
-```
+> `三类沟通模式`的完整内容已下沉至 `references/comms-patterns.md`，避免每次触发都占用上下文。
 
 ## 高危表达对比
 

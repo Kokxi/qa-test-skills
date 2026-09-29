@@ -1,6 +1,6 @@
 # 深度量化基准来源说明
 
-> 本文档说明各 skill 元数据中 `depth_requirement_quantification.reference_value` 的乘数基准（简单×N / 中等×N / 复杂×N）来源，让 AI 执行时能判断该按哪个乘数生成，也让新人理解乘数背后的逻辑。
+> 本文档说明各 skill 元数据中 `metadata.depth-requirement` 的 reference_value 乘数基准（简单×N / 中等×N / 复杂×N）来源，让 AI 执行时能判断该按哪个乘数生成，也让新人理解乘数背后的逻辑。
 
 ## 一、为什么需要深度量化基准
 

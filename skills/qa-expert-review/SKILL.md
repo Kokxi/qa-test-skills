@@ -1,56 +1,21 @@
 ---
 name: qa-expert-review
-slug: qa-expert-review
-displayName: 测试专家评审
-version: 1.7.7
 description: >-
-  当 AI 生成的测试用例已经过输出评审和盲区补盲、准备终审上线时使用此技能。由资深测试对 AI 输出的用例做人工抽样校验，从业务有效性、场景完整性、可执行性三个维度做最后把关。⚠️ 如果发现系统性问题（比如遗漏了某个关键模块），需要回退修正并记录到 Prompt 优化反馈库。专家评审不是走形式——发现的问题必须闭环。
-  本技能属于 QA Test Skills 技能集（49 个技能之一），完整工作流体验需安装全套：npx skills add Kokxi/qa-test-skills
-
-when_to_use: 用户说"专家评审"、"用例审查"、"校正反馈"、"评审用例"、"检查用例"、"终审"、需要对AI输出进行质量把关、用例上线前需要终审时
+  当 AI 生成的测试用例已经过输出评审和盲区补盲、准备终审上线时使用此技能。由资深测试对 AI 输出的用例做人工抽样校验，从业务有效性、场景完整性、可执行性三个维度做最后把关。⚠️ 如果发现系统性问题（比如遗漏了某个关键模块），需要回退修正并记录到 Prompt 优化反馈库。专家评审不是走形式——发现的问题必须闭环。 触发场景：专家评审、用例审查、校正反馈、评审用例、检查用例、终审、用例上线前需要终审时。 Use when the user asks about: final human-style review of AI-generated test cases before shipping, sampling for business validity, scenario completeness, and executability.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-ai-output-critique      # 输入：AI生成的测试用例
-    - qa-ai-blindspot-compensation # 输入：补盲后的测试用例
-  downstream:
-    - qa-test-reporting          # 输出：评审报告
-    - qa-retrospective           # 输出：校正数据用于复盘
-input_format:
-  required:
-    - name: 测试用例
-      type: array
-      description: AI生成的测试用例列表
-  optional:
-    - name: 需求文档
-      type: string
-      description: 原始需求文档，用于校验覆盖度
-    - name: 历史校正数据
-      type: array
-      description: 历史评审的校正记录，用于模式分析
-output_format:
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - review_id: "REV-XXXX"
-    - review_summary: "评审摘要"
-    - sampling_rate: "抽样比例"
-    - issues_found: "问题列表"
-    - corrections: "校正建议"
-    - learning_points: "学习要点"
-    - prompt_optimization: "Prompt优化建议"
-  traceability:
-    - 每次评审带唯一ID（REV-XXXX）
-    - 关联用例ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）
-    - 关联需求ID（TC_{需求模块缩写}_{功能缩写}_{序号}）
-depth_requirement_quantification:
-  reference_value: "根据项目重要性和风险等级调整评审深度：简单x1/中等x2/复杂x3"
-  minimum: "至少覆盖功能完整性、边界充分性、异常覆盖性3个维度"
-categories: ['Development','Testing','Quality']
-error_recovery_guidance:
-  on_failure: "评审发现系统性问题时回退到输出评审步骤修正"
-  retry_behavior: "修正后重新抽样校验"
+metadata:
+  slug: "qa-expert-review"
+  display-name: "测试专家评审"
+  version: "1.8.0"
+  when-to-use: "用户说\"专家评审\"、\"用例审查\"、\"校正反馈\"、\"评审用例\"、\"检查用例\"、\"终审\"、需要对AI输出进行质量把关、用例上线前需要终审时"
+  related-skills: "{\"upstream\":[\"qa-ai-output-critique\",\"qa-ai-blindspot-compensation\"],\"downstream\":[\"qa-test-reporting\",\"qa-retrospective\"]}"
+  references: "[\"references/meta-learning.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试用例\",\"type\":\"array\",\"description\":\"AI生成的测试用例列表\"}],\"optional\":[{\"name\":\"需求文档\",\"type\":\"string\",\"description\":\"原始需求文档，用于校验覆盖度\"},{\"name\":\"历史校正数据\",\"type\":\"array\",\"description\":\"历史评审的校正记录，用于模式分析\"}]}"
+  output-format: "{\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"review_id\":\"REV-XXXX\"},{\"review_summary\":\"评审摘要\"},{\"sampling_rate\":\"抽样比例\"},{\"issues_found\":\"问题列表\"},{\"corrections\":\"校正建议\"},{\"learning_points\":\"学习要点\"},{\"prompt_optimization\":\"Prompt优化建议\"}],\"traceability\":[\"每次评审带唯一ID（REV-XXXX）\",\"关联用例ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）\",\"关联需求ID：REQ-{需求模块缩写}-{序号}\"]}"
+  error-recovery-guidance: "{\"on_failure\":\"评审发现系统性问题时回退到输出评审步骤修正\",\"retry_behavior\":\"修正后重新抽样校验\"}"
+  categories: "[\"Development\",\"Testing\",\"Quality\"]"
+  depth-requirement: "{\"reference_value\":\"根据项目重要性和风险等级调整评审深度：简单x1/中等x2/复杂x3\",\"minimum\":\"至少覆盖功能完整性、边界充分性、异常覆盖性3个维度\"}"
 ---
 > ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
@@ -166,69 +131,13 @@ error_recovery_guidance:
 | REDUNDANT | 完全重复且P0 | 场景重叠 | 边界略有重叠 |
 | FORMAT | 完全无格式 | 部分字段缺失 | 格式可微调 |
 
-## 元学习机制
+## 加载时机
 
-### 校正数据收集
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 把评审反馈沉淀为可复用资产时 | [`references/meta-learning.md`](references/meta-learning.md) |
 
-```text
-收集内容：
-├─ 问题类型分布
-├─ 高频问题模式
-├─ 专家校正建议
-├─ 用例质量趋势
-└─ 改进效果跟踪
-
-存储格式：
-{
-  "review_id": "REV-001",
-  "date": "2024-01-01",
-  "issues": [
-    {
-      "type": "MISSING",
-      "count": 5,
-      "pattern": "缺少并发场景",
-      "correction": "补充并发测试"
-    }
-  ],
-  "learning_points": [...]
-}
-```
-
-### 模式识别
-
-```text
-识别方法：
-├─ 问题聚类：识别相似问题
-├─ 趋势分析：问题数量变化
-├─ 根因分析：为什么会出现这个问题
-└─ 改进验证：改进措施是否有效
-
-输出：
-├─ 高频问题TOP5
-├─ 问题趋势图
-├─ 改进建议
-└─ 效果评估
-```
-
-### Prompt优化
-
-```text
-优化流程：
-1. 分析校正数据
-2. 识别Prompt不足
-3. 生成优化建议
-4. 测试优化效果
-5. 持续迭代
-
-优化示例：
-原Prompt："生成登录模块的测试用例"
-优化后："生成登录模块的测试用例，需覆盖：
-1. 正常登录流程
-2. 异常场景（密码错误、账号锁定）
-3. 边界条件（密码长度、特殊字符）
-4. 并发场景（多设备同时登录）
-5. 安全场景（SQL注入、XSS）"
-```
+> `元学习机制`的完整内容已下沉至 `references/meta-learning.md`，避免每次触发都占用上下文。
 
 ## 应用场景
 
