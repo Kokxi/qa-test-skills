@@ -4,9 +4,161 @@
 
 | 脚本 | 用途 | 用法 |
 |------|------|------|
-| `validate_deps.py` | 验证所有 48 个子 Skill 的依赖引用完整性 | `python scripts/validate_deps.py` |
-| `grade_evals.py` | 根据 evals.json 中的结构化 assertions 评估输出 | `python scripts/grade_evals.py <workspace/iteration-N>` |
+| `check_spec_compliance.py` | **Agent Skills 规范门禁**（顶层字段白名单 / description≤1024 / 500 行 / 引用不出技能根 / 官方 `skills-ref validate`） | `python scripts/check_spec_compliance.py` |
+| `integrity_check.py` | 内容与一致性检查（15 项）。`--json` 输出机器可读结果，供自测消费 | `python scripts/integrity_check.py [--json]` |
+| `gate_selftest.py` | **门禁自测**：对 15 项检查逐项验证「该报的报、不该报的不报」 | `python scripts/gate_selftest.py [--check N] [-v] [--keep]` |
+| `migrate_frontmatter.py` | frontmatter 规范迁移（历史脚本，重跑为幂等空操作） | `python scripts/migrate_frontmatter.py --check` |
+| `validate_testcase_table.py` | 9 列标准用例表校验（列数/编号唯一性/P0-P3 占比/覆盖率口径） | `python scripts/validate_testcase_table.py <用例文件>` |
+| `validate_deps.py` | 依赖引用图校验（upstream/downstream 对称 + 无悬空 + 无孤立） | `python scripts/validate_deps.py` |
+| `validate_standards.py` | 全局标准一致性 | `python scripts/validate_standards.py` |
+| `check_security_audit.py` | ClawHub security audit 本地预检 | `python scripts/check_security_audit.py [技能名]` |
+| `stage_for_clawhub.py` | ClawHub 发布暂存：复制技能目录并剥掉 `metadata.slug`（SkillHub 独有字段） | `python scripts/stage_for_clawhub.py --all` |
+| `grade_evals.py` | 按 evals.json 的结构化 assertions 评估输出 | `python scripts/grade_evals.py <workspace/iteration-N>` |
 | `aggregate_benchmark.py` | 聚合 grading 结果生成 benchmark.json | `python scripts/aggregate_benchmark.py <workspace/iteration-N> --skill-name <name>` |
+| `skillmeta.py` | 读取 SKILL.md 元数据的唯一入口（被上述脚本复用） | `python scripts/skillmeta.py qa-api-testing` |
+
+## 规范合规
+
+```bash
+pip install skills-ref          # 官方参考实现
+python scripts/check_spec_compliance.py
+```
+
+检查：
+- frontmatter 顶层字段是否只含 `name` / `description` / `license` / `compatibility` / `metadata` / `allowed-tools`
+- `metadata` 是否为 string → string 映射
+- `description` ≤ 1024 字符、`compatibility` ≤ 500 字符
+- `name` 是否与目录名一致且符合命名规范
+- `SKILL.md` 是否 ≤ 500 行（规范建议）
+- 正文链接是否越出技能根目录或指向不存在的文件
+- 官方 `skills-ref validate` 逐技能结果（未安装时自动跳过并提示）
+
+> 历史教训：`integrity_check.py` 曾长期"0 硬问题"，但官方 validator 对 49 个技能全判失败。
+> 根因是自定义 frontmatter 字段不在规范白名单内，且 `categories: ['a','b']` 属于
+> flow-style 序列（官方 loader 判非法）。**两道门禁必须并存**：规范层零容忍，内容层可分期收敛。
+
+## 门禁自测（改门禁必跑）
+
+```bash
+python scripts/run_qa.py selftest            # 或 python scripts/gate_selftest.py
+python scripts/gate_selftest.py --check 14   # 只跑某一项
+python scripts/gate_selftest.py -v           # 失败时打印 frontmatter 键位与 skillmeta 读到的原始值
+python scripts/gate_selftest.py --keep       # 保留临时工作区供手工检查
+```
+
+**为什么需要它**：门禁的价值全在正则准不准。太松 → 缺陷漏过（46 个技能声明「固定 9 列
+用例表」、其中 41 个根本不产用例表，就是这么活下来的）；太严 → 噪音淹没真问题（检查项 13
+初版误报 29 条）。但只看「当前仓库是否通过」**无法区分这两种情况**——它同时也是
+「检查本身坏了」的表现。
+
+所以每项检查都要有两类用例：
+
+| 方向 | 含义 | 数量 |
+|------|------|------|
+| `BASE` | 干净仓库硬问题必须为 0 | 1 |
+| `INJECT` | 注入一个已知违规 → **必须报**（防漏） | 19 |
+| `LEGAL` | 放一个形似但合规的内容 → **必须不报**（防误报） | 7 |
+
+耗时约 95 秒（要跑 27 次完整检查），适合发布前 / CI，**不适合每次编辑都跑**。
+
+**已经靠它抓出来的真缺陷**（都是门禁本身太严，不是内容问题）：
+
+- 检查项 7 只认「检查/自检清单」，漏掉入口技能在用的 `## 验收清单` → 长期误报 1 项
+- 检查项 14 只认 `（REQ-` 括号形式，漏掉仓库实际在用的 `：REQ-` 冒号形式
+  → 写成 `关联需求ID：TC_XXX` 能绕过检测
+
+**踩过的坑（写自测用例时）**：
+
+- YAML 双引号标量里注入引号必须转义，否则 YAML 解析失败、症状变成「另一项检查报错」
+- `list.insert()` / `dict.update()` 返回 `None`，用它当变换函数的返回值会把字段写成 `"null"`
+- 改写 `metadata` 下的键必须**保留缩进**，否则变成顶层字段，被判成非规范字段
+- `skillmeta.split_doc` 在 `yaml.safe_load` 失败时会**静默回退**到扁平正则，
+  此时 `metadata` 变成 `{}`，所有键都读不到——看到这个症状先怀疑 YAML 解析
+
+## 发布
+
+| 渠道 | 脚本 | frontmatter 处理 |
+|------|------|-----------------|
+| SkillHub | `scripts/push-skillhub.bat [版本] [延迟]` | 暂存副本补**顶层 `displayName`** |
+| ClawHub | `scripts/push-clawhub.bat [版本] [延迟]` | 暂存副本剥掉 `metadata.slug` |
+| 两者 | `publish-all.bat [版本]` | 依次调上面两个 |
+
+```bash
+# 推之前先单独验证暂存，不碰任何源文件
+python scripts/stage_for_publish.py --all --platform skillhub
+python scripts/stage_for_publish.py --all --platform clawhub
+```
+
+### 为什么需要暂存：两个平台的要求与规范形态都冲突
+
+仓库里的 SKILL.md 是**规范形态**（顶层只允许
+name / description / license / compatibility / metadata / allowed-tools），
+但两个平台的 CLI 各有各的前置要求：
+
+| 平台 | 要求 | 冲突点 |
+|------|------|--------|
+| SkillHub | 读得到 `slug` / `version` / `displayName` | 键名是 `display-name`（连字符），CLI 只认 `displayName` |
+| ClawHub | 不认 `metadata.slug` | slug 是 SkillHub 独有字段 |
+
+SkillHub CLI 的 frontmatter 解析器**不认缩进**（`key.strip()`），所以嵌套的
+`slug` / `version` 能读到；唯独 `displayName` 找不到——只有这一个键会失败。
+暂存副本补一个顶层 `displayName` 即可，**源文件保持规范形态不变**。
+
+选暂存而不是维护双分支，是因为两个分支会随每次改动漂移。
+`.publish-staging/` 是构建产物，已在 `.gitignore`。
+
+> `push-clawhub.bat` 里的 `--slug` 参数是 **ClawHub CLI 的目标名**，
+> 和被剥掉的 metadata 字段是两回事，脚本里已加注释区分。
+
+> 三个发布脚本的**默认版本**必须与入口技能 `metadata.version` 一致，
+> 否则不带参数运行会把已发布版本覆盖成更低的版本号。
+> `integrity_check.py` 检查项 12 会校验（含注释里的版本号）。
+
+## ⚠️ 改 .bat 的三个硬约束
+
+`.bat` 和仓库里其他文件不一样，**用普通编辑工具改会静默改坏**。这三个坑本项目全踩过：
+
+**1. 编码必须是 GBK，不能是 UTF-8**
+
+`cmd.exe` 在中文 Windows 上按系统 ANSI 码页（GBK/936）读 `.bat`。
+文件是 UTF-8 时中文注释的字节被当 GBK 解释，**症状是报
+「'xxx' 不是内部或外部命令」**——且指向的位置看起来毫不相干，极难定位。
+
+**2. 行尾必须是 CRLF，不能是 LF**
+
+行尾是 LF 时，`if ... ( ... ) else ( ... )` 这类多行括号块会被拆成独立命令
+执行，症状同样是「不是内部或外部命令」。
+
+**3. `for /f ('...')` 里不能出现双引号**
+
+```bat
+REM   ❌ 错：cmd 在引号处截断命令，把路径当成独立命令
+for /f "delims=" %%P in ('python tool.py --out "%STAGE%"') do set "DIR=%%P"
+REM   ✅ 对：路径不含空格时直接不加引号
+for /f "delims=" %%P in ('python tool.py --out %STAGE%') do set "DIR=%%P"
+```
+
+另外 `set "DIR="` 必须在 `for` 循环**之前**：批处理读到某行时就展开了该行的
+`%DIR%`，循环之后再清空会把刚拿到的路径抹掉。
+
+**4. 调 Python CLI 前要设 `PYTHONIOENCODING=utf-8`**
+
+SkillHub CLI 发布成功后要打印 `✓ Published: skillId=...`。控制台是 GBK 时，
+Python 抛 `UnicodeEncodeError: 'gbk' codec can't encode character '\u2713'`，
+进程以非 0 退出——**发布其实成功了，批处理却记成 FAILED**。
+
+这个误报很隐蔽：35 个技能全进失败清单，日志里却看不到真正的错误。
+`push-skillhub.bat` 开头已设 `set "PYTHONIOENCODING=utf-8"`。
+
+> 判断发布是否真的失败，看 SkillHub 后台或 `auth whoami` 后的技能列表，
+> 不要只看 `push-skillhub-failed.txt`——它可能整份都是编码误报。
+
+`integrity_check.py` 检查项 12 会校验 `.bat` 的编码与行尾，`gate_selftest.py`
+有对应的注入用例。改完 `.bat` 请跑：
+
+```bash
+python scripts/gate_selftest.py --check 12
+```
 
 ## 依赖引用验证
 
@@ -15,10 +167,23 @@ python scripts/validate_deps.py
 ```
 
 检查：
-- `related_skills` 中引用的技能是否都存在
-- `upstream/downstream` 引用的技能是否都存在
+- `metadata.related-skills` 中引用的技能是否都存在
+- `upstream/downstream` 引用的技能是否都存在（规范形态，JSON 字符串）
 - 孤立技能（没有被任何其他技能引用的技能）
 - 依赖不对称（A 声明 upstream=B，但 B 的 downstream 不含 A）
+- 入口工作流 `all_skills` 是否收录全部子技能
+
+## 用例表校验
+
+```bash
+python scripts/validate_testcase_table.py test-output/测试用例.md
+python scripts/validate_testcase_table.py <文件> --no-quota   # 小规模集跳过 P0-P3 占比
+python scripts/validate_testcase_table.py <文件> --json
+```
+
+校验 9 列齐全、用例编号唯一且符合 `TC_{模块}_{功能}_{序号}`、P0-P3 占比上限、
+覆盖率口径措辞、绝对化措辞禁令。小规模用例集数学上无法满足 P0≤20% 等配额，
+用 `--no-quota` 跳过并在报告中说明口径。
 
 ## Eval 分级
 
@@ -44,4 +209,7 @@ python scripts/aggregate_benchmark.py workspace/iteration-1 --skill-name "qa-tes
 ## 注意事项
 
 - 所有路径使用 `pathlib.Path` 计算，兼容 Windows/Linux/macOS
+- 读取 SKILL.md 元数据统一走 `skillmeta.py`，不要在脚本里另写一套 frontmatter 正则
+- **改 `integrity_check.py` 的检查逻辑后必须跑 `gate_selftest.py`**，并为改动的检查补上
+  INJECT/LEGAL 用例——只验证「当前仓库仍然通过」证明不了检查是对的
 - 工作台目录结构：`workspace/iteration-N/eval-ID/{with_skill,without_skill}/outputs/`

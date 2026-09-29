@@ -1,51 +1,24 @@
 ---
 name: qa-test-data-engineering
-slug: qa-test-data-engineering
-displayName: Test Data Engineering
-version: 1.7.7
 description: >-
-  当需要批量构造测试数据（造 1000 条订单、准备各种状态的用户数据）、或者需要使用真实生产数据但需要脱敏时使用此技能。覆盖造数策略（API 造数/DB 直接构造/数据工厂）、脱敏方案（敏感字段识别/替换/掩码）、合规要求（GDPR/等保/个保法）和数据工厂架构设计。手工一条条造数据效率太低——测试数据工程的目标是让造数变成一键操作。
-
-when_to_use: 用户说"造数"、"批量造数"、"数据构造"、"测试数据脱敏"、"测试数据合规"、"数据工厂"、"造1000条"、"造大量数据"、需要管理测试数据、环境数据不足需要批量构造时
+  当需要批量构造测试数据（造 1000 条订单、准备各种状态的用户数据）、或者需要使用真实生产数据但需要脱敏时使用此技能。覆盖造数策略（API 造数/DB 直接构造/数据工厂）、脱敏方案（敏感字段识别/替换/掩码）、合规要求（GDPR/等保/个保法）和数据工厂架构设计。手工一条条造数据效率太低——测试数据工程的目标是让造数变成一键操作。 触发场景：造数、批量造数、数据构造、测试数据脱敏、测试数据合规、数据工厂、造1000条、造大量数据、环境数据不足需要批量构造时。 Use when the user asks about: bulk test data generation, production data masking and anonymization, data compliance, and data factory architecture.
+license: MIT
 allowed-tools: Read Grep Glob Bash
-related_skills:
-  upstream:
-    - qa-test-env-data           # 输入：环境和数据管理策略
-    - qa-req-deconstruction      # 输入：需求分析确定数据需求
-  downstream:
-    - qa-execution-observation   # 输出：测试数据支持执行
-    - qa-api-testing             # 输出：数据构造用于接口测试
-input_format:
-  required:
-    - name: 测试策略
-      type: object
-      description: 来自qa-test-strategy-design的测试策略
-    - name: 数据需求
-      type: string
-      description: 测试数据的类型和规模需求
-  optional:
-    - name: 数据源信息
-      type: string
-      description: 可用数据源描述
-output_format:
-  traceability:
-    - 每套造数方案带唯一ID（DATA-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - data_strategy: 测试数据策略
-    - data_generation: 数据生成方案
-    - data_mask_rules: 数据脱敏规则
-    - data_management: 数据管理流程
-categories: ['Development','Testing','DevOps']
-depth_requirement_quantification:
-  reference_value: "根据数据需求调整造数深度：简单×1/中等×2/复杂×3"
-  minimum: "至少覆盖数据构造、脱敏、合规3个维度"
-error_recovery_guidance:
-  on_failure: "造数方案遗漏合规要求时回退到需求解构补充"
-  retry_behavior: "补充合规要求后重新设计造数方案"
+metadata:
+  slug: "qa-test-data-engineering"
+  display-name: "测试数据工程"
+  version: "1.8.0"
+  when-to-use: "用户说\"造数\"、\"批量造数\"、\"数据构造\"、\"测试数据脱敏\"、\"测试数据合规\"、\"数据工厂\"、\"造1000条\"、\"造大量数据\"、需要管理测试数据、环境数据不足需要批量构造时"
+  related-skills: "{\"upstream\":[\"qa-test-env-data\",\"qa-req-deconstruction\"],\"downstream\":[\"qa-execution-observation\",\"qa-api-testing\"]}"
+  references: "[\"references/data-masking.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试策略\",\"type\":\"object\",\"description\":\"来自qa-test-strategy-design的测试策略\"},{\"name\":\"数据需求\",\"type\":\"string\",\"description\":\"测试数据的类型和规模需求\"}],\"optional\":[{\"name\":\"数据源信息\",\"type\":\"string\",\"description\":\"可用数据源描述\"}]}"
+  output-format: "{\"traceability\":[\"每套造数方案带唯一ID（DATA-XXXX）\"],\"structure\":[{\"data_strategy\":\"测试数据策略\"},{\"data_generation\":\"数据生成方案\"},{\"data_mask_rules\":\"数据脱敏规则\"},{\"data_management\":\"数据管理流程\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"造数方案遗漏合规要求时回退到需求解构补充\",\"retry_behavior\":\"补充合规要求后重新设计造数方案\"}"
+  categories: "[\"Development\",\"Testing\",\"DevOps\"]"
+  depth-requirement: "{\"reference_value\":\"根据数据需求调整造数深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少覆盖数据构造、脱敏、合规3个维度\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # 测试数据工程
 
 ## 核心原则
@@ -114,71 +87,13 @@ def create_test_order(user_id, product_id, quantity=1):
     return response.json()["order_id"]
 ```
 
-## 数据脱敏
+## 加载时机
 
-> 📌 本节与 qa-test-env-data「数据脱敏」内容同步，修改时请同步更新两处。qa-test-env-data 为简化版，完整版见此处。
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 做脱敏规则与实现时 | [`references/data-masking.md`](references/data-masking.md) |
 
-### 脱敏规则
-
-```text
-个人信息：
-├─ 手机号：138****1234
-├─ 身份证：110***********1234
-├─ 邮箱：test****@example.com
-├─ 姓名：*三
-├─ 地址：北京市***
-└─ 银行卡：6222****1234
-
-业务数据：
-├─ 金额：保留整数位，小数随机
-├─ 订单号：保留格式，数字随机
-├─ 时间：保留格式，时间随机
-└─ 关联ID：保持关联关系
-```
-
-### 脱敏方法
-
-```text
-├─ 替换法：用*替换部分字符
-│   └─ 示例：138****1234
-│
-├─ 加密法：用加密算法处理
-│   └─ 示例：AES加密后存储
-│
-├─ 截断法：只保留部分字符
-│   └─ 示例：北京市***
-│
-├─ 随机法：用随机值替换
-│   └─ 示例：姓名随机生成
-│
-└─ 哈希法：用哈希值替换
-    └─ 示例：SHA256哈希
-```
-
-### 脱敏实现
-
-```python
-# 示例：Python脱敏函数
-import hashlib
-import random
-
-def mask_phone(phone):
-    """手机号脱敏：138****1234"""
-    return phone[:3] + "****" + phone[-4:]
-
-def mask_id_card(id_card):
-    """身份证脱敏：110***********1234"""
-    return id_card[:3] + "*" * 10 + id_card[-4:]
-
-def mask_name(name):
-    """姓名脱敏：*三"""
-    return "*" + name[-1]
-
-def mask_email(email):
-    """邮箱脱敏：test****@example.com"""
-    local, domain = email.split("@")
-    return local[:4] + "****@" + domain
-```
+> `数据脱敏`的完整内容已下沉至 `references/data-masking.md`，避免每次触发都占用上下文。
 
 ## 数据清理
 

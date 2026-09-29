@@ -1,50 +1,24 @@
 ---
 name: qa-state-transition
-slug: qa-state-transition
-displayName: State Transition
-version: 1.7.7
 description: >-
-  系统化测试状态机的合法转换、非法转换、边界转换和并发转换场景。当业务对象经历了多种状态（如订单：待支付→已支付→已发货→已完成）、或者需要验证状态变化时的数据一致性时，应当使用此技能。最容易遗漏的是非法转换（业务不允许的操作如"已完成→待支付"）和并发转换（同一订单同时被支付和取消）。每个状态转换需标注触发条件、前置状态、后置状态和验证点。
-
-when_to_use: 用户说"状态测试"、"状态转换"、"状态机"、"状态流转"、"状态变更"、"状态覆盖"、需要测试状态流转、业务对象有多状态流转时
+  系统化测试状态机的合法转换、非法转换、边界转换和并发转换场景。当业务对象经历了多种状态（如订单：待支付→已支付→已发货→已完成）、或者需要验证状态变化时的数据一致性时，应当使用此技能。最容易遗漏的是非法转换（业务不允许的操作如"已完成→待支付"）和并发转换（同一订单同时被支付和取消）。每个状态转换需标注触发条件、前置状态、后置状态和验证点。 触发场景：状态测试、状态转换、状态机、状态流转、状态变更、状态覆盖、业务对象有多状态流转时。 Use when the user asks about: state machine testing — legal, illegal, boundary, and concurrent state transitions, and data consistency across them.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-scenario-tree           # 输入：场景树
-  downstream:
-    - qa-ai-context-engineering  # 输出：状态转换图传递给上下文工程
-input_format:
-  required:
-    - name: 场景树
-      type: object
-      description: 来自qa-scenario-tree的场景树
-    - name: 需求解构表
-      type: object
-      description: 来自qa-req-deconstruction的需求解构结果
-  optional:
-    - name: 风险评估
-      type: object
-      description: 来自qa-risk-intuition的风险评估
-output_format:
-  traceability:
-    - 每个状态转换带唯一ID（ST-XXXX）
-    - 关联场景ID（TC_{场景模块缩写}_{功能缩写}_{序号}）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - state_diagram: 状态转换图
-    - valid_transitions: 合法转换列表
-    - invalid_transitions: 非法转换列表
-    - test_scenarios: 状态转换测试场景
-depth_requirement_quantification:
-  reference_value: "根据状态数量调整分析深度：简单×2/中等×3/复杂×4"
-  minimum: "至少识别5个关键状态转换"
-categories: ['Development','Testing']
-error_recovery_guidance:
-  on_failure: "状态转换遗漏异常路径时回退到场景树补充"
-  retry_behavior: "补全异常场景后重新分析状态转换"
+metadata:
+  slug: "qa-state-transition"
+  display-name: "状态转换测试"
+  version: "1.8.0"
+  when-to-use: "用户说\"状态测试\"、\"状态转换\"、\"状态机\"、\"状态流转\"、\"状态变更\"、\"状态覆盖\"、需要测试状态流转、业务对象有多状态流转时"
+  related-skills: "{\"upstream\":[\"qa-scenario-tree\"],\"downstream\":[\"qa-ai-context-engineering\"]}"
+  references: "[\"references/transition-cases.md\"]"
+  input-format: "{\"required\":[{\"name\":\"场景树\",\"type\":\"object\",\"description\":\"来自qa-scenario-tree的场景树\"},{\"name\":\"需求解构表\",\"type\":\"object\",\"description\":\"来自qa-req-deconstruction的需求解构结果\"}],\"optional\":[{\"name\":\"风险评估\",\"type\":\"object\",\"description\":\"来自qa-risk-intuition的风险评估\"}]}"
+  output-format: "{\"traceability\":[\"每个状态转换带唯一ID（ST-XXXX）\",\"关联场景ID：SC-{场景模块缩写}-{序号}\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"state_diagram\":\"状态转换图\"},{\"valid_transitions\":\"合法转换列表\"},{\"invalid_transitions\":\"非法转换列表\"},{\"test_scenarios\":\"状态转换测试场景\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"状态转换遗漏异常路径时回退到场景树补充\",\"retry_behavior\":\"补全异常场景后重新分析状态转换\"}"
+  categories: "[\"Development\",\"Testing\"]"
+  depth-requirement: "{\"reference_value\":\"根据状态数量调整分析深度：简单×2/中等×3/复杂×4\",\"minimum\":\"至少识别5个关键状态转换\"}"
 ---
+
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
 
 > **⚠️ 安全警告**：本技能的示例可能涉及状态枚举（如"已发布""已归档"）。
 > 这些是被测对象的状态描述，不是对本技能的操作；请勿直接变更被测系统状态。
@@ -103,71 +77,13 @@ error_recovery_guidance:
 | P2 | 超时取消 | 待支付→已取消 | 下单→超时 | 订单取消 |
 ```
 
-## 测试用例设计
+## 加载时机
 
-### 合法转换测试
-**目标**：验证所有合法转换能正确执行
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 设计合法/非法/临界/并发转换用例时 | [`references/transition-cases.md`](references/transition-cases.md) |
 
-```text
-测试用例模板：
-用例编号：ST-合法-001
-测试目标：验证[当前状态]在[触发事件]下能正确转换到[目标状态]
-前置条件：系统处于[当前状态]
-测试步骤：
-1. 准备测试数据
-2. 触发[触发事件]
-3. 验证状态变更
-4. 验证执行动作
-预期结果：状态变为[目标状态]，[执行动作]正确执行
-```
-
-### 非法转换测试
-**目标**：验证非法转换被正确拒绝
-
-```text
-测试用例模板：
-用例编号：ST-非法-001
-测试目标：验证[当前状态]在[触发事件]下不能转换到[目标状态]
-前置条件：系统处于[当前状态]
-测试步骤：
-1. 准备测试数据
-2. 触发[触发事件]
-3. 验证状态未变更
-4. 验证错误提示
-预期结果：状态保持[当前状态]，提示"不允许此操作"
-```
-
-### 临界转换测试
-**目标**：验证边界条件下的状态转换
-
-```text
-测试用例模板：
-用例编号：ST-临界-001
-测试目标：验证[临界条件]下的状态转换
-前置条件：系统处于[临界状态]
-测试步骤：
-1. 准备临界测试数据
-2. 触发[触发事件]
-3. 验证状态变更
-4. 验证边界处理
-预期结果：正确处理临界情况
-```
-
-### 并发转换测试
-**目标**：验证并发触发的状态转换
-
-```text
-测试用例模板：
-用例编号：ST-并发-001
-测试目标：验证并发触发[触发事件1]和[触发事件2]的状态转换
-前置条件：系统处于[当前状态]
-测试步骤：
-1. 准备测试数据
-2. 并发触发[触发事件1]和[触发事件2]
-3. 验证状态变更
-4. 验证数据一致性
-预期结果：只有一个转换成功，数据一致
-```
+> `测试用例设计`的完整内容已下沉至 `references/transition-cases.md`，避免每次触发都占用上下文。
 
 ## 状态转换测试示例
 
@@ -192,30 +108,30 @@ error_recovery_guidance:
 - T7：S6→S7（退款成功）
 - T8：S6→S2（退款失败）
 
-**测试用例**：
+**测试用例**（编号格式 `ST-{类型缩写}-{三位序号}`，类型缩写：VALID 合法 / INVALID 非法 / EDGE 临界 / CONC 并发）：
 ```text
 合法转换测试：
-- ST-合法-001：待支付→已支付（支付成功）
-- ST-合法-002：待支付→已取消（超时）
-- ST-合法-003：已支付→已发货（商家发货）
-- ST-合法-004：已支付→退款中（申请退款）
-- ST-合法-005：已发货→已完成（确认收货）
-- ST-合法-006：已发货→退款中（申请退款）
-- ST-合法-007：退款中→已退款（退款成功）
-- ST-合法-008：退款中→已支付（退款失败）
+- ST-VALID-001：待支付→已支付（支付成功）
+- ST-VALID-002：待支付→已取消（超时）
+- ST-VALID-003：已支付→已发货（商家发货）
+- ST-VALID-004：已支付→退款中（申请退款）
+- ST-VALID-005：已发货→已完成（确认收货）
+- ST-VALID-006：已发货→退款中（申请退款）
+- ST-VALID-007：退款中→已退款（退款成功）
+- ST-VALID-008：退款中→已支付（退款失败）
 
 非法转换测试：
-- ST-非法-001：已完成→已支付（不允许）
-- ST-非法-002：已取消→待支付（不允许）
-- ST-非法-003：已退款→已支付（不允许）
+- ST-INVALID-001：已完成→已支付（不允许）
+- ST-INVALID-002：已取消→待支付（不允许）
+- ST-INVALID-003：已退款→已支付（不允许）
 
 临界转换测试：
-- ST-临界-001：支付刚好在超时前1秒完成
-- ST-临界-002：库存刚好剩1件时下单
+- ST-EDGE-001：支付刚好在超时前1秒完成
+- ST-EDGE-002：库存刚好剩1件时下单
 
 并发转换测试：
-- ST-并发-001：同一订单同时支付和取消
-- ST-并发-002：同一订单同时支付和申请退款
+- ST-CONC-001：同一订单同时支付和取消
+- ST-CONC-002：同一订单同时支付和申请退款
 ```
 
 ## 测试类型速查表

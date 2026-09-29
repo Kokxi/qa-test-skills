@@ -1,53 +1,24 @@
 ---
 name: qa-test-automation-arch
-slug: qa-test-automation-arch
-displayName: Test Automation Arch
-version: 1.7.7
 description: >-
-  当需要设计自动化测试框架、或者现有框架维护成本太高需要重构时使用此技能。运用 PageObject、分层测试、关键字驱动、数据驱动等模式设计可维护可扩展的自动化架构。不要直接写测试代码——先设计架构：选型（UI/API/单元）、分层（测试层/业务层/基础设施层）、数据管理（测试数据与脚本分离）和 CI 集成方案。好的自动化架构应该让写用例的人不需要懂底层实现。
-
-when_to_use: 用户说"自动化架构"、"框架设计"、"自动化策略"、"自动化框架"、"测试框架架构"、需要设计测试自动化架构、自动化维护困难需要重构时
+  当需要设计自动化测试框架、或者现有框架维护成本太高需要重构时使用此技能。运用 PageObject、分层测试、关键字驱动、数据驱动等模式设计可维护可扩展的自动化架构。不要直接写测试代码——先设计架构：选型（UI/API/单元）、分层（测试层/业务层/基础设施层）、数据管理（测试数据与脚本分离）和 CI 集成方案。好的自动化架构应该让写用例的人不需要懂底层实现。 触发场景：自动化架构、框架设计、自动化策略、自动化框架、测试框架架构、自动化维护困难需要重构时。 Use when the user asks about: test automation architecture — Page Object, layered test design, keyword-driven and data-driven frameworks, and data management.
+license: MIT
 allowed-tools: Read Grep Glob Bash
-related_skills:
-  upstream:
-    - qa-tech-selection          # 输入：技术选型结果
-    - qa-test-strategy-design    # 输入：测试策略
-  downstream:
-    - qa-ci-cd-testing           # 输出：架构设计用于CI/CD集成
-    - qa-api-testing             # 输出：架构设计指导API测试
-    - qa-mobile-testing
-    - qa-tech-debt-management
-input_format:
-  required:
-    - name: 测试策略
-      type: object
-      description: 来自qa-test-strategy-design的测试策略
-    - name: 技术选型
-      type: object
-      description: 来自qa-tech-selection的技术选型建议
-  optional:
-    - name: 项目约束
-      type: string
-      description: 技术栈和团队限制
-output_format:
-  traceability:
-    - 每份架构设计带唯一ID（ARCH-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - automation_architecture: 自动化测试架构设计
-    - framework_selection: 框架选择建议
-    - layer_design: 分层设计
-    - maintenance_strategy: 维护策略
-categories: ['Development','Testing','DevOps']
-depth_requirement_quantification:
-  reference_value: "根据架构复杂度调整设计深度：简单×1/中等×2/复杂×3"
-  minimum: "至少覆盖层架构、工具集成、维护策略3个核心要素"
-error_recovery_guidance:
-  on_failure: "自动化架构遗漏维护策略时回退到技术选型补充"
-  retry_behavior: "补充选型后重新设计架构"
+metadata:
+  slug: "qa-test-automation-arch"
+  display-name: "测试自动化架构"
+  version: "1.8.0"
+  when-to-use: "用户说\"自动化架构\"、\"框架设计\"、\"自动化策略\"、\"自动化框架\"、\"测试框架架构\"、需要设计测试自动化架构、自动化维护困难需要重构时"
+  related-skills: "{\"upstream\":[\"qa-tech-selection\",\"qa-test-strategy-design\"],\"downstream\":[\"qa-ci-cd-testing\",\"qa-api-testing\",\"qa-mobile-testing\",\"qa-tech-debt-management\"]}"
+  references: "[\"references/layered-architecture.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试策略\",\"type\":\"object\",\"description\":\"来自qa-test-strategy-design的测试策略\"},{\"name\":\"技术选型\",\"type\":\"object\",\"description\":\"来自qa-tech-selection的技术选型建议\"}],\"optional\":[{\"name\":\"项目约束\",\"type\":\"string\",\"description\":\"技术栈和团队限制\"}]}"
+  output-format: "{\"traceability\":[\"每份架构设计带唯一ID（ARCH-XXXX）\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"automation_architecture\":\"自动化测试架构设计\"},{\"framework_selection\":\"框架选择建议\"},{\"layer_design\":\"分层设计\"},{\"maintenance_strategy\":\"维护策略\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"自动化架构遗漏维护策略时回退到技术选型补充\",\"retry_behavior\":\"补充选型后重新设计架构\"}"
+  categories: "[\"Development\",\"Testing\",\"DevOps\"]"
+  depth-requirement: "{\"reference_value\":\"根据架构复杂度调整设计深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少覆盖层架构、工具集成、维护策略3个核心要素\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 > **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
 > 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
 > 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
@@ -75,76 +46,13 @@ error_recovery_guidance:
                     └─────────────┘
 ```
 
-## 分层架构设计
+## 加载时机
 
-### 第1层：单元测试层
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 设计自动化框架分层时 | [`references/layered-architecture.md`](references/layered-architecture.md) |
 
-```text
-职责：
-├─ 测试范围：函数、类、模块
-├─ 执行速度：毫秒级
-├─ 维护成本：低
-└─ 覆盖目标：核心逻辑
-
-技术选型：
-├─ Java：JUnit 5 + Mockito
-├─ Python：Pytest + Mock
-├─ JavaScript：Jest + Sinon
-└─ Go：testing + testify
-
-最佳实践：
-├─ 测试与代码同步维护
-├─ 每个测试单一职责
-├─ 使用Mock隔离依赖
-├─ 测试命名清晰（Given-When-Then）
-└─ 保持测试快速（<100ms）
-```
-
-### 第2层：集成测试层
-
-```text
-职责：
-├─ 测试范围：接口、服务间交互
-├─ 执行速度：秒级
-├─ 维护成本：中
-└─ 覆盖目标：业务流程
-
-技术选型：
-├─ API测试：Postman/Newman/REST Assured
-├─ 数据库测试：TestContainers
-├─ 消息队列测试：Embedded Kafka
-└─ 服务虚拟化：WireMock/Mountebank
-
-最佳实践：
-├─ 使用真实依赖（TestContainers）
-├─ 测试数据可构造、可清理
-├─ 验证接口契约
-├─ 覆盖正常/异常/边界场景
-└─ 保持测试独立性
-```
-
-### 第3层：E2E测试层
-
-```text
-职责：
-├─ 测试范围：完整用户流程
-├─ 执行速度：分钟级
-├─ 维护成本：高
-└─ 覆盖目标：核心路径
-
-技术选型：
-├─ Web UI：Playwright/Cypress/Selenium
-├─ 移动端：Appium/XCUITest/Espresso
-├─ 桌面端：Electron Test/WinAppDriver
-└─ 性能：JMeter/Locust/k6
-
-最佳实践：
-├─ 只覆盖核心路径（20%）
-├─ 使用Page Object模式
-├─ 数据驱动测试
-├─ 稳定的等待策略
-└─ 失败时自动截图/录屏
-```
+> `分层架构设计`的完整内容已下沉至 `references/layered-architecture.md`，避免每次触发都占用上下文。
 
 ## 框架设计模式
 

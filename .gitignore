@@ -13,6 +13,7 @@ build/
 *.swo
 .claude/
 .omo/
+.opencode/
 
 # Playwright
 .playwright-mcp/
@@ -27,8 +28,14 @@ Thumbs.db
 *.txt
 
 # 推送脚本例外（正式发布的发布脚本需入库）
+# 注意：publish-all.bat 是发布总入口，integrity_check 检查项 12 会校验它的默认版本，
+# 漏掉这条会让它不进版本控制，别人 clone 下来是残的。
+!publish-all.bat
 !scripts/push-clawhub.bat
 !scripts/push-skillhub.bat
+
+# 发布暂存目录（stage_for_clawhub.py 生成的构建产物，不入库）
+.publish-staging/
 
 # tmp
 output/
@@ -39,3 +46,9 @@ examples/**/.opencode/
 
 # AtomCode 工具自身配置
 .atomcode/
+
+# 本机 SkillHub 推送运维脚本（注册计划任务、读 $HOME/.skillhub，不是项目源码）
+retry-skillhub-*.sh
+push-skillhub-pending.txt
+push-skillhub-failed*.txt
+output-*.log

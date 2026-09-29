@@ -1,51 +1,24 @@
 ---
 name: qa-tech-debt-management
-slug: qa-tech-debt-management
-displayName: Tech Debt Management
-version: 1.7.7
 description: >-
-  当自动化用例频繁维护、跑一次就倒下一批、或者发现团队的测试资产维护成本越来越高时使用此技能。系统化识别测试自动化债务和测试资产技术债，评估每项债务的利息（维护成本）和本金（重写成本），给出分阶段的还款规划。不要追着 flaky test 修——技术债务管理解决的是"为什么有这么多 flaky test"的系统性问题。
-
-when_to_use: 用户说"技术债务"、"测试债务"、"自动化债务"、"重构"、"债务治理"、"维护成本"、需要管理技术债务、自动化维护成本高需要评估时
+  当自动化用例频繁维护、跑一次就倒下一批、或者发现团队的测试资产维护成本越来越高时使用此技能。系统化识别测试自动化债务和测试资产技术债，评估每项债务的利息（维护成本）和本金（重写成本），给出分阶段的还款规划。不要追着 flaky test 修——技术债务管理解决的是"为什么有这么多 flaky test"的系统性问题。 触发场景：技术债务、测试债务、自动化债务、重构、债务治理、维护成本、自动化维护成本高需要评估时。 Use when the user asks about: test automation and test asset technical debt — interest versus principal, flaky test triage, and staged repayment plans.
+license: MIT
 allowed-tools: Read Grep Glob Bash
-related_skills:
-  upstream:
-    - qa-test-automation-arch    # 输入：自动化架构评估
-    - qa-quality-metrics         # 输入：质量度量数据
-  downstream:
-    - qa-retrospective           # 输出：债务分析用于复盘
-    - qa-test-strategy-design    # 输出：债务治理影响测试策略
-input_format:
-  required:
-    - name: 测试报告
-      type: object
-      description: 来自qa-test-reporting的测试报告
-    - name: 代码质量数据
-      type: object
-      description: 代码质量分析数据
-  optional:
-    - name: 历史基线
-      type: object
-      description: 历史技术债务基线
-output_format:
-  traceability:
-    - 本技能评估债务，每个债务项沿用关联的缺陷ID或自动化架构ID
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - debt_inventory: 技术债务清单
-    - impact_analysis: 影响分析
-    - repayment_plan: 偿还计划
-    - prevention_strategies: 预防策略
-categories: ['Development','Testing']
-depth_requirement_quantification:
-  reference_value: "根据债务规模调整治理深度：简单×1/中等×2/复杂×3"
-  minimum: "至少完成债务识别、成本评估、治理优先级3步"
-error_recovery_guidance:
-  on_failure: "债务治理遗漏高优债务时回退到质量度量补充数据"
-  retry_behavior: "补充数据后重新评估治理优先级"
+metadata:
+  slug: "qa-tech-debt-management"
+  display-name: "测试技术债管理"
+  version: "1.8.0"
+  when-to-use: "用户说\"技术债务\"、\"测试债务\"、\"自动化债务\"、\"重构\"、\"债务治理\"、\"维护成本\"、需要管理技术债务、自动化维护成本高需要评估时"
+  related-skills: "{\"upstream\":[\"qa-test-automation-arch\",\"qa-quality-metrics\"],\"downstream\":[\"qa-retrospective\",\"qa-test-strategy-design\"]}"
+  references: "[\"references/debt-governance.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试报告\",\"type\":\"object\",\"description\":\"来自qa-test-reporting的测试报告\"},{\"name\":\"代码质量数据\",\"type\":\"object\",\"description\":\"代码质量分析数据\"}],\"optional\":[{\"name\":\"历史基线\",\"type\":\"object\",\"description\":\"历史技术债务基线\"}]}"
+  output-format: "{\"traceability\":[\"本技能评估债务，每个债务项沿用关联的缺陷ID或自动化架构ID\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"debt_inventory\":\"技术债务清单\"},{\"impact_analysis\":\"影响分析\"},{\"repayment_plan\":\"偿还计划\"},{\"prevention_strategies\":\"预防策略\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"债务治理遗漏高优债务时回退到质量度量补充数据\",\"retry_behavior\":\"补充数据后重新评估治理优先级\"}"
+  categories: "[\"Development\",\"Testing\"]"
+  depth-requirement: "{\"reference_value\":\"根据债务规模调整治理深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少完成债务识别、成本评估、治理优先级3步\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 > **⚠️ 安全警告**：本技能的示例可能涉及发布阻塞评估和线上问题影响分析。
 > 实际使用时请勿直接基于评估结论阻塞发布或下线功能，先与开发和产品确认风险。
 > 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
@@ -168,92 +141,13 @@ error_recovery_guidance:
 | 框架版本旧 | 中 | 低 | 高 | 中 | P2 |
 | 文档缺失 | 低 | 低 | 低 | 低 | P3 |
 
-## 债务治理
+## 加载时机
 
-### 治理策略
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 识别/评估/偿还测试债时 | [`references/debt-governance.md`](references/debt-governance.md) |
 
-```text
-├─ 立即解决（P0）
-│   ├─ 阻塞性问题
-│   ├─ 线上问题
-│   └─ 效率严重下降
-│
-├─ 计划解决（P1）
-│   ├─ 影响当前迭代
-│   ├─ 影响团队效率
-│   └─ 风险较高
-│
-├─ 逐步解决（P2）
-│   ├─ 不影响当前工作
-│   ├─ 可以规划解决
-│   └─ 成本较高
-│
-└─ 持续监控（P3）
-    ├─ 影响较小
-    ├─ 成本较高
-    └─ 可以接受
-```
-
-### 治理方法
-
-```text
-自动化债务治理：
-├─ 脚本稳定化
-│   ├─ 修复假阳性
-│   ├─ 优化等待策略
-│   ├─ 增加重试机制
-│   └─ 改进错误处理
-│
-├─ 覆盖提升
-│   ├─ 补充核心流程
-│   ├─ 补充边界场景
-│   ├─ 补充异常场景
-│   └─ 优化测试数据
-│
-└─ 框架升级
-    ├─ 版本升级
-    ├─ 架构优化
-    ├─ 文档完善
-    └─ 工具统一
-
-测试债务治理：
-├─ 用例优化
-│   ├─ 清理过时用例
-│   ├─ 合并冗余用例
-│   ├─ 补充覆盖不足
-│   └─ 改进可维护性
-│
-├─ 流程改进
-│   ├─ 规范测试流程
-│   ├─ 完善执行标准
-│   ├─ 改进缺陷管理
-│   └─ 优化回归策略
-│
-└─ 环境改善
-    ├─ 稳定测试环境
-    ├─ 补充测试数据
-    ├─ 升级测试工具
-    └─ 完善基础设施
-
-架构债务治理：
-├─ 可测试性改进
-│   ├─ 接口Mock化
-│   ├─ 日志完善
-│   ├─ 配置动态化
-│   └─ 数据构造化
-│
-├─ 架构优化
-│   ├─ 分层清晰化
-│   ├─ 职责单一化
-│   ├─ 扩展性提升
-│   └─ 可维护性提升
-│
-└─ 集成完善
-    ├─ CI/CD完善
-    ├─ 报告规范化
-    ├─ 监控完善
-    └─ 工具链统一
-```
+> `债务治理`的完整内容已下沉至 `references/debt-governance.md`，避免每次触发都占用上下文。
 
 ## 债务预防
 

@@ -1,57 +1,24 @@
 ---
 name: qa-requirement-review
-slug: qa-requirement-review
-displayName: Requirement Review
-version: 1.7.7
 description: >-
-  从完整性、清晰性、一致性、可测试性、可实现性五个维度系统化评审需求文档质量。当用户要求"评审这份需求"、"看看这个PRD写得怎么样"、或者测试用例设计前需要先评估需求质量时，应当使用此技能。如果需求本身有问题（模糊/矛盾/不可测试），后续的测试设计都是徒劳。不要只在用户明确说"需求评审"时才用——任何涉及需求文档的测试任务都应先过一遍需求评审。
-
-when_to_use: 用户说"需求评审"、"评审需求"、"需求质量"、"PRD评审"、"需求检查"、"需求写得好不好"、"评审这份需求"、需要评审需求文档、需求提交测试前预审时
+  从完整性、清晰性、一致性、可测试性、可实现性五个维度系统化评审需求文档质量。当用户要求"评审这份需求"、"看看这个PRD写得怎么样"、或者测试用例设计前需要先评估需求质量时，应当使用此技能。如果需求本身有问题（模糊/矛盾/不可测试），后续的测试设计都是徒劳。不要只在用户明确说"需求评审"时才用——任何涉及需求文档的测试任务都应先过一遍需求评审。 触发场景：需求评审、评审需求、需求质量、PRD评审、需求检查、需求写得好不好、评审这份需求、需求提交测试前预审时。 Use when the user asks about: reviewing a PRD or requirement document for completeness, clarity, consistency, testability, and feasibility before test design starts.
+license: MIT
 allowed-tools: Read Grep Glob WebFetch
-related_skills:
-  upstream:
-    - qa-input-validation        # 输入：输入验证结果
-    - qa-critical-thinking       # 输入：批判性思维
-    - qa-question-framework      # 输入：提问框架
-  downstream:
-    - qa-req-deconstruction      # 输出：评审结果用于需求解构
-    - qa-test-strategy-design    # 输出：评审结果影响测试策略
-references:
-  - references/report-template.md
-  - references/review-standards.md
-input_format:
-  required:
-    - name: 需求描述
-      type: string
-      description: 功能需求的详细描述文本
-  optional:
-    - name: 业务背景
-      type: string
-      description: 业务目标和用户角色
-    - name: 历史缺陷
-      type: array
-      description: 同类功能的历史缺陷记录
-output_format:
-  traceability:
-    - 每份需求评审报告带唯一ID（REV-REQ-XXXX）
-    - 关联需求ID（TC_{需求模块缩写}_{功能缩写}_{序号}）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - review_report: 需求评审报告
-    - completeness_score: 完整性评分
-    - clarity_score: 清晰性评分
-    - consistency_issues: 一致性问题清单
-    - testability_assessment: 可测试性评估
-error_recovery_guidance:
-  on_failure: "识别到需求不完整时返回缺失清单，要求用户补充信息"
-  retry_behavior: "用户补充信息后重新执行需求评审"
-categories: ['Development','Requirements']
-depth_requirement_quantification:
-  reference_value: "根据需求复杂度调整评审深度：简单×1/中等×2/复杂×3"
-  minimum: "至少评审完整性、清晰性、一致性、可测试性、可实现性5个维度"
+metadata:
+  slug: "qa-requirement-review"
+  display-name: "需求评审"
+  version: "1.8.0"
+  when-to-use: "用户说\"需求评审\"、\"评审需求\"、\"需求质量\"、\"PRD评审\"、\"需求检查\"、\"需求写得好不好\"、\"评审这份需求\"、需要评审需求文档、需求提交测试前预审时"
+  related-skills: "{\"upstream\":[\"qa-input-validation\",\"qa-critical-thinking\",\"qa-question-framework\"],\"downstream\":[\"qa-req-deconstruction\",\"qa-test-strategy-design\"]}"
+  references: "[\"references/report-template.md\",\"references/review-standards.md\"]"
+  input-format: "{\"required\":[{\"name\":\"需求描述\",\"type\":\"string\",\"description\":\"功能需求的详细描述文本\"}],\"optional\":[{\"name\":\"业务背景\",\"type\":\"string\",\"description\":\"业务目标和用户角色\"},{\"name\":\"历史缺陷\",\"type\":\"array\",\"description\":\"同类功能的历史缺陷记录\"}]}"
+  output-format: "{\"traceability\":[\"每份需求评审报告带唯一ID（REV-REQ-XXXX）\",\"关联需求ID：REQ-{需求模块缩写}-{序号}\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"review_report\":\"需求评审报告\"},{\"completeness_score\":\"完整性评分\"},{\"clarity_score\":\"清晰性评分\"},{\"consistency_issues\":\"一致性问题清单\"},{\"testability_assessment\":\"可测试性评估\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"识别到需求不完整时返回缺失清单，要求用户补充信息\",\"retry_behavior\":\"用户补充信息后重新执行需求评审\"}"
+  categories: "[\"Development\",\"Requirements\"]"
+  depth-requirement: "{\"reference_value\":\"根据需求复杂度调整评审深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少评审完整性、清晰性、一致性、可测试性、可实现性5个维度\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # 需求评审专项
 
 ## 核心原则
@@ -89,6 +56,20 @@ depth_requirement_quantification:
 ### P2（可选修改）
 ## 改进建议
 ```
+
+## 加载时机
+
+**需要时才读，不要一上来全读**：
+
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 拿评审报告模板填 | [`references/report-template.md`](references/report-template.md)（报告结构与填写要求） |
+| 判断某个需求问题算不算缺陷 | [`references/review-standards.md`](references/review-standards.md)（五维评审标准） |
+
+> 五维评分口径在本文；模板与逐条标准在 references，按需加载。
+
+
+---
 
 ## 输出示例
 

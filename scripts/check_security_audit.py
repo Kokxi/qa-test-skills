@@ -12,6 +12,8 @@
 """
 import re, sys, pathlib, json
 
+import skillmeta
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SLUG = "kokxi"  # ClawHub user slug
 
@@ -24,26 +26,18 @@ SHARED_KEYWORDS = {
     "自动化测试": ["qa-ci-cd-testing", "qa-test-automation-arch"],
 }
 
-def extract_frontmatter(path):
-    txt = path.read_text(encoding='utf-8').replace('\r\n', '\n')
-    m = re.match(r'^---\n(.*?)\n---\n', txt, re.S)
-    return m.group(1) if m else ''
-
-def check_vague_triggers(skill_name, fm):
+def check_vague_triggers(skill_name):
     """检测 when_to_use 里的关键词是否与其他技能独占。"""
     issues = []
-    m = re.search(r'^when_to_use:\s*(?:>-)?\s*\n?(.*?)\n\S', fm, re.S | re.M)
-    if not m:
-        m = re.search(r'^when_to_use:\s*"?(.*?)"?\s*$', fm, re.M)
-    if not m:
-        return ["when_to_use missing"]
-    wtu = m.group(1)
+    wtu = skillmeta.when_to_use(skill_name)
+    if not wtu:
+        return ["when_to_use missing (metadata.when-to-use)"]
     for kw, owners in SHARED_KEYWORDS.items():
         if kw in wtu and skill_name not in owners:
             issues.append(f"Vague Trigger: '{kw}' 也被 {owners} 声明，建议限定或删除")
     return issues
 
-def check_missing_warnings(fm, body):
+def check_missing_warnings(body):
     """检测涉险操作（删除/重置/发布）是否有 ⚠️ 警告。"""
     issues = []
     risky = re.search(r'(删除|重置|发布|回滚|drop|reset|publish|rollback)', body, re.I)
@@ -55,18 +49,17 @@ def check_missing_warnings(fm, body):
 def main():
     args = sys.argv[1:]
     skills_dir = ROOT / 'skills'
-    targets = [skills_dir / args[0]] if args else sorted(skills_dir.glob('qa-*'))
+    targets = [args[0]] if args else sorted(p.name for p in skills_dir.glob('qa-*'))
     results = []
     manual_urls = []
-    for d in targets:
-        f = d / 'SKILL.md'
-        if not f.exists(): continue
-        fm = extract_frontmatter(f)
-        body = f.read_text(encoding='utf-8').replace('\r\n', '\n')
-        issues = check_vague_triggers(d.name, fm) + check_missing_warnings(fm, body)
+    for name in targets:
+        d = skills_dir / name
+        if not (d / 'SKILL.md').exists(): continue
+        body = skillmeta.load(name)['body']
+        issues = check_vague_triggers(name) + check_missing_warnings(body)
         status = '✅ pass' if not issues else '❌ ' + '; '.join(issues)
-        results.append((d.name, status))
-        manual_urls.append(f"https://clawhub.ai/{SLUG}/skills/{d.name}/security-audit")
+        results.append((name, status))
+        manual_urls.append(f"https://clawhub.ai/{SLUG}/skills/{name}/security-audit")
     print("=== ClawHub Security Audit 本地预检 ===")
     for name, status in results:
         print(f"  {status.split(';')[0]:<8} {name}: {status.split(';',1)[1] if ';' in status else ''}")

@@ -1,50 +1,24 @@
 ---
 name: qa-team-coaching
-slug: qa-team-coaching
-displayName: Team Coaching
-version: 1.7.7
 description: >-
-  当团队里有测试新人需要带、想提升团队整体测试水平、或者需要把个人经验转化为团队能力时使用此技能。通过 Pair 测试、经验分享、checklist 沉淀、模板建设和培训材料等方式赋能团队。不要等着新人犯错再教——好的赋能是提前给工具和方法论，让新人在第一次做之前就知道"正确的做法是什么"。
-
-when_to_use: 用户说"培训"、"赋能"、"新人"、"怎么教"、"带人"、"培养"、"团队成长"、需要赋能团队、新成员加入需要快速上手时
+  当团队里有测试新人需要带、想提升团队整体测试水平、或者需要把个人经验转化为团队能力时使用此技能。通过 Pair 测试、经验分享、checklist 沉淀、模板建设和培训材料等方式赋能团队。不要等着新人犯错再教——好的赋能是提前给工具和方法论，让新人在第一次做之前就知道"正确的做法是什么"。 触发场景：培训、赋能、新人、怎么教、带人、培养、团队成长、新成员加入需要快速上手时。 Use when the user asks about: coaching and enabling a QA team — pairing, knowledge sharing, checklist and template creation, and onboarding new members.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-retrospective           # 输入：复盘结果和经验
-    - qa-heuristic-checklist     # 输入：checklist作为培训材料
-  downstream: []  # 输出用于团队赋能
-input_format:
-  required:
-    - name: 团队评估
-      type: string
-      description: 团队测试能力评估结果
-    - name: 培训需求
-      type: string
-      description: 团队技能提升需求
-  optional:
-    - name: 培训资源
-      type: string
-      description: 可用的培训资源和预算
-output_format:
-  traceability:
-    - 每份赋能方案带唯一ID（COACH-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - coaching_plan: 教练计划
-    - skill_matrix: 技能矩阵
-    - training_materials: 培训材料清单
-    - mentorship_guide: 导师指导方案
-    - progress_metrics: 进步度量方式
-categories: ['Development','Team']
-depth_requirement_quantification:
-  reference_value: "根据团队能力差距调整赋能深度：简单×1/中等×2/复杂×3"
-  minimum: "至少包含能力评估、培训计划、效果验收3环节"
-error_recovery_guidance:
-  on_failure: "赋能方案未能补齐能力差距时回退到能力评估补充"
-  retry_behavior: "补充评估后重新设计赋能方案"
+metadata:
+  slug: "qa-team-coaching"
+  display-name: "测试团队赋能"
+  version: "1.8.0"
+  when-to-use: "用户说\"培训\"、\"赋能\"、\"新人\"、\"怎么教\"、\"带人\"、\"培养\"、\"团队成长\"、需要赋能团队、新成员加入需要快速上手时"
+  related-skills: "{\"upstream\":[\"qa-retrospective\",\"qa-heuristic-checklist\"],\"downstream\":[]}"
+  references: "[\"references/coaching-methods.md\"]"
+  input-format: "{\"required\":[{\"name\":\"团队评估\",\"type\":\"string\",\"description\":\"团队测试能力评估结果\"},{\"name\":\"培训需求\",\"type\":\"string\",\"description\":\"团队技能提升需求\"}],\"optional\":[{\"name\":\"培训资源\",\"type\":\"string\",\"description\":\"可用的培训资源和预算\"}]}"
+  output-format: "{\"traceability\":[\"每份赋能方案带唯一ID（COACH-XXXX）\"],\"structure\":[{\"coaching_plan\":\"教练计划\"},{\"skill_matrix\":\"技能矩阵\"},{\"training_materials\":\"培训材料清单\"},{\"mentorship_guide\":\"导师指导方案\"},{\"progress_metrics\":\"进步度量方式\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"赋能方案未能补齐能力差距时回退到能力评估补充\",\"retry_behavior\":\"补充评估后重新设计赋能方案\"}"
+  categories: "[\"Development\",\"Team\"]"
+  depth-requirement: "{\"reference_value\":\"根据团队能力差距调整赋能深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少包含能力评估、培训计划、效果验收3环节\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 > **⚠️ 安全警告**：本技能的示例可能涉及发布检查清单和评审流程的培训材料。
 > 这些是培训示例不是直接操作；请勿未经授权即变更团队流程或发布标准。
 > 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
@@ -55,108 +29,13 @@ error_recovery_guidance:
 
 授人以渔——把经验做成checklist、把案例做成模板、把评判标准量化。
 
-## 四种赋能方式
+## 加载时机
 
-### 方式1：Checklist式
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 选定赋能方式后，取对应做法 | [`references/coaching-methods.md`](references/coaching-methods.md) |
 
-```text
-适用场景：
-├─ 常见测试点整理
-├─ 评审检查清单
-├─ 发布检查清单
-└─ 质量检查清单
-
-Checklist设计原则：
-├─ 完整性：覆盖所有关键点
-├─ 可执行：每项可直接执行
-├─ 可量化：有明确标准
-└─ 可维护：定期更新
-
-示例：
-登录功能测试Checklist
-├─ [ ] 正常登录验证
-├─ [ ] 密码错误验证
-├─ [ ] 用户名不存在验证
-├─ [ ] 账号锁定验证
-├─ [ ] 验证码验证
-├─ [ ] 记住我功能验证
-├─ [ ] 第三方登录验证
-└─ [ ] 多设备登录验证
-```
-
-### 方式2：模板式
-
-```text
-适用场景：
-├─ 用例模板
-├─ Bug报告模板
-├─ 测试报告模板
-└─ 测试计划模板
-
-模板设计原则：
-├─ 标准化：统一格式
-├─ 完整性：包含必要字段
-├─ 可填充：方便填写
-└─ 可复用：可多次使用
-
-示例：
-测试用例模板
-├─ 用例编号：TC_{模块缩写}_{功能缩写}_{序号}
-├─ 用例标题：[动作]+[对象]+[条件]
-├─ 前置条件：[测试前需要满足的条件]
-├─ 测试步骤：[1. 2. 3. ...]
-├─ 预期结果：[具体可验证的预期]
-├─ 优先级：P0/P1/P2/P3
-└─ 风险等级：高/中/低
-```
-
-### 方式3：Review式
-
-```text
-适用场景：
-├─ 用例评审
-├─ Bug评审
-├─ 代码评审
-└─ 测试报告评审
-
-Review设计原则：
-├─ 结构化：有明确的评审维度
-├─ 量化：有明确的评判标准
-├─ 教学式：评审过程即学习过程
-└─ 可改进：有明确的改进方向
-
-示例：
-用例评审维度
-├─ 完整性：是否覆盖所有场景？
-├─ 准确性：步骤/预期是否准确？
-├─ 可执行：用例能否直接执行？
-├─ 效率性：是否有冗余用例？
-└─ 风险覆盖：高风险区域是否深测？
-```
-
-### 方式4：Pair式
-
-```text
-适用场景：
-├─ 结对测试
-├─ 新人带教
-├─ 复杂场景测试
-└─ 探索测试
-
-Pair设计原则：
-├─ 角色分工：Driver/Navigator
-├─ 实时交流：边做边讲
-├─ 知识传递：经验分享
-└─ 及时反馈：发现问题立即讨论
-
-示例：
-结对测试流程
-├─ 准备：明确测试目标和分工
-├─ 执行：Driver操作，Navigator观察
-├─ 交流：实时讨论发现的问题
-├─ 总结：回顾测试过程和收获
-└─ 改进：制定改进措施
-```
+> `四种赋能方式`的完整内容已下沉至 `references/coaching-methods.md`，避免每次触发都占用上下文。
 
 ## 培训材料设计
 

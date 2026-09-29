@@ -1,53 +1,24 @@
 ---
 name: qa-specialized-testing
-slug: qa-specialized-testing
-displayName: Specialized Testing
-version: 1.7.7
 description: >-
-  当功能测试做完之后需要做进一步的质量验证时使用此技能。覆盖性能测试（负载/压力/稳定性）、安全测试（OWASP Top 10 TOP 漏洞）、兼容性测试（多浏览器/多设备）的测试方法。不要在功能测试还没做完时就做专项——先保证功能正确，再评估性能和安全。专项测试的产出是一组可复用的测试方案（性能指标基线、安全渗透用例、兼容性矩阵）。
-
-when_to_use: 用户说"性能测试"、"安全测试（专项）"、"兼容性测试"、"专项测试"、"压力测试"、"渗透测试"、"SQL注入测试"、"跨浏览器测试"、需要进行专项测试、功能测试完成后需要补充专项测试时
+  当功能测试做完之后需要做进一步的质量验证时使用此技能。覆盖性能测试（负载/压力/稳定性）、安全测试（OWASP Top 10 TOP 漏洞）、兼容性测试（多浏览器/多设备）的测试方法。不要在功能测试还没做完时就做专项——先保证功能正确，再评估性能和安全。专项测试的产出是一组可复用的测试方案（性能指标基线、安全渗透用例、兼容性矩阵）。 触发场景：性能测试、安全测试（专项）、兼容性测试、专项测试、压力测试、渗透测试、SQL注入测试、跨浏览器测试、功能测试完成后需要补充专项测试时。 Use when the user asks about: specialized non-functional testing — performance and load and stress testing, OWASP security testing, and cross-browser compatibility.
+license: MIT
 allowed-tools: Read Grep Glob Bash
-related_skills:
-  upstream:
-    - qa-risk-intuition          # 输入：风险评估识别专项测试需求
-    - qa-test-strategy-design    # 输入：测试策略确定专项测试范围
-  downstream:
-    - qa-release-risk-governance # 输出：专项测试结果用于发布评估
-    - qa-agent-testing
-    - qa-mobile-testing
-input_format:
-  required:
-    - name: 测试策略
-      type: object
-      description: 来自qa-test-strategy-design的测试策略
-    - name: 专项需求
-      type: string
-      description: 性能/安全/兼容性等专项测试需求
-  optional:
-    - name: 环境信息
-      type: string
-      description: 专项测试环境配置
-output_format:
-  traceability:
-    - 每个专项测试用例带唯一ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）
-    - 关联专项类型和需求ID
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - specialized_test_plan: 专项测试方案
-    - performance_cases: 性能测试场景
-    - security_cases: 安全测试用例
-    - compatibility_matrix: 兼容性矩阵
-categories: ['Development','Testing']
-depth_requirement_quantification:
-  reference_value: "根据专项类型调整测试深度：简单×1/中等×2/复杂×3"
-  minimum: "至少完成性能、安全、兼容性3类专项中的2类"
-error_recovery_guidance:
-  on_failure: "专项测试遗漏维度时回退到测试策略补充范围"
-  retry_behavior: "补全范围后重新执行专项测试"
+metadata:
+  slug: "qa-specialized-testing"
+  display-name: "专项测试"
+  version: "1.8.0"
+  when-to-use: "用户说\"性能测试\"、\"安全测试（专项）\"、\"兼容性测试\"、\"专项测试\"、\"压力测试\"、\"渗透测试\"、\"SQL注入测试\"、\"跨浏览器测试\"、需要进行专项测试、功能测试完成后需要补充专项测试时"
+  related-skills: "{\"upstream\":[\"qa-risk-intuition\",\"qa-test-strategy-design\"],\"downstream\":[\"qa-release-risk-governance\",\"qa-agent-testing\",\"qa-mobile-testing\"]}"
+  references: "[\"references/performance-depth.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试策略\",\"type\":\"object\",\"description\":\"来自qa-test-strategy-design的测试策略\"},{\"name\":\"专项需求\",\"type\":\"string\",\"description\":\"性能/安全/兼容性等专项测试需求\"}],\"optional\":[{\"name\":\"环境信息\",\"type\":\"string\",\"description\":\"专项测试环境配置\"}]}"
+  output-format: "{\"traceability\":[\"每个专项测试用例带唯一ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）\",\"关联专项类型和需求ID\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"specialized_test_plan\":\"专项测试方案\"},{\"performance_cases\":\"性能测试场景\"},{\"security_cases\":\"安全测试用例\"},{\"compatibility_matrix\":\"兼容性矩阵\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"专项测试遗漏维度时回退到测试策略补充范围\",\"retry_behavior\":\"补全范围后重新执行专项测试\"}"
+  categories: "[\"Development\",\"Testing\"]"
+  depth-requirement: "{\"reference_value\":\"根据专项类型调整测试深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少完成性能、安全、兼容性3类专项中的2类\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # 专项测试能力
 
 ## 核心原则
@@ -66,81 +37,13 @@ error_recovery_guidance:
 
 **适用范围**：本技能仅在你明确要求某个专项测试方向（如性能/安全/兼容性）且已确认测试目标和环境授权时激活。安全测试相关内容必须配合授权声明使用，不得在未获授权的系统上执行。
 
-## 维度1：性能测试
+## 加载时机
 
-### 性能测试类型
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 做性能测试专项时 | [`references/performance-depth.md`](references/performance-depth.md) |
 
-```text
-├─ 负载测试（Load Testing）
-│   ├─ 目标：验证系统在预期负载下的表现
-│   ├─ 方法：逐步增加并发，观察性能指标
-│   └─ 指标：响应时间、吞吐量、错误率
-│
-├─ 压力测试（Stress Testing）
-│   ├─ 目标：验证系统在极限负载下的表现
-│   ├─ 方法：持续增加并发直到系统崩溃
-│   └─ 指标：系统极限、崩溃点、恢复能力
-│
-├─ 稳定性测试（Soak Testing）
-│   ├─ 目标：验证系统长时间运行的稳定性
-│   ├─ 方法：持续运行24-72小时
-│   └─ 指标：内存泄漏、资源消耗、性能退化
-│
-└─ 尖峰测试（Spike Testing）
-    ├─ 目标：验证系统应对突发流量的能力
-    ├─ 方法：突然增加并发
-    └─ 指标：系统响应、恢复时间、数据一致性
-```
-
-### 性能指标
-
-```text
-核心指标：
-├─ 响应时间（Response Time）
-│   ├─ P50：50%请求的响应时间
-│   ├─ P95：95%请求的响应时间
-│   ├─ P99：99%请求的响应时间
-│   └─ 目标：P99 < 1秒
-│
-├─ 吞吐量（Throughput）
-│   ├─ TPS：每秒事务数
-│   ├─ QPS：每秒查询数
-│   └─ 目标：根据业务定义
-│
-├─ 错误率（Error Rate）
-│   ├─ 计算：错误请求数 / 总请求数
-│   └─ 目标：< 0.1%
-│
-└─ 资源使用率
-    ├─ CPU使用率：< 80%
-    ├─ 内存使用率：< 80%
-    ├─ 磁盘IO：< 80%
-    └─ 网络IO：< 80%
-```
-
-### 性能测试工具
-
-```text
-├─ JMeter
-│   ├─ 优点：功能全面、插件丰富
-│   ├─ 缺点：界面复杂、资源消耗大
-│   └─ 适用：复杂场景、协议测试
-│
-├─ Locust
-│   ├─ 优点：代码化、分布式
-│   ├─ 缺点：需要编程能力
-│   └─ 适用：API测试、分布式测试
-│
-├─ k6
-│   ├─ 优点：现代化、CI友好
-│   ├─ 缺点：社区较小
-│   └─ 适用：现代应用、DevOps
-│
-└─ wrk
-    ├─ 优点：轻量、高效
-    ├─ 缺点：功能简单
-    └─ 适用：简单压测、快速验证
-```
+> `维度1：性能测试`的完整内容已下沉至 `references/performance-depth.md`，避免每次触发都占用上下文。
 
 ## 维度2：安全测试
 

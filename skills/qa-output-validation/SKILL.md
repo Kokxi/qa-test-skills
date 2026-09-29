@@ -1,52 +1,24 @@
 ---
 name: qa-output-validation
-slug: qa-output-validation
-displayName: Output Validation
-version: 1.7.7
 description: >-
-  在最终输出前对测试用例做最后一轮防幻觉验证：事实核查（引用的需求ID是否存在）、一致性检查（用例之间是否矛盾）、可执行性验证（步骤是否能实际操作）、来源追溯（每个用例是否能追溯到具体需求）。当测试用例已经生成完毕、准备输出了，但你不确定AI有没有编造不存在的功能或需求时，应当使用此技能。这是整个工作流的最终质量守门——如果验证失败，必须返回问题清单要求修正，不得跳过。
-
-when_to_use: AI生成测试用例后、最终输出前自动激活；用户说"验证一下输出"、"检查有没有幻觉"、"这个用例对吗"、"确认一下质量"时
+  在最终输出前对测试用例做最后一轮防幻觉验证：事实核查（引用的需求ID是否存在）、一致性检查（用例之间是否矛盾）、可执行性验证（步骤是否能实际操作）、来源追溯（每个用例是否能追溯到具体需求）。当测试用例已经生成完毕、准备输出了，但你不确定AI有没有编造不存在的功能或需求时，应当使用此技能。这是整个工作流的最终质量守门——如果验证失败，必须返回问题清单要求修正，不得跳过。 触发场景：验证一下输出、检查有没有幻觉、这个用例对吗、确认一下质量、时。 Use when the user asks about: final anti-hallucination verification of generated test cases — fact checking, cross-case consistency, executability, and requirement traceability.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-ai-output-critique      # 输入：评审后的测试用例
-    - qa-ai-blindspot-compensation # 输入：补盲后的测试用例
-  downstream:
-    - qa-test-reporting          # 验证通过后输出最终结果
-input_format:
-  required:
-    - name: 测试用例
-      type: array
-      description: AI生成的测试用例列表
-    - name: 需求解构表
-      type: object
-      description: 原始需求解构结果
-  optional:
-    - name: 评审报告
-      type: object
-      description: 评审结果
-output_format:
-  traceability:
-    - 本技能验证输出，不新增唯一ID；问题清单关联到原用例ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - validation_result: "pass/fail"
-    - fact_check: "事实核查结果"
-    - consistency_check: "一致性检查结果"
-    - executability_check: "可执行性验证结果"
-    - issues: "问题清单"
-    - traceability: "来源追溯"
-error_recovery_guidance:
-  on_failure: "返回问题清单和具体失败原因，要求修正后重新生成"
-  retry_behavior: "修正后重新执行AI生成步骤"
-categories: ['Development','Testing','AI']
-depth_requirement_quantification:
-  reference_value: "根据用例数量调整验证深度：简单×1/中等×2/复杂×3"
-  minimum: "至少完成事实核查、一致性检查、可执行性验证、来源追溯4项"
+metadata:
+  slug: "qa-output-validation"
+  display-name: "输出验证"
+  version: "1.8.0"
+  when-to-use: "AI生成测试用例后、最终输出前自动激活；用户说\"验证一下输出\"、\"检查有没有幻觉\"、\"这个用例对吗\"、\"确认一下质量\"时"
+  related-skills: "{\"upstream\":[\"qa-ai-output-critique\",\"qa-ai-blindspot-compensation\"],\"downstream\":[\"qa-test-reporting\"]}"
+  references: "[\"references/validation-dimensions.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试用例\",\"type\":\"array\",\"description\":\"AI生成的测试用例列表\"},{\"name\":\"需求解构表\",\"type\":\"object\",\"description\":\"原始需求解构结果\"}],\"optional\":[{\"name\":\"评审报告\",\"type\":\"object\",\"description\":\"评审结果\"}]}"
+  output-format: "{\"traceability\":[\"本技能验证输出，不新增唯一ID；问题清单关联到原用例ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"validation_result\":\"pass/fail\"},{\"fact_check\":\"事实核查结果\"},{\"consistency_check\":\"一致性检查结果\"},{\"executability_check\":\"可执行性验证结果\"},{\"issues\":\"问题清单\"},{\"traceability\":\"来源追溯\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"返回问题清单和具体失败原因，要求修正后重新生成\",\"retry_behavior\":\"修正后重新执行AI生成步骤\"}"
+  categories: "[\"Development\",\"Testing\",\"AI\"]"
+  depth-requirement: "{\"reference_value\":\"根据用例数量调整验证深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少完成事实核查、一致性检查、可执行性验证、来源追溯4项\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 > **⚠️ 安全警告**：本技能的示例可能涉及对虚无功能的删除或标记建议。
 > 实际使用时请勿直接删除测试用例或功能项，先确认其来源并备份原数据。
 > 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
@@ -57,101 +29,13 @@ depth_requirement_quantification:
 
 AI可能编造不存在的内容——必须验证每个输出的依据。
 
-## 验证维度
+## 加载时机
 
-### 维度1：事实核查
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 逐维做防幻觉校验时 | [`references/validation-dimensions.md`](references/validation-dimensions.md) |
 
-**目标**：验证AI输出是否基于真实信息，而非编造
-
-```text
-检查点：
-├─ 需求是否真实存在？
-│   └─ 用例中的需求ID是否在需求解构表中？
-├─ 风险是否合理推断？
-│   └─ 风险ID是否基于实际风险分析？
-├─ 边界是否可验证？
-│   └─ 边界条件是否真实存在？
-├─ 行业标准是否准确？
-│   └─ 引用的行业知识是否正确？
-└─ 历史缺陷是否真实？
-    └─ 引用的历史缺陷是否有依据？
-
-防幻觉检查：
-├─ 检查是否有"凭空捏造"的内容
-├─ 检查是否有"过度推断"的内容
-├─ 检查是否有"错误引用"的内容
-└─ 检查是否有"逻辑矛盾"的内容
-```
-
-### 维度2：一致性检查
-
-**目标**：验证输出各部分是否一致
-
-```text
-检查点：
-├─ 需求ID与用例是否一一对应？
-│   └─ 每条用例的需求ID是否在需求列表中？
-├─ 风险ID与用例是否匹配？
-│   └─ 风险等级是否与用例内容一致？
-├─ 场景与边界是否对应？
-│   └─ 边界是否覆盖了相关场景？
-├─ 评审结果与实际输出是否一致？
-│   └─ 评审指出的问题是否已修正？
-└─ 不同技能输出是否矛盾？
-    └─ 需求解构、场景树、边界分析是否一致？
-
-一致性矩阵：
-| 维度1 | 维度2 | 检查项 |
-|-------|-------|--------|
-| 需求 | 用例 | 需求ID是否匹配 |
-| 风险 | 用例 | 风险ID是否匹配 |
-| 场景 | 边界 | 边界是否覆盖场景 |
-| 评审 | 输出 | 问题是否已修正 |
-```
-
-### 维度3：可执行性验证
-
-**目标**：验证测试用例是否可实际执行
-
-```text
-检查点：
-├─ 测试步骤是否具体可操作？
-│   └─ 步骤是否清晰到可以由任何人执行？
-├─ 预期结果是否可验证？
-│   └─ 预期结果是否客观可测量？
-├─ 测试数据是否可构造？
-│   └─ 需要的测试数据能否准备？
-├─ 测试环境是否可搭建？
-│   └─ 需要的环境能否搭建？
-└─ 测试工具是否可用？
-    └─ 需要的工具是否可获取？
-
-可执行性评分：
-- 10分：完全可执行，无任何障碍
-- 7分：基本可执行，少量障碍可克服
-- 4分：部分可执行，有明显障碍
-- 1分：无法执行，需要重新设计
-```
-
-### 维度4：来源追溯
-
-**目标**：标注每个输出的来源和依据
-
-```text
-追溯内容：
-├─ 需求来源：来自用户输入/需求文档
-├─ 风险来源：来自风险分析/行业经验
-├─ 边界来源：来自边界分析/最佳实践
-├─ 用例来源：来自哪个技能生成
-└─ 评审来源：来自哪个评审维度
-
-追溯格式：
-每条用例标注：
-- 需求来源：REQ-XXX（来自需求解构）
-- 风险来源：RISK-XXX（来自风险分析）
-- 生成来源：qa-ai-prompt-strategy
-- 评审状态：已评审/未评审
-```
+> `验证维度`的完整内容已下沉至 `references/validation-dimensions.md`，避免每次触发都占用上下文。
 
 ## 验证流程
 

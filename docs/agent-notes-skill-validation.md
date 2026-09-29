@@ -46,16 +46,17 @@
 ### 层 1：静态结构校验（`scripts/integrity_check.py`）
 
 **10 项必查**：
-1. frontmatter 12 字段 + traceability 全覆盖（入口编排器豁免 3 个叶子技能专属字段：`categories` / `depth_requirement_quantification` / `error_recovery_guidance`）
+1. frontmatter 规范形态（顶层仅 6 个允许字段）+ 8 个必填 `metadata` 键 + traceability（入口编排器豁免 3 个叶子技能专属键：`categories` / `depth-requirement` / `error-recovery-guidance`）
 2. name 与目录名一致
 3. version 全统一（动态以入口 `skills/qa-test-skills/SKILL.md` 的 version 为基准，当前 1.7.7）
-4. related_skills 悬空引用 + upstream/downstream 对称性
+4. `metadata.related-skills` 悬空引用 + upstream/downstream 对称性
 5. references/ 引用完整（技能目录内 + 入口 references/ 兜底）
 6. ID 规范一致性（与 `docs/standards.md` 前缀定义对照）
 7. 正文含 `## 检查清单`（软问题，⚠️ 不计硬问题）
 8. UTF-8 BOM（SKILL.md / scripts/*.py / evals/*.json 不得带 BOM）
 9. evals.json 结构有效（id 唯一、prompt/expected_output/assertions 齐全）
-10. 安全审计残留（when_to_use 裸泛化词 + 涉险技能 Missing Warnings）
+10. 安全审计残留（`metadata.when-to-use` 裸泛化词 + 涉险技能 Missing Warnings）
+11. evals 断言的 ID 前缀与 `docs/standards.md` 一致（历史缺陷：断言写 `TC-` 而技能规定 `TC_`，合规输出恒判负分）
 
 **用法**：
 ```bash
@@ -65,13 +66,13 @@ python scripts/integrity_check.py
 
 **实测踩坑**：
 - V1.5.1 遗留：5 技能 description 嵌了 `hen_to_use:` 文本（YAML folded scalar 吸收下一字段）
-- V1.5.1 遗留：`qa-risk-intuition` 缺 `input_format:` 键，required/optional 变 orphan
+- V1.5.1 遗留：`qa-risk-intuition` 缺 `input-format` 键，required/optional 变 orphan
 - **V1.7.7 命中**：入口从根目录迁到 `skills/` 后，脚本的 `skills/qa-*` glob 把入口扫进了 12 字段检查，
   报 3 项 ❌（入口是编排器，无叶子技能专属字段）→ 按迁移前语义为入口豁免这 3 项，而非给入口补凑字段
 
 ### 层 2：契约断言（`scripts/validate_deps.py` + `scripts/validate_standards.py` + `scripts/grade_evals.py`）
 
-**`validate_deps.py`**：校验 49 个技能的 `related_skills` 引用图——upstream/downstream 对称 + 无悬空 + 无孤立技能 + 入口 all_skills 收录完整。
+**`validate_deps.py`**：校验 49 个技能的 `metadata.related-skills` 引用图——upstream/downstream 对称 + 无悬空 + 无孤立技能 + 入口 all_skills 收录完整。
 
 **`validate_standards.py`**：入口工作流表的 ⚠️不得跳过 标注与 `references/enforcement.md` 的强制步骤一致；`docs/standards.md` 的 ID 前缀定义与子技能 traceability 声明一致。
 
@@ -304,7 +305,7 @@ STEP 9: 归档 + 报告 + 版本同步
 
 | 坑 | 表现 | 解法 |
 |----|------|------|
-| YAML folded scalar 吸收下一字段 | description 嵌了 `hen_to_use:` 文本 | 补独立 `when_to_use:` 字段 + 清理 description |
+| YAML folded scalar 吸收下一字段 | description 嵌了 `hen-to-use:` 文本 | 补独立 `metadata.when-to-use` 字段 + 清理 description |
 | frontmatter 字段错位 | required/optional 被插到 related_skills 下 | 检查 YAML 缩进 + 跑 integrity_check |
 | 手写 frontmatter 解析器不认块标量 | 插件加载后 49 个 description 全为空 | 支持 `>-`/`|` 块标量：收集缩进行折叠为单行；或直接用 YAML 库 |
 | 解析器遇 CRLF 文件正则失配 | `$` 锚点前残留 `\r`，`match` 全部落空 | 解析前统一 `.replace('\r\n','\n')` |

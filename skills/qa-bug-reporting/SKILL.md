@@ -1,59 +1,24 @@
 ---
 name: qa-bug-reporting
-slug: qa-bug-reporting
-displayName: Bug Reporting
-version: 1.7.7
 description: >-
-  当发现了一个 Bug 需要提交、自己提的 Bug 被开发打回来了、或者团队 Bug 质量参差不齐需要统一规范时使用此技能。一个高质量的 Bug 报告应该让开发看一遍就能复现并定位，不需要来回追问。包含清晰的复现步骤（从环境准备到操作序列到预期/实际结果）、根因推测、影响范围评估和必要附件。 ⚠️ 本技能示例可能调用外部抓包/日志工具，请在受控环境执行。
-when_to_use: 用户说"提Bug"、"写Bug报告"、"Bug描述"、"报告格式"、"复现步骤"、"加附件"、需要编写或优化Bug报告、开发打回Bug报告需要改进时
+  当发现了一个 Bug 需要提交、自己提的 Bug 被开发打回来了、或者团队 Bug 质量参差不齐需要统一规范时使用此技能。一个高质量的 Bug 报告应该让开发看一遍就能复现并定位，不需要来回追问。包含清晰的复现步骤（从环境准备到操作序列到预期/实际结果）、根因推测、影响范围评估和必要附件。 ⚠️ 本技能示例可能调用外部抓包/日志工具，请在受控环境执行。 触发场景：提Bug、写Bug报告、Bug描述、报告格式、复现步骤、加附件、开发打回Bug报告需要改进时。 Use when the user asks about: writing a bug report an engineer can reproduce without asking follow-up questions, or fixing reports that got rejected.
+license: MIT
 allowed-tools: Read Grep Glob Bash
-related_skills:
-  upstream:
-    - qa-execution-observation   # 输入：执行观察结果
-    - qa-bug-root-cause-analysis # 输入：根因分析结果
-    - qa-question-framework      # 输入：提问框架确保信息完整
-  downstream:
-    - qa-bug-lifecycle        # 输出：Bug报告进入缺陷管理
-    - qa-stakeholder-communication
-input_format:
-  required:
-    - name: Bug描述
-      type: string
-      description: 缺陷的详细描述
-    - name: 复现步骤
-      type: array
-      description: 缺陷复现的具体步骤
-  optional:
-    - name: 环境信息
-      type: string
-      description: 缺陷发现时的环境配置
-    - name: 日志信息
-      type: string
-      description: 相关执行日志
-output_format:
-  traceability:
-    - 每个Bug带唯一ID（TC_{缺陷模块缩写}_{功能缩写}_{序号}，如 TC_BUG_LOGIN_001；缺陷追溯保留 BUG 前缀）
-    - 关联执行用例ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - bug_title: 缺陷标题
-    - severity: 严重级别
-    - priority: 优先级
-    - reproduction_steps: 复现步骤
-    - expected_vs_actual: 预期vs实际结果
-    - root_cause: 根因推测（可选）
-    - impact_assessment: 影响范围评估
-    - attachments: 附件清单
-categories: ['Development','Testing','Quality']
-depth_requirement_quantification:
-  reference_value: "根据缺陷严重度调整报告深度：简单×1/中等×2/复杂×3"
-  minimum: "至少包含复现步骤、预期vs实际、影响评估3个核心结构"
-error_recovery_guidance:
-  on_failure: "Bug报告被开发打回时回退到执行观察步骤补充信息"
-  retry_behavior: "补充复现步骤或环境信息后重新提交"
+metadata:
+  slug: "qa-bug-reporting"
+  display-name: "缺陷报告"
+  version: "1.8.0"
+  when-to-use: "用户说\"提Bug\"、\"写Bug报告\"、\"Bug描述\"、\"报告格式\"、\"复现步骤\"、\"加附件\"、需要编写或优化Bug报告、开发打回Bug报告需要改进时"
+  related-skills: "{\"upstream\":[\"qa-execution-observation\",\"qa-bug-root-cause-analysis\",\"qa-question-framework\"],\"downstream\":[\"qa-bug-lifecycle\",\"qa-stakeholder-communication\"]}"
+  references: "[\"references/bug-report-structure.md\"]"
+  input-format: "{\"required\":[{\"name\":\"Bug描述\",\"type\":\"string\",\"description\":\"缺陷的详细描述\"},{\"name\":\"复现步骤\",\"type\":\"array\",\"description\":\"缺陷复现的具体步骤\"}],\"optional\":[{\"name\":\"环境信息\",\"type\":\"string\",\"description\":\"缺陷发现时的环境配置\"},{\"name\":\"日志信息\",\"type\":\"string\",\"description\":\"相关执行日志\"}]}"
+  output-format: "{\"traceability\":[\"每个Bug带唯一ID（TC_{缺陷模块缩写}_{功能缩写}_{序号}，如 TC_BUG_LOGIN_001；缺陷追溯保留 BUG 前缀）\",\"关联执行用例ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）\"],\"structure\":[{\"bug_title\":\"缺陷标题\"},{\"severity\":\"严重级别\"},{\"priority\":\"优先级\"},{\"reproduction_steps\":\"复现步骤\"},{\"expected_vs_actual\":\"预期vs实际结果\"},{\"root_cause\":\"根因推测（可选）\"},{\"impact_assessment\":\"影响范围评估\"},{\"attachments\":\"附件清单\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"Bug报告被开发打回时回退到执行观察步骤补充信息\",\"retry_behavior\":\"补充复现步骤或环境信息后重新提交\"}"
+  categories: "[\"Development\",\"Testing\",\"Quality\"]"
+  depth-requirement: "{\"reference_value\":\"根据缺陷严重度调整报告深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少包含复现步骤、预期vs实际、影响评估3个核心结构\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 > **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
 > 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
 > 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
@@ -64,130 +29,13 @@ error_recovery_guidance:
 
 好的Bug报告不只是"描述问题"，而是帮开发缩小排查范围。
 
-## Bug报告黄金结构
+## 加载时机
 
-### 结构1：标题（是什么+在哪+什么条件下）
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 写缺陷报告时，取七段式结构与各段写法 | [`references/bug-report-structure.md`](references/bug-report-structure.md) |
 
-```text
-标题公式：
-[功能模块] + [具体现象] + [触发条件]
-
-好标题：
-✓ [登录] 输入正确密码提示"密码错误"（Chrome浏览器）
-✓ [支付] 支付成功后订单状态仍为"待支付"
-✓ [导出] 导出Excel文件乱码（Windows系统）
-
-坏标题：
-✗ 登录有问题
-✗ 支付报错了
-✗ 导出不对
-```
-
-### 结构2：前置条件（测试前需要满足什么）
-
-```text
-前置条件清单：
-├─ 用户状态：登录/未登录、角色、权限
-├─ 数据状态：测试数据准备
-├─ 环境状态：浏览器、系统、网络
-├─ 配置状态：功能开关、配置项
-└─ 依赖状态：第三方服务状态
-
-示例：
-- 用户已登录，角色为普通用户
-- 测试账号：testuser001
-- 浏览器：Chrome 120.0
-- 网络：正常网络环境
-- 测试数据：已创建一个待支付订单
-```
-
-### 结构3：复现步骤（精确到每一步）
-
-```text
-复现步骤格式：
-1. [操作步骤1]
-2. [操作步骤2]
-3. [操作步骤3]
-4. 观察[具体现象]
-
-示例：
-1. 打开登录页面
-2. 输入用户名：testuser001
-3. 输入密码：Test@1234
-4. 点击"登录"按钮
-5. 观察页面提示
-
-注意：
-- 每步只做一个操作
-- 步骤要可重复
-- 包含必要的输入数据
-```
-
-### 结构4：预期vs实际（明确对比）
-
-```text
-预期结果：[应该发生什么]
-实际结果：[实际发生了什么]
-
-示例：
-预期结果：登录成功，跳转到首页
-实际结果：提示"密码错误"，停留在登录页面
-```
-
-### 结构5：附件（怎么截图、怎么抓包）
-
-```text
-附件清单：
-├─ 截图：错误界面截图
-├─ 日志：控制台日志
-├─ 网络：网络请求/响应
-├─ 录屏：操作过程录制
-└─ 环境：浏览器版本、系统信息
-
-截图技巧：
-- 截取完整错误信息
-- 包含关键操作区域
-- 标注问题位置
-- 多个角度截图
-
-抓包技巧：
-- 使用Chrome DevTools
-- 记录请求URL、参数、响应
-- 标注异常请求
-- 导出HAR文件
-```
-
-### 结构6：根因推测（如果有）
-
-```text
-根因推测：
-├─ 推测方向：可能是[代码/数据/配置]问题
-├─ 推测依据：因为[日志/现象/经验]
-├─ 验证建议：建议检查[具体位置]
-
-示例：
-推测方向：可能是密码验证逻辑问题
-推测依据：控制台日志显示"password validation failed"
-验证建议：建议检查LoginController.validatePassword方法
-```
-
-### 结构7：影响范围评估
-
-```text
-影响评估：
-├─ 影响功能：[具体功能]
-├─ 影响用户：[用户范围]
-├─ 影响程度：[严重/一般/轻微]
-├─ 是否阻塞：[是否阻塞其他功能]
-└─ 修复优先级：[P0/P1/P2/P3]
-
-示例：
-影响功能：用户登录功能
-影响用户：所有用户
-影响程度：严重（无法登录）
-是否阻塞：是（阻塞所有需要登录的功能）
-修复优先级：P0（紧急）
-```
+> `Bug报告黄金结构`的完整内容已下沉至 `references/bug-report-structure.md`，避免每次触发都占用上下文。
 
 ## Bug报告模板
 

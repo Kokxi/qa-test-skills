@@ -1,182 +1,37 @@
 ---
 name: qa-testability-advocacy
-slug: qa-testability-advocacy
-displayName: Testability Advocacy
-version: 1.7.7
 description: >-
-  当测试发现"这个功能测不了"、"加个日志就能定位"、"这个模块没法 Mock"时使用此技能。从可控性（能否控制测试条件）、可观察性（能否看到内部状态）、可隔离性（能否独立测试）、自动化性和可诊断性五个维度评估系统的可测试性水平，给出具体的系统改进建议和推动策略。可测试性差的系统一定质量差——不是因为系统本身不好，是因为你根本测不透它。输出可测试性评估报告和各维度的改造建议。 ⚠️ 本技能含废弃测试清理建议，执行前请确认非关键数据。
-when_to_use: 用户说"可测试性"、"难测"、"不好测"、"测试推动"、"架构改进"、"可测性评审"、需要评估可测试性、需要推动架构改进可测试性时
+  当测试发现"这个功能测不了"、"加个日志就能定位"、"这个模块没法 Mock"时使用此技能。从可控性（能否控制测试条件）、可观察性（能否看到内部状态）、可隔离性（能否独立测试）、自动化性和可诊断性五个维度评估系统的可测试性水平，给出具体的系统改进建议和推动策略。可测试性差的系统一定质量差——不是因为系统本身不好，是因为你根本测不透它。输出可测试性评估报告和各维度的改造建议。 ⚠️ 本技能含废弃测试清理建议，执行前请确认非关键数据。 触发场景：可测试性、难测、不好测、测试推动、架构改进、可测性评审、需要推动架构改进可测试性时。 Use when the user asks about: assessing and improving system testability — controllability, observability, isolatability, automability, and diagnosability.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-quality-metrics         # 输入：质量趋势识别改进点
-    - qa-execution-observation   # 输入：执行中发现的可测试性问题
-  downstream:
-    - qa-test-env-data           # 输出：推动环境和数据可测试性改进
-    - qa-shift-left
-input_format:
-  required:
-    - name: 测试策略
-      type: object
-      description: 来自qa-test-strategy-design的测试策略
-    - name: 架构设计
-      type: string
-      description: 系统架构设计文档
-  optional:
-    - name: 代码库访问
-      type: string
-      description: 代码库路径和结构
-output_format:
-  traceability:
-    - 每项推动建议带唯一ID（ADV-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - testability_assessment: 可测试性评估报告
-    - improvement_suggestions: 改进建议
-    - refactoring_guide: 重构指南
-    - best_practices: 可测试性最佳实践
-categories: ['Development','Testing','DevOps']
-depth_requirement_quantification:
-  reference_value: "根据系统问题调整推动深度：简单×1/中等×2/复杂×3"
-  minimum: "至少识别3个可测试性问题并提出改进建议"
-error_recovery_guidance:
-  on_failure: "可测试性推动遗漏问题时回退到代码评审补充"
-  retry_behavior: "补充评审后重新推动改进"
+metadata:
+  slug: "qa-testability-advocacy"
+  display-name: "可测试性倡导"
+  version: "1.8.0"
+  when-to-use: "用户说\"可测试性\"、\"难测\"、\"不好测\"、\"测试推动\"、\"架构改进\"、\"可测性评审\"、需要评估可测试性、需要推动架构改进可测试性时"
+  related-skills: "{\"upstream\":[\"qa-quality-metrics\",\"qa-execution-observation\"],\"downstream\":[\"qa-test-env-data\",\"qa-shift-left\"]}"
+  references: "[\"references/testability-dimensions.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试策略\",\"type\":\"object\",\"description\":\"来自qa-test-strategy-design的测试策略\"},{\"name\":\"架构设计\",\"type\":\"string\",\"description\":\"系统架构设计文档\"}],\"optional\":[{\"name\":\"代码库访问\",\"type\":\"string\",\"description\":\"代码库路径和结构\"}]}"
+  output-format: "{\"traceability\":[\"每项推动建议带唯一ID（ADV-XXXX）\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"testability_assessment\":\"可测试性评估报告\"},{\"improvement_suggestions\":\"改进建议\"},{\"refactoring_guide\":\"重构指南\"},{\"best_practices\":\"可测试性最佳实践\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"可测试性推动遗漏问题时回退到代码评审补充\",\"retry_behavior\":\"补充评审后重新推动改进\"}"
+  categories: "[\"Development\",\"Testing\",\"DevOps\"]"
+  depth-requirement: "{\"reference_value\":\"根据系统问题调整推动深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少识别3个可测试性问题并提出改进建议\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # 可测试性推动
 
 ## 核心原则
 
 在架构评审阶段就能识别可测试性问题，推动开发做可测试设计。
 
-## 可测试性检查维度
+## 加载时机
 
-### 维度1：接口层可测试性
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 逐维打分或找改进项时，取五维详表 | [`references/testability-dimensions.md`](references/testability-dimensions.md) |
 
-```text
-检查点：
-├─ Mock点：是否有Mock接口？
-│   ├─ 外部依赖是否可Mock
-│   ├─ 第三方服务是否可Mock
-│   └─ 数据库是否可Mock
-│
-├─ 测试接口：是否有测试专用接口？
-│   ├─ 数据初始化接口
-│   ├─ 数据清理接口
-│   └─ 状态查询接口
-│
-├─ 接口文档：接口文档是否完整？
-│   ├─ 入参/出参定义
-│   ├─ 错误码定义
-│   └─ 示例数据
-│
-└─ 接口版本：接口版本管理？
-    ├─ 向后兼容
-    └─ 版本切换
-```
-
-### 维度2：数据层可测试性
-
-```text
-检查点：
-├─ 数据构造：测试数据能否方便构造？
-│   ├─ 数据工厂模式
-│   ├─ 测试数据生成器
-│   └─ 批量数据导入
-│
-├─ 数据清理：测试数据能否方便清理？
-│   ├─ 测试后自动清理
-│   ├─ 按用例隔离
-│   └─ 按模块隔离
-│
-├─ 数据隔离：测试数据能否隔离？
-│   ├─ 测试环境独立
-│   ├─ 测试库独立
-│   └─ 测试账户独立
-│
-└─ 数据查询：能否方便查询数据状态？
-    ├─ 数据状态查询接口
-    ├─ 数据变更日志
-    └─ 数据快照
-```
-
-### 维度3：日志层可测试性
-
-```text
-检查点：
-├─ 关键路径日志：关键操作是否有日志？
-│   ├─ 业务操作日志
-│   ├─ 数据变更日志
-│   └─ 异常处理日志
-│
-├─ 日志级别：日志级别是否合理？
-│   ├─ DEBUG：调试信息
-│   ├─ INFO：业务信息
-│   ├─ WARN：警告信息
-│   └─ ERROR：错误信息
-│
-├─ TraceId：是否有链路追踪？
-│   ├─ 请求唯一标识
-│   ├─ 跨服务追踪
-│   └─ 日志关联
-│
-└─ 日志查询：能否方便查询日志？
-    ├─ 日志平台
-    ├─ 日志搜索
-    └─ 日志分析
-```
-
-### 维度4：配置层可测试性
-
-```text
-检查点：
-├─ 功能开关：是否有功能开关？
-│   ├─ 新功能开关
-│   ├─ 实验功能开关
-│   └─ 灰度开关
-│
-├─ 配置动态化：配置能否动态修改？
-│   ├─ 运行时配置
-│   ├─ 热更新配置
-│   └─ 配置回滚
-│
-├─ 测试配置：是否有测试专用配置？
-│   ├─ 测试环境配置
-│   ├─ Mock配置
-│   └─ 超时配置
-│
-└─ 配置文档：配置项文档是否完整？
-    ├─ 配置项说明
-    ├─ 默认值说明
-    └─ 影响范围说明
-```
-
-### 维度5：依赖层可测试性
-
-```text
-检查点：
-├─ 外部依赖：外部依赖能否Mock？
-│   ├─ 第三方接口Mock
-│   ├─ 消息队列Mock
-│   └─ 缓存服务Mock
-│
-├─ 服务依赖：服务依赖能否隔离？
-│   ├─ 服务虚拟化
-│   ├─ 契约测试
-│   └─ 集成测试环境
-│
-├─ 数据库依赖：数据库依赖能否Mock？
-│   ├─ 内存数据库
-│   ├─ 测试数据库
-│   └─ 数据库快照
-│
-└─ 降级方案：依赖异常时能否降级？
-    ├─ 熔断机制
-    ├─ 降级策略
-    └─ 容错处理
-```
+> `可测试性检查维度`的完整内容已下沉至 `references/testability-dimensions.md`，避免每次触发都占用上下文。
 
 ## 可测试性评估表
 

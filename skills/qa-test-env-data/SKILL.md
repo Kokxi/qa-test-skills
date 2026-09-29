@@ -1,50 +1,24 @@
 ---
 name: qa-test-env-data
-slug: qa-test-env-data
-displayName: Test Env Data
-version: 1.7.7
 description: >-
-  当测试环境不稳定、环境不够用、或者需要准备测试数据时使用此技能。覆盖环境部署与配置管理、环境监控与问题排查（环境问题 vs 代码问题的快速区分）、多环境管理策略（开发/测试/预发）和日常测试数据准备。环境问题是最容易浪费测试时间的事——一个稳定的环境比一百个测试用例更有价值。输出环境健康度检查和数据准备 checklist。 ⚠️ 本技能含环境清理步骤，执行前请确认非生产环境。
-when_to_use: 用户说"测试环境"、"环境搭建"、"环境配置"、"造数"、"测试数据"、"数据准备"、"环境部署"、需要搭建测试环境、需要准备测试数据时
+  当测试环境不稳定、环境不够用、或者需要准备测试数据时使用此技能。覆盖环境部署与配置管理、环境监控与问题排查（环境问题 vs 代码问题的快速区分）、多环境管理策略（开发/测试/预发）和日常测试数据准备。环境问题是最容易浪费测试时间的事——一个稳定的环境比一百个测试用例更有价值。输出环境健康度检查和数据准备 checklist。 ⚠️ 本技能含环境清理步骤，执行前请确认非生产环境。 触发场景：测试环境、环境搭建、环境配置、造数、测试数据、数据准备、环境部署、需要准备测试数据时。 Use when the user asks about: test environment setup and stability troubleshooting, multi-environment strategy, and day-to-day test data preparation.
+license: MIT
 allowed-tools: Read Grep Glob Bash
-related_skills:
-  upstream:
-    - qa-testability-advocacy    # 输入：可测试性改进建议
-    - qa-test-strategy-design    # 输入：测试策略确定环境需求
-  downstream:
-    - qa-execution-observation   # 输出：环境和数据支持执行
-    - qa-test-data-engineering
-input_format:
-  required:
-    - name: 测试策略
-      type: object
-      description: 来自qa-test-strategy-design的测试策略
-    - name: 环境需求
-      type: string
-      description: 测试环境的配置需求
-  optional:
-    - name: 现有环境清单
-      type: array
-      description: 现有测试环境列表
-output_format:
-  traceability:
-    - 每套环境配置带唯一ID（ENV-XXXX）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - env_requirements: 环境需求清单
-    - env_design: 环境设计方案
-    - configuration_guide: 配置指南
-    - maintenance_plan: 维护计划
-categories: ['Development','Testing','DevOps']
-depth_requirement_quantification:
-  reference_value: "根据环境复杂度调整部署深度：简单×1/中等×2/复杂×3"
-  minimum: "至少完成环境搭建、配置管理、数据准备3步"
-error_recovery_guidance:
-  on_failure: "环境部署遗漏配置项时回退到测试策略补充依赖"
-  retry_behavior: "补充依赖后重新部署环境"
+metadata:
+  slug: "qa-test-env-data"
+  display-name: "测试环境与数据"
+  version: "1.8.0"
+  when-to-use: "用户说\"测试环境\"、\"环境搭建\"、\"环境配置\"、\"造数\"、\"测试数据\"、\"数据准备\"、\"环境部署\"、需要搭建测试环境、需要准备测试数据时"
+  related-skills: "{\"upstream\":[\"qa-testability-advocacy\",\"qa-test-strategy-design\"],\"downstream\":[\"qa-execution-observation\",\"qa-test-data-engineering\"]}"
+  references: "[\"references/data-management.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试策略\",\"type\":\"object\",\"description\":\"来自qa-test-strategy-design的测试策略\"},{\"name\":\"环境需求\",\"type\":\"string\",\"description\":\"测试环境的配置需求\"}],\"optional\":[{\"name\":\"现有环境清单\",\"type\":\"array\",\"description\":\"现有测试环境列表\"}]}"
+  output-format: "{\"traceability\":[\"每套环境配置带唯一ID（ENV-XXXX）\"],\"structure\":[{\"env_requirements\":\"环境需求清单\"},{\"env_design\":\"环境设计方案\"},{\"configuration_guide\":\"配置指南\"},{\"maintenance_plan\":\"维护计划\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"环境部署遗漏配置项时回退到测试策略补充依赖\",\"retry_behavior\":\"补充依赖后重新部署环境\"}"
+  categories: "[\"Development\",\"Testing\",\"DevOps\"]"
+  depth-requirement: "{\"reference_value\":\"根据环境复杂度调整部署深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少完成环境搭建、配置管理、数据准备3步\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # 测试环境与数据管理
 
 ## 核心原则
@@ -141,84 +115,13 @@ error_recovery_guidance:
     └─ 预防：数据备份、数据监控
 ```
 
-## 测试数据管理
+## 加载时机
 
-### 数据准备方法
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 准备、脱敏、清理测试数据时 | [`references/data-management.md`](references/data-management.md) |
 
-```text
-数据准备方法：
-├─ 手动造数
-│   ├─ 适用：少量数据、复杂数据
-│   ├─ 工具：数据库客户端、管理后台
-│   └─ 优点：灵活、精确
-│
-├─ 脚本造数
-│   ├─ 适用：批量数据、重复数据
-│   ├─ 工具：SQL脚本、Python脚本
-│   └─ 优点：高效、可复用
-│
-├─ 数据工厂
-│   ├─ 适用：标准化数据、大量数据
-│   ├─ 工具：Faker、Mockaroo、自研
-│   └─ 优点：标准化、可扩展
-│
-└─ 接口造数
-    ├─ 适用：业务数据、流程数据
-    ├─ 工具：Postman、自研脚本
-    └─ 优点：业务真实、流程完整
-```
-
-### 数据脱敏
-
-> 📌 本节与 qa-test-data-engineering「数据脱敏」内容同步，修改时请同步更新。完整版含 Python 实现代码见 qa-test-data-engineering。
-
-```text
-脱敏规则：
-├─ 个人信息
-│   ├─ 手机号：138****1234
-│   ├─ 身份证：110***********1234
-│   ├─ 邮箱：test****@example.com
-│   └─ 姓名：*三
-│
-├─ 敏感数据
-│   ├─ 银行卡：6222****1234
-│   ├─ 密码：******
-│   ├─ Token：****
-│   └─ 地址：北京市***
-│
-└─ 脱敏方法
-    ├─ 替换法：用*替换部分字符
-    ├─ 加密法：用加密算法处理
-    ├─ 截断法：只保留部分字符
-    └─ 随机法：用随机值替换
-```
-
-### 数据清理
-
-> 📌 本节与 qa-test-data-engineering「数据清理」内容同步，修改时请同步更新两处。
-
-```text
-清理策略：
-├─ 按用例清理
-│   ├─ 每个用例执行后清理
-│   ├─ 优点：数据隔离好
-│   └─ 缺点：效率低
-│
-├─ 按模块清理
-│   ├─ 每个模块测试后清理
-│   ├─ 优点：效率较高
-│   └─ 缺点：隔离性一般
-│
-├─ 按批次清理
-│   ├─ 每个批次测试后清理
-│   ├─ 优点：效率高
-│   └─ 缺点：隔离性差
-│
-└─ 定期清理
-    ├─ 定期清理历史数据
-    ├─ 优点：保持数据量可控
-    └─ 缺点：可能影响测试
-```
+> `测试数据管理`的完整内容已下沉至 `references/data-management.md`，避免每次触发都占用上下文。
 
 ## 输出示例
 

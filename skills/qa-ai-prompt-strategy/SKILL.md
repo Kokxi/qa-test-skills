@@ -1,49 +1,24 @@
 ---
 name: qa-ai-prompt-strategy
-slug: qa-ai-prompt-strategy
-displayName: Ai Prompt Strategy
-version: 1.7.7
 description: >-
-  根据不同的测试目标和上下文，选择最佳的提示词模式来驱动AI生成高质量的测试用例。当AI输出的测试用例质量不够好、太泛泛、或者深度不够时，问题往往不在AI而在提示词。此技能提供结构化提示词模板，注入前面步骤产出的分析结果，输出包含角色定义、输出格式规范和约束条件的优化提示词。⚠️ 作为工作流的必过步骤，不得跳过。
-
-when_to_use: 用户说"怎么问AI"、"AI回答不好"、"换个方式问"、"提示词"、"提问模板"、"提示词优化"、"角色扮演"、需要不同测试视角、AI输出太浅需要更深时
+  根据不同的测试目标和上下文，选择最佳的提示词模式来驱动AI生成高质量的测试用例。当AI输出的测试用例质量不够好、太泛泛、或者深度不够时，问题往往不在AI而在提示词。此技能提供结构化提示词模板，注入前面步骤产出的分析结果，输出包含角色定义、输出格式规范和约束条件的优化提示词。⚠️ 作为工作流的必过步骤，不得跳过。 触发场景：怎么问AI、AI回答不好、换个方式问、提示词、提问模板、提示词优化、角色扮演、AI输出太浅需要更深时。 Use when the user asks about: choosing or optimizing the prompt that drives test case generation — role definition, output format constraints, and injection of prior analysis results.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-ai-context-engineering  # 输入：上下文包
-  downstream:
-    - qa-ai-output-critique      # 输出：优化后的提示词用于生成
-input_format:
-  required:
-    - name: AI上下文包
-      type: object
-      description: 来自qa-ai-context-engineering的上下文包
-  optional:
-    - name: 输出格式要求
-      type: string
-      description: 期望的输出格式和规范
-    - name: 约束条件
-      type: string
-      description: 提示词的约束和限制
-output_format:
-  traceability:
-    - 本技能生成提示词，不产出唯一ID
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - optimized_prompt: 优化后的提示词
-    - role_definition: 角色定义
-    - output_format_spec: 输出格式规范
-    - constraint_list: 约束条件列表
-depth_requirement_quantification:
-  reference_value: "根据场景复杂度和输出要求调整策略深度：简单x1/中等x2/复杂x3"
-  minimum: "至少包含角色定义、输出格式、约束条件3个核心要素"
-categories: ['Development','Testing','AI']
-error_recovery_guidance:
-  on_failure: "提示词输出质量不达标时回退到上下文工程步骤"
-  retry_behavior: "补充上下文要素后重新优化提示词"
+metadata:
+  slug: "qa-ai-prompt-strategy"
+  display-name: "AI 测试提示词策略"
+  version: "1.8.0"
+  when-to-use: "用户说\"怎么问AI\"、\"AI回答不好\"、\"换个方式问\"、\"提示词\"、\"提问模板\"、\"提示词优化\"、\"角色扮演\"、需要不同测试视角、AI输出太浅需要更深时"
+  related-skills: "{\"upstream\":[\"qa-ai-context-engineering\"],\"downstream\":[\"qa-ai-output-critique\"]}"
+  references: "[\"references/prompt-patterns.md\"]"
+  input-format: "{\"required\":[{\"name\":\"AI上下文包\",\"type\":\"object\",\"description\":\"来自qa-ai-context-engineering的上下文包\"}],\"optional\":[{\"name\":\"输出格式要求\",\"type\":\"string\",\"description\":\"期望的输出格式和规范\"},{\"name\":\"约束条件\",\"type\":\"string\",\"description\":\"提示词的约束和限制\"}]}"
+  output-format: "{\"traceability\":[\"本技能生成提示词，不产出唯一ID\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"optimized_prompt\":\"优化后的提示词\"},{\"role_definition\":\"角色定义\"},{\"output_format_spec\":\"输出格式规范\"},{\"constraint_list\":\"约束条件列表\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"提示词输出质量不达标时回退到上下文工程步骤\",\"retry_behavior\":\"补充上下文要素后重新优化提示词\"}"
+  categories: "[\"Development\",\"Testing\",\"AI\"]"
+  depth-requirement: "{\"reference_value\":\"根据场景复杂度和输出要求调整策略深度：简单x1/中等x2/复杂x3\",\"minimum\":\"至少包含角色定义、输出格式、约束条件3个核心要素\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # AI 提示词策略
 
 ## 核心原则
@@ -68,135 +43,13 @@ error_recovery_guidance:
 5. 质量要求：每条用例必须可执行、可验证
 ```
 
-## 六大提示词模式
+## 加载时机
 
-### 模式1：结构化输出模式
-**适用场景**：需要标准化、可对比的测试用例
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 选定提示词模式后，取对应模板 | [`references/prompt-patterns.md`](references/prompt-patterns.md) |
 
-```text
-
-请按以下框架输出测试用例：
-1. 用例编号：TC_{模块缩写}_{功能缩写}_{序号}（如 TC_API_LOGIN_001）
-2. 用例标题：[动作] + [对象] + [条件]
-3. 前置条件：[测试前需要满足的条件]
-4. 测试步骤：[1. 2. 3. ...]
-5. 预期结果：[具体可验证的预期]
-6. 优先级：P0/P1/P2/P3
-7. 风险等级：高/中/低
-
-输出格式：Markdown表格
-
-测试范围：[功能描述]
-测试深度：覆盖正常/异常/边界/安全
-```
-
-### 模式2：角色扮演模式
-**适用场景**：需要从特定视角深入测试
-
-```text
-你现在是一位[角色]，正在使用[功能]。
-
-你的背景：
-- 使用频率：[每天/每周/偶尔]
-- 技术水平：[新手/普通/专家]
-- 核心诉求：[你最关心什么]
-- 常见操作：[你通常怎么用]
-
-请从这个角色的视角，列出：
-1. 你会怎么用这个功能？
-2. 你会遇到什么问题？
-3. 什么会让你不满意？
-4. 你会怎么误用这个功能？
-```
-
-### 模式3：分步引导模式
-**适用场景**：复杂功能需要深度分析
-
-```text
-请按以下步骤分析这个功能：
-
-第1步：需求解构
-- 列出所有显性需求
-- 挖掘隐含假设
-- 识别潜在矛盾
-
-第2步：场景构建
-- 主路径场景
-- 分支路径场景
-- 异常恢复场景
-
-第3步：深度设计
-- 边界条件分析
-- 组合测试策略
-- 状态转换覆盖
-
-第4步：风险评估
-- 高风险区域
-- 建议测试深度
-
-功能描述：[具体描述]
-```
-
-### 模式4：反向质疑模式
-**适用场景**：AI输出后需要查漏补缺
-
-```text
-以上是你生成的测试用例。现在请：
-
-1. 假设挖掘
-- 你在输出中做了哪些假设？
-- 这些假设合理吗？
-- 如果假设不成立会怎样？
-
-2. 盲区检查
-- 哪些场景你可能遗漏了？
-- 哪些边界你没有覆盖？
-- 并发、时序、资源竞争考虑了吗？
-
-3. 改进建议
-- 最需要补充的3个场景是什么？
-- 从哪个方向迭代最有效？
-```
-
-### 模式5：多视角模式
-**适用场景**：需要全面覆盖不同角度
-
-```text
-请从以下三个视角分别分析这个功能：
-
-【用户视角】
-- 核心诉求：
-- 操作路径：
-- 痛点预测：
-
-【开发视角】
-- 技术实现风险：
-- 边界条件：
-- 异常处理：
-
-【运维视角】
-- 监控需求：
-- 故障场景：
-- 恢复方案：
-
-功能描述：[具体描述]
-```
-
-### 模式6：对抗模式
-**适用场景**：挑战AI的输出，逼出深层思考
-
-```text
-我对你的输出有以下质疑：
-
-1. [具体质疑点1]：你考虑过[特定场景]吗？
-2. [具体质疑点2]：如果[极端情况]发生会怎样？
-3. [具体质疑点3]：这个假设[具体假设]成立吗？
-
-请针对每个质疑：
-- 承认或反驳
-- 补充你的分析
-- 如果确实遗漏，补充测试场景
-```
+> `六大提示词模式`的完整内容已下沉至 `references/prompt-patterns.md`，避免每次触发都占用上下文。
 
 ## 模式选择指南
 

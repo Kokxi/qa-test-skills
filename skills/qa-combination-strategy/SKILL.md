@@ -1,50 +1,24 @@
 ---
 name: qa-combination-strategy
-slug: qa-combination-strategy
-displayName: Combination Strategy
-version: 1.7.7
 description: >-
-  当参数多、环境多、"全组合测不完"时运用正交试验法、Pairwise和判定表来解决组合爆炸问题。如果系统有多个输入字段的组合依赖关系（如"A=1且B=2时C不能为3"）、或者需要适配多浏览器多操作系统多语言，一定要用此技能来设计高效的组合覆盖方案。不要试图全覆盖——组合测试的核心是用最少的用例达到最高的组合覆盖率。输出组合覆盖矩阵并标注覆盖遗漏。
-
-when_to_use: 用户说"组合测试"、"参数组合"、"正交测试"、"组合爆炸"、"Pairwise"、"全组合测不完"、"判断表"、需要简化测试组合、参数多环境多时
+  当参数多、环境多、"全组合测不完"时运用正交试验法、Pairwise和判定表来解决组合爆炸问题。如果系统有多个输入字段的组合依赖关系（如"A=1且B=2时C不能为3"）、或者需要适配多浏览器多操作系统多语言，一定要用此技能来设计高效的组合覆盖方案。不要试图全覆盖——组合测试的核心是用最少的用例达到最高的组合覆盖率。输出组合覆盖矩阵并标注覆盖遗漏。 触发场景：组合测试、参数组合、正交测试、组合爆炸、Pairwise、全组合测不完、判断表、参数多环境多时。 Use when the user asks about: parameter and environment combination explosion — orthogonal arrays, pairwise testing, decision tables, and combinatorial test reduction.
+license: MIT
 allowed-tools: Read Grep Glob
-related_skills:
-  upstream:
-    - qa-scenario-tree           # 输入：场景树
-  downstream:
-    - qa-ai-context-engineering  # 输出：组合矩阵传递给上下文工程
-input_format:
-  required:
-    - name: 场景树
-      type: object
-      description: 来自qa-scenario-tree的场景树
-    - name: 需求解构表
-      type: object
-      description: 来自qa-req-deconstruction的需求解构结果
-  optional:
-    - name: 风险评估
-      type: object
-      description: 来自qa-risk-intuition的风险评估
-output_format:
-  traceability:
-    - 每个组合矩阵带唯一ID（COMBO-XXXX）
-    - 关联场景ID（TC_{场景模块缩写}_{功能缩写}_{序号}）
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - combination_matrix: 组合覆盖矩阵
-    - pairwise_combinations: 成对组合列表
-    - n_way_combinations: N维组合分析
-    - coverage_gaps: 组合覆盖遗漏
-depth_requirement_quantification:
-  reference_value: "根据参数数量和取值范围调整策略深度：简单×1/中等×2/复杂×3"
-  minimum: "至少使用1种组合简化策略"
-error_recovery_guidance:
-  on_failure: "回退到全组合方案或增加取样率"
-  retry_behavior: "扩大取样范围后重新生成组合方案"
-categories: ['Development','Testing']
+metadata:
+  slug: "qa-combination-strategy"
+  display-name: "组合测试策略"
+  version: "1.8.0"
+  when-to-use: "用户说\"组合测试\"、\"参数组合\"、\"正交测试\"、\"组合爆炸\"、\"Pairwise\"、\"全组合测不完\"、\"判断表\"、需要简化测试组合、参数多环境多时"
+  related-skills: "{\"upstream\":[\"qa-scenario-tree\"],\"downstream\":[\"qa-ai-context-engineering\"]}"
+  references: "[\"references/reduction-strategies.md\"]"
+  input-format: "{\"required\":[{\"name\":\"场景树\",\"type\":\"object\",\"description\":\"来自qa-scenario-tree的场景树\"},{\"name\":\"需求解构表\",\"type\":\"object\",\"description\":\"来自qa-req-deconstruction的需求解构结果\"}],\"optional\":[{\"name\":\"风险评估\",\"type\":\"object\",\"description\":\"来自qa-risk-intuition的风险评估\"}]}"
+  output-format: "{\"traceability\":[\"每个组合矩阵带唯一ID（COMBO-XXXX）\",\"关联场景ID：SC-{场景模块缩写}-{序号}\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"combination_matrix\":\"组合覆盖矩阵\"},{\"pairwise_combinations\":\"成对组合列表\"},{\"n_way_combinations\":\"N维组合分析\"},{\"coverage_gaps\":\"组合覆盖遗漏\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"回退到全组合方案或增加取样率\",\"retry_behavior\":\"扩大取样范围后重新生成组合方案\"}"
+  categories: "[\"Development\",\"Testing\"]"
+  depth-requirement: "{\"reference_value\":\"根据参数数量和取值范围调整策略深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少使用1种组合简化策略\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 > **⚠️ 安全警告**：本技能的示例可能涉及订单号、支付金额、截图、身份证、手机号等敏感数据。
 > 实际使用时请勿粘贴真实生产数据、客户信息或财务凭证；测试前应脱敏/掩码处理。
 > 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
@@ -56,75 +30,13 @@ categories: ['Development','Testing']
 
 全组合测不完，不测又怕漏——用科学方法简化。提供 Pairwise、正交实验法、风险加权组合三种简化策略。组合数必须少于全量组合，并标注覆盖分析。
 
-## 三种简化策略
+## 加载时机
 
-### 策略1：Pairwise（两两组合）
-**原理**：每个参数的每个值，至少与其他参数的每个值组合一次
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 设计 Pairwise/正交/风险加权时 | [`references/reduction-strategies.md`](references/reduction-strategies.md) |
 
-```text
-适用场景：
-- 参数数量中等（3-10个）
-- 每个参数取值不多（2-5个）
-- 需要较全面覆盖
-
-生成方法：
-1. 列出所有参数及其取值
-2. 使用Pairwise算法生成最小用例集
-3. 人工审核补充高风险组合
-
-示例：
-参数A：a1, a2
-参数B：b1, b2, b3
-参数C：c1, c2
-
-全组合：2×3×2=12个
-Pairwise：最多4-5个用例
-```
-
-### 策略2：正交实验法
-**原理**：用正交表安排实验，均衡分散、整齐可比
-
-```text
-适用场景：
-- 参数数量多（>10个）
-- 需要统计分析
-- 因素间交互作用小
-
-正交表选择：
-- L4(2^3)：3个2水平因素，4次实验
-- L8(2^7)：7个2水平因素，8次实验
-- L9(3^4)：4个3水平因素，9次实验
-- L16(4^5)：5个4水平因素，16次实验
-
-示例：
-因素：
-- 浏览器：Chrome, Firefox, Safari（3水平）
-- 操作系统：Windows, Mac, Linux（3水平）
-- 分辨率：1024x768, 1920x1080（2水平）
-
-选择L18(3^7)正交表
-```
-
-### 策略3：风险加权组合
-**原理**：高风险组合多测，低风险组合少测
-
-```text
-适用场景：
-- 已有历史缺陷数据
-- 能识别高风险区域
-- 需要重点突破
-
-风险评估维度：
-1. 业务影响：出问题影响多大？
-2. 历史缺陷：这里出过Bug吗？
-3. 技术复杂度：实现复杂吗？
-4. 变更频率：经常改吗？
-
-风险等级：
-- 高风险：全组合测试
-- 中风险：Pairwise测试
-- 低风险：单参数测试
-```
+> `三种简化策略`的完整内容已下沉至 `references/reduction-strategies.md`，避免每次触发都占用上下文。
 
 ## 组合测试流程
 

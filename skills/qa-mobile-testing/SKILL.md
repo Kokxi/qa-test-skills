@@ -1,57 +1,24 @@
 ---
 name: qa-mobile-testing
-slug: qa-mobile-testing
-displayName: Mobile Testing
-version: 1.7.7
 description: >-
-  当需要测试 iOS/Android 原生 App、H5 页面或小程序的移动端专项场景时使用此技能。移动端的坑主要不在功能逻辑上——中断（电话/通知/低电量）、弱网/断网/网络切换、前后台切换、系统权限管理、多机型适配和各种系统版本兼容才是重灾区。不要只测功能流程，移动端的 Bug 有一半以上是中断和兼容性相关的。输出按中断/网络/权限/兼容/性能分类的测试要点清单。
-
-when_to_use: 用户说"移动测试"、"App测试"、"Android测试"、"iOS测试"、"手机上测"、"H5测试"、"小程序测试"、"移动端中断测试"、"移动端兼容测试"、需要测试移动应用、移动端发版前全面测试时
+  当需要测试 iOS/Android 原生 App、H5 页面或小程序的移动端专项场景时使用此技能。移动端的坑主要不在功能逻辑上——中断（电话/通知/低电量）、弱网/断网/网络切换、前后台切换、系统权限管理、多机型适配和各种系统版本兼容才是重灾区。不要只测功能流程，移动端的 Bug 有一半以上是中断和兼容性相关的。输出按中断/网络/权限/兼容/性能分类的测试要点清单。 触发场景：移动测试、App测试、Android测试、iOS测试、手机上测、H5测试、小程序测试、移动端中断测试、移动端兼容测试、移动端发版前全面测试时。 Use when the user asks about: mobile testing for iOS and Android apps, H5 pages, and mini programs — interruptions, weak network, background/foreground switching, permissions, and device compatibility.
+license: MIT
 allowed-tools: Read Grep Glob Bash
-related_skills:
-  upstream:
-    - qa-test-automation-arch    # 输入：自动化架构设计
-    - qa-specialized-testing     # 输入：专项测试方法
-  downstream:
-    - qa-ci-cd-testing           # 输出：移动端测试用于CI/CD
-    - qa-release-risk-governance # 输出：测试结果用于发布评估
-references:
-  - references/platform-mini-program.md
-  - references/platform-mobile-app.md
-  - references/platform-mobile-web.md
-  - references/platform-pc-web.md
-input_format:
-  required:
-    - name: 测试策略
-      type: object
-      description: 来自qa-test-strategy-design的测试策略
-    - name: 移动端需求
-      type: string
-      description: 移动端的特性需求和平台要求
-  optional:
-    - name: 设备清单
-      type: array
-      description: 测试设备和OS版本列表
-output_format:
-  traceability:
-    - 每个移动端测试用例带唯一ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）
-    - 关联平台和需求ID
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - mobile_test_plan: 移动端测试方案
-    - device_coverage: 设备覆盖矩阵
-    - platform_specific: 平台特性测试清单
-    - performance_checks: 性能测试要点
-error_recovery_guidance:
-  on_failure: "设备兼容性问题时切换到备用设备或模拟器，记录环境信息"
-  retry_behavior: "更换测试设备或修复环境问题后重新执行移动端测试"
-categories: ['Development','Testing']
-depth_requirement_quantification:
-  reference_value: "根据平台复杂度调整测试深度：简单×1/中等×2/复杂×3"
-  minimum: "至少覆盖中断、网络、权限、兼容4个移动端维度"
+metadata:
+  slug: "qa-mobile-testing"
+  display-name: "移动端测试"
+  version: "1.8.0"
+  when-to-use: "用户说\"移动测试\"、\"App测试\"、\"Android测试\"、\"iOS测试\"、\"手机上测\"、\"H5测试\"、\"小程序测试\"、\"移动端中断测试\"、\"移动端兼容测试\"、需要测试移动应用、移动端发版前全面测试时"
+  related-skills: "{\"upstream\":[\"qa-test-automation-arch\",\"qa-specialized-testing\"],\"downstream\":[\"qa-ci-cd-testing\",\"qa-release-risk-governance\"]}"
+  references: "[\"references/mobile-checklist.md\",\"references/platform-desktop.md\",\"references/platform-mini-program.md\",\"references/platform-mobile-app.md\",\"references/platform-mobile-web.md\",\"references/platform-pc-web.md\"]"
+  input-format: "{\"required\":[{\"name\":\"测试策略\",\"type\":\"object\",\"description\":\"来自qa-test-strategy-design的测试策略\"},{\"name\":\"移动端需求\",\"type\":\"string\",\"description\":\"移动端的特性需求和平台要求\"}],\"optional\":[{\"name\":\"设备清单\",\"type\":\"array\",\"description\":\"测试设备和OS版本列表\"}]}"
+  output-format: "{\"traceability\":[\"每个移动端测试用例带唯一ID（TC_{模块缩写}_{功能缩写}_{序号}，如 TC_API_LOGIN_001）\",\"关联平台和需求ID\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"mobile_test_plan\":\"移动端测试方案\"},{\"device_coverage\":\"设备覆盖矩阵\"},{\"platform_specific\":\"平台特性测试清单\"},{\"performance_checks\":\"性能测试要点\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"设备兼容性问题时切换到备用设备或模拟器，记录环境信息\",\"retry_behavior\":\"更换测试设备或修复环境问题后重新执行移动端测试\"}"
+  categories: "[\"Development\",\"Testing\"]"
+  depth-requirement: "{\"reference_value\":\"根据平台复杂度调整测试深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少覆盖中断、网络、权限、兼容4个移动端维度\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 # 移动端测试专项
 
 ## 核心原则
@@ -84,133 +51,13 @@ depth_requirement_quantification:
 >
 > 桌面端 / PC Web 专项不属于本技能范围，如需测试桌面端或 PC Web 请使用通用测试策略技能。
 
-## 移动端测试检查清单
+## 加载时机
 
-### 功能测试检查
-- [ ] 安装/卸载/升级正常
-- [ ] 核心功能完整
-- [ ] 中断测试通过
-- [ ] 离线功能可用
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 需要跨平台通用检查项时，取全平台清单 | [`references/mobile-checklist.md`](references/mobile-checklist.md) |
 
-### 兼容性测试检查
-- [ ] 主流设备覆盖
-- [ ] 系统版本覆盖
-- [ ] 屏幕尺寸适配
-- [ ] 横竖屏切换
-
-### 中断测试检查
-- [ ] 来电/短信中断
-- [ ] 通知中断
-- [ ] 低电量处理
-- [ ] 网络切换
-- [ ] 后台/前台切换
-
-### 性能测试检查
-- [ ] 启动时间达标
-- [ ] 内存占用正常
-- [ ] 帧率流畅
-- [ ] 电量消耗合理
-
-### 弱网测试检查
-- [ ] WiFi/4G切换
-- [ ] 弱网环境表现
-- [ ] 离线状态处理
-- [ ] 网络恢复后同步
-
-### 功能测试
-
-```text
-测试范围：
-├─ 安装/卸载/升级
-│   ├─ 全新安装
-│   ├─ 覆盖安装
-│   ├─ 升级安装
-│   ├─ 卸载重装
-│   └─ 跨版本升级
-│
-├─ 核心功能
-│   ├─ 业务流程测试
-│   ├─ 功能交互测试
-│   ├─ 数据持久化测试
-│   └─ 离线功能测试
-│
-└─ 中断测试
-    ├─ 来电/短信中断
-    ├─ 通知中断
-    ├─ 低电量中断
-    ├─ 网络切换中断
-    └─ 后台/前台切换
-```
-
-### 兼容性测试
-
-```text
-设备维度：
-├─ 屏幕尺寸：小屏/标准/大屏/折叠屏
-├─ 分辨率：720p/1080p/2K/4K
-├─ 系统版本：iOS 14+/Android 8+
-├─ 设备类型：手机/平板/折叠屏
-└─ 品牌厂商：三星/华为/小米/OPPO
-
-系统特性：
-├─ 权限管理：不同权限策略
-├─ 通知管理：不同通知行为
-├─ 后台策略：不同后台限制
-└─ 存储策略：不同存储权限
-```
-
-### 性能测试
-
-```text
-性能指标：
-├─ 启动时间
-│   ├─ 冷启动：<2秒
-│   ├─ 热启动：<1秒
-│   └─ 温启动：<1.5秒
-│
-├─ 内存使用
-│   ├─ 内存占用：<200MB
-│   ├─ 内存泄漏：无持续增长
-│   └─ 内存峰值：<300MB
-│
-├─ 电量消耗
-│   ├─ 待机耗电：<5%/天
-│   ├─ 使用耗电：<15%/小时
-│   └─ 后台耗电：<3%/小时
-│
-├─ 流量消耗
-│   ├─ 首次加载：<5MB
-│   ├─ 每次操作：<1MB
-│   └─ 后台同步：<10MB/天
-│
-└─ 帧率
-    ├─ 滑动帧率：>55fps
-    ├─ 动画帧率：>55fps
-    └─ 页面切换：>50fps
-```
-
-### 网络测试
-
-```text
-网络场景：
-├─ 网络类型
-│   ├─ WiFi
-│   ├─ 4G/5G
-│   ├─ 弱网（高延迟、低带宽）
-│   └─ 断网
-│
-├─ 网络切换
-│   ├─ WiFi → 4G
-│   ├─ 4G → WiFi
-│   ├─ 有网 → 断网
-│   └─ 断网 → 有网
-│
-└─ 弱网模拟
-    ├─ 高延迟：>500ms
-    ├─ 低带宽：<100kbps
-    ├─ 高丢包：>10%
-    └─ 网络抖动：延迟不稳定
-```
+> `移动端测试检查清单`的完整内容已下沉至 `references/mobile-checklist.md`，避免每次触发都占用上下文。
 
 ## 自动化测试
 

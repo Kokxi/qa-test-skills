@@ -84,7 +84,7 @@
         {
           "name": "测试用例数≥10",
           "type": "min_count",
-          "target": "TC-",
+          "target": "TC_",
           "min": 10
         },
         {
@@ -221,7 +221,7 @@
         {
           "name": "测试用例数≥8",
           "type": "min_count",
-          "target": "TC-",
+          "target": "TC_",
           "min": 8
         },
         {
@@ -365,7 +365,7 @@
         {
           "name": "接口测试用例数≥6",
           "type": "min_count",
-          "target": "API-",
+          "target": "TC_",
           "min": 6
         },
         {
@@ -828,7 +828,7 @@
         {
           "name": "TC-XXXX 编号数≥5",
           "type": "min_count",
-          "target": "TC-",
+          "target": "TC_",
           "min": 5
         }
       ]
@@ -2402,7 +2402,7 @@
         {
           "name": "TC-XXXX 编号数≥10",
           "type": "min_count",
-          "target": "TC-",
+          "target": "TC_",
           "min": 10
         }
       ]

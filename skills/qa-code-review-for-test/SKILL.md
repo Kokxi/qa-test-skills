@@ -1,54 +1,24 @@
 ---
 name: qa-code-review-for-test
-slug: qa-code-review-for-test
-displayName: Code Review For Test
-version: 1.7.7
 description: >-
-  当开发提了 PR、代码变更需要确定测试范围、或者想通过分析代码来预测可能出 Bug 的区域时使用此技能。从测试视角分析代码变更的影响范围、识别高危模式和典型风险区域。不要看完整代码逻辑——你只需要关注变更类型（新增/修改/删除/重构）、影响范围（接口定义/数据库字段/业务逻辑）和相关依赖，据此确定最小回归测试范围。输出代码变更影响分析报告。
-
-when_to_use: 用户说"代码评审"、"CR"、"测试视角"、"看代码"、"代码变更"、"Diff"、需要从测试角度分析代码变更、代码变更后需要确定测试范围时
+  当开发提了 PR、代码变更需要确定测试范围、或者想通过分析代码来预测可能出 Bug 的区域时使用此技能。从测试视角分析代码变更的影响范围、识别高危模式和典型风险区域。不要看完整代码逻辑——你只需要关注变更类型（新增/修改/删除/重构）、影响范围（接口定义/数据库字段/业务逻辑）和相关依赖，据此确定最小回归测试范围。输出代码变更影响分析报告。 触发场景：代码评审、CR、测试视角、看代码、代码变更、Diff、代码变更后需要确定测试范围时。 Use when the user asks about: reviewing a PR or code diff from a testing perspective to determine regression scope and high-risk areas.
+license: MIT
 allowed-tools: Read Grep Glob Bash
-related_skills:
-  upstream:
-    - qa-boundary-deep-dive      # 输入：边界分析识别风险区域
-    - qa-risk-intuition          # 输入：风险评估识别高风险区域
-  downstream:
-    - qa-execution-observation   # 输出：代码变更指导执行观察
-    - qa-test-strategy-design    # 输出：代码变更影响测试策略
-    - qa-regression-testing
-input_format:
-  required:
-    - name: 代码变更
-      type: string
-      description: 代码变更的diff或描述
-    - name: 测试用例
-      type: array
-      description: 相关测试用例列表
-  optional:
-    - name: 需求文档
-      type: string
-      description: 相关功能需求
-output_format:
-  traceability:
-    - 每次代码评审带唯一ID（CR-XXXX）
-    - 关联变更ID或需求ID
-  structure:
-    - 测试用例表格：固定 9 列（用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级）
-    - 用例级别：P0≤20%（核心流程）/ P1≤40%（主要功能）/ P2≤30%（次要功能）/ P3≤10%（边缘场景）
-    - 覆盖率：标注口径（基于现有需求/输入文档），禁止"全覆盖/100%"绝对化表述；缺失模块标注"未覆盖+原因"
-    - review_findings: 代码评审发现
-    - test_gaps: 测试遗漏点
-    - impact_analysis: 变更影响分析
-    - high_risk_patterns: 高危模式识别
-    - regression_scope: 回归测试范围建议
-categories: ['Development','Team']
-depth_requirement_quantification:
-  reference_value: "根据代码变更量调整评审深度：简单×1/中等×2/复杂×3"
-  minimum: "至少分析变更类型、影响范围、回归范围3个维度"
-error_recovery_guidance:
-  on_failure: "代码变更分析遗漏依赖时回退到边界分析补充"
-  retry_behavior: "补全依赖分析后重新确定回归范围"
+metadata:
+  slug: "qa-code-review-for-test"
+  display-name: "测试视角代码评审"
+  version: "1.8.0"
+  when-to-use: "用户说\"代码评审\"、\"CR\"、\"测试视角\"、\"看代码\"、\"代码变更\"、\"Diff\"、需要从测试角度分析代码变更、代码变更后需要确定测试范围时"
+  related-skills: "{\"upstream\":[\"qa-boundary-deep-dive\",\"qa-risk-intuition\"],\"downstream\":[\"qa-execution-observation\",\"qa-test-strategy-design\",\"qa-regression-testing\"]}"
+  references: "[\"references/cr-lens.md\"]"
+  input-format: "{\"required\":[{\"name\":\"代码变更\",\"type\":\"string\",\"description\":\"代码变更的diff或描述\"},{\"name\":\"测试用例\",\"type\":\"array\",\"description\":\"相关测试用例列表\"}],\"optional\":[{\"name\":\"需求文档\",\"type\":\"string\",\"description\":\"相关功能需求\"}]}"
+  output-format: "{\"traceability\":[\"每次代码评审带唯一ID（CR-XXXX）\",\"关联变更ID或需求ID\"],\"structure\":[\"覆盖率：标注口径（基于现有需求/输入文档），禁止\\\"全覆盖/100%\\\"绝对化表述；缺失模块标注\\\"未覆盖+原因\\\"\",{\"review_findings\":\"代码评审发现\"},{\"test_gaps\":\"测试遗漏点\"},{\"impact_analysis\":\"变更影响分析\"},{\"high_risk_patterns\":\"高危模式识别\"},{\"regression_scope\":\"回归测试范围建议\"}]}"
+  error-recovery-guidance: "{\"on_failure\":\"代码变更分析遗漏依赖时回退到边界分析补充\",\"retry_behavior\":\"补全依赖分析后重新确定回归范围\"}"
+  categories: "[\"Development\",\"Team\"]"
+  depth-requirement: "{\"reference_value\":\"根据代码变更量调整评审深度：简单×1/中等×2/复杂×3\",\"minimum\":\"至少分析变更类型、影响范围、回归范围3个维度\"}"
 ---
+> ⚠️ 本技能单独使用效果有限，建议配合完整技能集（12 步工作流）使用。安装：npx skills add Kokxi/qa-test-skills
+
 > **⚠️ 安全警告**：本技能的示例可能涉及代码变更分析（新增/修改/删除/重构）。
 > 实际使用时请勿直接基于评审结论修改源码，先与开发确认变更范围和回归风险。
 > 本技能仅在 workspace/ 输出评估文件，不持久化、不外传、不跨会话复用。
@@ -71,77 +41,13 @@ error_recovery_guidance:
 | 中等变更 | 12-20个检查点 | 多文件/逻辑修改 |
 | 复杂变更 | 25-40个检查点 | 重构/重写/核心模块变更 |
 
-## 测试视角CR四看
+## 加载时机
 
-### 第1看：看diff（改了什么）
+| 什么时候读 | 读哪个 |
+|-----------|--------|
+| 从测试角度评审代码变更时 | [`references/cr-lens.md`](references/cr-lens.md) |
 
-```text
-分析维度：
-├─ 新增文件：新增了哪些文件？
-├─ 修改文件：修改了哪些文件？
-├─ 删除文件：删除了哪些文件？
-├─ 代码行数：新增/修改/删除多少行？
-└─ 变更类型：功能/修复/重构/配置？
-
-关注点：
-- 核心逻辑变更
-- 数据库变更
-- 配置变更
-- 接口变更
-```
-
-### 第2看：看影响（波及哪里）
-
-```text
-分析维度：
-├─ 调用方：哪些地方调用了这个方法？
-├─ 数据流向：数据从哪来、到哪去？
-├─ 接口变更：对外接口有没有变？
-├─ 数据库变更：表结构/索引有没有变？
-└─ 配置变更：配置项有没有变？
-
-关注点：
-- 影响范围评估
-- 需要回归的区域
-- 需要新增的测试场景
-```
-
-### 第3看：看风险模式（有什么风险）
-
-```text
-风险模式识别：
-├─ 静态数据变化：硬编码的值变了
-├─ 超时/重试：涉及超时或重试逻辑
-├─ 异常吞没：异常被catch但没处理
-├─ 并发处理：涉及多线程/分布式锁
-├─ 状态管理：涉及状态变更
-├─ 权限控制：涉及认证/授权
-├─ 数据转换：涉及格式/类型转换
-└─ 外部依赖：涉及第三方服务
-
-关注点：
-- 每个风险模式对应的测试场景
-- 需要重点验证的区域
-```
-
-### 第4看：看测试建议（怎么测）
-
-```text
-测试建议输出：
-├─ 回归测试：哪些功能需要回归？
-├─ 新增测试：需要新增哪些测试场景？
-├─ 重点测试：哪些区域需要深测？
-├─ 性能测试：是否需要性能测试？
-└─ 安全测试：是否需要安全测试？
-
-输出格式：
-[变更描述]
-├─ 影响范围：[影响的功能/模块]
-├─ 回归范围：[需要回归的功能]
-├─ 新增场景：[需要新增的测试场景]
-├─ 重点区域：[需要深测的区域]
-└─ 测试建议：[具体的测试建议]
-```
+> `测试视角CR四看`的完整内容已下沉至 `references/cr-lens.md`，避免每次触发都占用上下文。
 
 ## 代码评审检查清单
 
