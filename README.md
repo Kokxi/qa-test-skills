@@ -34,33 +34,30 @@
 
 ### 分支与发布
 
-代码**只维护一份**（`dev-zh` 分支，带 `metadata.slug`），两个发布渠道在推送时分流：
+代码**只维护一份**（`dev-zh` 分支，frontmatter 保持规范形态），两个渠道在推送时分流：
 
-| 渠道 | 脚本 | `metadata.slug` | 原因 |
-|------|------|-----------------|------|
-| [SkillHub](https://skillhub.cn) | `scripts/push-skillhub.bat` | **保留** | SkillHub 用 slug 做技能唯一标识 |
-| [ClawHub](https://clawhub.ai/plugins/@kokxi/qa-test-skills) | `scripts/push-clawhub.bat` | **发布时剥离** | ClawHub 用目录名识别技能，不认这个键 |
+| 渠道 | 脚本 | 暂存副本的 frontmatter 处理 |
+|------|------|----------------------------|
+| [SkillHub](https://skillhub.cn) | `scripts/push-skillhub.bat` | 补**顶层 `displayName`** |
+| [ClawHub](https://clawhub.ai/plugins/@kokxi/qa-test-skills) | `scripts/push-clawhub.bat` | 剥掉 `metadata.slug` |
 
-ClawHub 侧不维护独立分支，因为两个分支的内容会随每次改动漂移。改为在发布前做一次
-可验证的暂存：
+两个平台的 CLI 要求都与规范形态冲突（详见
+[`scripts/README.md` 的「为什么需要暂存」](scripts/README.md#为什么需要暂存两个平台的要求与规范形态都冲突)），
+所以在发布前做一次**可验证的暂存**：
 
 ```bash
-# 单独跑暂存，检查剥离结果（不改任何源文件）
-python scripts/stage_for_clawhub.py --all --out .publish-staging/clawhub
-
-# 检查暂存副本里还有没有 slug
-grep -r "^\s*slug:" .publish-staging/clawhub --include=SKILL.md
+# 单独跑暂存检查结果，不改任何源文件
+python scripts/stage_for_publish.py --all --platform skillhub
+python scripts/stage_for_publish.py --all --platform clawhub
 ```
 
-- 剥离只发生在 `.publish-staging/` 下的副本里，`skills/` 源文件不动
-- 只删 frontmatter 里缩进的那一行，正文中的同名字段不受影响
-- 剥完的副本仍需通过官方 `skills-ref validate`（自测里已覆盖）
-- `scripts/push-clawhub.bat` 里的 `--slug` 参数是 **ClawHub CLI 的目标名**，
+- 调整只发生在 `.publish-staging/` 下的副本里，`skills/` 源文件不动
+- `.publish-staging/` 是构建产物，已在 `.gitignore`
+- `push-clawhub.bat` 里的 `--slug` 参数是 **ClawHub CLI 的目标名**，
   和被剥掉的 metadata 字段是两回事，不要混
 
-> 任何门禁都不要求 `metadata.slug` 存在，所以剥离不影响门禁全绿。
-> `scripts/metadata.json` 里的 SkillHub 接口（`api.skillhub.cn` / COS 索引）
-> 只在 SkillHub 链路使用。
+> 任何门禁都不要求 `metadata.slug` 存在，暂存调整不影响门禁全绿。
+> `scripts/metadata.json` 里的 SkillHub 接口只在 SkillHub 链路使用。
 
 ---
 
@@ -742,7 +739,7 @@ AI工作流：
 - **YAML frontmatter**：遵循 Agent Skills 规范，顶层只允许 6 个字段
   （`name` / `description` / `license` / `compatibility` / `metadata` / `allowed-tools`）。
   本技能集的自定义字段全部收在 `metadata` 下（string → string，复杂值用紧凑 JSON 字符串）：
-  `version` / `slug`（**SkillHub 独有，发 ClawHub 时由 `stage_for_clawhub.py` 剥离**）/
+  `version` / `slug`（SkillHub 独有，发 ClawHub 时由 `stage_for_publish.py` 暂存剥离）/
   `display-name` / `when-to-use` / `related-skills` /
   `references` / `input-format` / `output-format` / `categories` /
   `error-recovery-guidance` / `depth-requirement`

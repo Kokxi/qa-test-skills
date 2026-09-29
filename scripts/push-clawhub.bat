@@ -114,12 +114,16 @@ REM ------------------------------------------------------------
 set "SLUG=%~1"
 set /a COUNT+=1
 
-REM 鍏堟殏瀛橈細鍓ユ帀 metadata.slug锛圫killHub 鐙湁瀛楁锛孋lawHub 涓嶉渶瑕侊級
-for /f "delims=" %%P in ('python scripts\stage_for_clawhub.py %SLUG% --out "%STAGE%" 2^>nul') do set "DIR=%%P"
+REM 先暂存：剥掉 metadata.slug（SkillHub 独有字段，ClawHub 不需要）
+REM 注意 1：DIR 必须在 for 循环【之前】清空。批处理读到该行时就展开了 %DIR%，
+REM         循环之后再清空会把刚拿到的路径抹掉。
+REM 注意 2：for /f ('...') 里不能出现双引号，cmd 会把命令截断、把引号里的内容
+REM         当成独立命令执行。STAGE 路径本身不含空格，所以直接不加引号。
+set "DIR="
+for /f "delims=" %%P in ('python scripts\stage_for_publish.py %SLUG% --platform clawhub --out %STAGE% 2^>nul') do set "DIR=%%P"
 if not defined DIR (
   echo [%COUNT%/49] Publishing %SLUG% ...
   echo  !! STAGE FAILED: %SLUG% 1>>"%FAILED_FILE%"
-  echo  !! %SLUG% 鏆傚瓨澶辫触锛岃烦杩囷紙slug 鍓ョ鎴栫洰褰曠己澶憋級1>>"%FAILED_FILE%"
   timeout /t %DELAY% /nobreak >nul
   exit /b 0
 )

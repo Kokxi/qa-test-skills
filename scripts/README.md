@@ -77,25 +77,88 @@ python scripts/gate_selftest.py --keep       # 保留临时工作区供手工检
 
 ## 发布
 
-| 渠道 | 脚本 | 说明 |
-|------|------|------|
-| SkillHub | `scripts/push-skillhub.bat [版本] [延迟]` | 49 个技能逐个推送，保留 `metadata.slug` |
-| ClawHub | `scripts/push-clawhub.bat [版本] [延迟]` | 先经 `stage_for_clawhub.py` 剥离 `metadata.slug` 再推 |
+| 渠道 | 脚本 | frontmatter 处理 |
+|------|------|-----------------|
+| SkillHub | `scripts/push-skillhub.bat [版本] [延迟]` | 暂存副本补**顶层 `displayName`** |
+| ClawHub | `scripts/push-clawhub.bat [版本] [延迟]` | 暂存副本剥掉 `metadata.slug` |
 | 两者 | `publish-all.bat [版本]` | 依次调上面两个 |
 
 ```bash
-# 推之前先单独验证剥离结果，不碰任何源文件
-python scripts/stage_for_clawhub.py --all --out .publish-staging/clawhub
-grep -r "^\s*slug:" .publish-staging/clawhub --include=SKILL.md   # 应无输出
+# 推之前先单独验证暂存，不碰任何源文件
+python scripts/stage_for_publish.py --all --platform skillhub
+python scripts/stage_for_publish.py --all --platform clawhub
 ```
 
-`metadata.slug` 是 SkillHub 独有的字段，代码里只维护一份（带 slug），
-发 ClawHub 时在暂存副本上剥离——不维护双分支，避免两边内容漂移。
-`.publish-staging/` 是构建产物，已在 `.gitignore` 里。
+### 为什么需要暂存：两个平台的要求与规范形态都冲突
+
+仓库里的 SKILL.md 是**规范形态**（顶层只允许
+name / description / license / compatibility / metadata / allowed-tools），
+但两个平台的 CLI 各有各的前置要求：
+
+| 平台 | 要求 | 冲突点 |
+|------|------|--------|
+| SkillHub | 读得到 `slug` / `version` / `displayName` | 键名是 `display-name`（连字符），CLI 只认 `displayName` |
+| ClawHub | 不认 `metadata.slug` | slug 是 SkillHub 独有字段 |
+
+SkillHub CLI 的 frontmatter 解析器**不认缩进**（`key.strip()`），所以嵌套的
+`slug` / `version` 能读到；唯独 `displayName` 找不到——只有这一个键会失败。
+暂存副本补一个顶层 `displayName` 即可，**源文件保持规范形态不变**。
+
+选暂存而不是维护双分支，是因为两个分支会随每次改动漂移。
+`.publish-staging/` 是构建产物，已在 `.gitignore`。
+
+> `push-clawhub.bat` 里的 `--slug` 参数是 **ClawHub CLI 的目标名**，
+> 和被剥掉的 metadata 字段是两回事，脚本里已加注释区分。
 
 > 三个发布脚本的**默认版本**必须与入口技能 `metadata.version` 一致，
 > 否则不带参数运行会把已发布版本覆盖成更低的版本号。
-> `integrity_check.py` 检查项 12 会校验（包含注释里的版本号）。
+> `integrity_check.py` 检查项 12 会校验（含注释里的版本号）。
+
+## ⚠️ 改 .bat 的三个硬约束
+
+`.bat` 和仓库里其他文件不一样，**用普通编辑工具改会静默改坏**。这三个坑本项目全踩过：
+
+**1. 编码必须是 GBK，不能是 UTF-8**
+
+`cmd.exe` 在中文 Windows 上按系统 ANSI 码页（GBK/936）读 `.bat`。
+文件是 UTF-8 时中文注释的字节被当 GBK 解释，**症状是报
+「'xxx' 不是内部或外部命令」**——且指向的位置看起来毫不相干，极难定位。
+
+**2. 行尾必须是 CRLF，不能是 LF**
+
+行尾是 LF 时，`if ... ( ... ) else ( ... )` 这类多行括号块会被拆成独立命令
+执行，症状同样是「不是内部或外部命令」。
+
+**3. `for /f ('...')` 里不能出现双引号**
+
+```bat
+REM   ❌ 错：cmd 在引号处截断命令，把路径当成独立命令
+for /f "delims=" %%P in ('python tool.py --out "%STAGE%"') do set "DIR=%%P"
+REM   ✅ 对：路径不含空格时直接不加引号
+for /f "delims=" %%P in ('python tool.py --out %STAGE%') do set "DIR=%%P"
+```
+
+另外 `set "DIR="` 必须在 `for` 循环**之前**：批处理读到某行时就展开了该行的
+`%DIR%`，循环之后再清空会把刚拿到的路径抹掉。
+
+**4. 调 Python CLI 前要设 `PYTHONIOENCODING=utf-8`**
+
+SkillHub CLI 发布成功后要打印 `✓ Published: skillId=...`。控制台是 GBK 时，
+Python 抛 `UnicodeEncodeError: 'gbk' codec can't encode character '\u2713'`，
+进程以非 0 退出——**发布其实成功了，批处理却记成 FAILED**。
+
+这个误报很隐蔽：35 个技能全进失败清单，日志里却看不到真正的错误。
+`push-skillhub.bat` 开头已设 `set "PYTHONIOENCODING=utf-8"`。
+
+> 判断发布是否真的失败，看 SkillHub 后台或 `auth whoami` 后的技能列表，
+> 不要只看 `push-skillhub-failed.txt`——它可能整份都是编码误报。
+
+`integrity_check.py` 检查项 12 会校验 `.bat` 的编码与行尾，`gate_selftest.py`
+有对应的注入用例。改完 `.bat` 请跑：
+
+```bash
+python scripts/gate_selftest.py --check 12
+```
 
 ## 依赖引用验证
 

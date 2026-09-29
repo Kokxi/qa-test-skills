@@ -120,13 +120,25 @@ def raw_meta(ws: Path, skill: str, key: str) -> str:
 
 
 def read(ws: Path, rel: str) -> str:
-    return (ws / rel).read_text(encoding='utf-8')
+    p = ws / rel
+    if p.suffix.lower() == '.bat':
+        # .bat 是 GBK（cmd.exe 按系统 ANSI 码页读）
+        return p.read_bytes().decode('gbk').replace('\r\n', '\n')
+    return p.read_text(encoding='utf-8')
 
 
 def write(ws: Path, rel: str, text: str):
+    """按目标文件的既有编码写回。
+
+    .bat 必须是 GBK + CRLF（cmd.exe 按系统 ANSI 码页读 .bat，LF 行尾会让
+    多行 ( ) 块解析错乱）。用 UTF-8 写会把文件改坏——注入用例必须无损。
+    """
     p = ws / rel
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(text, encoding='utf-8', newline='\n')
+    if p.suffix.lower() == '.bat':
+        p.write_bytes(text.replace('\r\n', '\n').replace('\n', '\r\n').encode('gbk'))
+    else:
+        p.write_text(text, encoding='utf-8', newline='\n')
 
 
 def sub_frontmatter(text: str, key: str, old: str, new: str) -> str:
@@ -167,6 +179,12 @@ def _inj_check_id(p):
 
 
 INJECT = []
+LEGAL = []
+
+
+def legal(cid, name, files, mutate, why):
+    """登记一条「合规内容必须不报」的用例——验证的是误报方向。"""
+    LEGAL.append((cid, name, files, mutate, why))
 
 
 def inject(cid, name, files, mutate):
@@ -320,6 +338,22 @@ inject(12, 'push-skillhub.bat 注释里的版本落后于技能基准',
                         re.sub(r'(default\s+version\s*=\s*)([\d.]+)', r'\g<1>1.0.0',
                                read(ws, 'scripts/push-skillhub.bat'), count=1)))
 
+# .bat 编码/行尾：踩过的坑——文件是 UTF-8 时 cmd.exe 把中文注释按 GBK 解释，
+# 报「'xxx' 不是内部或外部命令」；行尾是 LF 时多行 ( ) 块被拆成独立命令。
+inject(12, 'push-clawhub.bat 被写成 UTF-8（cmd.exe 会解析错乱）',
+       ['scripts/push-clawhub.bat'],
+       lambda ws: (ws / 'scripts/push-clawhub.bat').write_bytes(
+           read(ws, 'scripts/push-clawhub.bat').encode('utf-8')))
+
+inject(12, 'publish-all.bat 行尾是纯 LF（多行块会解析错乱）',
+       ['publish-all.bat'],
+       lambda ws: (ws / 'publish-all.bat').write_bytes(
+           (ws / 'publish-all.bat').read_bytes().replace(b'\r\n', b'\n')))
+
+legal(12, '.bat 为 GBK + CRLF 时不应被误报',
+      ['scripts/push-skillhub.bat'],
+      lambda ws: None, '正确的 .bat 形态（GBK 编码 + CRLF 行尾）必须通过')
+
 # 13 产出一致性
 inject(13, '不产用例表的技能声明「固定 9 列用例表」',
        [f'skills/{PLAIN}/SKILL.md'],
@@ -342,13 +376,6 @@ inject(15, 'references/ 新增文件但没登记进 metadata.references',
        [f'skills/{PLAIN}/references/brand-new.md'],
        lambda ws: write(ws, f'skills/{PLAIN}/references/brand-new.md',
                         '# 新文件\n\n这个文件没有登记进 metadata.references。\n'))
-
-LEGAL = []
-
-
-def legal(cid, name, files, mutate, why):
-    LEGAL.append((cid, name, files, mutate, why))
-
 
 # —— 误报控制：以下内容形似违规但合规，门禁必须放过 ——
 legal(1, '完整的 9 列 output-format JSON 不应被判非法',
@@ -401,46 +428,57 @@ legal(14, '正确的 REQ-/SC- 关联 ID 不该被误判',
       'TC_ 出现在同一条 traceability 里但用于用例编号，不该误伤')
 
 # —— 发布链路：ClawHub 侧不能带 metadata.slug（SkillHub 独有字段）——
-# slug 剥离逻辑在 scripts/stage_for_clawhub.py；这里验证「剥得干净」且「剥完还是合法技能」
+# 发布暂存逻辑在 scripts/stage_for_publish.py。两个平台的要求正好相反：
+#   SkillHub 需要顶层 displayName（它的解析器不认嵌套键，键名还必须是 displayName）
+#   ClawHub 不能有 metadata.slug
+# 两边都要验证：暂存副本满足各自要求，且源文件保持规范形态不被改动。
 def _stage_check(ws: Path) -> str:
-    """跑一遍 ClawHub 暂存，校验：49 个都剥掉了 slug、且剥离后仍能解析 frontmatter"""
-    r = subprocess.run([sys.executable, 'scripts/stage_for_clawhub.py', '--all',
-                        '--out', '.stage-selftest'],
-                       cwd=str(ws), capture_output=True, text=True, encoding='utf-8')
-    if r.returncode != 0:
-        return f'暂存失败：{r.stderr[:200]}'
-    root = ws / '.stage-selftest'
-    dirs = [d for d in root.iterdir() if (d / 'SKILL.md').exists()]
-    if len(dirs) != 49:
-        return f'暂存了 {len(dirs)} 个技能，应为 49'
-    residue = []
-    for d in dirs:
-        text = (d / 'SKILL.md').read_text(encoding='utf-8')
-        m = re.match(r'^---\n(.*?)\n---\n', text, re.S)
-        if not m:
-            residue.append(f'{d.name}: frontmatter 结构坏了')
-        elif re.search(r'^[ \t]+slug[ \t]*:', m.group(1), re.M):
-            residue.append(f'{d.name}: 仍含 slug')
-        else:
+    """跑两遍发布暂存，校验各平台的 frontmatter 要求都满足"""
+    import yaml
+    out = []
+    for platform, check in (
+        ('clawhub', lambda h: not re.search(r'^[ \t]+slug[ \t]*:', h, re.M)),
+        ('skillhub', lambda h: bool(re.search(r'^displayName[ \t]*:[ \t]*\S', h, re.M))),
+    ):
+        r = subprocess.run(
+            [sys.executable, 'scripts/stage_for_publish.py', '--all',
+             '--platform', platform, '--out', f'.stage-selftest/{platform}'],
+            cwd=str(ws), capture_output=True, text=True, encoding='utf-8')
+        if r.returncode != 0:
+            out.append(f'{platform} 暂存失败：{r.stderr[:150]}')
+            continue
+        root = ws / '.stage-selftest' / platform
+        dirs = [d for d in root.iterdir() if (d / 'SKILL.md').exists()]
+        if len(dirs) != 49:
+            out.append(f'{platform} 暂存了 {len(dirs)} 个技能，应为 49')
+            continue
+        bad = []
+        for d in dirs:
+            text = (d / 'SKILL.md').read_text(encoding='utf-8')
+            m = re.match(r'^---\n(.*?)\n---\n', text, re.S)
+            if not m:
+                bad.append(f'{d.name}: frontmatter 结构坏了')
+                continue
+            if not check(m.group(1)):
+                bad.append(f'{d.name}: 不满足 {platform} 的字段要求')
+                continue
             try:
-                import yaml
                 fm = yaml.safe_load(text.split('\n---\n')[0]) or {}
-                if not isinstance(fm.get('metadata'), dict):
-                    residue.append(f'{d.name}: metadata 不是映射')
-                elif 'slug' in fm['metadata']:
-                    residue.append(f'{d.name}: YAML 里还有 slug')
             except Exception as exc:  # noqa: BLE001
-                residue.append(f'{d.name}: YAML 解析失败 {exc}')
-    shutil.rmtree(root, ignore_errors=True)
-    if residue:
-        return f'剥离不干净：{residue[:5]}'
-    return ''
+                bad.append(f'{d.name}: YAML 解析失败 {exc}')
+                continue
+            if not isinstance(fm.get('metadata'), dict):
+                bad.append(f'{d.name}: metadata 不是映射')
+        if bad:
+            out.append(f'{platform}: {bad[:4]}')
+    shutil.rmtree(ws / '.stage-selftest', ignore_errors=True)
+    return '；'.join(out)
 
 
 LEGAL.append((
-    0, 'ClawHub 暂存副本已剥离 metadata.slug 且仍通过官方规范校验',
-    [f'skills/{T}/SKILL.md', 'scripts/stage_for_clawhub.py'],
-    _stage_check, '发布给 ClawHub 的副本不能含 SkillHub 独有的 slug；剥完必须仍是合法技能'))
+    0, '两个平台的发布暂存副本都满足各自 frontmatter 要求',
+    [f'skills/{T}/SKILL.md', 'scripts/stage_for_publish.py'],
+    _stage_check, 'SkillHub 要顶层 displayName、ClawHub 不要 metadata.slug；源文件保持规范形态'))
 
 
 def _legal_target(ws):

@@ -238,8 +238,23 @@ if expected:
     for rel in SYNC_BATS:
         p = ROOT / rel
         if not p.exists():
+            f12.append(f'{rel}: 文件不存在')
             continue
-        bat = p.read_text(encoding='utf-8', newline='')
+        # .bat 必须是 GBK 编码 + CRLF 行尾，否则 cmd.exe 解析会错乱。
+        # 历史踩坑：文件是 UTF-8 时中文注释被当 GBK 解释，症状是
+        # 报「'xxx' 不是内部或外部命令」；行尾是 LF 时多行 ( ) 块会被拆成独立命令。
+        raw = p.read_bytes()
+        try:
+            raw.decode('gbk')
+        except UnicodeDecodeError as exc:
+            f12.append(f'{rel}: 不是 GBK 编码（cmd.exe 按系统 ANSI 码页读 .bat），{exc}')
+            continue
+        crlf, lf = raw.count(b'\r\n'), raw.count(b'\n') - raw.count(b'\r\n')
+        if crlf == 0:
+            f12.append(f'{rel}: 行尾是纯 LF，cmd.exe 解析多行 ( ) 块会错乱，需 CRLF')
+        elif lf > 0:
+            f12.append(f'{rel}: 行尾 CRLF/LF 混用（CRLF={crlf} LF={lf}）')
+        bat = raw.decode('gbk')
         # 既看真正生效的 set "VER=..."，也看 REM 注释里的说明
         # （注释写着旧版本号，下一个人照着改就又埋一次降版本的雷）
         for m in re.finditer(r'set\s+"VER=([0-9][\d.]*)"', bat):

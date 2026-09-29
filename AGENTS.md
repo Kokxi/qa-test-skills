@@ -89,8 +89,17 @@ examples/                           ← 示例项目（ecommerce / agent）
   改了 `integrity_check.py` 再加跑 `python scripts/gate_selftest.py`
 - **发布脚本默认版本必须同步**：`publish-all.bat` / `push-clawhub.bat` / `push-skillhub.bat`
   的默认版本要与入口技能 `metadata.version` 一致（检查项 12 会拦），否则发布会降版本
-- **`metadata.slug` 只走 SkillHub**：代码里保留（单分支），发 ClawHub 时由
-  `scripts/stage_for_clawhub.py` 在暂存副本上剥离。**不要为此维护双分支**，会漂移
+- **调 Python CLI 前设 `PYTHONIOENCODING=utf-8`**：控制台是 GBK 时，CLI 打印 `✓`
+  会抛 `UnicodeEncodeError` 并以非 0 退出——**操作其实成功了，批处理却记成 FAILED**。
+  判断发布是否真失败要看平台后台，不要只看 `push-skillhub-failed.txt`
+- **改 `.bat` 必须保持 GBK + CRLF**：`cmd.exe` 在中文 Windows 上按系统 ANSI 码页
+  （GBK/936）读 `.bat`；编码写成 UTF-8 或行尾写成 LF，症状都是
+  「'xxx' 不是内部或外部命令」且指错位置。另外 `for /f ('...')` 里不能有双引号。
+  改完必须跑 `python scripts/gate_selftest.py --check 12`
+- **发布暂存是平台适配层，不要在源文件里迁就平台**：
+  `scripts/stage_for_publish.py --platform {skillhub,clawhub}` 在副本上改 frontmatter
+  （SkillHub 补顶层 `displayName`；ClawHub 剥 `metadata.slug`）。
+  源文件始终保持规范形态。**不要为此维护双分支**，会漂移
 - **产出测试用例必须用全项目统一的 9 列格式**，唯一真源是
   `skills/qa-test-case-design/references/output-template-full.md`：
   `用例编号|测试类型|功能模块|测试标题|用例级别|预置条件|测试步骤|预期结果|风险等级`

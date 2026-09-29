@@ -51,3 +51,4 @@ examples/**/.opencode/
 retry-skillhub-*.sh
 push-skillhub-pending.txt
 push-skillhub-failed*.txt
+output-*.log
