@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-bug-reporting"
-  display-name: "缺陷报告"
+  display-name: "Bug Reporting"
   version: "1.8.0"
   when-to-use: "用户说\"提Bug\"、\"写Bug报告\"、\"Bug描述\"、\"报告格式\"、\"复现步骤\"、\"加附件\"、需要编写或优化Bug报告、开发打回Bug报告需要改进时"
   related-skills: "{\"upstream\":[\"qa-execution-observation\",\"qa-bug-root-cause-analysis\",\"qa-question-framework\"],\"downstream\":[\"qa-bug-lifecycle\",\"qa-stakeholder-communication\"]}"

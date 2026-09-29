@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-retrospective"
-  display-name: "测试复盘"
+  display-name: "Retrospective"
   version: "1.8.0"
   when-to-use: "用户说\"测试复盘\"、\"迭代复盘\"、\"项目复盘\"、\"经验沉淀\"、\"漏测分析\"、\"回顾总结\"、\"事后分析\"、需要复盘总结经验、反复出现同类问题需要根因改进时"
   related-skills: "{\"upstream\":[\"qa-bug-root-cause-analysis\",\"qa-quality-metrics\",\"qa-bug-lifecycle\"],\"downstream\":[\"qa-heuristic-checklist\",\"qa-team-coaching\",\"qa-test-leadership\"]}"

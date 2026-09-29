@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-test-strategy-design"
-  display-name: "测试策略设计"
+  display-name: "Test Strategy Design"
   version: "1.8.0"
   when-to-use: "用户说\"测试策略\"、\"怎么测\"、\"测试计划\"、\"方案设计\"、\"测试范围\"、\"质量策略\"、需要制定测试策略、新项目启动确定测试方案时"
   related-skills: "{\"upstream\":[\"qa-risk-intuition\",\"qa-req-deconstruction\"],\"downstream\":[\"qa-release-risk-governance\",\"qa-ci-cd-testing\",\"qa-specialized-testing\",\"qa-tech-selection\",\"qa-test-automation-arch\",\"qa-test-env-data\"]}"

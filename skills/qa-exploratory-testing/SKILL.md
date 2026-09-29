@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-exploratory-testing"
-  display-name: "探索式测试"
+  display-name: "Exploratory Testing"
   version: "1.8.0"
   when-to-use: "用户说\"探索测试\"、\"自由测试\"、\"漫游测试\"、\"场景发现\"、\"到处点一点\"、\"随机测试\"、\"角色扮演\"、\"SBTM\"、需要发现脚本化测试遗漏的问题、新产品快速验证时"
   related-skills: "{\"upstream\":[\"qa-scenario-tree\",\"qa-risk-intuition\"],\"downstream\":[\"qa-bug-reporting\",\"qa-retrospective\"]}"

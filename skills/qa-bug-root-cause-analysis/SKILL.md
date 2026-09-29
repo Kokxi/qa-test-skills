@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-bug-root-cause-analysis"
-  display-name: "缺陷根因分析"
+  display-name: "Bug Root Cause Analysis"
   version: "1.8.0"
   when-to-use: "用户说\"Bug根因\"、\"根因分析\"、\"为什么出Bug\"、\"深层原因\"、\"定位问题\"、\"排查方向\"、需要分析Bug根因、反复出现同类问题需要根因改进时"
   related-skills: "{\"upstream\":[\"qa-execution-observation\"],\"downstream\":[\"qa-bug-reporting\",\"qa-retrospective\"]}"

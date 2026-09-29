@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob WebFetch Bash
 metadata:
   slug: "qa-test-skills"
-  display-name: "QA 测试技能集"
+  display-name: "QA Test Skills"
   version: "1.8.0"
   disable-model-invocation: "false"
   when-to-use: "用户说\"生成测试用例\"、\"帮我测试\"、\"设计测试\"、\"上传需求\"、\"开始测试\"、上传需求文档/URL时自动激活， 需要完整测试流程时，想浏览技能集目录、了解QA Test Skills包含哪些技能、查看技能分类说明、获取安装指引时"

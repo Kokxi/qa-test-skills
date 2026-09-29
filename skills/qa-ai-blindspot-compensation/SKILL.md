@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-ai-blindspot-compensation"
-  display-name: "AI 测试盲区补偿"
+  display-name: "Ai Blindspot Compensation"
   version: "1.8.0"
   when-to-use: "AI输出评审完成后自动激活；用户说\"还有什么没测到\"、\"AI漏了什么\"、\"补盲\"、\"全面覆盖\"、\"是不是不够\"、\"哪还没测\"、\"盲区分析\"、\"遗漏场景\"时"
   related-skills: "{\"upstream\":[\"qa-ai-output-critique\"],\"downstream\":[\"qa-test-skills\",\"qa-expert-review\",\"qa-output-validation\"]}"

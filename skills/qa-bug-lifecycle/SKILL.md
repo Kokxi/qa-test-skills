@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-bug-lifecycle"
-  display-name: "缺陷生命周期"
+  display-name: "Bug Lifecycle"
   version: "1.8.0"
   when-to-use: "用户说\"缺陷管理\"、\"Bug管理\"、\"缺陷流程\"、\"Bug状态\"、\"严重度\"、\"缺陷趋势\"、需要管理缺陷、分析缺陷趋势、团队需要规范缺陷管理流程时"
   related-skills: "{\"upstream\":[\"qa-bug-reporting\"],\"downstream\":[\"qa-quality-metrics\",\"qa-retrospective\",\"qa-test-reporting\"]}"

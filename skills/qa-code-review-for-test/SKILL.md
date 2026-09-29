@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-code-review-for-test"
-  display-name: "测试视角代码评审"
+  display-name: "Code Review For Test"
   version: "1.8.0"
   when-to-use: "用户说\"代码评审\"、\"CR\"、\"测试视角\"、\"看代码\"、\"代码变更\"、\"Diff\"、需要从测试角度分析代码变更、代码变更后需要确定测试范围时"
   related-skills: "{\"upstream\":[\"qa-boundary-deep-dive\",\"qa-risk-intuition\"],\"downstream\":[\"qa-execution-observation\",\"qa-test-strategy-design\",\"qa-regression-testing\"]}"

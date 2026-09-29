@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-test-leadership"
-  display-name: "测试领导力"
+  display-name: "Test Leadership"
   version: "1.8.0"
   when-to-use: "用户说\"团队管理\"、\"绩效评估\"、\"招聘\"、\"面试\"、\"团队建设\"、\"能力模型\"、\"目标\"、需要管理测试团队、团队扩招需要面试标准时"
   related-skills: "{\"upstream\":[\"qa-team-coaching\",\"qa-retrospective\"],\"downstream\":[\"qa-stakeholder-communication\"]}"

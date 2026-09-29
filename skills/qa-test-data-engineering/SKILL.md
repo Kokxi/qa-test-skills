@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-test-data-engineering"
-  display-name: "测试数据工程"
+  display-name: "Test Data Engineering"
   version: "1.8.0"
   when-to-use: "用户说\"造数\"、\"批量造数\"、\"数据构造\"、\"测试数据脱敏\"、\"测试数据合规\"、\"数据工厂\"、\"造1000条\"、\"造大量数据\"、需要管理测试数据、环境数据不足需要批量构造时"
   related-skills: "{\"upstream\":[\"qa-test-env-data\",\"qa-req-deconstruction\"],\"downstream\":[\"qa-execution-observation\",\"qa-api-testing\"]}"

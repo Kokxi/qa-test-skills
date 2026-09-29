@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-question-framework"
-  display-name: "测试提问框架"
+  display-name: "Question Framework"
   version: "1.8.0"
   when-to-use: "用户说\"不知道该问什么\"、\"怎么获取信息\"、\"需求不清楚\"、\"需要澄清\"、\"问什么问题\"、\"提问模板\"、\"和产品对需求\"、\"和开发沟通细节\"、需要和PM/开发沟通需求细节、需求文档信息不足需要补充时"
   related-skills: "{\"upstream\":[],\"downstream\":[\"qa-req-deconstruction\",\"qa-bug-reporting\",\"qa-requirement-review\"]}"

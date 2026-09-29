@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-expert-review"
-  display-name: "测试专家评审"
+  display-name: "Expert Review"
   version: "1.8.0"
   when-to-use: "用户说\"专家评审\"、\"用例审查\"、\"校正反馈\"、\"评审用例\"、\"检查用例\"、\"终审\"、需要对AI输出进行质量把关、用例上线前需要终审时"
   related-skills: "{\"upstream\":[\"qa-ai-output-critique\",\"qa-ai-blindspot-compensation\"],\"downstream\":[\"qa-test-reporting\",\"qa-retrospective\"]}"

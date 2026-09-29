@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-tech-debt-management"
-  display-name: "测试技术债管理"
+  display-name: "Tech Debt Management"
   version: "1.8.0"
   when-to-use: "用户说\"技术债务\"、\"测试债务\"、\"自动化债务\"、\"重构\"、\"债务治理\"、\"维护成本\"、需要管理技术债务、自动化维护成本高需要评估时"
   related-skills: "{\"upstream\":[\"qa-test-automation-arch\",\"qa-quality-metrics\"],\"downstream\":[\"qa-retrospective\",\"qa-test-strategy-design\"]}"

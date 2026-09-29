@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-ai-prompt-strategy"
-  display-name: "AI 测试提示词策略"
+  display-name: "Ai Prompt Strategy"
   version: "1.8.0"
   when-to-use: "用户说\"怎么问AI\"、\"AI回答不好\"、\"换个方式问\"、\"提示词\"、\"提问模板\"、\"提示词优化\"、\"角色扮演\"、需要不同测试视角、AI输出太浅需要更深时"
   related-skills: "{\"upstream\":[\"qa-ai-context-engineering\"],\"downstream\":[\"qa-ai-output-critique\"]}"

@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-test-reporting"
-  display-name: "测试报告"
+  display-name: "Test Reporting"
   version: "1.8.0"
   when-to-use: "用户说\"测试报告\"、\"日报\"、\"周报\"、\"迭代报告\"、\"报告模板\"、\"质量汇报\"、\"进度汇报\"、需要编写测试报告、向管理层汇报测试进展时"
   related-skills: "{\"upstream\":[\"qa-quality-metrics\",\"qa-bug-lifecycle\",\"qa-execution-observation\"],\"downstream\":[\"qa-stakeholder-communication\",\"qa-retrospective\"]}"

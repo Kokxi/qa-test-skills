@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-boundary-deep-dive"
-  display-name: "测试边界深度分析"
+  display-name: "Boundary Deep Dive"
   version: "1.8.0"
   when-to-use: "用户说\"边界分析\"、\"边界条件\"、\"还有什么边界\"、\"边界值\"、\"边界扫描\"、需要深入分析边界、等价类划分完成后需要补充边界值测试时"
   related-skills: "{\"upstream\":[\"qa-scenario-tree\"],\"downstream\":[\"qa-ai-context-engineering\",\"qa-code-review-for-test\",\"qa-execution-observation\",\"qa-test-case-design\"]}"

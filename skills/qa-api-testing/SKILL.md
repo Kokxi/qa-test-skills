@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash WebFetch
 metadata:
   slug: "qa-api-testing"
-  display-name: "接口测试"
+  display-name: "Api Testing"
   version: "1.8.0"
   when-to-use: "用户说\"接口测试\"、\"API测试\"、\"接口自动化\"、\"RESTful测试\"、\"GraphQL测试\"、\"gRPC测试\"、\"契约测试\"、\"接口安全测试\"、需要测试API时"
   related-skills: "{\"upstream\":[\"qa-test-automation-arch\",\"qa-req-deconstruction\"],\"downstream\":[\"qa-ci-cd-testing\",\"qa-execution-observation\"]}"

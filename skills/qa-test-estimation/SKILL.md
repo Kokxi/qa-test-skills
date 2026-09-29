@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-test-estimation"
-  display-name: "测试估算"
+  display-name: "Test Estimation"
   version: "1.8.0"
   when-to-use: "用户说\"工作量估算\"、\"测试时间\"、\"排期\"、\"资源规划\"、\"估算工时\"、\"人天\"、\"工期\"、\"多久测完\"、需要估算测试工作量、项目计划阶段需要测试工时评估时"
   related-skills: "{\"upstream\":[\"qa-req-deconstruction\",\"qa-risk-intuition\"],\"downstream\":[\"qa-test-strategy-design\",\"qa-release-risk-governance\"]}"

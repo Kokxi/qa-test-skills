@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-domain-modeling"
-  display-name: "测试领域建模"
+  display-name: "Domain Modeling"
   version: "1.8.0"
   when-to-use: "用户说\"画状态图\"、\"数据流\"、\"服务依赖\"、\"建模\"、\"领域建模\"、\"状态转换\"、\"数据流向\"、\"服务调用关系\"、需要理解复杂业务流程、需求文档复杂难以理解时"
   related-skills: "{\"upstream\":[\"qa-scenario-tree\"],\"downstream\":[\"qa-ai-context-engineering\"]}"

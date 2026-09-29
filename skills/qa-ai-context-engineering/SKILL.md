@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob WebFetch
 metadata:
   slug: "qa-ai-context-engineering"
-  display-name: "AI 测试上下文工程"
+  display-name: "Ai Context Engineering"
   version: "1.8.0"
   when-to-use: "用户说\"上下文工程\"、\"构建上下文\"、\"上下文包\"、\"测试上下文\"、\"结构化上下文\"、\"上下文不够\"、已完成需求解构和场景构建需要打包上下文时"
   related-skills: "{\"upstream\":[\"qa-req-deconstruction\",\"qa-scenario-tree\",\"qa-boundary-deep-dive\",\"qa-combination-strategy\",\"qa-state-transition\"],\"downstream\":[\"qa-ai-prompt-strategy\"]}"

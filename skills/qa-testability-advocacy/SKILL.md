@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-testability-advocacy"
-  display-name: "可测试性倡导"
+  display-name: "Testability Advocacy"
   version: "1.8.0"
   when-to-use: "用户说\"可测试性\"、\"难测\"、\"不好测\"、\"测试推动\"、\"架构改进\"、\"可测性评审\"、需要评估可测试性、需要推动架构改进可测试性时"
   related-skills: "{\"upstream\":[\"qa-quality-metrics\",\"qa-execution-observation\"],\"downstream\":[\"qa-test-env-data\",\"qa-shift-left\"]}"

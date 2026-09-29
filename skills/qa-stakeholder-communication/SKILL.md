@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-stakeholder-communication"
-  display-name: "测试干系人沟通"
+  display-name: "Stakeholder Communication"
   version: "1.8.0"
   when-to-use: "用户说\"怎么沟通\"、\"跟开发说\"、\"跟PM说\"、\"跟领导说\"、\"沟通策略\"、\"向上汇报\"、\"干系人沟通\"、需要与不同角色沟通、推动问题解决需要有效沟通时"
   related-skills: "{\"upstream\":[\"qa-bug-reporting\",\"qa-release-risk-governance\",\"qa-quality-metrics\"],\"downstream\":[]}"

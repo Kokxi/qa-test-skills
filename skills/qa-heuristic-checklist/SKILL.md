@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-heuristic-checklist"
-  display-name: "测试启发式清单"
+  display-name: "Heuristic Checklist"
   version: "1.8.0"
   when-to-use: "用户说\"这个功能怎么测\"、\"有什么测试要点\"、\"checklist\"、\"测试模板\"、\"表单测试\"、\"支付测试要点\"、\"导入怎么测\"、面对新功能类型、测试新人需要指引时"
   related-skills: "{\"upstream\":[\"qa-retrospective\"],\"downstream\":[\"qa-scenario-tree\",\"qa-boundary-deep-dive\",\"qa-team-coaching\"]}"

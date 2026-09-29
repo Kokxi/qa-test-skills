@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-regression-testing"
-  display-name: "回归测试"
+  display-name: "Regression Testing"
   version: "1.8.0"
   when-to-use: "用户说\"回归测试\"、\"回归策略\"、\"回归范围\"、\"回归用例\"、\"冒烟测试\"、\"全量回归\"、\"回归不够时间\"、\"哪些要回归\"、版本迭代需要确定回归范围时"
   related-skills: "{\"upstream\":[\"qa-code-review-for-test\",\"qa-risk-intuition\",\"qa-test-case-design\"],\"downstream\":[\"qa-ci-cd-testing\",\"qa-test-strategy-design\"]}"

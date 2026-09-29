@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-combination-strategy"
-  display-name: "组合测试策略"
+  display-name: "Combination Strategy"
   version: "1.8.0"
   when-to-use: "用户说\"组合测试\"、\"参数组合\"、\"正交测试\"、\"组合爆炸\"、\"Pairwise\"、\"全组合测不完\"、\"判断表\"、需要简化测试组合、参数多环境多时"
   related-skills: "{\"upstream\":[\"qa-scenario-tree\"],\"downstream\":[\"qa-ai-context-engineering\"]}"

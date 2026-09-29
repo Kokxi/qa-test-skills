@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-scenario-tree"
-  display-name: "测试场景树"
+  display-name: "Scenario Tree"
   version: "1.8.0"
   when-to-use: "用户说\"构建场景\"、\"测试场景\"、\"场景树\"、\"场景设计\"、\"测试路径\"、\"场景覆盖\"、完成需求解构后需要设计测试、业务流程复杂需要系统化梳理时"
   related-skills: "{\"upstream\":[\"qa-req-deconstruction\"],\"downstream\":[\"qa-boundary-deep-dive\",\"qa-combination-strategy\",\"qa-state-transition\",\"qa-ai-context-engineering\",\"qa-ai-output-critique\",\"qa-domain-modeling\",\"qa-execution-observation\",\"qa-exploratory-testing\",\"qa-test-case-design\"]}"

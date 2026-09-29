@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-mobile-testing"
-  display-name: "移动端测试"
+  display-name: "Mobile Testing"
   version: "1.8.0"
   when-to-use: "用户说\"移动测试\"、\"App测试\"、\"Android测试\"、\"iOS测试\"、\"手机上测\"、\"H5测试\"、\"小程序测试\"、\"移动端中断测试\"、\"移动端兼容测试\"、需要测试移动应用、移动端发版前全面测试时"
   related-skills: "{\"upstream\":[\"qa-test-automation-arch\",\"qa-specialized-testing\"],\"downstream\":[\"qa-ci-cd-testing\",\"qa-release-risk-governance\"]}"

@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob WebFetch
 metadata:
   slug: "qa-input-validation"
-  display-name: "输入验证"
+  display-name: "Input Validation"
   version: "1.8.0"
   when-to-use: "用户说\"需求不清楚\"、\"信息不够\"、\"这个需求能测吗\"、用户输入模糊时自动激活（第一步）"
   related-skills: "{\"upstream\":[],\"downstream\":[\"qa-requirement-review\"]}"

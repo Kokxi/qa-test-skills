@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-critical-thinking"
-  display-name: "测试批判性思维"
+  display-name: "Critical Thinking"
   version: "1.8.0"
   when-to-use: "用户说\"还有什么\"、\"如果...会怎样\"、\"逆向思考\"、\"你怎么看\"、\"这样够吗\"、\"质疑\"、\"挑战需求\"、\"有没有漏\"、需要怀疑和深度分析时"
   related-skills: "{\"upstream\":[],\"downstream\":[\"qa-req-deconstruction\",\"qa-scenario-tree\",\"qa-boundary-deep-dive\",\"qa-requirement-review\"]}"

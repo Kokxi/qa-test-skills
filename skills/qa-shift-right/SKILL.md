@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-shift-right"
-  display-name: "测试右移"
+  display-name: "Shift Right"
   version: "1.8.0"
   when-to-use: "用户说\"测试右移\"、\"生产验证\"、\"灰度监控\"、\"混沌工程\"、\"线上灰度验证\"、\"上线后验证\"、需要设计生产环境灰度发布方案、需要规划线上监控与回滚策略时"
   related-skills: "{\"upstream\":[\"qa-release-risk-governance\",\"qa-ci-cd-testing\"],\"downstream\":[\"qa-quality-metrics\",\"qa-retrospective\"]}"

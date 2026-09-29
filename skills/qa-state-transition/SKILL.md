@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-state-transition"
-  display-name: "状态转换测试"
+  display-name: "State Transition"
   version: "1.8.0"
   when-to-use: "用户说\"状态测试\"、\"状态转换\"、\"状态机\"、\"状态流转\"、\"状态变更\"、\"状态覆盖\"、需要测试状态流转、业务对象有多状态流转时"
   related-skills: "{\"upstream\":[\"qa-scenario-tree\"],\"downstream\":[\"qa-ai-context-engineering\"]}"

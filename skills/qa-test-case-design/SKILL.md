@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-test-case-design"
-  display-name: "测试用例设计"
+  display-name: "Test Case Design"
   version: "1.8.0"
   when-to-use: "用户说\"设计测试用例\"、\"用例评审\"、\"用例覆盖\"、\"测试用例设计\"、\"用例模板\"、\"用例规范\"、\"用例格式\"、需要测试用例结构指导、需要编写或规范测试用例时"
   related-skills: "{\"upstream\":[\"qa-req-deconstruction\",\"qa-boundary-deep-dive\",\"qa-scenario-tree\"],\"downstream\":[\"qa-test-skills\",\"qa-expert-review\",\"qa-regression-testing\"]}"

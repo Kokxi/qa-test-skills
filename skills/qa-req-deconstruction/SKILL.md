@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob WebFetch
 metadata:
   slug: "qa-req-deconstruction"
-  display-name: "需求解构"
+  display-name: "Req Deconstruction"
   version: "1.8.0"
   when-to-use: "用户说\"分析这个需求\"、\"需求解构\"、\"挖掘隐含需求\"、\"需求挖掘\"、\"需求分析\"、\"拆解需求\"、\"业务规则提取\"、上传PRD/需求文档、需求模糊需要深挖时"
   related-skills: "{\"upstream\":[\"qa-requirement-review\"],\"downstream\":[\"qa-scenario-tree\",\"qa-risk-intuition\",\"qa-ai-context-engineering\",\"qa-api-testing\",\"qa-shift-left\",\"qa-test-case-design\",\"qa-test-data-engineering\",\"qa-test-estimation\",\"qa-test-strategy-design\"]}"

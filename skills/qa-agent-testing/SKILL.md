@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash WebFetch
 metadata:
   slug: "qa-agent-testing"
-  display-name: "AI AGENT测试专项"
+  display-name: "Agent Testing"
   version: "1.8.0"
   when-to-use: "用户说\"Agent测试\"、\"智能体测试\"、\"AI助手\"、\"聊天机器人\"、\"Agent幻觉\"、\"Prompt注入\"、\"AI安全审计\"、\"LLM测试\"、需要测试AI Agent或评估AI行为时"
   related-skills: "{\"upstream\":[\"qa-specialized-testing\",\"qa-risk-intuition\"],\"downstream\":[\"qa-release-risk-governance\"]}"

@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-ci-cd-testing"
-  display-name: "CI/CD 测试"
+  display-name: "Ci Cd Testing"
   version: "1.8.0"
   when-to-use: "用户说\"CI/CD\"、\"持续测试\"、\"流水线测试\"、\"质量门禁\"、\"自动化回归\"、\"提交即测试\"、需要设计CI/CD测试流程、构建流水线需要加入测试环节时"
   related-skills: "{\"upstream\":[\"qa-tech-selection\",\"qa-test-strategy-design\"],\"downstream\":[\"qa-release-risk-governance\",\"qa-shift-right\"]}"

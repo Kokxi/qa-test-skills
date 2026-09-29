@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-execution-observation"
-  display-name: "测试执行观察"
+  display-name: "Execution Observation"
   version: "1.8.0"
   when-to-use: "用户说\"执行观察\"、\"观察日志\"、\"测试执行\"、\"多轮观察\"、\"执行异常\"、\"观察报告\"、需要执行测试观察、需要分析执行过程异常时"
   related-skills: "{\"upstream\":[\"qa-scenario-tree\",\"qa-boundary-deep-dive\"],\"downstream\":[\"qa-bug-root-cause-analysis\",\"qa-bug-reporting\",\"qa-test-reporting\",\"qa-testability-advocacy\"]}"

@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-shift-left"
-  display-name: "测试左移"
+  display-name: "Shift Left"
   version: "1.8.0"
   when-to-use: "用户说\"测试左移\"、\"左移\"、\"提前测试\"、\"需求可测试性（左移阶段）\"、\"需求评审（左移介入）\"、\"开发阶段测\"、需要将测试提前、项目早期需要介入测试时"
   related-skills: "{\"upstream\":[\"qa-req-deconstruction\",\"qa-testability-advocacy\"],\"downstream\":[\"qa-code-review-for-test\",\"qa-test-automation-arch\"]}"

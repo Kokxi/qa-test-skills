@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob WebFetch
 metadata:
   slug: "qa-requirement-review"
-  display-name: "需求评审"
+  display-name: "Requirement Review"
   version: "1.8.0"
   when-to-use: "用户说\"需求评审\"、\"评审需求\"、\"需求质量\"、\"PRD评审\"、\"需求检查\"、\"需求写得好不好\"、\"评审这份需求\"、需要评审需求文档、需求提交测试前预审时"
   related-skills: "{\"upstream\":[\"qa-input-validation\",\"qa-critical-thinking\",\"qa-question-framework\"],\"downstream\":[\"qa-req-deconstruction\",\"qa-test-strategy-design\"]}"

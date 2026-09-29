@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-risk-intuition"
-  display-name: "测试风险直觉"
+  display-name: "Risk Intuition"
   version: "1.8.0"
   when-to-use: "用户说\"风险评估\"、\"优先级\"、\"哪里风险高\"、\"风险信号\"、\"测试重点\"、\"资源分配\"、\"高优测试\"、需要判断测试重点、测试资源有限需要聚焦时"
   related-skills: "{\"upstream\":[\"qa-req-deconstruction\"],\"downstream\":[\"qa-test-estimation\",\"qa-test-strategy-design\",\"qa-req-deconstruction\",\"qa-ai-context-engineering\",\"qa-agent-testing\",\"qa-api-testing\",\"qa-mobile-testing\",\"qa-bug-lifecycle\",\"qa-release-risk-governance\",\"qa-test-env-data\",\"qa-test-data-engineering\",\"qa-expert-review\"]}"

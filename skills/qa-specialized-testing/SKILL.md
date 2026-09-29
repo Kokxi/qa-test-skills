@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-specialized-testing"
-  display-name: "专项测试"
+  display-name: "Specialized Testing"
   version: "1.8.0"
   when-to-use: "用户说\"性能测试\"、\"安全测试（专项）\"、\"兼容性测试\"、\"专项测试\"、\"压力测试\"、\"渗透测试\"、\"SQL注入测试\"、\"跨浏览器测试\"、需要进行专项测试、功能测试完成后需要补充专项测试时"
   related-skills: "{\"upstream\":[\"qa-risk-intuition\",\"qa-test-strategy-design\"],\"downstream\":[\"qa-release-risk-governance\",\"qa-agent-testing\",\"qa-mobile-testing\"]}"

@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-output-validation"
-  display-name: "输出验证"
+  display-name: "Output Validation"
   version: "1.8.0"
   when-to-use: "AI生成测试用例后、最终输出前自动激活；用户说\"验证一下输出\"、\"检查有没有幻觉\"、\"这个用例对吗\"、\"确认一下质量\"时"
   related-skills: "{\"upstream\":[\"qa-ai-output-critique\",\"qa-ai-blindspot-compensation\"],\"downstream\":[\"qa-test-reporting\"]}"

@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-release-risk-governance"
-  display-name: "发布测试风险治理"
+  display-name: "Release Risk Governance"
   version: "1.8.0"
   when-to-use: "用户说\"发布风险\"、\"灰度策略\"、\"回滚方案\"、\"风险评估\"、\"版本发布\"、\"紧急发布\"、需要评估发布风险、大版本发布前风险评估时"
   related-skills: "{\"upstream\":[\"qa-test-strategy-design\",\"qa-risk-intuition\"],\"downstream\":[\"qa-quality-metrics\",\"qa-shift-right\",\"qa-stakeholder-communication\"]}"

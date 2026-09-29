@@ -7,7 +7,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-ai-output-critique"
-  display-name: "AI 测试输出评审"
+  display-name: "Ai Output Critique"
   version: "1.8.0"
   when-to-use: "AI生成用例后自动激活（最终输出前的必过门禁）；用户说\"检查一下输出\"、\"评审用例质量\"、\"验证完整性\"、\"这个用例对吗\"、\"自动检查\"时"
   related-skills: "{\"upstream\":[\"qa-ai-prompt-strategy\",\"qa-scenario-tree\",\"qa-risk-intuition\"],\"downstream\":[\"qa-ai-blindspot-compensation\",\"qa-expert-review\",\"qa-output-validation\"]}"

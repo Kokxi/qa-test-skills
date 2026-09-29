@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-test-automation-arch"
-  display-name: "测试自动化架构"
+  display-name: "Test Automation Arch"
   version: "1.8.0"
   when-to-use: "用户说\"自动化架构\"、\"框架设计\"、\"自动化策略\"、\"自动化框架\"、\"测试框架架构\"、需要设计测试自动化架构、自动化维护困难需要重构时"
   related-skills: "{\"upstream\":[\"qa-tech-selection\",\"qa-test-strategy-design\"],\"downstream\":[\"qa-ci-cd-testing\",\"qa-api-testing\",\"qa-mobile-testing\",\"qa-tech-debt-management\"]}"

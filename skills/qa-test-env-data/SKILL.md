@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob Bash
 metadata:
   slug: "qa-test-env-data"
-  display-name: "测试环境与数据"
+  display-name: "Test Env Data"
   version: "1.8.0"
   when-to-use: "用户说\"测试环境\"、\"环境搭建\"、\"环境配置\"、\"造数\"、\"测试数据\"、\"数据准备\"、\"环境部署\"、需要搭建测试环境、需要准备测试数据时"
   related-skills: "{\"upstream\":[\"qa-testability-advocacy\",\"qa-test-strategy-design\"],\"downstream\":[\"qa-execution-observation\",\"qa-test-data-engineering\"]}"

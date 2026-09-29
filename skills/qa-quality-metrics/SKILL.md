@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-quality-metrics"
-  display-name: "测试质量度量"
+  display-name: "Quality Metrics"
   version: "1.8.0"
   when-to-use: "用户说\"质量度量\"、\"质量指标\"、\"怎么量化质量\"、\"质量看板\"、\"质量数据\"、\"趋势分析\"、需要建立度量体系、向管理层展示质量数据时"
   related-skills: "{\"upstream\":[\"qa-release-risk-governance\",\"qa-bug-lifecycle\"],\"downstream\":[\"qa-retrospective\",\"qa-testability-advocacy\",\"qa-stakeholder-communication\",\"qa-tech-debt-management\",\"qa-test-reporting\"]}"

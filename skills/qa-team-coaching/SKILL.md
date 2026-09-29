@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob
 metadata:
   slug: "qa-team-coaching"
-  display-name: "测试团队赋能"
+  display-name: "Team Coaching"
   version: "1.8.0"
   when-to-use: "用户说\"培训\"、\"赋能\"、\"新人\"、\"怎么教\"、\"带人\"、\"培养\"、\"团队成长\"、需要赋能团队、新成员加入需要快速上手时"
   related-skills: "{\"upstream\":[\"qa-retrospective\",\"qa-heuristic-checklist\"],\"downstream\":[]}"

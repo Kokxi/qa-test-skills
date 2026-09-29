@@ -6,7 +6,7 @@ license: MIT
 allowed-tools: Read Grep Glob WebFetch
 metadata:
   slug: "qa-tech-selection"
-  display-name: "测试技术选型"
+  display-name: "Tech Selection"
   version: "1.8.0"
   when-to-use: "用户说\"技术选型\"、\"工具选择\"、\"框架选择\"、\"用什么工具\"、\"工具对比\"、需要评估测试技术方案、现有工具不能满足需求需要替换时"
   related-skills: "{\"upstream\":[\"qa-test-strategy-design\"],\"downstream\":[\"qa-ci-cd-testing\",\"qa-test-automation-arch\"]}"
