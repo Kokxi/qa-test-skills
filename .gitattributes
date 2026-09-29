@@ -1,6 +1,13 @@
 # 统一行尾符为 LF，避免 Windows/WSL 跨平台切换时的假 diff
 * text=auto eol=lf
 
+# Windows 批处理例外：必须保持 GBK 编码 + CRLF 行尾
+# - `-text` 禁止 git 做行尾转换；否则上面的 `* text=auto eol=lf` 会把 .bat 改回 LF，
+#   而 cmd.exe 解析多行 ( ) 块时行尾是 LF 会错乱（报「不是内部或外部命令」）
+# - cmd.exe 在中文 Windows 上按系统 ANSI 码页（GBK/936）读 .bat，UTF-8 会同样出错
+# - 由 integrity_check.py 检查项 12 校验
+*.bat -text
+
 # 二进制文件不做转换
 *.png binary
 *.jpg binary
