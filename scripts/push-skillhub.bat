@@ -1,6 +1,11 @@
 @echo off
 setlocal
 
+REM The SkillHub CLI prints a check mark (U+2713) after a successful publish.
+REM On a GBK console that raises UnicodeEncodeError and exits non-zero,
+REM which makes a SUCCESSFUL publish look like a failure. Force UTF-8.
+set "PYTHONIOENCODING=utf-8"
+
 REM ============================================================
 REM  Push All Skills to SkillHub (official CLI)
 REM  Publish 49 skills one by one with delay control
@@ -20,6 +25,8 @@ REM    - Publishes all 49 skills (entry qa-test-skills + 48 subs)
 REM    - Waits DELAY seconds after each push to avoid rate limit
 REM      (8s is too short - gets rate-limited; 15s works)
 REM    - Failed skills are recorded in push-skillhub-failed.txt for retry
+REM      NOTE: verify against the platform version, not this file. It mixes
+REM      real rate-limit failures with encoding false positives.
 REM    - If push-skillhub-pending.txt exists, only those skills are pushed
 REM      (rate-limit retry; avoids re-publishing completed ones).
 REM      Delete that file to go back to publishing all 49.
@@ -179,11 +186,19 @@ if not defined DIR (
 
 echo [%COUNT%/%PLANNED%] Publishing %SLUG% ...
 python "%CLI%" publish "%DIR%" --version %VER% --changelog "%VER%"
-if errorlevel 1 (
-  echo  !! FAILED: %SLUG% 1>>"%FAILED_FILE%"
-  echo  !! %SLUG% FAILED (see %FAILED_FILE%)
-) else (
-  echo  OK: %SLUG%
-)
+
+REM No if/else parenthesised block here: those have broken repeatedly in
+REM this project (LF line endings, for /f quoting, and once BOTH branches
+REM executing at once, which printed OK unconditionally and made the log
+REM useless). goto has none of those hazards.
+if errorlevel 1 goto :push_failed
+echo  OK: %SLUG%
+goto :push_finished
+
+:push_failed
+echo  %SLUG% 1>>"%FAILED_FILE%"
+echo  !! %SLUG% FAILED ^(see %FAILED_FILE%^)
+
+:push_finished
 timeout /t %DELAY% /nobreak >nul
 exit /b 0
