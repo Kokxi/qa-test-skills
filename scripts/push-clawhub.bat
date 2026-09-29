@@ -8,19 +8,29 @@ REM  (ClawHub has publish rate limits)
 REM
 REM  Usage:
 REM    push-clawhub.bat [version] [delay_seconds]
-REM      default version=1.7.7  delay=10 (seconds)
+REM      default version=1.8.0  delay=10 (seconds)
 REM
 REM  Notes:
 REM    - Publishes all 49 skills (entry qa-test-skills + 48 subs)
 REM    - Waits DELAY seconds after each push to avoid rate limit
 REM    - Failed skills are recorded in push-failed.txt for retry
+REM    - Strips metadata.slug via stage_for_clawhub.py before publishing.
+REM      metadata.slug is SkillHub-only; ClawHub identifies skills by
+REM      directory name and does not need it. The repo keeps slug on
+REM      dev-zh (single source of truth), so it must be removed here.
+REM      NOTE: the --slug argument below is the ClawHub CLI target name,
+REM      not the metadata field - do not confuse the two.
 REM ============================================================
 
 set "VER=%~1"
-if "%VER%"=="" set "VER=1.7.7"
+if "%VER%"=="" set "VER=1.8.0"
 
 set "DELAY=%~2"
 if "%DELAY%"=="" set "DELAY=10"
+
+set "STAGE=.publish-staging\clawhub"
+if exist "%STAGE%" rmdir /s /q "%STAGE%"
+if not exist "%STAGE%" mkdir "%STAGE%"
 
 echo ============================================
 echo  Pushing 49 skills to ClawHub
@@ -98,13 +108,24 @@ endlocal
 exit /b 0
 
 REM ------------------------------------------------------------
-REM  push <slug> - publish one skill, then wait DELAY seconds
+REM  push <slug> - stage a slug-free copy, publish it, then wait
 REM ------------------------------------------------------------
 :push
 set "SLUG=%~1"
 set /a COUNT+=1
+
+REM 先暂存：剥掉 metadata.slug（SkillHub 独有字段，ClawHub 不需要）
+for /f "delims=" %%P in ('python scripts\stage_for_clawhub.py %SLUG% --out "%STAGE%" 2^>nul') do set "DIR=%%P"
+if not defined DIR (
+  echo [%COUNT%/49] Publishing %SLUG% ...
+  echo  !! STAGE FAILED: %SLUG% 1>>"%FAILED_FILE%"
+  echo  !! %SLUG% 暂存失败，跳过（slug 剥离或目录缺失）1>>"%FAILED_FILE%"
+  timeout /t %DELAY% /nobreak >nul
+  exit /b 0
+)
+
 echo [%COUNT%/49] Publishing %SLUG% ...
-call clawhub skill publish "./skills/%SLUG%" --slug %SLUG% --version %VER%
+call clawhub skill publish "%DIR%" --slug %SLUG% --version %VER%
 if errorlevel 1 (
   echo  !! FAILED: %SLUG% 1>>"%FAILED_FILE%"
   echo  !! %SLUG% FAILED (see %FAILED_FILE%)

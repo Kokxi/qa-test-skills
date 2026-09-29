@@ -1,0 +1,48 @@
+{
+  "_comment": "内容层存量基线（棘轮）。检查只对超出本文件的新增违规失败；每完成一批改造用 --prune 收缩。",
+  "checks": {
+    "no-load-map": [],
+    "no-assets": [
+      "qa-ai-blindspot-compensation",
+      "qa-ai-prompt-strategy",
+      "qa-bug-lifecycle",
+      "qa-bug-reporting",
+      "qa-bug-root-cause-analysis",
+      "qa-ci-cd-testing",
+      "qa-code-review-for-test",
+      "qa-combination-strategy",
+      "qa-critical-thinking",
+      "qa-domain-modeling",
+      "qa-expert-review",
+      "qa-exploratory-testing",
+      "qa-heuristic-checklist",
+      "qa-input-validation",
+      "qa-mobile-testing",
+      "qa-output-validation",
+      "qa-quality-metrics",
+      "qa-question-framework",
+      "qa-regression-testing",
+      "qa-release-risk-governance",
+      "qa-requirement-review",
+      "qa-retrospective",
+      "qa-shift-left",
+      "qa-shift-right",
+      "qa-specialized-testing",
+      "qa-stakeholder-communication",
+      "qa-state-transition",
+      "qa-team-coaching",
+      "qa-tech-debt-management",
+      "qa-tech-selection",
+      "qa-test-automation-arch",
+      "qa-test-data-engineering",
+      "qa-test-env-data",
+      "qa-test-estimation",
+      "qa-test-leadership",
+      "qa-testability-advocacy"
+    ],
+    "id-has-cjk": [
+      "qa-state-transition"
+    ],
+    "no-checklist": []
+  }
+}
